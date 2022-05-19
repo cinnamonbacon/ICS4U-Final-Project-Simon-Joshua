@@ -1,10 +1,13 @@
 import javafx.stage.*;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
+import javafx.scene.Group;
 import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javafx.scene.image.*;
+import javax.imageio.*;
+import javafx.embed.swing.*;
 public class Grid{
     private Tile[][] tiles;
     private int mainX;
@@ -54,22 +57,49 @@ public class Grid{
         return false;
     }
     public void draw(Stage st){
-        HBox[] roots =  new HBox[tiles[0].length];
-        
+        GridPane screen =  new GridPane();
         for(int row=0;row<tiles.length;row++){
             for(int col=0;col<tiles[0].length;col++){
-                //String path = "E:\\Simon Bakan Joshua Persaud Final ISP Draft 1\\Sprites"+"\\"+tiles[row][col].getFile();
-                ImageView imageView = new ImageView();
-                Image image = new Image(getClass().getResource(tiles[row][col].getFile()).toExternalForm());
-                imageView.setImage(image);
-                roots[row].getChildren().add(imageView);
+                try{
+                    ImageView imageView = new ImageView();
+                    File file = new File(tiles[row][col].getFile());
+                    Image image = new Image(file.toURI().toString());
+                    imageView.setImage(image);
+                    imageView.setFitWidth(30);
+                    imageView.setFitHeight(30);
+                    VBox vb = new VBox();
+                    vb.getChildren().add(imageView);
+                    screen.add(vb,col,row);
+                }catch(Exception e){}
             }
         }
-        VBox output =  new VBox();
-        for(HBox hb : roots){
-            output.getChildren().add(hb);
+        GridPane objects =  new GridPane();
+        for(int row=0;row<tiles.length;row++){
+            for(int col=0;col<tiles[0].length;col++){
+                try{
+                    ImageView imageView = new ImageView();
+                    File file = new File(tiles[row][col].getObject());
+                    Image image = new Image(file.toURI().toString());
+                    imageView.setImage(image);
+                    imageView.setFitWidth(30);
+                    imageView.setFitHeight(30);
+                    objects.add(imageView,col,row);
+                }catch(Exception e){}
+            }
         }
-        Scene scene = new Scene(output,600,600);
+        ImageView mainChar = new ImageView();
+        try{
+           File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\Sprites\\MainChar.png");
+           Image image = new Image(file.toURI().toString());
+           mainChar.setImage(image);
+           mainChar.setX(30*mainX);
+           mainChar.setY(30*mainY);
+        }catch(Exception e){}
+        StackPane stack =  new StackPane(screen,objects,mainChar);
+        Group g = new Group();
+        g.getChildren().add(stack);
+        g.getChildren().add(mainChar);
+        Scene scene = new Scene(g,600,600);
         st.setScene(scene);
     }
     public void makeInteractable(String st){

@@ -11,7 +11,7 @@ public class Tile{
         
     }
     public boolean canMove(){
-        return movable&&object==null;
+        return movable;
     }
     public boolean isInteractable(){
         return interactable;
