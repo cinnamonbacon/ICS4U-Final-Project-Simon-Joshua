@@ -1,40 +1,102 @@
-import javafx.application.*;
-import javafx.animation.*;
-import javafx.css.*;
-import javafx.event.*;
-import javafx.geometry.*;
-import javafx.fxml.*;
-import javafx.scene.*;
-import javafx.scene.media.*;
-import javafx.scene.chart.*;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.*;
-import javafx.scene.layout.*;
-import javafx.scene.web.*;
-import javafx.scene.media.*;
-import javafx.scene.text.*;
-import javafx.scene.shape.*;
-import javafx.scene.paint.*;
-import javafx.scene.image.*;
-import javafx.scene.input.*;
-import javafx.stage.*;
-import javafx.util.*;
-import javafx.concurrent.*;
+//import javafx.application.*;
+import javafx.application.Application; // Imports the Application.java class, which allows the program to create a GUI and display it on the screen to the user.
+//import javafx.animation.*;
+import javafx.animation.FadeTransition; // Imports the FadeTransition.java class, which allows the program to create a fading transition that is used in various places, such as in the loading screen.
+//import javafx.css.*;
+//import javafx.event.*;
+import javafx.event.EventHandler; // Imports the EventHandler.java class, which allows the program to recognize inputs and events that are occuring on the computer (say from user input from the mouse or keyboard).
+import javafx.event.ActionEvent; // Imports the ActionEvent.java class, which allows the program to recognize inputs and actions that are occuring on the computer (say from user input from the mouse or keyboard).
+//import javafx.geometry.*;
+//import javafx.fxml.*;
+//import javafx.scene.*;
+import javafx.scene.Scene; // Imports the Scene.java class, which allows the program to have access to a scene on which the GUI can be added onto and displayed to the user.
+import javafx.scene.Group; // Imports the Group.java class, which allows the program to have access to the group layout to organize Nodes and other graphics within (it can group various nodes together).
+//import javafx.scene.media.*;
+//import javafx.scene.chart.*;
+//import javafx.scene.control.*;
+//import javafx.scene.control.cell.*;
+//import javafx.scene.layout.*;
+//import javafx.scene.web.*;
+//import javafx.scene.media.*;
+//import javafx.scene.text.*;
+//import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle; // Imports the Rectangle.java class, which allows the program to create a rectangle that will be shown to the user (by being added as a node to the current scene).
+//import javafx.scene.paint.*;
+import javafx.scene.paint.Paint; // Imports the Paint.java class, which allows the program to create specific paint colours for various parts of the GUI.
+import javafx.scene.paint.Color; // Imports the Color.java class, which allows the programa to create specific colors for various parts of the GUI.
+//import javafx.scene.image.*;
+import javafx.scene.image.Image; // Imports the Image.java class, which allows the program to create images from various files that are on the user's computer.
+import javafx.scene.image.ImageView; // Imports the ImageView.java class, which allows the program to create images that can act as nodes and can be added onto the scenes (and displayed to the user).
+//import javafx.scene.input.*;
+import javafx.scene.input.KeyEvent; // Imports the KeyEvent.java class, which allows the program to recognize inputs that are coming from the keyboard and act accordingly based on what key the input is coming from.
+import javafx.scene.input.KeyCode; // Imports the KeyCode.java class, which allows the program to see what key the key event is coming from.
+import javafx.scene.input.MouseEvent; // Imports the MouseEvent.java class, which allows the program to recognize inputs that are coming from the mouse and act accordingly.
+//import javafx.stage.*;
+import javafx.stage.Stage; // Imports the Stage.java class, which allows the program to have access to a stage to display the graphics within.
+import javafx.stage.StageStyle; // Imports the StageStyle.java class, which allows the program to set the style of the stage (such as modifying its border).
+//import javafx.util.*;
+import javafx.util.Duration; // Imports the Duration.java class, which allows the program to set the duration of time for a specific task (say how long the fading animation (so FadeTransition instance) should last for).
+//import javafx.concurrent.*;
 
-import java.io.*;
-import java.util.*;
-import java.math.*;
-import java.lang.*;
+//import java.io.*;
+import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
+import java.io.IOException; // Imports the IOException.java class, which allows the user to take care of the IOExceptions that are thrown by any parts of the program.
+//import java.util.*;
+//import java.math.*;
+//import java.lang.*;
 //import java.awt.*;
-import java.awt.Point;
-import java.awt.MouseInfo;
-import javax.swing.*;
+//import javax.swing.*;
 //import java.time.*;
-import java.util.concurrent.*;
+//import java.util.concurrent.*;
 
+/**
+ * Create a Grid made of Tiles that the user will move around in.
+ * <p>
+ * This class will create a grid made from numerous instances of
+ * the Tile.java class, which will all be stored within a global
+ * 2D array that will be a code representation of the grid. This
+ * class will also have various methods that help with user
+ * movement.
+ * <p>
+ * Course: ICS 4U0/P
+ * <p>
+ * Teacher Name: Ms. Krasteva
+ * <p>
+ * Purpose: to build manipulate and draw a screen with tiles
+ * that the player can move around in.
+ * <p>
+ * Filename: MainApplication.java
+ *
+ * @author Simon Bakan
+ * @author Joshua Persaud
+ * @version 5/20/2022
+ * 
+ * @see javafx.application.Application
+ * @see javafx.animation.FadeTransition
+ * @see javafx.event.EventHandler
+ * @see javafx.event.ActionEvent
+ * @see javafx.scene.Scene
+ * @see javafx.scene.Group
+ * @see javafx.scene.shape.Rectangle
+ * @see javafx.scene.paint.Paint
+ * @see javafx.scene.paint.Color
+ * @see javafx.scene.image.Image
+ * @see javafx.scene.image.ImageView
+ * @see javafx.scene.input.KeyEvent
+ * @see javafx.scene.input.KeyCode
+ * @see javafx.scene.input.MouseEvent
+ * @see javafx.stage.Stage
+ * @see javafx.util.Duration
+ * @see java.io.File
+ * @see java.io.IOException
+ *
+ * @since JDK1.17
+ */
+ 
 // Number of things to change: 2
 
 public class MainApplication extends Application {
+
    private File logoFile;
    
    private File introBorderFile;

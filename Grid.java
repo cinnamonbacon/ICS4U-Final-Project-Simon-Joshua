@@ -9,14 +9,14 @@
 */
 
 import javafx.stage.Stage; // Imports the Stage.java class, which allows the program to have access to a stage to display the graphics within.
-import javafx.scene.layout.GridPane; // Imports the GridPane.java class, which allows the program to have access to a grid layout to easily organize Nodes and other graphics within.
-import javafx.scene.layout.VBox; // Imports the VBox.java class, which allows the program to have access to the vertical box layout to easily organize Nodes and other graphics.
-import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to have access to the stack layout to easily organize Nodes and other graphis within (it can now stack the panes).
+import javafx.scene.layout.GridPane; // Imports the GridPane.java class, which allows the program to have access to a grid layout to organize Nodes and other graphics within.
+import javafx.scene.layout.VBox; // Imports the VBox.java class, which allows the program to have access to the vertical box layout to organize Nodes and other graphics.
+import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to have access to the stack layout to organize Nodes and other graphics within (it can now stack the panes).
 import javafx.scene.Scene; // Imports the Scene.java class, which allows the program to have access to a scene on which the GUI can be added onto and displayed to the user.
-import javafx.scene.Group; // Imports the Group.java class, which allows the program to have access to the group layout to easily organize Nodes and other graphics within (it can group various nodes together).
-import java.io.File; // Imports the File.java class, which allows the program to easily access files that are on the user's computer.
-import javafx.scene.image.Image; // Imports the Image.java class, which allows the program to easily create images from various files that are on the user's computer.
-import javafx.scene.image.ImageView; // Imports the ImageView.java class, which allows the program to easily create images that can act as nodes and can be added onto the scenes (and displayed to the user).
+import javafx.scene.Group; // Imports the Group.java class, which allows the program to have access to the group layout to organize Nodes and other graphics within (it can group various nodes together).
+import javafx.scene.image.Image; // Imports the Image.java class, which allows the program to create images from various files that are on the user's computer.
+import javafx.scene.image.ImageView; // Imports the ImageView.java class, which allows the program to create images that can act as nodes and can be added onto the scenes (and displayed to the user).
+import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
 
 /**
  * Create a Grid made of Tiles that the user will move around in.
@@ -38,6 +38,16 @@ import javafx.scene.image.ImageView; // Imports the ImageView.java class, which 
  *
  * @author Simon Bakan
  * @version 5/20/2022
+ * 
+ * @see javafx.stage.Stage
+ * @see javafx.scene.layout.GridPane
+ * @see javafx.scene.layout.VBox
+ * @see javafx.scene.layout.StackPane
+ * @see javafx.scene.Scene
+ * @see javafx.scene.Group
+ * @see javafx.scene.image.Image
+ * @see javafx.scene.image.ImageView
+ * @see java.io.File
  *
  * @since JDK1.17
  */
