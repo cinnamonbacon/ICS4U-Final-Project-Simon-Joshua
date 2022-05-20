@@ -32,7 +32,7 @@ public class Tile{
    }
    
    /**
-     * Private non-static return method used get the value of movable.
+     * Public non-static return method used get the value of movable.
      * <p>
      * This private non-static return method will be used as an accesor method
      * for the movable attribute of the tile.
@@ -44,7 +44,7 @@ public class Tile{
    }
    
    /**
-     * Private non-static return method used get the value of interactable.
+     * Public non-static return method used get the value of interactable.
      * <p>
      * This private non-static return method will be used as an accessor method 
      * for the interactable attribute of the tile.
@@ -56,7 +56,7 @@ public class Tile{
    }
    
    /**
-     * Private non-static return method used change the value of interactable.
+     * Public non-static method used change the value of interactable.
      * <p>
      * This private non-static method to act as a accessor method allowing other 
      * classes to make a tile interactable.
@@ -66,7 +66,7 @@ public class Tile{
    }
    
    /**
-     * Private non-static return method used get the value of file.
+     * Public non-static return method used get the value of file.
      * <p>
      * This private non-static return method will be used as an accessor method 
      * for the file attribute of the tile which has the pathway for the image.
@@ -78,7 +78,7 @@ public class Tile{
    }
    
    /**
-     * Private non-static return method used get the value of object.
+     * Public non-static return method used get the value of object.
      * <p>
      * This private non-static return method will be used as an accessor method 
      * for the object attribute of the tile which has the pathway for the image
