@@ -89,7 +89,7 @@ public class Grid{
         }
         ImageView mainChar = new ImageView();
         try{
-           File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\Sprites\\MainChar.png");
+           File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\MainChar.png");
            Image image = new Image(file.toURI().toString());
            mainChar.setImage(image);
            mainChar.setX(30*mainX);

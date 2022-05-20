@@ -49,6 +49,8 @@ public class MainApplication extends Application {
    
    private File newGameFile;
    
+   private String screen;
+   
    public MainApplication () {
       logoFile = new File("ICS ISP - Single Star Games Logo.png");
       introBorderFile = new File("ICS ISP - Border for Intro Screens.png");
@@ -113,7 +115,7 @@ public class MainApplication extends Application {
    }
    
    public void mainMenu(Stage stage) throws IOException {
-   
+      screen="main";
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
       introBorderImageView.setSmooth(true);
@@ -133,18 +135,22 @@ public class MainApplication extends Application {
       whiteTitleImageView.setX(20);
       whiteTitleImageView.setY(55);
       whiteTitleImageView.setFitWidth(180);
+      stage.addEventFilter(KeyEvent.ANY, k -> {
+            if(k.getCode()== KeyCode.SPACE&&screen.equals("main")){
+                try{
+                    game(stage);
+                }catch(Exception e){}
+            }
+      });
       
-      /*
       stage.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
-
         
         final double xVal = e.getX();
         final double yVal = e.getY();
         
         System.out.println(xVal + " " + yVal);
-
       });
-      */
+      
       /*
       Service<Void> service = new Service<Void>() {
           @Override
@@ -196,44 +202,43 @@ public class MainApplication extends Application {
       stage.show();
    
    }
-   
-   private Label createMonitoredLabel(final Label reporter) {
-    final Label monitored = new Label("Mouse Location Monitor");
-
-    monitored.setStyle("-fx-background-color: forestgreen; -fx-text-fill: white; -fx-font-size: 20px;");
-
-    monitored.setOnMouseMoved(new EventHandler<MouseEvent>() {
-      @Override public void handle(MouseEvent event) {
-        String msg =
-          "(x: "       + event.getX()      + ", y: "       + event.getY()       + ") -- " +
-          "(sceneX: "  + event.getSceneX() + ", sceneY: "  + event.getSceneY()  + ") -- " +
-          "(screenX: " + event.getScreenX()+ ", screenY: " + event.getScreenY() + ")";
-
-        reporter.setText(msg);
-      }
-    });
-
-    monitored.setOnMouseExited(new EventHandler<MouseEvent>() {
-        @Override public void handle(MouseEvent event) {
-            reporter.setText("yo");
-        }
-    });
-
-    return monitored;
-  }
 
    public void game(Stage stage) throws IOException {
+      screen = "game";
       try {            
          Grid grid = new Grid(15,15);
          for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-               grid.assign(i, j, grassTileFile.getPath(), additionalGrassTileFile.getPath(), false, false);
+               grid.assign(i, j, grassTileFile.getPath(), additionalGrassTileFile.getPath(), true, false);
             }
          }
          grid.draw(stage);
             
             //stage.setStage(scene);
          stage.show();
+         stage.addEventFilter(KeyEvent.KEY_RELEASED, k -> {
+            try{
+                if(screen.equals("game")){
+                    if(k.getCode()== KeyCode.W){
+                        grid.moveUp();
+                        grid.draw(stage);
+                        stage.show();
+                    }else if(k.getCode()== KeyCode.A){
+                        grid.moveLeft();
+                        grid.draw(stage);
+                        stage.show();
+                    }else if(k.getCode()== KeyCode.S){
+                        grid.moveDown();
+                        grid.draw(stage);
+                        stage.show();
+                    }if(k.getCode()== KeyCode.D){
+                        grid.moveRight();
+                        grid.draw(stage);
+                        stage.show();
+                    }
+                }
+            }catch(Exception e){}
+         });
       } catch (Exception e) {
          e.printStackTrace();
       }
