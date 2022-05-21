@@ -1,3 +1,13 @@
+/*
+  Names: Simon Bakan and Joshua Persaud
+  Teacher: Ms. Krasteva
+  Date: May 20, 2022
+  Course: ICS4U0/P
+  
+  Purpose: to act as a driver class and run various code in the correct order to simulate a game.
+  Worked on by: Joshua and Simon
+*/
+
 //import javafx.application.*;
 import javafx.application.Application; // Imports the Application.java class, which allows the program to create a GUI and display it on the screen to the user.
 //import javafx.animation.*;
@@ -50,20 +60,18 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
 //import java.util.concurrent.*;
 
 /**
- * Create a Grid made of Tiles that the user will move around in.
+ * Main program that will act as driver class and run entire game.
  * <p>
- * This class will create a grid made from numerous instances of
- * the Tile.java class, which will all be stored within a global
- * 2D array that will be a code representation of the grid. This
- * class will also have various methods that help with user
- * movement.
+ * This class will be used to create instances of various classes
+ * to create the game. It will also coordinate the code so that
+ * the program works as intended.
  * <p>
  * Course: ICS 4U0/P
  * <p>
  * Teacher Name: Ms. Krasteva
  * <p>
- * Purpose: to build manipulate and draw a screen with tiles
- * that the player can move around in.
+ * Purpose: to act as a driver class and run various code in
+ * the correct order to simulate a game.
  * <p>
  * Filename: MainApplication.java
  *
@@ -96,33 +104,55 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
 // Number of things to change: 2
 
 public class MainApplication extends Application {
-
+   /** This private non-static File variable will hold the logo for the game. */    
    private File logoFile;
    
+   /** This private non-static File variable will hold the intro border design for the game. */
    private File introBorderFile;
    
+   /** This private non-static File variable will hold the title design (the white version) for the game. */
    private File whiteTitleFile;
    
+   /** This private non-static File variable will hold the title design (the black version) for the game. */
    private File blackTitleFile;
    
+   /** This private non-static File variable will hold the grass tile that will be used in the game's grid. */
    private File grassTileFile;
    
+   /** This private non-static File variable will hold the additional grass that will be added onto the grass tile that will be used in the game's grid. */
    private File additionalGrassTileFile;
    
-   private File newGameFile;
+   /** This private non-static File variable will hold the design for the "New Game" button in the main menu. */
+   private File newGameButtonFile;
    
+   /** This private non-static String variable will hold the name of the method that the program should be running currently. */
    private String screen;
    
+   /**
+    * An instance of the Tile class will be created using this no parameter constructor.
+    */
    public MainApplication () {
-      logoFile = new File("ICS ISP - Single Star Games Logo.png");
-      introBorderFile = new File("ICS ISP - Border for Intro Screens.png");
-      whiteTitleFile = new File("ICS ISP - Title of Game (White Version).png");
-      blackTitleFile = new File("ICS ISP - Title of Game (Black Version).png");
-      grassTileFile = new File("Grass.png");
-      additionalGrassTileFile = new File("AdditionalGrass.png");
-      newGameFile = new File("ICS ISP - Button Design for New Game Button.png");      
+      this.logoFile = new File("ICS ISP - Single Star Games Logo.png");
+      this.introBorderFile = new File("ICS ISP - Border for Intro Screens.png");
+      this.whiteTitleFile = new File("ICS ISP - Title of Game (White Version).png");
+      this.blackTitleFile = new File("ICS ISP - Title of Game (Black Version).png");
+      this.grassTileFile = new File("Grass.png");
+      this.additionalGrassTileFile = new File("AdditionalGrass.png");
+      this.newGameButtonFile = new File("ICS ISP - Button Design for New Game Button.png");      
    }
    
+   /**
+    * Public non-static method used to initialize the settings of the stage for the GUI.
+    * <p>
+    * This public non-static method is void and it will be used to initialize
+    * the settings of the stage that will be used in the GUI for the program.
+    * It will set its title to "Trans-form: The Awakening", it will set the
+    * surrounding border of the stage to a decorated style (using one of the
+    * static variables in the StageStyle.java class), and it will set this
+    * stage to have its own icon, not be resizable by the user, and to be
+    * at the front of all the current windows.
+    * @throws IOException
+    */
    public void initializeStageSettings(Stage stage) throws IOException {
       stage.setTitle("Trans-form: The Awakening");
       stage.initStyle(StageStyle.DECORATED); // <-------------------------------------------------------------------------------------------------------------------------------- set this to StageStyle.TRANSPARENT later on
@@ -131,6 +161,23 @@ public class MainApplication extends Application {
       stage.toFront();
    }
    
+   /**
+    * Public non-static method used to create the intro animation for the game.
+    * <p>
+    * This public non-static method is void and it will be used to create the
+    * introduction animation for the program. It will use the ImageView.java
+    * class to create a Node that holds the image of the logo and can add it
+    * to the scene. The method will also use an instance of the FadeTransition
+    * class to help create the fading effect that is seen at the start of the
+    * game. A nested class will be used to wait for the animation to finish
+    * and then call on the mainMenu() method to display the menu for the game.
+    * <p>
+    * Done by: Joshua
+    * 
+    * @param stage An instance of the Stage.java class, which will be the main
+    *              stage that the program will use and display to the user.
+    * @throws IOException
+    */
    public void introAnimation(Stage stage) throws IOException {
    
       ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
@@ -147,14 +194,15 @@ public class MainApplication extends Application {
       ftLogo.play();
    
       // Taken from https://stackoverflow.com/questions/11188018/how-to-wait-for-a-transition-to-end-in-javafx-2-1
-      ftLogo.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-         @Override 
-         public void handle(ActionEvent actionEvent) {
-            try{
-               mainMenu(stage);
-            }catch(Exception e){}
-         }
-      });
+      ftLogo.onFinishedProperty().set(
+         new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent actionEvent) {
+               try{
+                  mainMenu(stage);
+               }catch(Exception e){}
+            }
+         });
       
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
@@ -170,12 +218,28 @@ public class MainApplication extends Application {
       scene.setFill(Color.BLACK);
       stage.setScene(scene);
    
-      stage.show();
-      
-      //groupLines.getChildren().clear();
-   
+      stage.show();   
    }
    
+   /**
+    * Public non-static method used to create the main menu for the game.
+    * <p>
+    * This public non-static method is void and it will be used to create the
+    * main menu for the program, which will allow the user to choose the
+    * direction that they would like to go in the program. This will be done
+    * by using various instances of the ImageView.java class to create Nodes
+    * of certain images that can be added to the scene to make it more lovely
+    * to look at. There will also be instances of  various classes from the
+    * javafx.scene.shape package that will be added to the scene to create the
+    * correct design. There are also pieces of code that are triggered by events
+    * from the user's input and will act accordingly.
+    * <p>
+    * Done by: Joshua
+    * 
+    * @param stage An instance of the Stage.java class, which will be the main
+    *              stage that the program will use and display to the user.
+    * @throws IOException
+    */
    public void mainMenu(Stage stage) throws IOException {
       screen="main";
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
@@ -197,23 +261,26 @@ public class MainApplication extends Application {
       whiteTitleImageView.setX(20);
       whiteTitleImageView.setY(55);
       whiteTitleImageView.setFitWidth(180);
-      stage.addEventFilter(KeyEvent.ANY, k -> {
+      stage.addEventFilter(KeyEvent.ANY, 
+         k -> {
             if(k.getCode()== KeyCode.SPACE&&screen.equals("main")){
-                try{
-                    game(stage);
-                }catch(Exception e){}
+               try{
+                  game(stage);
+               }catch(Exception e){}
             }
-      });
+         });
       
-      stage.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
-        
-        final double xVal = e.getX();
-        final double yVal = e.getY();
-        
-        System.out.println(xVal + " " + yVal);
-      });
+      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+         
+            System.out.println(xVal + " " + yVal);
+         });
       
       /*
+      // This code will be used in the case that the code for the events take too long to run and start to make the game feel unresponsive and laggy.
       Service<Void> service = new Service<Void>() {
           @Override
           protected Task<Void> createTask() {
@@ -265,6 +332,20 @@ public class MainApplication extends Application {
    
    }
 
+   /**
+    * Public non-static method used to create the actual game.
+    * <p>
+    * This public non-static method is void and it will be used to create the
+    * game for the program. It will do this by creating an instance of the
+    * Grid.java class to simulate the grid and it will also have various
+    * blocks of code that will run based on certain keys from keyboard events.
+    * <p>
+    * Done by: Simon
+    * 
+    * @param stage An instance of the Stage.java class, which will be the main
+    *              stage that the program will use and display to the user.
+    * @throws IOException
+    */
    public void game(Stage stage) throws IOException {
       screen = "game";
       try {            
@@ -278,34 +359,50 @@ public class MainApplication extends Application {
             
             //stage.setStage(scene);
          stage.show();
-         stage.addEventFilter(KeyEvent.KEY_RELEASED, k -> {
-            try{
-                if(screen.equals("game")){
-                    if(k.getCode()== KeyCode.W){
+         stage.addEventFilter(KeyEvent.KEY_RELEASED, 
+            k -> {
+               try{
+                  if(screen.equals("game")){
+                     if(k.getCode()== KeyCode.W){
                         grid.moveUp();
                         grid.draw(stage);
                         stage.show();
-                    }else if(k.getCode()== KeyCode.A){
+                     }else if(k.getCode()== KeyCode.A){
                         grid.moveLeft();
                         grid.draw(stage);
                         stage.show();
-                    }else if(k.getCode()== KeyCode.S){
+                     }else if(k.getCode()== KeyCode.S){
                         grid.moveDown();
                         grid.draw(stage);
                         stage.show();
-                    }if(k.getCode()== KeyCode.D){
+                     }
+                     if(k.getCode()== KeyCode.D){
                         grid.moveRight();
                         grid.draw(stage);
                         stage.show();
-                    }
-                }
-            }catch(Exception e){}
-         });
+                     }
+                  }
+               }catch(Exception e){}
+            });
       } catch (Exception e) {
          e.printStackTrace();
       }
    }
    
+   /**
+    * Public non-static method used to run the entire GUI.
+    * <p>
+    * This public non-static method is void and it will be used to run the
+    * various methods that each do a section of the overall game. This
+    * method is overriding the start() method that is present in the
+    * Application.java class.
+    * <p>
+    * Done by: Joshua
+    * 
+    * @param stage An instance of the Stage.java class, which will be the main
+    *              stage that the program will use and display to the user.
+    * @throws IOException
+    */
    @Override
    public void start(Stage stage) throws IOException {
       this.initializeStageSettings(stage);
@@ -315,7 +412,17 @@ public class MainApplication extends Application {
        
    }
 
+   // This is the main method, which is public, static, and has a void return type. This will be used to execute the program.
+
+   /**
+    * Public static method used to run program.
+    * <p>
+    * This is the main method, which is a public static method
+    * that will be used to execute the program.
+    *
+    * @param args Arguments from the command line.
+    */
    public static void main(String[] args) {
       Application.launch();
-   }
-}
+   } // End of the main() method
+} // End of the MainApplication.java class

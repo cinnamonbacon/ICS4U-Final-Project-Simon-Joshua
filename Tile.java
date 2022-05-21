@@ -45,6 +45,14 @@ public class Tile{
    
    /**
     * An instance of the Tile class will be created using this constructor.
+    * 
+    * @param file A String, which will be path to the tile's design.
+    * @param object A String, which will be the path to the object
+    *               that is on the tile's design.
+    * @param movable A boolean, which is whether or not the player
+    *                can move to this tile.
+    * @param interactable A boolean, which is whether or not the
+    *                     player can interact with this tile.
     */
    public Tile(String file, String object, boolean movable, boolean interactable){
       this.file=file;

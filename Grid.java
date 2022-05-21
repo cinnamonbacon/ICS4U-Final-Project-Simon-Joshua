@@ -66,6 +66,9 @@ public class Grid{
    /**
     * An instance of the Tile class will be created using this constructor with
     * parameters for the x and y coordinate.
+    * 
+    * @param x An integer, which is x coordinate of the player.
+    * @param y An integer, which is y coordinate of the player.
     */
    public Grid(int x, int y){
       tiles = new Tile[20][20];
