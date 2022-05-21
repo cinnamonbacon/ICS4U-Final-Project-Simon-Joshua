@@ -59,6 +59,10 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
 //import java.time.*;
 //import java.util.concurrent.*;
 
+
+//Remember to add these imports to the JavaDoc
+import javafx.scene.shape.Circle;
+
 /**
  * Main program that will act as driver class and run entire game.
  * <p>
@@ -137,6 +141,12 @@ public class MainApplication extends Application {
    /** This private non-static File variable will hold the design for the copyright statement in the main menu. */
    private File copyrightStatementFile;
    
+   /** This private non-static File variable will hold the design for the grass and dirt block in the main menu. */
+   private File grassAndDirtBlockFile;
+   
+   /** This private non-static File variable will hold the design for the non-pixelated character in the main menu. */
+   private File characterNonPixelatedFile;
+   
    /** This private non-static String variable will hold the name of the method that the program should be running currently. */
    private String screen;
    
@@ -152,9 +162,11 @@ public class MainApplication extends Application {
       this.additionalGrassTileFile = new File("AdditionalGrass.png");
       this.newGameButtonFile = new File("ICS ISP - Button Design for New Game Button.png");      
       this.instructionsButtonFile = new File("ICS ISP - Button Design for Instructions Button.png");
-      this.leaderboardButtonFile = new File("ICS ISP - Button Design for Leaderboard Button.png"); 
-      this.quitGameButtonFile = new File("ICS ISP - Button Design for Quit Game Button.png"); 
-      this.copyrightStatementFile = new File("ICS ISP - Design for Copyright Statement.png"); 
+      this.leaderboardButtonFile = new File("ICS ISP - Button Design for Leaderboard Button.png");
+      this.quitGameButtonFile = new File("ICS ISP - Button Design for Quit Game Button.png");
+      this.copyrightStatementFile = new File("ICS ISP - Design for Copyright Statement.png");
+      this.grassAndDirtBlockFile = new File("ICS ISP - Design for Grass and Dirt Block.png");
+      this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
    }
    
    /**
@@ -333,9 +345,30 @@ public class MainApplication extends Application {
       copyrightStatementImageView.setY(535);
       copyrightStatementImageView.setFitWidth(160);
       
+      Group grassAndDirtBlocksGroup = new Group();
+      for (int i = 0; i < 5; i++) {
+          ImageView grassAndDirtBlockImageView = new ImageView(new Image(grassAndDirtBlockFile.getPath()));
+          grassAndDirtBlockImageView.setPreserveRatio(true);
+          grassAndDirtBlockImageView.setSmooth(true);
+          grassAndDirtBlockImageView.setX(210 + i * 100);
+          grassAndDirtBlockImageView.setY(535);
+          grassAndDirtBlockImageView.setFitWidth(100);
+          grassAndDirtBlocksGroup.getChildren().add(grassAndDirtBlockImageView);
+      }
+      
+      ImageView characterNonPixelatedImageView = new ImageView(new Image(characterNonPixelatedFile.getPath()));
+      characterNonPixelatedImageView.setPreserveRatio(true);
+      characterNonPixelatedImageView.setSmooth(true);
+      characterNonPixelatedImageView.setX(230);
+      characterNonPixelatedImageView.setY(364);
+      characterNonPixelatedImageView.setFitWidth(120);
+      
+      Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
+      yellowCircleForSun.setStroke(Paint.valueOf("rgb(0,0,0)"));
+      
       stage.addEventFilter(KeyEvent.ANY, 
          k -> {
-            if(k.getCode()== KeyCode.SPACE&&screen.equals("main")){
+            if(k.getCode() == KeyCode.SPACE && screen.equals("main")){
                try{
                   game(stage);
                } catch(Exception e){}
@@ -430,6 +463,9 @@ public class MainApplication extends Application {
       nodesToAdd.getChildren().add(redRectangleAroundQuitGameButton);
       nodesToAdd.getChildren().add(quitGameButtonImageView);
       nodesToAdd.getChildren().add(copyrightStatementImageView);
+      nodesToAdd.getChildren().add(grassAndDirtBlocksGroup);
+      nodesToAdd.getChildren().add(characterNonPixelatedImageView);
+      nodesToAdd.getChildren().add(yellowCircleForSun);
       nodesToAdd.getChildren().add(introBorderImageView);
      
       Scene scene = new Scene(nodesToAdd, 600, 600);
