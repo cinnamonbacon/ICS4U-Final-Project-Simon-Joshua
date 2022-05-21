@@ -125,6 +125,18 @@ public class MainApplication extends Application {
    /** This private non-static File variable will hold the design for the "New Game" button in the main menu. */
    private File newGameButtonFile;
    
+   /** This private non-static File variable will hold the design for the "Instructions" button in the main menu. */
+   private File instructionsButtonFile;
+   
+   /** This private non-static File variable will hold the design for the "Leaderboard" button in the main menu. */
+   private File leaderboardButtonFile;
+   
+   /** This private non-static File variable will hold the design for the "Quit Game" button in the main menu. */
+   private File quitGameButtonFile;
+   
+   /** This private non-static File variable will hold the design for the copyright statement in the main menu. */
+   private File copyrightStatementFile;
+   
    /** This private non-static String variable will hold the name of the method that the program should be running currently. */
    private String screen;
    
@@ -139,6 +151,10 @@ public class MainApplication extends Application {
       this.grassTileFile = new File("Grass.png");
       this.additionalGrassTileFile = new File("AdditionalGrass.png");
       this.newGameButtonFile = new File("ICS ISP - Button Design for New Game Button.png");      
+      this.instructionsButtonFile = new File("ICS ISP - Button Design for Instructions Button.png");
+      this.leaderboardButtonFile = new File("ICS ISP - Button Design for Leaderboard Button.png"); 
+      this.quitGameButtonFile = new File("ICS ISP - Button Design for Quit Game Button.png"); 
+      this.copyrightStatementFile = new File("ICS ISP - Design for Copyright Statement.png"); 
    }
    
    /**
@@ -261,12 +277,68 @@ public class MainApplication extends Application {
       whiteTitleImageView.setX(20);
       whiteTitleImageView.setY(55);
       whiteTitleImageView.setFitWidth(180);
+      
+      ImageView newGameButtonImageView = new ImageView(new Image(newGameButtonFile.getPath()));
+      newGameButtonImageView.setPreserveRatio(true);
+      newGameButtonImageView.setSmooth(true);
+      newGameButtonImageView.setX(33);
+      newGameButtonImageView.setY(205);
+      newGameButtonImageView.setFitWidth(160);
+      
+      Rectangle redRectangleAroundNewGameButton = new Rectangle(20, 205, 180, 58);
+      redRectangleAroundNewGameButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
+      redRectangleAroundNewGameButton.setStrokeWidth(2);
+      redRectangleAroundNewGameButton.setVisible(false);
+      
+      ImageView instructionsButtonImageView = new ImageView(new Image(instructionsButtonFile.getPath()));
+      instructionsButtonImageView.setPreserveRatio(true);
+      instructionsButtonImageView.setSmooth(true);
+      instructionsButtonImageView.setX(30);
+      instructionsButtonImageView.setY(277);
+      instructionsButtonImageView.setFitWidth(160);
+      
+      Rectangle redRectangleAroundInstructionsButton = new Rectangle(20, 280, 180, 58);
+      redRectangleAroundInstructionsButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
+      redRectangleAroundInstructionsButton.setStrokeWidth(2);
+      redRectangleAroundInstructionsButton.setVisible(false);
+      
+      ImageView leaderboardButtonImageView = new ImageView(new Image(leaderboardButtonFile.getPath()));
+      leaderboardButtonImageView.setPreserveRatio(true);
+      leaderboardButtonImageView.setSmooth(true);
+      leaderboardButtonImageView.setX(30);
+      leaderboardButtonImageView.setY(352);
+      leaderboardButtonImageView.setFitWidth(160);
+      
+      Rectangle redRectangleAroundLeaderboardButton = new Rectangle(20, 355, 180, 58);
+      redRectangleAroundLeaderboardButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
+      redRectangleAroundLeaderboardButton.setStrokeWidth(2);
+      redRectangleAroundLeaderboardButton.setVisible(true);
+      
+      ImageView quitGameButtonImageView = new ImageView(new Image(quitGameButtonFile.getPath()));
+      quitGameButtonImageView.setPreserveRatio(true);
+      quitGameButtonImageView.setSmooth(true);
+      quitGameButtonImageView.setX(30);
+      quitGameButtonImageView.setY(452);
+      quitGameButtonImageView.setFitWidth(110);
+      
+      Rectangle redRectangleAroundQuitGameButton = new Rectangle(20, 455, 130, 48);
+      redRectangleAroundQuitGameButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
+      redRectangleAroundQuitGameButton.setStrokeWidth(2);
+      redRectangleAroundQuitGameButton.setVisible(true);
+      
+      ImageView copyrightStatementImageView = new ImageView(new Image(copyrightStatementFile.getPath()));
+      copyrightStatementImageView.setPreserveRatio(true);
+      copyrightStatementImageView.setSmooth(true);
+      copyrightStatementImageView.setX(30);
+      copyrightStatementImageView.setY(535);
+      copyrightStatementImageView.setFitWidth(160);
+      
       stage.addEventFilter(KeyEvent.ANY, 
          k -> {
             if(k.getCode()== KeyCode.SPACE&&screen.equals("main")){
                try{
                   game(stage);
-               }catch(Exception e){}
+               } catch(Exception e){}
             }
          });
       
@@ -277,6 +349,30 @@ public class MainApplication extends Application {
             final double yVal = e.getY();
          
             System.out.println(xVal + " " + yVal);
+            
+            if (xVal >= 20 && xVal <= 200 && yVal >= 205 && yVal <= 263) {
+                redRectangleAroundNewGameButton.setVisible(true);
+            } else {
+                redRectangleAroundNewGameButton.setVisible(false);
+            }
+            
+            if (xVal >= 20 && xVal <= 200 && yVal >= 280 && yVal <= 338) {
+                redRectangleAroundInstructionsButton.setVisible(true);
+            } else {
+                redRectangleAroundInstructionsButton.setVisible(false);
+            }
+            
+            if (xVal >= 20 && xVal <= 200 && yVal >= 355 && yVal <= 413) {
+                redRectangleAroundLeaderboardButton.setVisible(true);
+            } else {
+                redRectangleAroundLeaderboardButton.setVisible(false);
+            }
+            
+            if (xVal >= 20 && xVal <= 150 && yVal >= 455 && yVal <= 503) {
+                redRectangleAroundQuitGameButton.setVisible(true);
+            } else {
+                redRectangleAroundQuitGameButton.setVisible(false);
+            }
          });
       
       /*
@@ -320,8 +416,21 @@ public class MainApplication extends Application {
       };
       service.start();
       */
-           
-      Group nodesToAdd = new Group(blackRectangleUnderOptions, greyRectangleUnderTitle, whiteTitleImageView, introBorderImageView);
+                 
+      Group nodesToAdd = new Group();
+      nodesToAdd.getChildren().add(blackRectangleUnderOptions);
+      nodesToAdd.getChildren().add(greyRectangleUnderTitle);
+      nodesToAdd.getChildren().add(whiteTitleImageView);
+      nodesToAdd.getChildren().add(redRectangleAroundNewGameButton);
+      nodesToAdd.getChildren().add(newGameButtonImageView);
+      nodesToAdd.getChildren().add(redRectangleAroundInstructionsButton);
+      nodesToAdd.getChildren().add(instructionsButtonImageView);
+      nodesToAdd.getChildren().add(redRectangleAroundLeaderboardButton);
+      nodesToAdd.getChildren().add(leaderboardButtonImageView);
+      nodesToAdd.getChildren().add(redRectangleAroundQuitGameButton);
+      nodesToAdd.getChildren().add(quitGameButtonImageView);
+      nodesToAdd.getChildren().add(copyrightStatementImageView);
+      nodesToAdd.getChildren().add(introBorderImageView);
      
       Scene scene = new Scene(nodesToAdd, 600, 600);
        
