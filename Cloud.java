@@ -57,7 +57,7 @@ public class Cloud extends Shape {
         Circle middleCircle = new Circle(0.0, -25.0, 50.0);
         Circle rightSideCircle = new Circle(50.0, 0.0, 35.0);
         Rectangle bottomRectangle = new Rectangle(-50.0, 0.0, 100.0, 35.0);
-        returnedShape = Shape.union(Shape.union(Shape.union(leftSideCircle, middleCircle), rightSideCircle), bottomRectangle);
+        returnedShape = Shape.union(Shape.union(Shape.union(leftSideCircle, middleCircle), rightSideCircle), bottomRectangle); // This line of code just takes all of the shapes and adds each one of them together
         returnedShape.setFill(this.colour);
         returnedShape.getTransforms().add(new Translate(this.xVal, this.yVal));
         returnedShape.getTransforms().add(new Scale(this.scale, this.scale));

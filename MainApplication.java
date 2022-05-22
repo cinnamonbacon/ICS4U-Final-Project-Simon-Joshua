@@ -67,6 +67,7 @@ import javafx.animation.TranslateTransition;
 import javafx.animation.Animation;
 import javafx.animation.SequentialTransition; // <------------------------------------------------------------------------------------------------ check to see if you have to remove this import (if it isn't used anywhere)
 import javafx.animation.ParallelTransition;
+import javafx.scene.Cursor;
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -201,7 +202,8 @@ public class MainApplication extends Application {
    public void initializeStageSettings(Stage stage) throws IOException {
       stage.setTitle("Trans-form: The Awakening");
       stage.initStyle(StageStyle.DECORATED); // <-------------------------------------------------------------------------------------------------------------------------------- set this to StageStyle.TRANSPARENT later on
-      stage.isIconified();
+      Image logoImage = new Image(logoFile.getPath());
+      stage.getIcons().add(logoImage);
       stage.setResizable(false);
       stage.toFront();
    }
@@ -261,7 +263,7 @@ public class MainApplication extends Application {
       Group nodesToAdd = new Group();
       nodesToAdd.getChildren().add(logoImageView);
       nodesToAdd.getChildren().add(introBorderImageView);
-
+   
       Scene scene = new Scene(nodesToAdd, 600, 600);
        
       scene.setFill(Color.BLACK);
@@ -291,6 +293,7 @@ public class MainApplication extends Application {
     */
    public void mainMenu(Stage stage) throws IOException {
       screen = "main";
+      
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
       introBorderImageView.setSmooth(true);
@@ -345,7 +348,7 @@ public class MainApplication extends Application {
       Rectangle redRectangleAroundLeaderboardButton = new Rectangle(20, 355, 180, 58);
       redRectangleAroundLeaderboardButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
       redRectangleAroundLeaderboardButton.setStrokeWidth(2);
-      redRectangleAroundLeaderboardButton.setVisible(true);
+      redRectangleAroundLeaderboardButton.setVisible(false);
       
       ImageView quitGameButtonImageView = new ImageView(new Image(quitGameButtonFile.getPath()));
       quitGameButtonImageView.setPreserveRatio(true);
@@ -357,7 +360,7 @@ public class MainApplication extends Application {
       Rectangle redRectangleAroundQuitGameButton = new Rectangle(20, 455, 130, 48);
       redRectangleAroundQuitGameButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
       redRectangleAroundQuitGameButton.setStrokeWidth(2);
-      redRectangleAroundQuitGameButton.setVisible(true);
+      redRectangleAroundQuitGameButton.setVisible(false);
       
       ImageView copyrightStatementImageView = new ImageView(new Image(copyrightStatementFile.getPath()));
       copyrightStatementImageView.setPreserveRatio(true);
@@ -368,13 +371,13 @@ public class MainApplication extends Application {
       
       Group grassAndDirtBlocksGroup = new Group();
       for (int i = 0; i < 5; i++) {
-          ImageView grassAndDirtBlockImageView = new ImageView(new Image(grassAndDirtBlockFile.getPath()));
-          grassAndDirtBlockImageView.setPreserveRatio(true);
-          grassAndDirtBlockImageView.setSmooth(true);
-          grassAndDirtBlockImageView.setX(210 + i * 100);
-          grassAndDirtBlockImageView.setY(535);
-          grassAndDirtBlockImageView.setFitWidth(100);
-          grassAndDirtBlocksGroup.getChildren().add(grassAndDirtBlockImageView);
+         ImageView grassAndDirtBlockImageView = new ImageView(new Image(grassAndDirtBlockFile.getPath()));
+         grassAndDirtBlockImageView.setPreserveRatio(true);
+         grassAndDirtBlockImageView.setSmooth(true);
+         grassAndDirtBlockImageView.setX(210 + i * 100);
+         grassAndDirtBlockImageView.setY(535);
+         grassAndDirtBlockImageView.setFitWidth(100);
+         grassAndDirtBlocksGroup.getChildren().add(grassAndDirtBlockImageView);
       }
       
       ImageView characterNonPixelatedImageView = new ImageView(new Image(characterNonPixelatedFile.getPath()));
@@ -422,7 +425,8 @@ public class MainApplication extends Application {
       ParallelTransition ptClouds = new ParallelTransition(ttCloudTop, ttCloudMiddle, ttCloudBottom);
       ptClouds.setCycleCount(Animation.INDEFINITE);
       ptClouds.play();
-                 
+      
+      /*
       stage.addEventFilter(KeyEvent.ANY, 
          k -> {
             if(k.getCode() == KeyCode.SPACE && screen.equals("main")){
@@ -430,8 +434,10 @@ public class MainApplication extends Application {
                   game(stage);
                } catch(Exception e){}
             }
-         });
-      
+         }
+      );
+      */
+            
       stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
          e -> {
          
@@ -440,28 +446,28 @@ public class MainApplication extends Application {
          
             System.out.println(xVal + " " + yVal);
             
-            if (xVal >= 20 && xVal <= 200 && yVal >= 205 && yVal <= 263) {
-                redRectangleAroundNewGameButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
+               redRectangleAroundNewGameButton.setVisible(true);
             } else {
-                redRectangleAroundNewGameButton.setVisible(false);
+               redRectangleAroundNewGameButton.setVisible(false);
             }
             
-            if (xVal >= 20 && xVal <= 200 && yVal >= 280 && yVal <= 338) {
-                redRectangleAroundInstructionsButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
+               redRectangleAroundInstructionsButton.setVisible(true);
             } else {
-                redRectangleAroundInstructionsButton.setVisible(false);
+               redRectangleAroundInstructionsButton.setVisible(false);
             }
             
-            if (xVal >= 20 && xVal <= 200 && yVal >= 355 && yVal <= 413) {
-                redRectangleAroundLeaderboardButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
+               redRectangleAroundLeaderboardButton.setVisible(true);
             } else {
-                redRectangleAroundLeaderboardButton.setVisible(false);
+               redRectangleAroundLeaderboardButton.setVisible(false);
             }
             
-            if (xVal >= 20 && xVal <= 150 && yVal >= 455 && yVal <= 503) {
-                redRectangleAroundQuitGameButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
+               redRectangleAroundQuitGameButton.setVisible(true);
             } else {
-                redRectangleAroundQuitGameButton.setVisible(false);
+               redRectangleAroundQuitGameButton.setVisible(false);
             }
          }
       );
@@ -472,27 +478,31 @@ public class MainApplication extends Application {
             final double xVal = e.getX();
             final double yVal = e.getY();
             
-            if (xVal >= 20 && xVal <= 200 && yVal >= 205 && yVal <= 263) {
-                redRectangleAroundNewGameButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
+               //redRectangleAroundNewGameButton.setVisible(true);
             }
             
-            if (xVal >= 20 && xVal <= 200 && yVal >= 280 && yVal <= 338) {
-                try {
-                    this.instructions(stage);
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
+            if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
+               try {
+                  this.instructions(stage);
+               } catch (IOException ioe) {
+                  ioe.printStackTrace();
+               }
             }
             
-            if (xVal >= 20 && xVal <= 200 && yVal >= 355 && yVal <= 413) {
-                redRectangleAroundLeaderboardButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
+               //redRectangleAroundLeaderboardButton.setVisible(true);
             }
             
-            if (xVal >= 20 && xVal <= 150 && yVal >= 455 && yVal <= 503) {
-                redRectangleAroundQuitGameButton.setVisible(true);
+            if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
+               try {
+                  this.quitGame(stage);
+               } catch (IOException ioe) {
+                  ioe.printStackTrace();
+               }
             }
          }
-      );
+       );
       
       /*
       // This code will be used in the case that the code for the events take too long to run and start to make the game feel unresponsive and laggy.
@@ -558,6 +568,26 @@ public class MainApplication extends Application {
       nodesToAdd.getChildren().add(introBorderImageView);
      
       Scene scene = new Scene(nodesToAdd, 600, 600);
+      
+      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
+               scene.setCursor(Cursor.HAND);
+            } else if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
+               scene.setCursor(Cursor.HAND);
+            } else if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
+               scene.setCursor(Cursor.HAND);
+            } else if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
+               scene.setCursor(Cursor.HAND);
+            } else {
+               scene.setCursor(Cursor.DEFAULT);
+            }
+         }
+       );
        
       scene.setFill(Color.DEEPSKYBLUE);
       stage.setScene(scene);
@@ -581,6 +611,7 @@ public class MainApplication extends Application {
     */
    public void game(Stage stage) throws IOException {
       screen = "game";
+      
       try {            
          Grid grid = new Grid(15,15);
          for (int i = 0; i < 20; i++) {
@@ -596,20 +627,20 @@ public class MainApplication extends Application {
             k -> {
                try{
                   if(screen.equals("game")){
-                     if(k.getCode()== KeyCode.W){
+                     if(k.getCode() == KeyCode.W){
                         grid.moveUp();
                         grid.draw(stage);
                         stage.show();
-                     }else if(k.getCode()== KeyCode.A){
+                     }else if(k.getCode() == KeyCode.A){
                         grid.moveLeft();
                         grid.draw(stage);
                         stage.show();
-                     }else if(k.getCode()== KeyCode.S){
+                     }else if(k.getCode() == KeyCode.S){
                         grid.moveDown();
                         grid.draw(stage);
                         stage.show();
                      }
-                     if(k.getCode()== KeyCode.D){
+                     if(k.getCode() == KeyCode.D){
                         grid.moveRight();
                         grid.draw(stage);
                         stage.show();
@@ -623,48 +654,49 @@ public class MainApplication extends Application {
    }
    
    public void instructions(Stage stage) throws IOException {
-       screen = "instructions";
-       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
-       introBorderImageView.setPreserveRatio(true);
-       introBorderImageView.setSmooth(true);
-       introBorderImageView.setX(0);
-       introBorderImageView.setY(0);
-       introBorderImageView.setFitWidth(600);
+      screen = "instructions";
+      
+      ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
+      introBorderImageView.setPreserveRatio(true);
+      introBorderImageView.setSmooth(true);
+      introBorderImageView.setX(0);
+      introBorderImageView.setY(0);
+      introBorderImageView.setFitWidth(600);
        
-       ImageView whiteInstructionsTitleImageView = new ImageView(new Image(whiteInstructionsTitleFile.getPath()));
-       whiteInstructionsTitleImageView.setPreserveRatio(true);
-       whiteInstructionsTitleImageView.setSmooth(true);
-       whiteInstructionsTitleImageView.setX(50);
-       whiteInstructionsTitleImageView.setY(85);
-       whiteInstructionsTitleImageView.setFitWidth(300);
+      ImageView whiteInstructionsTitleImageView = new ImageView(new Image(whiteInstructionsTitleFile.getPath()));
+      whiteInstructionsTitleImageView.setPreserveRatio(true);
+      whiteInstructionsTitleImageView.setSmooth(true);
+      whiteInstructionsTitleImageView.setX(50);
+      whiteInstructionsTitleImageView.setY(85);
+      whiteInstructionsTitleImageView.setFitWidth(300);
        
-       ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
-       logoImageView.setPreserveRatio(true);
-       logoImageView.setSmooth(true);
-       logoImageView.setX(400);
-       logoImageView.setY(50);
-       logoImageView.setFitWidth(150);
-
-       ImageView blackInstructionsTextImageView = new ImageView(new Image(blackInstructionsTextFile.getPath()));
-       blackInstructionsTextImageView.setPreserveRatio(true);
-       blackInstructionsTextImageView.setSmooth(true);
-       blackInstructionsTextImageView.setX(25);
-       blackInstructionsTextImageView.setY(190);
-       blackInstructionsTextImageView.setFitWidth(550);
+      ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
+      logoImageView.setPreserveRatio(true);
+      logoImageView.setSmooth(true);
+      logoImageView.setX(400);
+      logoImageView.setY(50);
+      logoImageView.setFitWidth(150);
+   
+      ImageView blackInstructionsTextImageView = new ImageView(new Image(blackInstructionsTextFile.getPath()));
+      blackInstructionsTextImageView.setPreserveRatio(true);
+      blackInstructionsTextImageView.setSmooth(true);
+      blackInstructionsTextImageView.setX(25);
+      blackInstructionsTextImageView.setY(190);
+      blackInstructionsTextImageView.setFitWidth(550);
        
-       ImageView backButtonImageView = new ImageView(new Image(backButtonFile.getPath()));
-       backButtonImageView.setPreserveRatio(true);
-       backButtonImageView.setSmooth(true);
-       backButtonImageView.setX(390);
-       backButtonImageView.setY(512);
-       backButtonImageView.setFitWidth(130);
+      ImageView backButtonImageView = new ImageView(new Image(backButtonFile.getPath()));
+      backButtonImageView.setPreserveRatio(true);
+      backButtonImageView.setSmooth(true);
+      backButtonImageView.setX(390);
+      backButtonImageView.setY(512);
+      backButtonImageView.setFitWidth(130);
        
-       Rectangle redRectangleAroundBackButton = new Rectangle(389, 516, 132, 42);
-       redRectangleAroundBackButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
-       redRectangleAroundBackButton.setStrokeWidth(2);
-       redRectangleAroundBackButton.setVisible(true);
+      Rectangle redRectangleAroundBackButton = new Rectangle(389, 516, 132, 42);
+      redRectangleAroundBackButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
+      redRectangleAroundBackButton.setStrokeWidth(2);
+      redRectangleAroundBackButton.setVisible(true);
        
-       stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
          e -> {
          
             final double xVal = e.getX();
@@ -673,12 +705,12 @@ public class MainApplication extends Application {
             System.out.println(xVal + " " + yVal);
             
             if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
-                redRectangleAroundBackButton.setVisible(true);
+               redRectangleAroundBackButton.setVisible(true);
             } else {
-                redRectangleAroundBackButton.setVisible(false);
+               redRectangleAroundBackButton.setVisible(false);
             }
          }
-      );
+         );
       
       stage.addEventFilter(MouseEvent.MOUSE_CLICKED, 
          e -> {
@@ -687,28 +719,79 @@ public class MainApplication extends Application {
             final double yVal = e.getY();
             
             if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
-                try {
-                    this.mainMenu(stage);
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
+               try {
+                  this.mainMenu(stage);
+               } catch (IOException ioe) {
+                  ioe.printStackTrace();
+               }
             }
          }
-      );
+         );
        
-       Group nodesToAdd = new Group();
-       nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
-       nodesToAdd.getChildren().add(logoImageView);
-       nodesToAdd.getChildren().add(blackInstructionsTextImageView);
-       nodesToAdd.getChildren().add(redRectangleAroundBackButton);
-       nodesToAdd.getChildren().add(backButtonImageView);
-       nodesToAdd.getChildren().add(introBorderImageView);
+      Group nodesToAdd = new Group();
+      nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
+      nodesToAdd.getChildren().add(logoImageView);
+      nodesToAdd.getChildren().add(blackInstructionsTextImageView);
+      nodesToAdd.getChildren().add(redRectangleAroundBackButton);
+      nodesToAdd.getChildren().add(backButtonImageView);
+      nodesToAdd.getChildren().add(introBorderImageView);
        
-       Scene scene = new Scene(nodesToAdd, 600, 600);
-       
+      Scene scene = new Scene(nodesToAdd, 600, 600);
+      
+      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+            
+            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+               scene.setCursor(Cursor.HAND);
+            } else {
+               scene.setCursor(Cursor.DEFAULT);
+            }
+         }
+       );  
+      
       scene.setFill(Color.DEEPSKYBLUE);
       stage.setScene(scene);
    
+      stage.show();
+   }
+   
+   public void quitGame(Stage stage) throws IOException {
+      screen = "quit game";
+      
+      ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
+      introBorderImageView.setPreserveRatio(true);
+      introBorderImageView.setSmooth(true);
+      introBorderImageView.setX(0);
+      introBorderImageView.setY(0);
+      introBorderImageView.setFitWidth(600);
+       
+      ImageView whiteInstructionsTitleImageView = new ImageView(new Image(whiteInstructionsTitleFile.getPath()));
+      whiteInstructionsTitleImageView.setPreserveRatio(true);
+      whiteInstructionsTitleImageView.setSmooth(true);
+      whiteInstructionsTitleImageView.setX(50);
+      whiteInstructionsTitleImageView.setY(85);
+      whiteInstructionsTitleImageView.setFitWidth(300);
+       
+      ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
+      logoImageView.setPreserveRatio(true);
+      logoImageView.setSmooth(true);
+      logoImageView.setX(400);
+      logoImageView.setY(50);
+      logoImageView.setFitWidth(150);
+      
+      Group nodesToAdd = new Group();
+      nodesToAdd.getChildren().add(introBorderImageView);
+      nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
+      nodesToAdd.getChildren().add(logoImageView);
+       
+      Scene scene = new Scene(nodesToAdd, 600, 600);
+       
+      scene.setFill(Color.DEEPSKYBLUE);
+      stage.setScene(scene);
+      
       stage.show();
    }
    
