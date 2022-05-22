@@ -62,6 +62,11 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
 
 //Remember to add these imports to the JavaDoc
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
+import javafx.animation.TranslateTransition;
+import javafx.animation.Animation;
+import javafx.animation.SequentialTransition; // <------------------------------------------------------------------------------------------------ check to see if you have to remove this import (if it isn't used anywhere)
+import javafx.animation.ParallelTransition;
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -105,7 +110,7 @@ import javafx.scene.shape.Circle;
  * @since JDK1.17
  */
  
-// Number of things to change: 2
+// Number of things to change: 3
 
 public class MainApplication extends Application {
    /** This private non-static File variable will hold the logo for the game. */    
@@ -365,7 +370,43 @@ public class MainApplication extends Application {
       
       Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
       yellowCircleForSun.setStroke(Paint.valueOf("rgb(0,0,0)"));
+      System.out.println(yellowCircleForSun);
       
+      Cloud cloudCloud = new Cloud(0.0, 0.0);
+      Shape cloudShapeTop = cloudCloud.getShape();
+      cloudShapeTop.setStroke(Paint.valueOf("rgb(0,0,0)"));
+      
+      Shape cloudShapeMiddle = cloudCloud.getShape();
+      cloudShapeMiddle.setStroke(Paint.valueOf("rgb(0,0,0)"));
+      
+      Shape cloudShapeBottom = cloudCloud.getShape();
+      cloudShapeBottom.setStroke(Paint.valueOf("rgb(0,0,0)"));
+      
+      TranslateTransition ttCloudTop = new TranslateTransition(Duration.millis(7000), cloudShapeTop);
+      ttCloudTop.setByX(1.0);
+      ttCloudTop.setFromX(700.0);
+      ttCloudTop.setToX(0.0);
+      ttCloudTop.setFromY(225.0);
+      ttCloudTop.setToY(225.0);
+      
+      TranslateTransition ttCloudMiddle = new TranslateTransition(Duration.millis(16000), cloudShapeMiddle);
+      ttCloudMiddle.setByX(1.0);
+      ttCloudMiddle.setFromX(1600.0);
+      ttCloudMiddle.setToX(0.0);
+      ttCloudMiddle.setFromY(350.0);
+      ttCloudMiddle.setToY(350.0);
+      
+      TranslateTransition ttCloudBottom = new TranslateTransition(Duration.millis(25000), cloudShapeBottom);
+      ttCloudBottom.setByX(1.0);
+      ttCloudBottom.setFromX(2500.0);
+      ttCloudBottom.setToX(0.0);
+      ttCloudBottom.setFromY(100.0);
+      ttCloudBottom.setToY(100.0);
+      
+      ParallelTransition ptClouds = new ParallelTransition(ttCloudTop, ttCloudMiddle, ttCloudBottom);
+      ptClouds.setCycleCount(Animation.INDEFINITE);
+      ptClouds.play();
+                 
       stage.addEventFilter(KeyEvent.ANY, 
          k -> {
             if(k.getCode() == KeyCode.SPACE && screen.equals("main")){
@@ -451,6 +492,10 @@ public class MainApplication extends Application {
       */
                  
       Group nodesToAdd = new Group();
+      nodesToAdd.getChildren().add(yellowCircleForSun);
+      nodesToAdd.getChildren().add(cloudShapeTop);
+      nodesToAdd.getChildren().add(cloudShapeMiddle);
+      nodesToAdd.getChildren().add(cloudShapeBottom);
       nodesToAdd.getChildren().add(blackRectangleUnderOptions);
       nodesToAdd.getChildren().add(greyRectangleUnderTitle);
       nodesToAdd.getChildren().add(whiteTitleImageView);
@@ -465,7 +510,6 @@ public class MainApplication extends Application {
       nodesToAdd.getChildren().add(copyrightStatementImageView);
       nodesToAdd.getChildren().add(grassAndDirtBlocksGroup);
       nodesToAdd.getChildren().add(characterNonPixelatedImageView);
-      nodesToAdd.getChildren().add(yellowCircleForSun);
       nodesToAdd.getChildren().add(introBorderImageView);
      
       Scene scene = new Scene(nodesToAdd, 600, 600);
@@ -474,7 +518,6 @@ public class MainApplication extends Application {
       stage.setScene(scene);
    
       stage.show();
-   
    }
 
    /**
@@ -502,7 +545,7 @@ public class MainApplication extends Application {
          }
          grid.draw(stage);
             
-            //stage.setStage(scene);
+         //stage.setStage(scene);
          stage.show();
          stage.addEventFilter(KeyEvent.KEY_RELEASED, 
             k -> {
