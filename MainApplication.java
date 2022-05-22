@@ -152,6 +152,15 @@ public class MainApplication extends Application {
    /** This private non-static File variable will hold the design for the non-pixelated character in the main menu. */
    private File characterNonPixelatedFile;
    
+   /** This private non-static File variable will hold the design for the white title for the instructions screen. */
+   private File whiteInstructionsTitleFile;
+   
+   /** This private non-static File variable will hold the design for the black text for the instructions screen. */
+   private File blackInstructionsTextFile;
+   
+   /** This private non-static File variable will hold the design for the "Back" button. */
+   private File backButtonFile;
+   
    /** This private non-static String variable will hold the name of the method that the program should be running currently. */
    private String screen;
    
@@ -172,6 +181,9 @@ public class MainApplication extends Application {
       this.copyrightStatementFile = new File("ICS ISP - Design for Copyright Statement.png");
       this.grassAndDirtBlockFile = new File("ICS ISP - Design for Grass and Dirt Block.png");
       this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
+      this.whiteInstructionsTitleFile = new File("ICS ISP - Title for Instructions (White Version).png");
+      this.blackInstructionsTextFile = new File("ICS ISP - Text for Instructions (Black Version).png");
+      this.backButtonFile = new File("ICS ISP - Button Design for Back Button.png");
    }
    
    /**
@@ -233,7 +245,9 @@ public class MainApplication extends Application {
             public void handle(ActionEvent actionEvent) {
                try{
                   mainMenu(stage);
-               }catch(Exception e){}
+               }catch(IOException ioe){
+                  ioe.printStackTrace();
+               }
             }
          });
       
@@ -244,8 +258,10 @@ public class MainApplication extends Application {
       introBorderImageView.setY(0);
       introBorderImageView.setFitWidth(600);
       
-      Group nodesToAdd = new Group(introBorderImageView, logoImageView);
-   
+      Group nodesToAdd = new Group();
+      nodesToAdd.getChildren().add(logoImageView);
+      nodesToAdd.getChildren().add(introBorderImageView);
+
       Scene scene = new Scene(nodesToAdd, 600, 600);
        
       scene.setFill(Color.BLACK);
@@ -274,7 +290,7 @@ public class MainApplication extends Application {
     * @throws IOException
     */
    public void mainMenu(Stage stage) throws IOException {
-      screen="main";
+      screen = "main";
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
       introBorderImageView.setSmooth(true);
@@ -447,7 +463,36 @@ public class MainApplication extends Application {
             } else {
                 redRectangleAroundQuitGameButton.setVisible(false);
             }
-         });
+         }
+      );
+         
+      stage.addEventFilter(MouseEvent.MOUSE_CLICKED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+            
+            if (xVal >= 20 && xVal <= 200 && yVal >= 205 && yVal <= 263) {
+                redRectangleAroundNewGameButton.setVisible(true);
+            }
+            
+            if (xVal >= 20 && xVal <= 200 && yVal >= 280 && yVal <= 338) {
+                try {
+                    this.instructions(stage);
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+            
+            if (xVal >= 20 && xVal <= 200 && yVal >= 355 && yVal <= 413) {
+                redRectangleAroundLeaderboardButton.setVisible(true);
+            }
+            
+            if (xVal >= 20 && xVal <= 150 && yVal >= 455 && yVal <= 503) {
+                redRectangleAroundQuitGameButton.setVisible(true);
+            }
+         }
+      );
       
       /*
       // This code will be used in the case that the code for the events take too long to run and start to make the game feel unresponsive and laggy.
@@ -575,6 +620,96 @@ public class MainApplication extends Application {
       } catch (Exception e) {
          e.printStackTrace();
       }
+   }
+   
+   public void instructions(Stage stage) throws IOException {
+       screen = "instructions";
+       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
+       introBorderImageView.setPreserveRatio(true);
+       introBorderImageView.setSmooth(true);
+       introBorderImageView.setX(0);
+       introBorderImageView.setY(0);
+       introBorderImageView.setFitWidth(600);
+       
+       ImageView whiteInstructionsTitleImageView = new ImageView(new Image(whiteInstructionsTitleFile.getPath()));
+       whiteInstructionsTitleImageView.setPreserveRatio(true);
+       whiteInstructionsTitleImageView.setSmooth(true);
+       whiteInstructionsTitleImageView.setX(50);
+       whiteInstructionsTitleImageView.setY(85);
+       whiteInstructionsTitleImageView.setFitWidth(300);
+       
+       ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
+       logoImageView.setPreserveRatio(true);
+       logoImageView.setSmooth(true);
+       logoImageView.setX(400);
+       logoImageView.setY(50);
+       logoImageView.setFitWidth(150);
+
+       ImageView blackInstructionsTextImageView = new ImageView(new Image(blackInstructionsTextFile.getPath()));
+       blackInstructionsTextImageView.setPreserveRatio(true);
+       blackInstructionsTextImageView.setSmooth(true);
+       blackInstructionsTextImageView.setX(25);
+       blackInstructionsTextImageView.setY(190);
+       blackInstructionsTextImageView.setFitWidth(550);
+       
+       ImageView backButtonImageView = new ImageView(new Image(backButtonFile.getPath()));
+       backButtonImageView.setPreserveRatio(true);
+       backButtonImageView.setSmooth(true);
+       backButtonImageView.setX(390);
+       backButtonImageView.setY(512);
+       backButtonImageView.setFitWidth(130);
+       
+       Rectangle redRectangleAroundBackButton = new Rectangle(389, 516, 132, 42);
+       redRectangleAroundBackButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
+       redRectangleAroundBackButton.setStrokeWidth(2);
+       redRectangleAroundBackButton.setVisible(true);
+       
+       stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+         
+            System.out.println(xVal + " " + yVal);
+            
+            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+                redRectangleAroundBackButton.setVisible(true);
+            } else {
+                redRectangleAroundBackButton.setVisible(false);
+            }
+         }
+      );
+      
+      stage.addEventFilter(MouseEvent.MOUSE_CLICKED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+            
+            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+                try {
+                    this.mainMenu(stage);
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+         }
+      );
+       
+       Group nodesToAdd = new Group();
+       nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
+       nodesToAdd.getChildren().add(logoImageView);
+       nodesToAdd.getChildren().add(blackInstructionsTextImageView);
+       nodesToAdd.getChildren().add(redRectangleAroundBackButton);
+       nodesToAdd.getChildren().add(backButtonImageView);
+       nodesToAdd.getChildren().add(introBorderImageView);
+       
+       Scene scene = new Scene(nodesToAdd, 600, 600);
+       
+      scene.setFill(Color.DEEPSKYBLUE);
+      stage.setScene(scene);
+   
+      stage.show();
    }
    
    /**
