@@ -68,6 +68,9 @@ import javafx.animation.Animation;
 import javafx.animation.SequentialTransition; // <------------------------------------------------------------------------------------------------ check to see if you have to remove this import (if it isn't used anywhere)
 import javafx.animation.ParallelTransition;
 import javafx.scene.Cursor;
+import javafx.concurrent.*;
+import javafx.application.Platform;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -111,7 +114,8 @@ import javafx.scene.Cursor;
  * @since JDK1.17
  */
  
-// Number of things to change: 3
+// Number of things to change: 5
+// Remember to update the JavaDoc comments for the global variables, the methods (especially because return types changed), and for the imports
 
 public class MainApplication extends Application {
    /** This private non-static File variable will hold the logo for the game. */    
@@ -162,8 +166,13 @@ public class MainApplication extends Application {
    /** This private non-static File variable will hold the design for the "Back" button. */
    private File backButtonFile;
    
-   /** This private non-static String variable will hold the name of the method that the program should be running currently. */
-   private String screen;
+   private int screenNum; // <------------------------------------------------------------------------------------------------------------------------ Check to see if we have to delete this as well.
+   
+   private Scene introAnimationScene;
+   
+   private Scene mainMenuScene;
+   
+   private Scene instructionsScene;
    
    /**
     * An instance of the Tile class will be created using this no parameter constructor.
@@ -185,6 +194,8 @@ public class MainApplication extends Application {
       this.whiteInstructionsTitleFile = new File("ICS ISP - Title for Instructions (White Version).png");
       this.blackInstructionsTextFile = new File("ICS ISP - Text for Instructions (Black Version).png");
       this.backButtonFile = new File("ICS ISP - Button Design for Back Button.png");
+      
+      this.screenNum = 0;
    }
    
    /**
@@ -225,7 +236,8 @@ public class MainApplication extends Application {
     *              stage that the program will use and display to the user.
     * @throws IOException
     */
-   public void introAnimation(Stage stage) throws IOException {
+   public Scene introAnimation(Stage stage) throws IOException {
+      screenNum = 0;
    
       ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
       logoImageView.setPreserveRatio(true);
@@ -239,19 +251,18 @@ public class MainApplication extends Application {
       ftLogo.setToValue(1.0);
       ftLogo.setByValue(0.01);
       ftLogo.play();
-   
+      
       // Taken from https://stackoverflow.com/questions/11188018/how-to-wait-for-a-transition-to-end-in-javafx-2-1
       ftLogo.onFinishedProperty().set(
          new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent actionEvent) {
-               try{
-                  mainMenu(stage);
-               }catch(IOException ioe){
-                  ioe.printStackTrace();
-               }
+               screenNum = 1;
+               stage.setScene(mainMenuScene);
+               stage.show();
             }
-         });
+         }
+      );
       
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
@@ -267,9 +278,8 @@ public class MainApplication extends Application {
       Scene scene = new Scene(nodesToAdd, 600, 600);
        
       scene.setFill(Color.BLACK);
-      stage.setScene(scene);
-   
-      stage.show();   
+      
+      return scene;
    }
    
    /**
@@ -291,8 +301,8 @@ public class MainApplication extends Application {
     *              stage that the program will use and display to the user.
     * @throws IOException
     */
-   public void mainMenu(Stage stage) throws IOException {
-      screen = "main";
+   public Scene mainMenu(Stage stage) throws IOException {
+      screenNum = 1;
       
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
@@ -425,85 +435,7 @@ public class MainApplication extends Application {
       ParallelTransition ptClouds = new ParallelTransition(ttCloudTop, ttCloudMiddle, ttCloudBottom);
       ptClouds.setCycleCount(Animation.INDEFINITE);
       ptClouds.play();
-      
-      /*
-      stage.addEventFilter(KeyEvent.ANY, 
-         k -> {
-            if(k.getCode() == KeyCode.SPACE && screen.equals("main")){
-               try{
-                  game(stage);
-               } catch(Exception e){}
-            }
-         }
-      );
-      */
-            
-      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
-         e -> {
-         
-            final double xVal = e.getX();
-            final double yVal = e.getY();
-         
-            System.out.println(xVal + " " + yVal);
-            
-            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
-               redRectangleAroundNewGameButton.setVisible(true);
-            } else {
-               redRectangleAroundNewGameButton.setVisible(false);
-            }
-            
-            if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
-               redRectangleAroundInstructionsButton.setVisible(true);
-            } else {
-               redRectangleAroundInstructionsButton.setVisible(false);
-            }
-            
-            if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
-               redRectangleAroundLeaderboardButton.setVisible(true);
-            } else {
-               redRectangleAroundLeaderboardButton.setVisible(false);
-            }
-            
-            if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
-               redRectangleAroundQuitGameButton.setVisible(true);
-            } else {
-               redRectangleAroundQuitGameButton.setVisible(false);
-            }
-         }
-      );
-         
-      stage.addEventFilter(MouseEvent.MOUSE_CLICKED, 
-         e -> {
-         
-            final double xVal = e.getX();
-            final double yVal = e.getY();
-            
-            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
-               //redRectangleAroundNewGameButton.setVisible(true);
-            }
-            
-            if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
-               try {
-                  this.instructions(stage);
-               } catch (IOException ioe) {
-                  ioe.printStackTrace();
-               }
-            }
-            
-            if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
-               //redRectangleAroundLeaderboardButton.setVisible(true);
-            }
-            
-            if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
-               try {
-                  this.quitGame(stage);
-               } catch (IOException ioe) {
-                  ioe.printStackTrace();
-               }
-            }
-         }
-       );
-      
+                  
       /*
       // This code will be used in the case that the code for the events take too long to run and start to make the game feel unresponsive and laggy.
       Service<Void> service = new Service<Void>() {
@@ -569,14 +501,15 @@ public class MainApplication extends Application {
      
       Scene scene = new Scene(nodesToAdd, 600, 600);
       
-      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+      // Keep these two split or else the cursor will not work as expected
+      scene.addEventFilter(MouseEvent.MOUSE_MOVED, 
          e -> {
          
             final double xVal = e.getX();
             final double yVal = e.getY();
             
             if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
-               scene.setCursor(Cursor.HAND);
+               scene.setCursor(Cursor.HAND);               
             } else if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
                scene.setCursor(Cursor.HAND);
             } else if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
@@ -589,10 +522,69 @@ public class MainApplication extends Application {
          }
        );
        
+       scene.addEventFilter(MouseEvent.MOUSE_MOVED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+         
+            //System.out.println(xVal + " " + yVal);
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
+               redRectangleAroundNewGameButton.setVisible(true);
+            } else {
+               redRectangleAroundNewGameButton.setVisible(false);
+            }
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
+               redRectangleAroundInstructionsButton.setVisible(true);
+            } else {
+               redRectangleAroundInstructionsButton.setVisible(false);
+            }
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
+               redRectangleAroundLeaderboardButton.setVisible(true);
+            } else {
+               redRectangleAroundLeaderboardButton.setVisible(false);
+            }
+            
+            if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
+               redRectangleAroundQuitGameButton.setVisible(true);
+            } else {
+               redRectangleAroundQuitGameButton.setVisible(false);
+            }
+         }
+      );
+         
+      scene.addEventFilter(MouseEvent.MOUSE_CLICKED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 205 && yVal <= 261) {
+               screenNum = 2;
+            }
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
+              screenNum = 3;
+              stage.setScene(this.instructionsScene);
+              stage.show();
+            }
+            
+            if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
+               screenNum = 4;
+            }
+            
+            if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
+               screenNum = 5;
+            }
+         }
+       );
+
       scene.setFill(Color.DEEPSKYBLUE);
-      stage.setScene(scene);
-   
-      stage.show();
+      
+      return scene;
    }
 
    /**
@@ -610,7 +602,7 @@ public class MainApplication extends Application {
     * @throws IOException
     */
    public void game(Stage stage) throws IOException {
-      screen = "game";
+      screenNum = 2;
       
       try {            
          Grid grid = new Grid(15,15);
@@ -626,7 +618,7 @@ public class MainApplication extends Application {
          stage.addEventFilter(KeyEvent.KEY_RELEASED, 
             k -> {
                try{
-                  if(screen.equals("game")){
+                  if(screenNum == 2){
                      if(k.getCode() == KeyCode.W){
                         grid.moveUp();
                         grid.draw(stage);
@@ -653,8 +645,8 @@ public class MainApplication extends Application {
       }
    }
    
-   public void instructions(Stage stage) throws IOException {
-      screen = "instructions";
+   public Scene instructions(Stage stage) throws IOException {
+      screenNum = 3;
       
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
@@ -696,38 +688,6 @@ public class MainApplication extends Application {
       redRectangleAroundBackButton.setStrokeWidth(2);
       redRectangleAroundBackButton.setVisible(true);
        
-      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
-         e -> {
-         
-            final double xVal = e.getX();
-            final double yVal = e.getY();
-         
-            System.out.println(xVal + " " + yVal);
-            
-            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
-               redRectangleAroundBackButton.setVisible(true);
-            } else {
-               redRectangleAroundBackButton.setVisible(false);
-            }
-         }
-         );
-      
-      stage.addEventFilter(MouseEvent.MOUSE_CLICKED, 
-         e -> {
-         
-            final double xVal = e.getX();
-            final double yVal = e.getY();
-            
-            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
-               try {
-                  this.mainMenu(stage);
-               } catch (IOException ioe) {
-                  ioe.printStackTrace();
-               }
-            }
-         }
-         );
-       
       Group nodesToAdd = new Group();
       nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
       nodesToAdd.getChildren().add(logoImageView);
@@ -738,11 +698,13 @@ public class MainApplication extends Application {
        
       Scene scene = new Scene(nodesToAdd, 600, 600);
       
-      stage.addEventFilter(MouseEvent.MOUSE_MOVED, 
+      scene.addEventFilter(MouseEvent.MOUSE_MOVED, 
          e -> {
          
             final double xVal = e.getX();
             final double yVal = e.getY();
+         
+            //System.out.println(xVal + " " + yVal);
             
             if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
                scene.setCursor(Cursor.HAND);
@@ -750,16 +712,45 @@ public class MainApplication extends Application {
                scene.setCursor(Cursor.DEFAULT);
             }
          }
-       );  
+      );
+       
+      scene.addEventFilter(MouseEvent.MOUSE_MOVED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+         
+            //System.out.println(xVal + " " + yVal);
+            
+            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+               redRectangleAroundBackButton.setVisible(true);
+            } else {
+               redRectangleAroundBackButton.setVisible(false);
+            }
+         }
+      );
+     
+      scene.addEventFilter(MouseEvent.MOUSE_CLICKED, 
+         e -> {
+         
+            final double xVal = e.getX();
+            final double yVal = e.getY();
+            
+            if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+               screenNum = 1;
+               stage.setScene(this.mainMenuScene);
+               stage.show();
+            }
+         }
+      ); 
       
       scene.setFill(Color.DEEPSKYBLUE);
-      stage.setScene(scene);
-   
-      stage.show();
+      
+      return scene;
    }
    
-   public void quitGame(Stage stage) throws IOException {
-      screen = "quit game";
+   public Scene quitGame(Stage stage) throws IOException {
+      screenNum = 5;
       
       ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
       introBorderImageView.setPreserveRatio(true);
@@ -790,9 +781,8 @@ public class MainApplication extends Application {
       Scene scene = new Scene(nodesToAdd, 600, 600);
        
       scene.setFill(Color.DEEPSKYBLUE);
-      stage.setScene(scene);
       
-      stage.show();
+      return scene;
    }
    
    /**
@@ -812,10 +802,13 @@ public class MainApplication extends Application {
    @Override
    public void start(Stage stage) throws IOException {
       this.initializeStageSettings(stage);
-      this.introAnimation(stage);
-      //MouseEvent me = new MouseEvent();
-      //this.mainMenu(stage);
-       
+      this.introAnimationScene = this.introAnimation(stage);
+      this.mainMenuScene = this.mainMenu(stage);
+      this.instructionsScene = this.instructions(stage);
+      
+      this.screenNum = 0;
+      stage.setScene(this.introAnimationScene);
+      stage.show();       
    }
 
    // This is the main method, which is public, static, and has a void return type. This will be used to execute the program.
