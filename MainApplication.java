@@ -71,6 +71,9 @@ import javafx.scene.Cursor;
 import javafx.concurrent.*;
 import javafx.application.Platform;
 import java.util.concurrent.CountDownLatch;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -183,6 +186,14 @@ public class MainApplication extends Application {
     private File bookTileFile;
     
     private int gridNum;
+    
+    private File[] books;
+    
+    private boolean showingBook;
+    
+    private int bookNum;
+    
+    private File pressStart2P;
 
     /**
      * An instance of the Tile class will be created using this no parameter constructor.
@@ -207,7 +218,10 @@ public class MainApplication extends Application {
         this.whiteInstructionsTitleFile = new File("ICS ISP - Title for Instructions (White Version).png");
         this.blackInstructionsTextFile = new File("ICS ISP - Text for Instructions (Black Version).png");
         this.backButtonFile = new File("ICS ISP - Button Design for Back Button.png");
-
+        this.books=new File[8];
+        this.pressStart2P=new File("PressStart2P-Regular.ttf");
+        this.books[0]= new File("Book1.png");
+        
         this.screenNum = 0;
     }
 
@@ -412,7 +426,7 @@ public class MainApplication extends Application {
 
         Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
         yellowCircleForSun.setStroke(Paint.valueOf("rgb(0,0,0)"));
-        System.out.println(yellowCircleForSun);
+        //System.out.println(yellowCircleForSun);
 
         Cloud cloudCloud = new Cloud(0.0, 0.0);
         Shape cloudShapeTop = cloudCloud.getShape();
@@ -606,11 +620,16 @@ public class MainApplication extends Application {
      * Public non-static method used to create the first level for the actual game.
      * <p>
      * This public non-static method is void and it will be used to create the
-     * first level of the program. It will do this by creating an instance of the
-     * Grid.java class to simulate the grid and it will also have various
-     * blocks of code that will run based on certain keys from keyboard events.
+     * first level of the program. It will do this by creating 4 instances of the
+     * Grid.java class to simulate the grid and it also has an action listener
+     * for moving, and interaction with books. It draws this on a scene that it
+     * returns with the draw method in the Grid instance and a photo at the location
+     * of the mainX and mainY coordinates of the Grid instance.
      * <p>
      * Done by: Simon
+     * Simon Bakan May 23-27 spent 5 hours: completely re-did grid instantiation,
+     * added books, added interaction with books, added label for number of books
+     * collected, and added multiple grids. 
      * 
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
@@ -620,6 +639,8 @@ public class MainApplication extends Application {
         screenNum = 2;
         Grid[] grid = {new Grid(15, 15),new Grid(15, 15),new Grid(15, 15),new Grid(15, 15)};
         Scene scene;
+        showingBook = false;
+        
         // Top left grid
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 20; j++) {
@@ -737,6 +758,12 @@ public class MainApplication extends Application {
                 grid[3].assign(i, j, grassTileFile.getPath(), additionalGrassTileFile.getPath(), true, false);
             }
         }
+        grid[3].setObject(3,12,bookTileFile.getPath());
+        grid[3].setInteractable(3,12,true);
+        grid[3].setMovable(3,12,false);
+        grid[3].setObject(10,10,bookTileFile.getPath());
+        grid[3].setInteractable(10,10,true);
+        grid[3].setMovable(10,10,false);
         
         this.gridNum = 0;
         Group[] gr = new Group[4];
@@ -751,16 +778,48 @@ public class MainApplication extends Application {
             mainChar.setX(30 * grid[gridNum].getX());
             mainChar.setY(30 * grid[gridNum].getY());
         } catch (Exception e) {}
+        bookNum = 0;
+        Label bookLabel = new Label(bookNum+"/"+books.length+" books found");
+        
+        Font pressStart2PFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
+        pressStart2PFont.loadFont(pressStart2P.getPath(), 1); // It doesn't matter what size font I put, so I will default it to 1.
+        // titleLabel.setTextFill(Paint.valueOf(fontPaint));
+        bookLabel.setFont(pressStart2PFont);
+        bookLabel.setStyle("-fx-background-color: rgba(0,0,0,0); -fx-text-fill: rgb(0,0,0); -fx-font-size: 20 px;"); //  -fx-font-family: 'Press Start 2P', cursive;
+        bookLabel.setTranslateX(450);
+        bookLabel.setTranslateY(12);
+        
         Group view=new Group();
         view.getChildren().add(gr[gridNum]);
         view.getChildren().add(mainChar);
+        view.getChildren().add(bookLabel);
         scene = new Scene(view);
-
+        
+        // Runs on a key press.
         try {
-            stage.addEventFilter(KeyEvent.KEY_PRESSED,
+            scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 k -> {
                     try {
-                        if (screenNum == 2) {
+                        if(k.getCode() == KeyCode.SPACE){
+                            Tile interaction = grid[gridNum].interact();
+                            if(showingBook){
+                                showingBook = false;
+                                gr[gridNum]=grid[gridNum].draw();
+                            }else if(interaction.getObject().equals(bookTileFile.getPath())){
+                                showingBook = true;
+                                interaction.setObject(additionalGrassTileFile.getPath());
+                                interaction.setMovable(true);
+                                interaction.setInteractable(false);
+                                ImageView bookScene = new ImageView();
+                                Image image = new Image(books[0].toURI().toString());
+                                bookScene.setImage(image);
+                                Group bk = new Group();
+                                bk.getChildren().add(bookScene);
+                                scene.setRoot(bk);
+                                bookNum++;
+                            }
+                        }
+                        if(!showingBook){
                             if (k.getCode() == KeyCode.W) {
                                 final int OFF = grid[gridNum].moveUp();
                                 if(OFF!=-1){
@@ -782,8 +841,7 @@ public class MainApplication extends Application {
                                     grid[gridNum].setX(OFF);
                                     grid[gridNum].setY(0);
                                 }
-                            }
-                            if (k.getCode() == KeyCode.D) {
+                            }else if (k.getCode() == KeyCode.D) {
                                 final int OFF = grid[gridNum].moveRight();
                                 if(OFF!=-1){
                                     gridNum+=1;
@@ -791,17 +849,16 @@ public class MainApplication extends Application {
                                     grid[gridNum].setY(OFF);
                                 }
                             }
-                            
-                            try {
-                                File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\mainChar.png");
-                                Image image = new Image(file.toURI().toString());
-                                mainChar.setImage(image);
-                                mainChar.setX(30 * grid[gridNum].getX());
-                                mainChar.setY(30 * grid[gridNum].getY());
-                            } catch (Exception e) {}
+                            File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\mainChar.png");
+                            Image image = new Image(file.toURI().toString());
+                            mainChar.setImage(image);
+                            mainChar.setX(30 * grid[gridNum].getX());
+                            mainChar.setY(30 * grid[gridNum].getY());
                             view.getChildren().clear();
                             view.getChildren().add(gr[gridNum]);
                             view.getChildren().add(mainChar);
+                            bookLabel.setText(bookNum+"/"+books.length+" books found");
+                            view.getChildren().add(bookLabel);
                             scene.setRoot(view);
                         }
                     } catch (Exception e) {}
