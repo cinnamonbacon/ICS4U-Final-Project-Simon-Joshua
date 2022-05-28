@@ -5,6 +5,7 @@
   Course: ICS4U0/P
   Purpose: to act as a variable type for a tile in the graphics of the game.
   Worked on by: Fully Simon
+  Eddited May 23-27
 */
 
 /**
@@ -85,17 +86,7 @@ public class Tile {
     public boolean isInteractable() {
         return interactable;
     }
-
-    /**
-     * Private non-static return method used change the value of interactable.
-     * <p>
-     * This private non-static method to act as a accessor method allowing other 
-     * classes to make a tile interactable.
-     */
-    public void setInteractable(boolean interactable) {
-        this.interactable = interactable;
-    }
-
+    
     /**
      * Private non-static return method used get the value of file.
      * <p>
@@ -122,10 +113,43 @@ public class Tile {
         return object;
     }
     
+    /**
+     * Private non-static method used change the value of interactable.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to make a tile interactable or not.
+     *
+     * @param interactable A boolean to change the interactable variable to.
+     */
+    public void setInteractable(boolean interactable) {
+        // Simon Bakan May 23-27 changed from just making the tile interactable to setting it
+        this.interactable = interactable;
+    }
+
+    
+    // Everything after is added by Simon Bakan from May 23-27 taking half an hour.
+    
+    /**
+     * Private non-static method used change the value of object.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to change the object string of the tile.
+     *
+     * @param object A String to change the object variable to. This will be
+     *        the path of a file.
+     */
     public void setObject(String object) {
         this.object=object;
     }
     
+    /**
+     * Private non-static method used change the value of movable.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to make a tile movablee or not.
+     *
+     * @param movable A boolean to change the movable variable to.
+     */
     public void setMovable(boolean movable) {
         this.movable=movable;
     }

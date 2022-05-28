@@ -6,6 +6,7 @@
   
   Purpose: to build manipulate and draw a screen with tiles that the player can move around in.
   Worked on by: Fully Simon
+  Eddited May 23-27
 */
 
 import javafx.stage.Stage; // Imports the Stage.java class, which allows the program to have access to a stage to display the graphics within.
@@ -102,9 +103,10 @@ public class Grid {
      * This private non-static return method will be used to check if the player
      * can move left and then move them left if they can.
      *
-     * @return A boolean that will say whether the player has walked off of the screen.
+     * @return An int that will the mainY if the player has walked off of the screen.
      */
     public int moveLeft() {
+        // Simon Bakan May 23-27 changed to return mainY instead of a boolean.
         if (mainX == 0) {
             return mainY;
         }
@@ -120,9 +122,10 @@ public class Grid {
      * This private non-static return method will be used to check if the player
      * can move left and then move them right if they can.
      *
-     * @return A boolean that will say whether the player has walked off of the screen.
+     * @return An int that will the mainY if the player has walked off of the screen.
      */
     public int moveRight() {
+        // Simon Bakan May 23-27 changed to return mainY instead of a boolean.
         if (mainX == tiles[0].length-1) {
             return mainY;
         }
@@ -138,9 +141,10 @@ public class Grid {
      * This private non-static return method will be used to check if the player
      * can move left and then move them up if they can.
      *
-     * @return A boolean that will say whether the player has walked off of the screen.
+     * @return An int that will the mainX if the player has walked off of the screen.
      */
     public int moveUp() {
+        // Simon Bakan May 23-27 changed to return mainX instead of a boolean.
         if (mainY == 0) {
             return mainX;
         }
@@ -156,9 +160,10 @@ public class Grid {
      * This private non-static return method will be used to check if the player
      * can move left and then move them down if they can.
      *
-     * @return A boolean that will say whether the player has walked off of the screen.
+     * @return A int that will the mainX if the player has walked off of the screen.
      */
     public int moveDown() {
+        // Simon Bakan May 23-27 changed to return mainX instead of a boolean.
         if (mainY == tiles.length-1) {
             return mainX;
         }
@@ -169,15 +174,15 @@ public class Grid {
     }
 
     /**
-     * Public non-static method used to draw the grid on the passed scene.
+     * Public non-static method used to create a group to draw the grid.
      * <p>
-     * This private non-static method will be used draw a grid of tiles and
-     * then their given objects followed by an image for the playeron a scene
-     * and set the stage to be that scene.
+     * This private non-static method will be used meake a group of tiles and
+     * then their given objects and return the group.
      *
-     * @param st The Stage that the grid will be drawn on.
+     * @return a Group with the elements of the Grid instance
      */
     public Group draw() {
+        // Simon Bakan May 23-27 changed to return Group instead of draw it on a passed stage.
         GridPane screen = new GridPane();
         for (int row = 0; row < tiles.length; row++) {
             for (int col = 0; col < tiles[0].length; col++) {
@@ -208,6 +213,7 @@ public class Grid {
                 } catch (Exception e) {}
             }
         }
+        // Simon Bakan May 23-27 removed drawing of main character from Grid class and added to MainApplication.
         /*ImageView mainChar = new ImageView();
         try {
             File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\mainChar.png");
@@ -229,42 +235,118 @@ public class Grid {
      * This private non-static method will be make the boolean interactable
      * true for the all tiles with a certain object on them.
      *
-     * @param obj A String with the object the program is looking for to make
-     *           tiles interactable.
+     * @param obj A Tile in the adjacent squares that is interactable.
      */
      
-    public String interact() {
+    public Tile interact() {
+        // Simon Bakan May 23-27 changed to return Tile instead of returning object.
         if(tiles[mainY-1][mainX].isInteractable()){
-            return tiles[mainY-1][mainX].getFile();
+            return tiles[mainY-1][mainX];
         }else if(tiles[mainY+1][mainX].isInteractable()){
-            return tiles[mainY+1][mainX].getFile();
+            return tiles[mainY+1][mainX];
         }else if(tiles[mainY][mainX-1].isInteractable()){
-            return tiles[mainY][mainX-1].getFile();
+            return tiles[mainY][mainX-1];
         }else if(tiles[mainY][mainX+1].isInteractable()){
-            return tiles[mainY][mainX+1].getFile();
+            return tiles[mainY][mainX+1];
         }else{
-            return "";
+            return null;
         }
     }
     
+    // Everything after is added by Simon Bakan from May 23-27 taking half an hour.
+    
+    /**
+     * Private non-static method used change the value of mainX.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to change the mainX int of the tile.
+     *
+     * @param object An int to change the mainX variable to.
+     */
     public void setX(int x){
         this.mainX = x;
     }
+    
+    /**
+     * Private non-static method used change the value of mainY.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to change the mainY int of the tile.
+     *
+     * @param object An int to change the mainY variable to.
+     */
     public void setY(int y){
         this.mainY = y;
     }
+    
+    /**
+     * Private non-static return method used access value of mainX.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to access the value of the mainX int of the tile.
+     *
+     * @return An int that will equal the mainX instance variable value.
+     */
     public int getX(){
         return mainX;
     }
+    
+    /**
+     * Private non-static return method used access value of mainY.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to access the value of the mainY int of the tile.
+     *
+     * @return An int that will equal the mainY instance variable value.
+     */
     public int getY(){
         return mainY;
     }
+    
+    /**
+     * Private non-static method used change the value of object for a Tile.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to change the object string of one of the Tile objects in the tiles
+     * array.
+     *
+     * @param y A int representing the y position of the Tile in the array class.
+     * @param x A int representing the x position of the Tile in the array class.
+     * @param object A String to change the object variable to for a Tile object
+     * in the tiles array. This will be the path of a file.
+     */
     public void setObject(int y, int x, String object) {
         tiles[y][x].setObject(object);
     }
+    
+    /**
+     * Private non-static method used change the value of interactable for a Tile.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to change the interactable boolean of one of the Tile objects in the 
+     * tiles array.
+     *
+     * @param y A int representing the y position of the Tile in the array class.
+     * @param x A int representing the x position of the Tile in the array class.
+     * @param interactable A boolean to change the interactable variable to for a Tile 
+     * object in the tiles array.
+     */
     public void setInteractable(int y, int x, boolean interactable) {
         tiles[y][x].setInteractable(interactable);
     }
+    
+    /**
+     * Private non-static method used change the value of movable for a Tile.
+     * <p>
+     * This private non-static method to act as a accessor method allowing other 
+     * classes to change the movable boolean of one of the Tile objects in the 
+     * tiles array.
+     *
+     * @param y A int representing the y position of the Tile in the array class.
+     * @param x A int representing the x position of the Tile in the array class.
+     * @param movable A boolean to change the interactable variable to for a Tile 
+     * object in the tiles array.
+     */
     public void setMovable(int y, int x, boolean movable) {
         tiles[y][x].setMovable(movable);
     }
