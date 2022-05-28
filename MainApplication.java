@@ -87,9 +87,6 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
  * @since JDK1.17
  */
 
-// Number of things to change: 5
-// Remember to update the JavaDoc comments for the global variables, the methods (especially because return types changed), and for the imports
-
 public class MainApplication extends Application {
     /** This private non-static File variable will hold the logo for the game. */
     private File logoFile;
@@ -201,10 +198,10 @@ public class MainApplication extends Application {
         this.whiteInstructionsTitleFile = new File("ICS ISP - Title for Instructions (White Version).png");
         this.blackInstructionsTextFile = new File("ICS ISP - Text for Instructions (Black Version).png");
         this.backButtonFile = new File("ICS ISP - Button Design for Back Button.png");
+
         this.books = new File[8];
         this.pressStart2P = new File("PressStart2P-Regular.ttf");
-        this.books[0] = new File("Book1.png");
-        
+        this.books[0] = new File("Book1.png");        
         this.screenNum = 0;
     }
 
