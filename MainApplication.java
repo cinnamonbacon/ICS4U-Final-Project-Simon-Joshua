@@ -173,7 +173,7 @@ public class MainApplication extends Application {
     private int bookNum;
     
     /** This private non-static File variable will hold onto the location of the Press Start 2P file. */
-    private File pressStart2P;
+    private File pressStart2PFile;
 
     /**
      * An instance of the Tile class will be created using this no parameter constructor.
@@ -200,7 +200,7 @@ public class MainApplication extends Application {
         this.backButtonFile = new File("ICS ISP - Button Design for Back Button.png");
 
         this.books = new File[8];
-        this.pressStart2P = new File("PressStart2P-Regular.ttf");
+        this.pressStart2PFile = new File("PressStart2P-Regular.ttf");
         this.books[0] = new File("Book1.png");        
         this.screenNum = 0;
     }
@@ -771,7 +771,7 @@ public class MainApplication extends Application {
         Label bookLabel = new Label(bookNum+"/"+books.length+" books found");
         
         Font pressStart2PFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        pressStart2PFont.loadFont(pressStart2P.getPath(), 1); // It doesn't matter what size font I put, so I will default it to 1.
+        pressStart2PFont.loadFont(pressStart2PFile.getPath(), 1); // It doesn't matter what size font I put, so I will default it to 1.
         // titleLabel.setTextFill(Paint.valueOf(fontPaint));
         bookLabel.setFont(pressStart2PFont);
         bookLabel.setStyle("-fx-background-color: rgba(0,0,0,0); -fx-text-fill: rgb(0,0,0); -fx-font-size: 20 px;"); //  -fx-font-family: 'Press Start 2P', cursive;
@@ -1053,6 +1053,19 @@ public class MainApplication extends Application {
         this.level1Scene = this.level1(stage);
         this.screenNum = 0;
         stage.setScene(this.introAnimationScene);
+        
+        /*
+        GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
+        //Rectangle rect = new Rectangle(50, 50, 1, 1);
+        Group nodesToAdd = new Group();
+        nodesToAdd.getChildren().addAll(
+            test.getButton()
+            //rect
+        );
+        Scene scene = new Scene(nodesToAdd, 600, 600);
+        stage.setScene(scene);
+        */
+        
         stage.show();
     }
 
