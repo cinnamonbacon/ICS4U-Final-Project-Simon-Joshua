@@ -18,7 +18,7 @@ public class GameButton {
     
     private Rectangle boxAroundLabel;
     
-    //private Rectangle redRectangleAroundButton;
+    private Rectangle redRectangleAroundButton;
     
     private double xCoord;
     
@@ -29,19 +29,12 @@ public class GameButton {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         
-        System.out.println(fontFile.getPath());
+        //System.out.println(fontFile.getPath());
         
-        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        try {
-            FileInputStream fontFIS = new FileInputStream(fontFile);
-            fontFont = Font.loadFont(fontFIS, 1); // It doesn't matter what size font I put, so I will default it to 1.
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
         //fontFont = Font.loadFont("https://fonts.googleapis.com/css2?family=Press+Start+2P", 1);
         //System.out.println(fontFont);
         //this.label.setTextFill(Paint.valueOf(fontPaint));
-        this.label.setFont(fontFont);
+        this.label.setFont(this.getFontFromFile(fontFile, 1)); // It doesn't matter what size font I put, so I will default it to 1.
         //this.label.getStylesheets().add("https://fonts.googleapis.com/css2?family=Press+Start+2P");
         this.label.setStyle("-fx-font-family: 'Press Start 2P', cursive; -fx-background-color: " + backgroundColour + "; -fx-text-fill: " + fontPaint + "; -fx-font-size: " + fontSize + "px;"); // -fx-font-family: 'Press Start 2P', cursive;
         this.label.setTranslateX(textTranslationX);
@@ -51,10 +44,10 @@ public class GameButton {
         
         this.boxAroundLabel = new Rectangle(0, 0, width, height); // this.boxAroundLabel = new Rectangle(-this.getHoriPadding(width), -this.getVertPadding(height), width, height);
         this.boxAroundLabel.setFill(Paint.valueOf(backgroundColour));
-        this.boxAroundLabel.setStrokeWidth(2.0);
-        this.boxAroundLabel.setStroke(Paint.valueOf("rgb(255,0,0)"));
-        this.boxAroundLabel.setTranslateX(-2.0);
-        this.boxAroundLabel.setTranslateY(-2.0);
+        this.boxAroundLabel.setSmooth(false);
+        //this.boxAroundLabel.setStroke(Paint.valueOf("rgb(255,0,0)"));
+        //this.boxAroundLabel.setTranslateX(-2.0);
+        //this.boxAroundLabel.setTranslateY(-2.0);
         //System.out.println(this.label.prefWidth(-1));
         //this.boxAroundLabel = new Rectangle(this.label.getWidth() + 2 * horiPadding, this.label.getHeight() + 2 * vertPadding);
         //this.boxAroundLabel.setFill(Paint.valueOf("rgb(255,255,0)"));
@@ -63,10 +56,26 @@ public class GameButton {
         //this.boxAroundLabel.setTranslateX(xCoord);
         //this.boxAroundLabel.setTranslateY(yCoord);
         
+        this.redRectangleAroundButton = new Rectangle(-2.0, -2.0, width + 4.5, height + 4.5);
+        this.redRectangleAroundButton.setFill(Paint.valueOf("rgb(255,0,0)"));
+        this.redRectangleAroundButton.setSmooth(false);
+        this.redRectangleAroundButton.setVisible(false);
+
+        
         //this.redRectangleAroundButton = new Rectangle(-horiPadding - 2, -vertPadding - 2, this.getWidth(this.label) + 2 * horiPadding + 4, this.getHeight(this.label) + 2 * vertPadding + 4);
         //this.redRectangleAroundButton.setFill(Paint.valueOf("rgb(255,0,0)"));
         //this.redRectangleAroundButton.setTranslateX(xCoord);
         //this.redRectangleAroundButton.setTranslateY(yCoord);
+        
+        
+    }
+    
+    public void cursorOverButton() {
+        this.redRectangleAroundButton.setVisible(true);
+    }
+    
+    public void cursorNotOverButton() {
+        this.redRectangleAroundButton.setVisible(false);
     }
     
     /*
@@ -75,9 +84,11 @@ public class GameButton {
     }
     */
     
-    public Rectangle getRectAroundLabel () {
+    /*
+    public Rectangle getRectAroundLabel() {
         return this.boxAroundLabel;
     }
+    */
     
     /*
     private double getWidth(Label label) {
@@ -113,6 +124,18 @@ public class GameButton {
     }
     */
     
+    private Font getFontFromFile(File fontFile, int fontSize) {
+        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
+        try {
+            FileInputStream fontFIS = new FileInputStream(fontFile);
+            fontFont = Font.loadFont(fontFIS, fontSize);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return fontFont;
+    }
+    
+    /*
     public String getText() {
         return this.label.getText();
     }
@@ -124,11 +147,12 @@ public class GameButton {
     public Label getLabel() {
         return this.label;
     }
+    */
     
     public StackPane getButton() {
         StackPane returnedValue = new StackPane();
         returnedValue.getChildren().addAll(
-            //this.redRectangleAroundButton,
+            this.redRectangleAroundButton,
             this.boxAroundLabel,
             this.label
         );

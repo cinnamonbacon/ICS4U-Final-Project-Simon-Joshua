@@ -37,6 +37,11 @@ import javafx.util.Duration; // Imports the Duration.java class, which allows th
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
 import java.io.IOException; // Imports the IOException.java class, which allows the user to take care of the IOExceptions that are thrown by any parts of the program.
 
+// Remember to add JavaDoc for these imports:
+import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
+import java.io.FileInputStream;
+
 /**
  * Main program that will act as driver class and run entire game.
  * <p>
@@ -174,6 +179,10 @@ public class MainApplication extends Application {
     
     /** This private non-static File variable will hold onto the location of the Press Start 2P file. */
     private File pressStart2PFile;
+    
+    private Scene leaderboardScene;
+    
+    private Scene quitGameScene;
 
     /**
      * An instance of the Tile class will be created using this no parameter constructor.
@@ -276,16 +285,13 @@ public class MainApplication extends Application {
             }
         );
 
-        ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
-        introBorderImageView.setPreserveRatio(true);
-        introBorderImageView.setSmooth(true);
-        introBorderImageView.setX(0);
-        introBorderImageView.setY(0);
-        introBorderImageView.setFitWidth(600);
+        ImageView introBorderImageView = this.getIntroBorderImageView();
 
         Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().add(logoImageView);
-        nodesToAdd.getChildren().add(introBorderImageView);
+        nodesToAdd.getChildren().addAll(
+            logoImageView,
+            introBorderImageView
+        );
 
         Scene scene = new Scene(nodesToAdd, 600, 600);
 
@@ -318,12 +324,7 @@ public class MainApplication extends Application {
     public Scene mainMenu(Stage stage) throws IOException {
         screenNum = 1;
 
-        ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
-        introBorderImageView.setPreserveRatio(true);
-        introBorderImageView.setSmooth(true);
-        introBorderImageView.setX(0);
-        introBorderImageView.setY(0);
-        introBorderImageView.setFitWidth(600);
+        ImageView introBorderImageView = this.getIntroBorderImageView();
 
         Rectangle blackRectangleUnderOptions = new Rectangle(10, 10, 200, 580);
         blackRectangleUnderOptions.setFill(Paint.valueOf("rgb(0,0,0)"));
@@ -493,26 +494,28 @@ public class MainApplication extends Application {
         */
 
         Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().add(yellowCircleForSun);
-        nodesToAdd.getChildren().add(cloudShapeTop);
-        nodesToAdd.getChildren().add(cloudShapeMiddle);
-        nodesToAdd.getChildren().add(cloudShapeBottom);
-        nodesToAdd.getChildren().add(blackRectangleUnderOptions);
-        nodesToAdd.getChildren().add(greyRectangleUnderTitle);
-        nodesToAdd.getChildren().add(whiteTitleImageView);
-        nodesToAdd.getChildren().add(redRectangleAroundNewGameButton);
-        nodesToAdd.getChildren().add(newGameButtonImageView);
-        nodesToAdd.getChildren().add(redRectangleAroundInstructionsButton);
-        nodesToAdd.getChildren().add(instructionsButtonImageView);
-        nodesToAdd.getChildren().add(redRectangleAroundLeaderboardButton);
-        nodesToAdd.getChildren().add(leaderboardButtonImageView);
-        nodesToAdd.getChildren().add(redRectangleAroundQuitGameButton);
-        nodesToAdd.getChildren().add(quitGameButtonImageView);
-        nodesToAdd.getChildren().add(copyrightStatementImageView);
-        nodesToAdd.getChildren().add(grassAndDirtBlocksGroup);
-        nodesToAdd.getChildren().add(characterNonPixelatedImageView);
-        nodesToAdd.getChildren().add(introBorderImageView);
-
+        nodesToAdd.getChildren().addAll(
+            yellowCircleForSun,
+            cloudShapeTop,
+            cloudShapeMiddle,
+            cloudShapeBottom,
+            blackRectangleUnderOptions,
+            greyRectangleUnderTitle,
+            whiteTitleImageView,
+            redRectangleAroundNewGameButton,
+            newGameButtonImageView,
+            redRectangleAroundInstructionsButton,
+            instructionsButtonImageView,
+            redRectangleAroundLeaderboardButton,
+            leaderboardButtonImageView,
+            redRectangleAroundQuitGameButton,
+            quitGameButtonImageView,
+            copyrightStatementImageView,
+            grassAndDirtBlocksGroup,
+            characterNonPixelatedImageView,
+            introBorderImageView
+        );
+        
         Scene scene = new Scene(nodesToAdd, 600, 600);
 
         // Keep these two split or else the cursor will not work as expected
@@ -580,20 +583,16 @@ public class MainApplication extends Application {
                     screenNum = 2;
                     stage.setScene(this.level1Scene);
                     stage.show();
-                }
-
-                if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
+                }else if (xVal >= 20 && xVal <= 198 && yVal >= 280 && yVal <= 336) {
                     screenNum = 3;
                     stage.setScene(this.instructionsScene);
                     stage.show();
-                }
-
-                if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
+                } else if (xVal >= 20 && xVal <= 198 && yVal >= 355 && yVal <= 411) {
                     screenNum = 4;
-                }
-
-                if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
+                } else if (xVal >= 20 && xVal <= 148 && yVal >= 455 && yVal <= 501) {
                     screenNum = 5;
+                    stage.setScene(this.quitGameScene);
+                    stage.show();
                 }
             }
         );
@@ -770,11 +769,8 @@ public class MainApplication extends Application {
         bookNum = 0;
         Label bookLabel = new Label(bookNum+"/"+books.length+" books found");
         
-        Font pressStart2PFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        pressStart2PFont.loadFont(pressStart2PFile.getPath(), 1); // It doesn't matter what size font I put, so I will default it to 1.
-        // titleLabel.setTextFill(Paint.valueOf(fontPaint));
-        bookLabel.setFont(pressStart2PFont);
-        bookLabel.setStyle("-fx-background-color: rgba(0,0,0,0); -fx-text-fill: rgb(0,0,0); -fx-font-size: 20 px;"); //  -fx-font-family: 'Press Start 2P', cursive;
+        bookLabel.setFont(this.getPressStart2PFont(20));
+        bookLabel.setStyle("-fx-background-color: rgba(255,255,255,0); -fx-text-fill: rgb(0,0,0); -fx-font-size: 20px;"); //  -fx-font-family: 'Press Start 2P', cursive;
         bookLabel.setTranslateX(450);
         bookLabel.setTranslateY(12);
         
@@ -877,19 +873,17 @@ public class MainApplication extends Application {
     public Scene instructions(Stage stage) throws IOException {
         screenNum = 3;
 
-        ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
-        introBorderImageView.setPreserveRatio(true);
-        introBorderImageView.setSmooth(true);
-        introBorderImageView.setX(0);
-        introBorderImageView.setY(0);
-        introBorderImageView.setFitWidth(600);
+        ImageView introBorderImageView = this.getIntroBorderImageView();
 
+        GameTitle whiteInstructionsGameTitle = new GameTitle(pressStart2PFile, "white", "Instructions", "red", 15, 50, 90, 300);
+        /*
         ImageView whiteInstructionsTitleImageView = new ImageView(new Image(whiteInstructionsTitleFile.getPath()));
         whiteInstructionsTitleImageView.setPreserveRatio(true);
         whiteInstructionsTitleImageView.setSmooth(true);
         whiteInstructionsTitleImageView.setX(50);
         whiteInstructionsTitleImageView.setY(85);
         whiteInstructionsTitleImageView.setFitWidth(300);
+        */
 
         ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
         logoImageView.setPreserveRatio(true);
@@ -897,36 +891,28 @@ public class MainApplication extends Application {
         logoImageView.setX(400);
         logoImageView.setY(50);
         logoImageView.setFitWidth(150);
-
-        ImageView blackInstructionsTextImageView = new ImageView(new Image(blackInstructionsTextFile.getPath()));
-        blackInstructionsTextImageView.setPreserveRatio(true);
-        blackInstructionsTextImageView.setSmooth(true);
-        blackInstructionsTextImageView.setX(25);
-        blackInstructionsTextImageView.setY(190);
-        blackInstructionsTextImageView.setFitWidth(550);
-
-        ImageView backButtonImageView = new ImageView(new Image(backButtonFile.getPath()));
-        backButtonImageView.setPreserveRatio(true);
-        backButtonImageView.setSmooth(true);
-        backButtonImageView.setX(390);
-        backButtonImageView.setY(512);
-        backButtonImageView.setFitWidth(130);
-
-        Rectangle redRectangleAroundBackButton = new Rectangle(389, 516, 132, 42);
-        redRectangleAroundBackButton.setStroke(Paint.valueOf("rgb(255,0,0)"));
-        redRectangleAroundBackButton.setStrokeWidth(2);
-        redRectangleAroundBackButton.setVisible(true);
+        
+        Text instructionsText = new Text("\"Trans-form:The Awakening\" is a game about combating transphobia. You play as a transgender kid who has to come out to themself, confront transphobia at their school, and then come out to their parents.\n\nMove with WASD and interact with space. You can always press escape to pause the game or quit. Good luck combating transphobia!");
+        instructionsText.setFont(this.getPressStart2PFont(18));
+        instructionsText.setFill(Paint.valueOf("rgb(0,0,0)"));
+        instructionsText.setWrappingWidth(500);
+        instructionsText.setX(50);
+        instructionsText.setY(250);
+        
+        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", 390, 495, 125, 50, 0, 0);
 
         Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
-        nodesToAdd.getChildren().add(logoImageView);
-        nodesToAdd.getChildren().add(blackInstructionsTextImageView);
-        nodesToAdd.getChildren().add(redRectangleAroundBackButton);
-        nodesToAdd.getChildren().add(backButtonImageView);
-        nodesToAdd.getChildren().add(introBorderImageView);
+        nodesToAdd.getChildren().addAll(
+            instructionsText,
+            backButton.getButton(),
+            whiteInstructionsGameTitle.getTitle(),
+            //whiteInstructionsTitleImageView,
+            logoImageView,
+            introBorderImageView
+        );
 
         Scene scene = new Scene(nodesToAdd, 600, 600);
-
+        
         scene.addEventFilter(MouseEvent.MOUSE_MOVED,
             e -> {
 
@@ -935,7 +921,7 @@ public class MainApplication extends Application {
 
                 //System.out.println(xVal + " " + yVal);
 
-                if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+                if (xVal >= 390 && xVal <= 515 && yVal >= 495 && yVal <= 545) {
                     scene.setCursor(Cursor.HAND);
                 } else {
                     scene.setCursor(Cursor.DEFAULT);
@@ -951,10 +937,14 @@ public class MainApplication extends Application {
 
                 //System.out.println(xVal + " " + yVal);
 
-                if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
-                    redRectangleAroundBackButton.setVisible(true);
+                if (xVal >= 390 && xVal <= 515 && yVal >= 495 && yVal <= 545) {
+                    backButton.cursorOverButton();
+                    //backButton.getRedRectangle().setVisible(true);
+                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
-                    redRectangleAroundBackButton.setVisible(false);
+                    backButton.cursorNotOverButton();
+                    //backButton.getRedRectangle().setVisible(false);
+                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -965,7 +955,7 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                if (xVal >= 390 && xVal <= 520 && yVal >= 512 && yVal <= 560) {
+                if (xVal >= 390 && xVal <= 515 && yVal >= 495 && yVal <= 545) {
                     screenNum = 1;
                     stage.setScene(this.mainMenuScene);
                     stage.show();
@@ -976,6 +966,16 @@ public class MainApplication extends Application {
         scene.setFill(Color.DEEPSKYBLUE);
 
         return scene;
+    }
+    
+    public Scene leaderboard(Stage stage) throws IOException {
+        screenNum = 4;
+        
+        ImageView introBorderImageView = this.getIntroBorderImageView();
+        
+        
+        
+        return new Scene(new Group());
     }
     
     /**
@@ -997,19 +997,9 @@ public class MainApplication extends Application {
     public Scene quitGame(Stage stage) throws IOException {
         screenNum = 5;
 
-        ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
-        introBorderImageView.setPreserveRatio(true);
-        introBorderImageView.setSmooth(true);
-        introBorderImageView.setX(0);
-        introBorderImageView.setY(0);
-        introBorderImageView.setFitWidth(600);
+        ImageView introBorderImageView = this.getIntroBorderImageView();
 
-        ImageView whiteInstructionsTitleImageView = new ImageView(new Image(whiteInstructionsTitleFile.getPath()));
-        whiteInstructionsTitleImageView.setPreserveRatio(true);
-        whiteInstructionsTitleImageView.setSmooth(true);
-        whiteInstructionsTitleImageView.setX(50);
-        whiteInstructionsTitleImageView.setY(85);
-        whiteInstructionsTitleImageView.setFitWidth(300);
+        GameTitle whiteQuitGameGameTitle = new GameTitle(pressStart2PFile, "white", "Quit Game", "red", 15, 50, 90, 300);
 
         ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
         logoImageView.setPreserveRatio(true);
@@ -1017,13 +1007,93 @@ public class MainApplication extends Application {
         logoImageView.setX(400);
         logoImageView.setY(50);
         logoImageView.setFitWidth(150);
+        
+        Text quitGameText = new Text("Thank you for playing Trans-form: The Awakening!\n\nThis game was made by Simon Bakan and Joshua Persaud (with a special thanks to Valentina Krasteva).\n\n");
+        quitGameText.setFont(this.getPressStart2PFont(24));
+        quitGameText.setFill(Paint.valueOf("rgb(0,0,0)"));
+        quitGameText.setWrappingWidth(500);
+        quitGameText.setX(50);
+        quitGameText.setY(250);
+        
+        GameButton exitButton = new GameButton("Exit Game", this.pressStart2PFile, 12, "white", "black", 390, 495, 125, 50, 0, 0);
+        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", 85, 495, 125, 50, 0, 0);
 
         Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().add(introBorderImageView);
-        nodesToAdd.getChildren().add(whiteInstructionsTitleImageView);
-        nodesToAdd.getChildren().add(logoImageView);
+        nodesToAdd.getChildren().addAll(
+            quitGameText,
+            exitButton.getButton(),
+            backButton.getButton(),
+            whiteQuitGameGameTitle.getTitle(),
+            //whiteInstructionsTitleImageView,
+            logoImageView,
+            introBorderImageView
+        );
 
         Scene scene = new Scene(nodesToAdd, 600, 600);
+        
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                //System.out.println(xVal + " " + yVal);
+                if (xVal >= 85 && xVal <= 210 && yVal >= 495 && yVal <= 545) {
+                    scene.setCursor(Cursor.HAND);
+                } else if (xVal >= 390 && xVal <= 515 && yVal >= 495 && yVal <= 545) {
+                    scene.setCursor(Cursor.HAND);
+                } else {
+                    scene.setCursor(Cursor.DEFAULT);
+                }
+            }
+        );
+
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                //System.out.println(xVal + " " + yVal);
+                
+                if (xVal >= 85 && xVal <= 210 && yVal >= 495 && yVal <= 545) {
+                    backButton.cursorOverButton();
+                    //backButton.getRedRectangle().setVisible(true);
+                    //redRectangleAroundBackButton.setVisible(true);
+                } else {
+                    backButton.cursorNotOverButton();
+                    //backButton.getRedRectangle().setVisible(false);
+                    //redRectangleAroundBackButton.setVisible(false);
+                }
+
+                if (xVal >= 390 && xVal <= 515 && yVal >= 495 && yVal <= 545) {
+                    exitButton.cursorOverButton();
+                    //backButton.getRedRectangle().setVisible(true);
+                    //redRectangleAroundBackButton.setVisible(true);
+                } else {
+                    exitButton.cursorNotOverButton();
+                    //backButton.getRedRectangle().setVisible(false);
+                    //redRectangleAroundBackButton.setVisible(false);
+                }
+            }
+        );
+
+        scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+                
+                if (xVal >= 85 && xVal <= 210 && yVal >= 495 && yVal <= 545) {
+                    screenNum = 1;
+                    stage.setScene(this.mainMenuScene);
+                    stage.show();
+                } else if (xVal >= 390 && xVal <= 515 && yVal >= 495 && yVal <= 545) {
+                    System.exit(0);
+                }
+            }
+        );
+
 
         scene.setFill(Color.DEEPSKYBLUE);
 
@@ -1050,23 +1120,50 @@ public class MainApplication extends Application {
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
+        this.leaderboardScene = this.leaderboard(stage);
         this.level1Scene = this.level1(stage);
+        this.quitGameScene = this.quitGame(stage);
+        
         this.screenNum = 0;
         stage.setScene(this.introAnimationScene);
         
         /*
-        GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
+        //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
+        //GameTitle test = new GameTitle(pressStart2PFile, "Trans-form:", 24, "black", "Instructions", 24, "blue", 100, 50, 10, 0, 2);
         //Rectangle rect = new Rectangle(50, 50, 1, 1);
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
-            test.getButton()
+            //test.getButton()
             //rect
+            test.getTitle()
         );
         Scene scene = new Scene(nodesToAdd, 600, 600);
+        //scene.setFill(Color.BLACK);
         stage.setScene(scene);
         */
         
         stage.show();
+    }
+    
+    private ImageView getIntroBorderImageView() {
+        ImageView introBorderImageView = new ImageView(new Image(introBorderFile.getPath()));
+        introBorderImageView.setPreserveRatio(true);
+        introBorderImageView.setSmooth(true);
+        introBorderImageView.setX(0);
+        introBorderImageView.setY(0);
+        introBorderImageView.setFitWidth(600);
+        return introBorderImageView;
+    }
+    
+    private Font getPressStart2PFont(int fontSize) {
+        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
+        try {
+            FileInputStream fontFIS = new FileInputStream(this.pressStart2PFile);
+            fontFont = Font.loadFont(fontFIS, fontSize);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return fontFont;
     }
 
     // This is the main method, which is public, static, and has a void return type. This will be used to execute the program.

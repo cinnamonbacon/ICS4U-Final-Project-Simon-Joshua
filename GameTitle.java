@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.scene.layout.Region;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,31 +21,21 @@ public class GameTitle {
     
     private StackPane overallTitle;
     
-    public GameTitle(File fontFile, String titleText, int titleFontSize, String titleFontPaint, String subheadingText, int subheadingFontSize, String subheadingFontPaint, double xCoord, double yCoord, double spacing, double underlineY, double underlineHeight) {
+    public GameTitle(File fontFile, String titleFontPaint, String subheadingText, String subheadingFontPaint, double spacing, double xCoord, double yCoord, double width) {
+        this(fontFile, "Trans-form:", 24, titleFontPaint, subheadingText, 24, subheadingFontPaint, spacing, 0, 2, xCoord, yCoord, width, Region.USE_COMPUTED_SIZE);
+    }
+    
+    public GameTitle(File fontFile, String titleText, int titleFontSize, String titleFontPaint, String subheadingText, int subheadingFontSize, String subheadingFontPaint, double spacing, double underlineY, double underlineHeight, double xCoord, double yCoord, double width, double height) {
         Text title = new Text(titleText + "\n");
         
-        Font fontFontTitle = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        try {
-            FileInputStream fontFIS = new FileInputStream(fontFile);
-            fontFontTitle = Font.loadFont(fontFIS, titleFontSize);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        title.setFont(fontFontTitle);
+        title.setFont(this.getFontFromFile(fontFile, titleFontSize));
         title.setFill(Paint.valueOf(titleFontPaint));
         //title.setStyle("-fx-underline: true;");
         //title.setStyle("-fx-font-family: 'Press Start 2P', cursive; -fx-background-color: rgba(255,255,255,0); -fx-text-fill: " + titleFontPaint + "; -fx-font-size: " + titleFontSize + "px;"); // -fx-text-decoration: underline; -fx-opacity: 1;
         //title.setUnderline(true);
 
         Text subheading = new Text(subheadingText);
-        Font fontFontSubheading = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        try {
-            FileInputStream fontFIS = new FileInputStream(fontFile);
-            fontFontSubheading = Font.loadFont(fontFIS, subheadingFontSize);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        subheading.setFont(fontFontSubheading);
+        subheading.setFont(this.getFontFromFile(fontFile, subheadingFontSize));
         subheading.setFill(Paint.valueOf(subheadingFontPaint));
         //subheading.setStyle("-fx-font-family: 'Press Start 2P', cursive; -fx-background-color: rgba(255,255,255,0); -fx-text-fill: " + subheadingFontPaint + "; -fx-font-size: " + subheadingFontSize + "px;"); // -fx-opacity: 1;
         
@@ -55,6 +46,8 @@ public class GameTitle {
         );
         tempTextFlow.setTextAlignment(TextAlignment.CENTER);
         tempTextFlow.setLineSpacing(spacing);
+        tempTextFlow.setPrefWidth(width);
+        tempTextFlow.setPrefHeight(height);
         
         Rectangle underlineRect = new Rectangle(0, this.getHeight(title) + underlineY, this.getWidth(title), underlineHeight);
         underlineRect.setFill(Paint.valueOf(titleFontPaint)); 
@@ -67,7 +60,8 @@ public class GameTitle {
         );
         
         this.overallTitle.setTranslateX(xCoord);
-        this.overallTitle.setTranslateY(yCoord);   
+        this.overallTitle.setTranslateY(yCoord);
+           
     }
     
     /*
@@ -198,6 +192,17 @@ public class GameTitle {
         root.applyCss();
         root.layout();
         return label.getHeight();
+    }
+    
+    private Font getFontFromFile(File fontFile, int fontSize) {
+        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
+        try {
+            FileInputStream fontFIS = new FileInputStream(fontFile);
+            fontFont = Font.loadFont(fontFIS, fontSize);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return fontFont;
     }
 
     public StackPane getTitle() {
