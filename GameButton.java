@@ -34,7 +34,7 @@ public class GameButton {
         Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
         try {
             FileInputStream fontFIS = new FileInputStream(fontFile);
-            fontFont = Font.loadFont(new FileInputStream(fontFile), 1); // It doesn't matter what size font I put, so I will default it to 1.
+            fontFont = Font.loadFont(fontFIS, 1); // It doesn't matter what size font I put, so I will default it to 1.
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
