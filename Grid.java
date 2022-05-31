@@ -18,6 +18,7 @@ import javafx.scene.Group; // Imports the Group.java class, which allows the pro
 import javafx.scene.image.Image; // Imports the Image.java class, which allows the program to create images from various files that are on the user's computer.
 import javafx.scene.image.ImageView; // Imports the ImageView.java class, which allows the program to create images that can act as nodes and can be added onto the scenes (and displayed to the user).
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
+import java.util.ArrayList;
 
 /**
  * Create a Grid made of Tiles that the user will move around in.
@@ -184,35 +185,43 @@ public class Grid {
     public Group draw() {
         // Simon Bakan May 23-27 changed to return Group instead of draw it on a passed stage.
         GridPane screen = new GridPane();
+        GridPane objects = new GridPane();
+        ArrayList<ImageView> exclamationPoints = new ArrayList<ImageView>();
         for (int row = 0; row < tiles.length; row++) {
             for (int col = 0; col < tiles[0].length; col++) {
                 try {
-                    ImageView imageView = new ImageView();
+                    ImageView tileImageView = new ImageView();
                     File file = new File(tiles[row][col].getFile());
                     Image image = new Image(file.toURI().toString());
-                    imageView.setImage(image);
-                    imageView.setFitWidth(30);
-                    imageView.setFitHeight(30);
+                    tileImageView.setImage(image);
+                    tileImageView.setFitWidth(30);
+                    tileImageView.setFitHeight(30);
                     VBox vb = new VBox();
-                    vb.getChildren().add(imageView);
+                    vb.getChildren().add(tileImageView);
                     screen.add(vb, col, row);
+                    
+                    ImageView ObjImageView = new ImageView();
+                    file = new File(tiles[row][col].getObject());
+                    image = new Image(file.toURI().toString());
+                    ObjImageView.setImage(image);
+                    ObjImageView.setFitWidth(30);
+                    ObjImageView.setFitHeight(30);
+                    objects.add(ObjImageView, col, row);
+                    
+                    if(tiles[row][col].isInteractable()){
+                        ImageView interactImageView = new ImageView();
+                        file = new File("ExclamationPoint.png");
+                        image = new Image(file.toURI().toString());
+                        interactImageView.setImage(image);
+                        interactImageView.setFitWidth(30);
+                        interactImageView.setFitHeight(30);
+                        interactImageView.setX(30 * col);
+                        interactImageView.setY(30 * row - 15);
+                        exclamationPoints.add(interactImageView);
+                    }
                 } catch (Exception e) {}
             }
-        }
-        GridPane objects = new GridPane();
-        for (int row = 0; row < tiles.length; row++) {
-            for (int col = 0; col < tiles[0].length; col++) {
-                try {
-                    ImageView imageView = new ImageView();
-                    File file = new File(tiles[row][col].getObject());
-                    Image image = new Image(file.toURI().toString());
-                    imageView.setImage(image);
-                    imageView.setFitWidth(30);
-                    imageView.setFitHeight(30);
-                    objects.add(imageView, col, row);
-                } catch (Exception e) {}
-            }
-        }
+        }        
         // Simon Bakan May 23-27 removed drawing of main character from Grid class and added to MainApplication.
         /*ImageView mainChar = new ImageView();
         try {
@@ -226,6 +235,9 @@ public class Grid {
         Group g = new Group();
         g.getChildren().add(screen);
         g.getChildren().add(objects);
+        for(ImageView exclamation : exclamationPoints){
+            g.getChildren().add(exclamation);
+        }
         return g;
     }
 
