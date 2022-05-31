@@ -49,8 +49,9 @@ public class GameTitle {
         tempTextFlow.setPrefWidth(width);
         tempTextFlow.setPrefHeight(height);
         
-        Rectangle underlineRect = new Rectangle(0, this.getHeight(title) + underlineY, this.getWidth(title), underlineHeight);
-        underlineRect.setFill(Paint.valueOf(titleFontPaint)); 
+        Rectangle underlineRect = new Rectangle(0, this.getHeight(title), this.getWidth(title), underlineHeight);
+        underlineRect.setFill(Paint.valueOf(titleFontPaint));
+        underlineRect.setTranslateY(underlineY);
         
         
         this.overallTitle = new StackPane();
