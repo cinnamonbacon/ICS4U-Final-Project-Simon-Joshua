@@ -79,7 +79,8 @@ public class GameButton {
         //this.boxAroundLabel.setStyle("-fx-stroke: red; -fx-stroke-width: 3;");
         this.boxAroundLabel.setStrokeType(StrokeType.OUTSIDE);
         this.boxAroundLabel.setStroke(Paint.valueOf("rgb(255,0,0)"));
-        this.boxAroundLabel.setStrokeWidth(3.0);
+        //this.boxAroundLabel.setStrokeWidth(3.0);
+        this.boxAroundLabel.setStrokeWidth(0.0);
         //this.boxAroundLabel.setTranslateX(-2.0);
         //this.boxAroundLabel.setTranslateY(-2.0);
         //System.out.println(this.label.prefWidth(-1));
@@ -191,7 +192,7 @@ public class GameButton {
     }
     */
     
-    private Font getFontFromFile(File fontFile, int fontSize) {
+    private Font getFontFromFile(File fontFile, double fontSize) {
         Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
         try {
             FileInputStream fontFIS = new FileInputStream(fontFile);

@@ -195,7 +195,7 @@ public class GameTitle {
         return label.getHeight();
     }
     
-    private Font getFontFromFile(File fontFile, int fontSize) {
+    private Font getFontFromFile(File fontFile, double fontSize) {
         Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
         try {
             FileInputStream fontFIS = new FileInputStream(fontFile);
