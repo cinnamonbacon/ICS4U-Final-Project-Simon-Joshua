@@ -7,20 +7,23 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Leaderboard {
 
     private File leaderboardFile;
 
-    private ArrayList < String > names;
+    private ArrayList <String> names;
 
-    private ArrayList < Integer > scores;
+    private ArrayList <Integer> scores;
     
-    private ArrayList < LocalDateTime > startTime;
+    private ArrayList <LocalDateTime> startTime;
     
-    private ArrayList < LocalDateTime > endTime;
+    private ArrayList <LocalDateTime> endTime;
     
-    private ArrayList < Duration > diffTime;
+    private ArrayList <Duration> diffTime;
 
     private int numOfEntries;
 
@@ -152,9 +155,23 @@ public class Leaderboard {
         Period perDiff = Period.between(startLDT.toLocalDate(), endLDT.toLocalDate());
         perDiff = perDiff.minusDays(endLDT.toLocalTime().compareTo(startLDT.toLocalTime()) >= 0 ? 0 : 1);
         Duration durDiff = Duration.between(startLDT, endLDT);
+        long days = ChronoUnit.DAYS.between(startLDT, endLDT);
         
-        if (perDiff.getYears() > 0) ans = "364:23:59:59:999";
-        else ans = String.format("%d:%d:%d:%d:%d", perDiff.getDays(), durDiff.toHoursPart(), durDiff.toMinutesPart(), durDiff.toSecondsPart(), durDiff.toMillisPart());
+        if (days > 999) ans = "999:23:59:59:999";
+        else ans = String.format("%d:%d:%d:%d:%d", days, durDiff.toHoursPart(), durDiff.toMinutesPart(), durDiff.toSecondsPart(), durDiff.toMillisPart());
+        
+        return ans;
+    }
+    
+    public String findUser(String name) {
+        String ans = "";
+        
+        int position = this.names.indexOf(name);
+        if (position == -1) {
+            ans = "That name isn't found within the database."; 
+        } else {
+            ans = "Rank: " + (position + 1) + " Score: " + this.scores.get(position) + " Time: " + this.diffTime.get(position);
+        }
         
         return ans;
     }
