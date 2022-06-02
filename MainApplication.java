@@ -46,6 +46,7 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Pane;
 import java.io.FileInputStream;
+import javafx.scene.control.ScrollPane;
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -126,8 +127,7 @@ public class MainApplication extends Application {
       4 = leaderboard
       5 = quit game
     */
-
-
+    
     /** This private non-static Scene variable will hold the scene for the introduction animation screen. */
     private Scene introAnimationScene;
 
@@ -1153,6 +1153,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.initializeStageSettings(stage);
+        /*
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
@@ -1162,6 +1163,7 @@ public class MainApplication extends Application {
 
         this.screenNum = 0;
         stage.setScene(this.introAnimationScene);
+        */
 
         /*
         //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
@@ -1177,7 +1179,20 @@ public class MainApplication extends Application {
         //scene.setFill(Color.BLACK);
         stage.setScene(scene);
         */
-
+        ImageView mainChar = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
+        ImageView mainCharV2 = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
+        mainCharV2.setScaleY(-1.0);
+        ImageView background = new ImageView(new Image(new FileInputStream(new File("Background.png"))));
+        GameButton test1 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
+        GameButton test2 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
+        GameButton test3 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
+        GameButton test4 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
+        
+        ConfrontationScene cs = new ConfrontationScene(this.pressStart2PFile, background, mainChar, mainCharV2, test1, test2, test3, test4, "red", "blue", false, 0.0, 0.0);
+        // Paint closeEllipsePaint, Paint farEllipsePaint, boolean setHealth, double healthChar1, double healthChar2
+        
+        Scene scene = cs.getScene();
+        stage.setScene(scene);
         stage.show();
     }
 

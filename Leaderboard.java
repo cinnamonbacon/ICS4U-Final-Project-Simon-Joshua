@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class Leaderboard {
 
@@ -170,7 +168,7 @@ public class Leaderboard {
         if (position == -1) {
             ans = "That name isn't found within the database."; 
         } else {
-            ans = "Rank: " + (position + 1) + " Score: " + this.scores.get(position) + " Time: " + this.diffTime.get(position);
+            ans = "Rank: #" + (position + 1) + " Score: " + this.scores.get(position) + " Time: " + this.diffTime.get(position);
         }
         
         return ans;

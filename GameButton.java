@@ -146,6 +146,14 @@ public class GameButton {
         return this.yCoord + this.height;
     }
     
+    public void setXCoord(double newXCoord) {
+        this.xCoord = newXCoord;
+    }
+    
+    public void setYCoord(double newYCoord) {
+        this.yCoord = newYCoord;
+    }
+    
     /*
     public Rectangle getRedRectangle() {
         return this.redRectangleAroundButton;
