@@ -208,6 +208,7 @@ public class Grid {
                     ObjImageView.setFitHeight(30);
                     objects.add(ObjImageView, col, row);
                     
+                    // Simon Bakan May 30-June 3 changed added exclamation point to display, 30 minutes.
                     if(tiles[row][col].isInteractable()){
                         ImageView interactImageView = new ImageView();
                         file = new File("ExclamationPoint.png");

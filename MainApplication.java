@@ -46,7 +46,6 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Pane;
 import java.io.FileInputStream;
-import javafx.scene.control.ScrollPane;
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -127,7 +126,8 @@ public class MainApplication extends Application {
       4 = leaderboard
       5 = quit game
     */
-    
+
+
     /** This private non-static Scene variable will hold the scene for the introduction animation screen. */
     private Scene introAnimationScene;
 
@@ -181,6 +181,7 @@ public class MainApplication extends Application {
     private File doorRightFile;
     
     private File cafFloorFiles[];
+
     private Scene level2Scene;
     
     private int health;
@@ -192,13 +193,13 @@ public class MainApplication extends Application {
     private String form;
     
     private int block;
+
     private File blankFile;
     
     private File[] confrontationChar;
     
     private Scene confrontationTextScene1;
     private Scene confrontationBattleScene1;
-
     /**
      * An instance of the Tile class will be created using this no parameter constructor.
      */
@@ -1655,6 +1656,7 @@ public class MainApplication extends Application {
         //scene.setFill(Color.BLACK);
         stage.setScene(scene);
         */
+        
         /*
         ImageView mainChar = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
         ImageView mainCharV2 = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
@@ -1705,6 +1707,7 @@ public class MainApplication extends Application {
         Scene scene = cs.getScene();
         stage.setScene(scene);
         */
+        
         stage.show();
     }
 
