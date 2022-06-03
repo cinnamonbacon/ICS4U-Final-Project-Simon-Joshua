@@ -38,7 +38,7 @@ public class GameButton {
     
     private double height;
     
-    public GameButton (String text, File fontFile, int fontSize, String fontPaint, String backgroundColour, double xCoord, double yCoord, double width, double height, double textTranslationX, double textTranslationY) {
+    public GameButton (String text, File fontFile, int fontSize, String fontPaint, String backgroundPaint, String strokePaint, double xCoord, double yCoord, double width, double height, double textTranslationX, double textTranslationY) {
         //this.label = new Label(text);
         this.xCoord = xCoord;
         this.yCoord = yCoord;
@@ -74,11 +74,11 @@ public class GameButton {
         //this.label.setTranslateY(yCoord);
         
         this.boxAroundLabel = new Rectangle(0, 0, width, height); // this.boxAroundLabel = new Rectangle(-this.getHoriPadding(width), -this.getVertPadding(height), width, height);
-        this.boxAroundLabel.setFill(Paint.valueOf(backgroundColour));
+        this.boxAroundLabel.setFill(Paint.valueOf(backgroundPaint));
         //this.boxAroundLabel.setSmooth(false);
         //this.boxAroundLabel.setStyle("-fx-stroke: red; -fx-stroke-width: 3;");
         this.boxAroundLabel.setStrokeType(StrokeType.OUTSIDE);
-        this.boxAroundLabel.setStroke(Paint.valueOf("rgb(255,0,0)"));
+        this.boxAroundLabel.setStroke(Paint.valueOf(strokePaint));
         //this.boxAroundLabel.setStrokeWidth(3.0);
         this.boxAroundLabel.setStrokeWidth(0.0);
         //this.boxAroundLabel.setTranslateX(-2.0);
@@ -154,6 +154,18 @@ public class GameButton {
         this.yCoord = newYCoord;
     }
     
+    public void setWidth(double newWidth) {
+        this.width = newWidth;
+        this.textTextFlow.setPrefWidth(newWidth);
+        this.boxAroundLabel.setWidth(newWidth);
+    }
+    
+    public void setHeight(double newHeight) {
+        this.height = newHeight;
+        this.textTextFlow.setPrefHeight(newHeight);
+        this.boxAroundLabel.setHeight(newHeight);
+    }  
+      
     /*
     public Rectangle getRedRectangle() {
         return this.redRectangleAroundButton;

@@ -169,6 +169,35 @@ public class MainApplication extends Application {
     private File level1Confrontation;
 
     private Scene quitGameScene;
+    
+    private File mainCharFile;
+    
+    private String direction;
+    
+    private File cafWallFile;
+    
+    private File doorLeftFile;
+    
+    private File doorRightFile;
+    
+    private File cafFloorFiles[];
+    private Scene level2Scene;
+    
+    private int health;
+    
+    private int enemyHealth;
+    
+    private String battleMenu;
+    
+    private String form;
+    
+    private int block;
+    private File blankFile;
+    
+    private File[] confrontationChar;
+    
+    private Scene confrontationTextScene1;
+    private Scene confrontationBattleScene1;
 
     /**
      * An instance of the Tile class will be created using this no parameter constructor.
@@ -184,11 +213,28 @@ public class MainApplication extends Application {
         this.grassAndDirtBlockFile = new File("ICS ISP - Design for Grass and Dirt Block.png");
         this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
         this.level1Confrontation = new File("Level1Confrontation.png");
-
+        
+        this.mainCharFile = new File("MainChar.png");
+        this.cafWallFile = new File("CafWall.png");
+        this.doorLeftFile = new File("DoorLeft.png");
+        this.doorRightFile = new File("DoorRight.png");
+        this.blankFile = new File("Blank.png");
+        
+        this.cafFloorFiles = new File[2];
+        this.cafFloorFiles[0] = new File("cafFloor1.png");
+        this.cafFloorFiles[1] = new File("cafFloor2.png");
+        
         this.books = new File[8];
         this.pressStart2PFile = new File("PressStart2P-Regular.ttf");
         this.books[0] = new File("Book1.png");
         this.screenNum = 0;
+        
+        this.confrontationChar = new File[5];
+        this.confrontationChar[0] = new File("Level1Confrontation.png");
+        this.confrontationChar[1] = new File("Level1Confrontation.png");
+        this.confrontationChar[2] = new File("Level1Confrontation.png");
+        this.confrontationChar[3] = new File("Level1Confrontation.png");
+        this.confrontationChar[4] = new File("Level1Confrontation.png");
     }
 
     /**
@@ -312,13 +358,13 @@ public class MainApplication extends Application {
         GameTitle whiteTitleGameTitle = new GameTitle(pressStart2PFile, "Trans-form:", 14, "white", "The Awakening", 14, "red", 10, -13, 2, 30, 56, 160, Region.USE_COMPUTED_SIZE);
         //System.out.println(Region.USE_COMPUTED_SIZE);
 
-        GameButton newGameGameButton = new GameButton("New Game", this.pressStart2PFile, 17, "white", "black", 30, 205, 160, 50, 1, 16);
+        GameButton newGameGameButton = new GameButton("New Game", this.pressStart2PFile, 17, "white", "black", "red", 30, 205, 160, 50, 1, 16);
 
-        GameButton instructionsGameButton = new GameButton("Instructions", this.pressStart2PFile, 12, "white", "black", 30, 275, 160, 50, 1, 18);
+        GameButton instructionsGameButton = new GameButton("Instructions", this.pressStart2PFile, 12, "white", "black", "red", 30, 275, 160, 50, 1, 18);
 
-        GameButton leaderboardGameButton = new GameButton("Leaderboard", this.pressStart2PFile, 13, "white", "black", 30, 350, 160, 50, 1, 18);
+        GameButton leaderboardGameButton = new GameButton("Leaderboard", this.pressStart2PFile, 13, "white", "black", "red", 30, 350, 160, 50, 1, 18);
 
-        GameButton quitGameGameButton = new GameButton("Quit Game", this.pressStart2PFile, 12, "white", "black", 30, 435, 125, 40, 1, 16);
+        GameButton quitGameGameButton = new GameButton("Quit Game", this.pressStart2PFile, 12, "white", "black", "red", 30, 435, 125, 40, 1, 16);
 
         Text copyrightStatementText = new Text(0, 0, "© 2022 Single Star Games");
         copyrightStatementText.setFont(this.getPressStart2PFont(6.5));
@@ -551,8 +597,8 @@ public class MainApplication extends Application {
     /**
      * Public non-static method used to create the first level for the actual game.
      * <p>
-     * This public non-static method is void and it will be used to create the
-     * first level of the program. It will do this by creating 4 instances of the
+     * This public non-static method will be used to create the first level of the
+     * program and return it as a scene. It will do this by creating 4 instances of the
      * Grid.java class to simulate the grid and it also has an action listener
      * for moving, and interaction with books. It draws this on a scene that it
      * returns with the draw method in the Grid instance and a photo at the location
@@ -709,13 +755,14 @@ public class MainApplication extends Application {
         for (int i = 0; i < 4; i++) {
             gr[i] = grid[i].draw();
         }
+        
+        direction = "right";
         ImageView mainChar = new ImageView();
         try {
-            File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\mainChar.png");
-            Image image = new Image(file.toURI().toString());
+            Image image = new Image(mainCharFile.toURI().toString());
             mainChar.setImage(image);
             mainChar.setX(30 * grid[gridNum].getX());
-            mainChar.setY(30 * grid[gridNum].getY());
+            mainChar.setY(30 * grid[gridNum].getY()-15);
         } catch (Exception e) {}
         bookNum = 0;
         Label bookLabel = new Label(bookNum + "/" + books.length + " books found");
@@ -761,7 +808,9 @@ public class MainApplication extends Application {
                                     grid[0].setInteractable(15, 15, true);
                                     gr[0] = grid[0].draw();
                                 }
-                            } else if (interaction.getObject().equals(level1Confrontation.getPath())) {}
+                            } else if (interaction.getObject().equals(level1Confrontation.getPath())) {
+                                stage.setScene(level2Scene);
+                            }
                         }
                         if (!showingBook) {
                             if (k.getCode() == KeyCode.W) {
@@ -778,6 +827,7 @@ public class MainApplication extends Application {
                                     grid[gridNum].setX(19);
                                     grid[gridNum].setY(OFF);
                                 }
+                                direction = "left";
                             } else if (k.getCode() == KeyCode.S) {
                                 final int OFF = grid[gridNum].moveDown();
                                 if (OFF != -1) {
@@ -792,12 +842,18 @@ public class MainApplication extends Application {
                                     grid[gridNum].setX(0);
                                     grid[gridNum].setY(OFF);
                                 }
+                                direction = "right";
                             }
-                            File file = new File("\\Simon Bakan Joshua Persaud Final ISP Draft 1\\mainChar.png");
-                            Image image = new Image(file.toURI().toString());
+                            
+                            Image image = new Image(mainCharFile.toURI().toString());
                             mainChar.setImage(image);
                             mainChar.setX(30 * grid[gridNum].getX());
-                            mainChar.setY(30 * grid[gridNum].getY());
+                            mainChar.setY(30 * grid[gridNum].getY()-15);
+                            if(direction.equals("left")){
+                                mainChar.setScaleX(-1);
+                            }else{
+                                mainChar.setScaleX(1);
+                            }
                             view.getChildren().clear();
                             view.getChildren().add(gr[gridNum]);
                             view.getChildren().add(mainChar);
@@ -811,6 +867,425 @@ public class MainApplication extends Application {
             e.printStackTrace();
         }
         return scene;
+    }
+    
+    
+    /**
+     * Public non-static method used to create the second level for the actual game.
+     * <p>
+     * This public non-static method will be used to create the second level of the
+     * program and return it as a scene. It will do this by creating an instance of the
+     * Grid.java class to simulate the grid and it also has an action listener
+     * for moving, and interaction with books. It draws this on a scene that it
+     * returns with the draw method in the Grid instance and a photo at the location
+     * of the mainX and mainY coordinates of the Grid instance.
+     * <p>
+     * Done by: Simon
+     * 
+     * @param stage An instance of the Stage.java class, which will be the main
+     *              stage that the program will use and display to the user.
+     * @return  An instance of the Scene.java class, which will be the scene
+     *          that will show level 2 of the game.
+     * @throws IOException
+     */
+    public Scene level2(Stage stage) throws IOException {
+        
+        //By Simon May 30-June 3 for 1 hour
+        screenNum = 2;
+        Grid grid = new Grid(15, 15);
+        Scene scene;
+
+        // Grid
+        for (int i = 0; i < 20; i++) {
+            int j=0;
+            grid.assign(i, j, cafWallFile.getPath(), "", false, false);
+            j=19;
+            grid.assign(i, j, cafWallFile.getPath(), "", false, false);
+        }
+        for (int j = 1; j < 19; j++) {
+            int i = 0;
+            grid.assign(i, j, cafWallFile.getPath(), "", false, false);
+            i = 19;
+            grid.assign(i, j, cafWallFile.getPath(), "", false, false);
+        }
+        for (int i = 1; i < 19; i++) {
+            for (int j = 1; j < 19; j++) {
+                grid.assign(i, j, cafFloorFiles[(i+j)%2].getPath(), "", true, false);
+            }
+        }
+        
+        /*grid.setObject(0, 10, caffDoorLeftFile.getPath());
+        grid.setInteractable(0, 10, false);
+        grid.setMovable(0, 10, false);
+        grid.setObject(5, 10, bookTileFile.getPath());
+        grid.setInteractable(5, 10, true);
+        grid.setMovable(5, 10, false);*/
+
+        Group gr = grid.draw();
+        
+        direction = "right";
+        ImageView mainChar = new ImageView();
+        try {
+            Image image = new Image(mainCharFile.toURI().toString());
+            mainChar.setImage(image);
+            mainChar.setX(30 * grid.getX());
+            mainChar.setY(30 * grid.getY()-15);
+        } catch (Exception e) {}
+        bookNum = 0;
+        Label bookLabel = new Label(bookNum + "/" + books.length + " books found");
+
+        bookLabel.setFont(this.getPressStart2PFont(1)); // It doesn't matter what font size I put here so I will default it to 1.
+        bookLabel.setStyle("-fx-font-family: 'Press Start 2P', cursive; -fx-background-color: rgba(255,255,255,0); -fx-text-fill: rgb(0,0,0); -fx-font-size: 15px;");
+        bookLabel.setTranslateX(375);
+        bookLabel.setTranslateY(12);
+
+        Group view = new Group();
+        view.getChildren().addAll(
+            gr,
+            mainChar,
+            bookLabel
+        );
+        scene = new Scene(view);
+
+        // Runs on a key press.
+        try {
+            scene.addEventFilter(KeyEvent.KEY_PRESSED,
+                k -> {
+                    try {
+                        if (k.getCode() == KeyCode.W) {
+                            grid.moveUp();
+                        } else if (k.getCode() == KeyCode.A) {
+                            grid.moveLeft();
+                            direction = "left";
+                        } else if (k.getCode() == KeyCode.S) {
+                            grid.moveDown();
+                        } else if (k.getCode() == KeyCode.D) {
+                            grid.moveRight();
+                            direction = "right";
+                        }
+                            
+                        Image image = new Image(mainCharFile.toURI().toString());
+                        mainChar.setImage(image);
+                        mainChar.setX(30 * grid.getX());
+                        mainChar.setY(30 * grid.getY()-15);
+                        if(direction.equals("left")){
+                            mainChar.setScaleX(-1);
+                        }else{
+                            mainChar.setScaleX(1);
+                        }
+                        view.getChildren().clear();
+                        view.getChildren().add(gr);
+                        view.getChildren().add(mainChar);
+                        bookLabel.setText(bookNum + "/" + books.length + " books found");
+                        view.getChildren().add(bookLabel);
+                        scene.setRoot(view);
+                    } catch (Exception e) {}
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return scene;
+    }
+    
+    
+    /**
+     * Public non-static method used to create the first encounter text.
+     * <p>
+     * This public non-static method will be used to create the text for the first
+     * conflict. It will do this by creating an instance of the ConfrontationScene
+     * class which will draw a scene with the main character, the enemy, and the
+     * text.
+     * <p>
+     * Done by: Simon
+     * 
+     * @param stage An instance of the Stage.java class, which will be the main
+     *              stage that the program will use and display to the user.
+     * @return  An instance of the Scene.java class, which will be the scene
+     *          that will show the text of the first encounter of the game.
+     * @throws IOException
+     */
+    public Scene confrontation1Text(Stage stage) throws IOException {
+        Scene scene;
+        // Set scene to text
+        try {
+            scene.addEventFilter(KeyEvent.KEY_PRESSED,
+                k -> {
+                    try {
+                        if (k.getCode() == KeyCode.SPACE) {
+                        
+                        }
+                    } catch (Exception e) {}
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return scene;
+    }
+    
+    
+    /**
+     * Public non-static method used to create the combat element of all encounters.
+     * <p>
+     * This public non-static method will be used to create the game for all the 
+     * conflicts. It will do this by creating aseveral GameButton instances and 
+     * displaying them ConfrontationScene class which will draw a scene with the 
+     * main character, the enemy, and the button or text that is being displayed.
+     * It will use these buttons to get user input for the player to change forms or
+     * perform actions.
+     * <p>
+     * Done by: Simon
+     * 
+     * @param stage An instance of the Stage.java class, which will be the main
+     *              stage that the program will use and display to the user.
+     * @return  An instance of the Scene.java class, which will be the scene
+     *          that will show the text of the first encounter of the game.
+     * @throws IOException
+     */
+    public Scene confrontationBattle(Stage stage, int encounterNum) throws IOException {
+        health = 100;
+        enemyHealth = 100;
+        Scene scene;
+        battleMenu = "main";
+        GameButton actionButton = new GameButton("Action", this.pressStart2PFile, 17, "white", "black", 85, 470, 160, 50, 1, 16);
+        GameButton formButton = new GameButton("Form", this.pressStart2PFile, 17, "white", "black", 390, 470, 160, 50, 1, 16);
+        GameButton debateButton = new GameButton("Debate", this.pressStart2PFile, 17, "white", "black", 85, 470, 160, 50, 1, 16);
+        GameButton defendButton = new GameButton("Defend", this.pressStart2PFile, 17, "white", "black", 390, 470, 160, 50, 1, 16);
+        GameButton defensiveButton = new GameButton("Defensive", this.pressStart2PFile, 17, "white", "black", 85, 470, 160, 50, 1, 16);
+        GameButton assertiveButton = new GameButton("Assertive", this.pressStart2PFile, 17, "white", "black", 390, 470, 160, 50, 1, 16);
+        GameButton empatheticButton = new GameButton("Empathetic", this.pressStart2PFile, 17, "white", "black", 85, 540, 160, 50, 1, 16);
+        // Set scene to text
+        try{
+            scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+                e -> {
+                    final double xVal = e.getX();
+                    final double yVal = e.getY();
+                    if(battleMenu.equals("main")){
+                        if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        } else if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        }
+                    }else if(battleMenu.equals("action")){
+                        if (xVal >= debateButton.getLeftX() && xVal <= debateButton.getRightX() && yVal >= debateButton.getTopY() && yVal <= debateButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        } else if (xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        }
+                    }else if(battleMenu.equals("form")){
+                        if (xVal >= defensiveButton.getLeftX() && xVal <= defensiveButton.getRightX() && yVal >= defensiveButton.getTopY() && yVal <= defensiveButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        } else if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        } else if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
+                            scene.setCursor(Cursor.HAND);
+                        }
+                    }
+                }
+            );
+    
+            scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+                e -> {
+    
+                    final double xVal = e.getX();
+                    final double yVal = e.getY();
+                    
+                    //System.out.println(xVal + " " + yVal);
+                    
+                    if(battleMenu.equals("main")){
+                        if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
+                            actionButton.cursorOverButton();
+                            //redRectangleAroundNewGameButton.setVisible(true);
+                        } else {
+                            actionButton.cursorNotOverButton();
+                            //redRectangleAroundNewGameButton.setVisible(false);
+                        }
+        
+                        if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
+                            formButton.cursorOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(true);
+                        } else {
+                            formButton.cursorNotOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(false);
+                        }
+                    }else if(battleMenu.equals("action")){
+                        if (xVal >= debateButton.getLeftX() && xVal <= debateButton.getRightX() && yVal >= debateButton.getTopY() && yVal <= debateButton.getBottomY()) {
+                            debateButton.cursorOverButton();
+                            //redRectangleAroundNewGameButton.setVisible(true);
+                        } else {
+                            debateButton.cursorNotOverButton();
+                            //redRectangleAroundNewGameButton.setVisible(false);
+                        }
+        
+                        if (xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()) {
+                            defendButton.cursorOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(true);
+                        } else {
+                            defendButton.cursorNotOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(false);
+                        }
+                    }else if(battleMenu.equals("form")){
+                        if (xVal >= defensiveButton.getLeftX() && xVal <= defensiveButton.getRightX() && yVal >= defensiveButton.getTopY() && yVal <= defensiveButton.getBottomY()) {
+                            defensiveButton.cursorOverButton();
+                            //redRectangleAroundNewGameButton.setVisible(true);
+                        } else {
+                            defensiveButton.cursorNotOverButton();
+                            //redRectangleAroundNewGameButton.setVisible(false);
+                        }
+        
+                        if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
+                            assertiveButton.cursorOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(true);
+                        } else {
+                            assertiveButton.cursorNotOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(false);
+                        }
+                        
+                        if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
+                            empatheticButton.cursorOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(true);
+                        } else {
+                            empatheticButton.cursorNotOverButton();
+                            //redRectangleAroundInstructionsButton.setVisible(false);
+                        }
+                    }
+                }
+            );
+    
+            scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
+                e -> {
+    
+                    final double xVal = e.getX();
+                    final double yVal = e.getY();
+                    if(battleMenu.equals("main")){
+                        if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
+                            ConfrontationScene act = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),"Red","Blue",new Rectangle(5,5,Paint.valueOf("Gray")),debateButton,null,defendButton,null,true,health,enemyHealth);
+                            scene.setScene(act.getScene().getRoot());
+                            stage.show();
+                            battleMenu = "action";
+                        } else if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
+                            ConfrontationScene formSc = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),"Red","Blue",new Rectangle(5,5,Paint.valueOf("Gray")),debateButton,deffensiveButton,empatheticButton,assertiveButton,true,health,enemyHealth);
+                            scene.setScene(formSc.getScene().getRoot());
+                            stage.show();
+                            battleMenu = "form";
+                        }
+                    }else if(battleMenu.equals("action")){
+                        if (xVal >= debateButton.getLeftX() && xVal <= debateButton.getRightX() && yVal >= debateButton.getTopY() && yVal <= debateButton.getBottomY()) {
+                            final int damage = (int)(20*Math.random()+10);
+                            if (form.equals("defensive")){
+                                block+=15;
+                            }else if (form.equals("assertive")){
+                                damage*=2;
+                            }else if (form.equals("empathetic")){
+                                block+=damage;
+                            }
+                            enemyHealth-=damage;
+                            Text title = new Text("Damage");
+                            title.setFont(this.getPressStart2PFont(18));
+                            title.setFill(Paint.valueOf("Blue"));
+                            Text body = new Text("You dealt "+damage+" damage and you have "+block+" block");
+                            body.setFont(this.getPressStart2PFont(12));
+                            body.setFill(Paint.valueOf("Blue"));
+                            
+                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
+                            scene.setScene(damageTxt.getScene().getRoot());
+                            battleMenu = "damageText";
+                        }else if(xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()){
+                            block+=15;
+                            if (form.equals("defensive")){
+                                block+=20;
+                            }
+                            Text title = new Text("Defend");
+                            title.setFont(this.getPressStart2PFont(18));
+                            title.setFill(Paint.valueOf("Blue"));
+                            Text body = new Text("You Defended and you now have "+block+" block");
+                            body.setFont(this.getPressStart2PFont(12));
+                            body.setFill(Paint.valueOf("Blue"));
+                            
+                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
+                            scene.setScene(damageTxt.getScene().getRoot());
+                            
+                            battleMenu = "damageText";
+                        }
+                    }else if(battleMenu.equals("form")){
+                        if (xVal >= defensiveButton.getLeftX() && xVal <= defensiveButton.getRightX() && yVal >= defensiveButton.getTopY() && yVal <= defensiveButton.getBottomY()) {
+                            // Set Scene to damage text
+                            form = "defensive";
+                            block+=20;
+                            battleMenu = "damageText";
+                            
+                            Text title = new Text("Form Change");
+                            title.setFont(this.getPressStart2PFont(18));
+                            title.setFill(Paint.valueOf("Blue"));
+                            Text body = new Text("You changed to "+form+" form and you have "+block+" block");
+                            body.setFont(this.getPressStart2PFont(12));
+                            body.setFill(Paint.valueOf("Blue"));
+                            
+                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
+                            scene.setScene(damageTxt.getScene().getRoot());
+                        } else if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
+                            // Set Scene to damage text
+                            form = "assertive";
+                            battleMenu = "damageText";
+                            
+                            Text title = new Text("Form Change");
+                            title.setFont(this.getPressStart2PFont(18));
+                            title.setFill(Paint.valueOf("Blue"));
+                            Text body = new Text("You changed to "+form+" form and you have "+block+" block");
+                            body.setFont(this.getPressStart2PFont(12));
+                            body.setFill(Paint.valueOf("Blue"));
+                            
+                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
+                            scene.setScene(damageTxt.getScene().getRoot());
+                        } else if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
+                            // Set Scene to damage text
+                            form = "empathetic";
+                            battleMenu = "damageText";
+                            
+                            Text title = new Text("Form Change");
+                            title.setFont(this.getPressStart2PFont(18));
+                            title.setFill(Paint.valueOf("Blue"));
+                            Text body = new Text("You changed to "+form+" form and you have "+block+" block");
+                            body.setFont(this.getPressStart2PFont(12));
+                            body.setFill(Paint.valueOf("Blue"));
+                            
+                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
+                            scene.setScene(damageTxt.getScene().getRoot());
+                        }
+                    }
+                }
+            );
+            scene.addEventFilter(KeyEvent.KEY_PRESSED,
+                k -> {
+                    if(battleMenu.equals("damageText")){
+                        if(enemy.getPath().equals(confrontationChar[0].getPath())){
+                            final int damage = (int)(20*Math.random());
+                            health-=damage;
+                            //Set scene to enemy damage text
+                        }else if(enemy.getPath().equals(confrontationChar[1].getPath())){
+                            final int damage = (int)(20*Math.random()+10);
+                            health-=damage;
+                            //Set scene to enemy damage text
+                        }else if(enemy.getPath().equals(confrontationChar[2].getPath())){
+                            final int damage = (int)(20*Math.random()+10);
+                            health-=damage;
+                            //Set scene to enemy damage text
+                        }else if(enemy.getPath().equals(confrontationChar[3].getPath())){
+                            final int damage = (int)(20*Math.random()+10);
+                            health-=damage;
+                            //Set scene to enemy damage text
+                        }else if(enemy.getPath().equals(confrontationChar[4].getPath())){
+                            final int damage = (int)(20*Math.random()+20);
+                            health-=damage;
+                            //Set scene to enemy damage text
+                        }
+                        battleMenu = "enemyText";
+                    }else if(battleMenu.equals("enemyText")){
+                        // Set Scene to attack options
+                        battleMenu = "main";
+                    }
+                }
+            );
+        }catch(Exception e){}
     }
 
     /**
@@ -850,7 +1325,7 @@ public class MainApplication extends Application {
         instructionsText.setX(50);
         instructionsText.setY(250);
 
-        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", 390, 495, 125, 50, 2, 16);
+        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", "red", 390, 495, 125, 50, 2, 16);
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
@@ -945,7 +1420,7 @@ public class MainApplication extends Application {
         //Text scoresText = new Text(leaderboard.getLeaderboard());
         //scoresText.setFill(Paint.valueOf("white"));
 
-        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", 390, 495, 125, 50, 2, 16);
+        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", "red", 390, 495, 125, 50, 2, 16);
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
@@ -1051,8 +1526,8 @@ public class MainApplication extends Application {
         quitGameText.setX(50);
         quitGameText.setY(250);
 
-        GameButton exitButton = new GameButton("Exit Game", this.pressStart2PFile, 11, "white", "black", 85, 495, 125, 50, 0, 20);
-        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", 390, 495, 125, 50, 2, 16);
+        GameButton exitButton = new GameButton("Exit Game", this.pressStart2PFile, 11, "white", "black", "red", 85, 495, 125, 50, 0, 20);
+        GameButton backButton = new GameButton("Back", this.pressStart2PFile, 18, "white", "black", "red", 390, 495, 125, 50, 2, 16);
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
@@ -1153,17 +1628,18 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.initializeStageSettings(stage);
-        /*
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
         this.leaderboardScene = this.leaderboard(stage);
         this.level1Scene = this.level1(stage);
+        this.level2Scene = this.level2(stage);
+        this.confrontationTextScene1 = this.confrontation1Text(stage);
+        this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
         this.quitGameScene = this.quitGame(stage);
 
         this.screenNum = 0;
         stage.setScene(this.introAnimationScene);
-        */
 
         /*
         //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
@@ -1179,20 +1655,56 @@ public class MainApplication extends Application {
         //scene.setFill(Color.BLACK);
         stage.setScene(scene);
         */
+        /*
         ImageView mainChar = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
         ImageView mainCharV2 = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
         mainCharV2.setScaleY(-1.0);
         ImageView background = new ImageView(new Image(new FileInputStream(new File("Background.png"))));
-        GameButton test1 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
-        GameButton test2 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
-        GameButton test3 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
-        GameButton test4 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", 0, 0, 125, 50, 1, 16);
+        GameButton test1 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        GameButton test2 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        GameButton test3 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        GameButton test4 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
         
-        ConfrontationScene cs = new ConfrontationScene(this.pressStart2PFile, background, mainChar, mainCharV2, test1, test2, test3, test4, "red", "blue", false, 0.0, 0.0);
+        ConfrontationScene cs = new ConfrontationScene(this.pressStart2PFile, background, mainChar, mainCharV2, test1, test2, test3, test4, new Rectangle(500, 200, Paint.valueOf("grey")), "red", "blue", false, 0.0, 0.0);
         // Paint closeEllipsePaint, Paint farEllipsePaint, boolean setHealth, double healthChar1, double healthChar2
+        */
+        
+        /*
+        ImageView background = new ImageView(new Image(new FileInputStream(new File("Water.png"))));
+        ImageView mainChar = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
+        ImageView mainCharV2 = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
+        mainCharV2.setScaleX(-1.0);
+        Ellipse closeCharPlat = new Ellipse(5, 5);
+        closeCharPlat.setFill(Paint.valueOf("red"));
+        Ellipse farCharPlat = new Ellipse(5, 5);
+        farCharPlat.setFill(Paint.valueOf("blue"));
+        Rectangle rect = new Rectangle(5, 5, Paint.valueOf("blue"));
+        rect.setStrokeWidth(3.0);
+        rect.setStroke(Paint.valueOf("black"));
+        GameButton test1 = new GameButton("Top Left Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        GameButton test2 = new GameButton("Bottom Left Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        GameButton test3 = new GameButton("Top Right Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        GameButton test4 = new GameButton("Bottom Right Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
+        Rectangle char1HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
+        char1HealthBarFront.setStrokeWidth(1.0);
+        char1HealthBarFront.setStroke(Paint.valueOf("black"));
+        Rectangle char1HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
+        char1HealthBarBack.setStrokeWidth(1.0);
+        char1HealthBarBack.setStroke(Paint.valueOf("black"));
+        Rectangle char2HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
+        char2HealthBarFront.setStrokeWidth(1.0);
+        char2HealthBarFront.setStroke(Paint.valueOf("black"));
+        Rectangle char2HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
+        char2HealthBarBack.setStrokeWidth(1.0);
+        char2HealthBarBack.setStroke(Paint.valueOf("black"));
+        //mainCharV2.setTranslateX(0);
+        //ImageView background = new ImageView(new Image(new FileInputStream(new File("RedBackgroundRectangle.svg"))));
+        //ImageView background = new ImageView("https://upload.wikimedia.org/wikipedia/commons/e/e6/Red_rectangle.svg");
+        ConfrontationScene cs = new ConfrontationScene(this.pressStart2PFile, background, closeCharPlat, farCharPlat, mainChar, mainCharV2, rect, test1, test2, test3, test4, 50, char1HealthBarFront, char1HealthBarBack, 50, char2HealthBarFront, char2HealthBarBack);
         
         Scene scene = cs.getScene();
         stage.setScene(scene);
+        */
         stage.show();
     }
 
