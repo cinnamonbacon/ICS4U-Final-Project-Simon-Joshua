@@ -39,13 +39,14 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
 
 // Remember to add JavaDoc for these imports:
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
+import javafx.scene.text.Text; 
 import javafx.scene.shape.StrokeType;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.TextFlow;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Pane;
 import java.io.FileInputStream;
+import javafx.scene.shape.Ellipse; // Imports the Ellipse.java class, which will allow the program to create ellipses for the graphics.
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -163,45 +164,66 @@ public class MainApplication extends Application {
 
     /** This private non-static File variable will hold onto the location of the Press Start 2P file. */
     private File pressStart2PFile;
-
+    
+    /** This private non-static Scene variable will hold the scene for the leaderboard of the game. */
     private Scene leaderboardScene;
 
+    /** This private non-static File variable will hold onto the location of the first confrontation character file. */
     private File level1Confrontation;
 
+    /** This private non-static Scene variable will hold the scene for screen when the player quits the game. */
     private Scene quitGameScene;
     
+    /** This private non-static File variable will hold onto the location of the main character image file. */
     private File mainCharFile;
     
+    /** This private non-static String variable will hold onto the direction of the main character during grid movement. */
     private String direction;
     
+    /** This private non-static File variable will hold onto the location of the cafeteria wall file. */
     private File cafWallFile;
     
+    /** This private non-static File variable will hold onto the location of the left door file. */
     private File doorLeftFile;
     
+    /** This private non-static File variable will hold onto the location of the right door file. */
     private File doorRightFile;
     
+    /** This private non-static File array variable will hold onto the location of the cafeteria floor files. */
     private File cafFloorFiles[];
 
+    /** This private non-static Scene variable will hold the scene for level 2 of the game screen. */
     private Scene level2Scene;
     
+    /** This private non-static int variable will hold onto the health of the main character during confrontations. */
     private int health;
     
+    /** This private non-static int variable will hold onto the health of the enemy character during confrontations. */
     private int enemyHealth;
     
+    /** This private non-static String variable will hold onto the screen that is showing during confrontations. */
     private String battleMenu;
     
+    /** This private non-static String variable will hold onto the form of the main character during confrontations. */
     private String form;
     
+    /** This private non-static int variable will hold onto the block of the main character during confrontations. */
     private int block;
-
+    
+    /** This private non-static File variable will hold onto the location of the blank image file. */
     private File blankFile;
     
+    /** This private non-static File array variable will hold onto the location of the files for the characters of the confrontation. */
     private File[] confrontationChar;
     
+    /** This private non-static Scene variable will hold the scene for text before the first confrontation of the game. */
     private Scene confrontationTextScene1;
+    
+    /** This private non-static Scene variable will hold the scene for the first confrontation of the game. */
     private Scene confrontationBattleScene1;
+    
     /**
-     * An instance of the Tile class will be created using this no parameter constructor.
+     * An instance of the MainApplication class will be created using this no parameter constructor.
      */
     public MainApplication() {
         this.logoFile = new File("ICS ISP - Single Star Games Logo.png");
@@ -810,7 +832,7 @@ public class MainApplication extends Application {
                                     gr[0] = grid[0].draw();
                                 }
                             } else if (interaction.getObject().equals(level1Confrontation.getPath())) {
-                                stage.setScene(level2Scene);
+                                stage.setScene(confrontationBattleScene1);
                             }
                         }
                         if (!showingBook) {
@@ -881,7 +903,7 @@ public class MainApplication extends Application {
      * returns with the draw method in the Grid instance and a photo at the location
      * of the mainX and mainY coordinates of the Grid instance.
      * <p>
-     * Done by: Simon
+     * Done by: Simon May 30 - June 3
      * 
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
@@ -997,7 +1019,7 @@ public class MainApplication extends Application {
      * class which will draw a scene with the main character, the enemy, and the
      * text.
      * <p>
-     * Done by: Simon
+     * Done by: Simon May 30 - June 3: 1 hour
      * 
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
@@ -1007,7 +1029,35 @@ public class MainApplication extends Application {
      */
     public Scene confrontation1Text(Stage stage) throws IOException {
         Scene scene;
-        // Set scene to text
+        Text title = new Text("Encounter 1");
+        title.setFont(this.getPressStart2PFont(18));
+        title.setFill(Paint.valueOf("Blue"));
+        Text body = new Text("I think I may be transgendered, but I'm scared.");
+        body.setFont(this.getPressStart2PFont(12));
+        body.setFill(Paint.valueOf("Blue"));
+        
+        Rectangle char1HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
+        char1HealthBarFront.setStrokeWidth(1.0);
+        char1HealthBarFront.setStroke(Paint.valueOf("black"));
+        Rectangle char1HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
+        char1HealthBarBack.setStrokeWidth(1.0);
+        char1HealthBarBack.setStroke(Paint.valueOf("black"));
+        Rectangle char2HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
+        char2HealthBarFront.setStrokeWidth(1.0);
+        char2HealthBarFront.setStroke(Paint.valueOf("black"));
+        Rectangle char2HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
+        char2HealthBarBack.setStrokeWidth(1.0);
+        char2HealthBarBack.setStroke(Paint.valueOf("black"));
+        
+        Ellipse closeCharPlat = new Ellipse(5, 5);
+        closeCharPlat.setFill(Paint.valueOf("red"));
+        Ellipse farCharPlat = new Ellipse(5, 5);
+        farCharPlat.setFill(Paint.valueOf("blue"));
+
+        
+        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[0]))),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+        scene = new Scene(encounterTxt.getScene());
+
         try {
             scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 k -> {
@@ -1034,7 +1084,7 @@ public class MainApplication extends Application {
      * It will use these buttons to get user input for the player to change forms or
      * perform actions.
      * <p>
-     * Done by: Simon
+     * Done by: Simon May 30 - June 3: 4 hours
      * 
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
@@ -1047,14 +1097,36 @@ public class MainApplication extends Application {
         enemyHealth = 100;
         Scene scene;
         battleMenu = "main";
-        GameButton actionButton = new GameButton("Action", this.pressStart2PFile, 17, "white", "black", 85, 470, 160, 50, 1, 16);
-        GameButton formButton = new GameButton("Form", this.pressStart2PFile, 17, "white", "black", 390, 470, 160, 50, 1, 16);
-        GameButton debateButton = new GameButton("Debate", this.pressStart2PFile, 17, "white", "black", 85, 470, 160, 50, 1, 16);
-        GameButton defendButton = new GameButton("Defend", this.pressStart2PFile, 17, "white", "black", 390, 470, 160, 50, 1, 16);
-        GameButton defensiveButton = new GameButton("Defensive", this.pressStart2PFile, 17, "white", "black", 85, 470, 160, 50, 1, 16);
-        GameButton assertiveButton = new GameButton("Assertive", this.pressStart2PFile, 17, "white", "black", 390, 470, 160, 50, 1, 16);
-        GameButton empatheticButton = new GameButton("Empathetic", this.pressStart2PFile, 17, "white", "black", 85, 540, 160, 50, 1, 16);
-        // Set scene to text
+        form = "";
+        
+        Rectangle char1HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
+        char1HealthBarFront.setStrokeWidth(1.0);
+        char1HealthBarFront.setStroke(Paint.valueOf("black"));
+        Rectangle char1HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
+        char1HealthBarBack.setStrokeWidth(1.0);
+        char1HealthBarBack.setStroke(Paint.valueOf("black"));
+        Rectangle char2HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
+        char2HealthBarFront.setStrokeWidth(1.0);
+        char2HealthBarFront.setStroke(Paint.valueOf("black"));
+        Rectangle char2HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
+        char2HealthBarBack.setStrokeWidth(1.0);
+        char2HealthBarBack.setStroke(Paint.valueOf("black"));
+        
+        Ellipse closeCharPlat = new Ellipse(5, 5);
+        closeCharPlat.setFill(Paint.valueOf("red"));
+        Ellipse farCharPlat = new Ellipse(5, 5);
+        farCharPlat.setFill(Paint.valueOf("blue"));
+        
+        GameButton actionButton = new GameButton("Action", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 85, 470, 160, 50, 1, 16);
+        GameButton formButton = new GameButton("Form", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 390, 470, 160, 50, 1, 16);
+        GameButton debateButton = new GameButton("Debate", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 85, 470, 160, 50, 1, 16);
+        GameButton defendButton = new GameButton("Defend", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 390, 470, 160, 50, 1, 16);
+        GameButton defensiveButton = new GameButton("Defensive", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 85, 470, 160, 50, 1, 16);
+        GameButton assertiveButton = new GameButton("Assertive", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 390, 470, 160, 50, 1, 16);
+        GameButton empatheticButton = new GameButton("Empathetic", this.pressStart2PFile, 17, "rgb(255,255,255)", "rgb(0,0,0)", "red", 85, 540, 160, 50, 1, 16);
+        
+        ConfrontationScene startButtons = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),actionButton,null,formButton,null,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);                   
+        scene = new Scene(startButtons.getScene());
         try{
             scene.addEventFilter(MouseEvent.MOUSE_MOVED,
                 e -> {
@@ -1154,139 +1226,152 @@ public class MainApplication extends Application {
     
             scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
                 e -> {
-    
-                    final double xVal = e.getX();
-                    final double yVal = e.getY();
-                    if(battleMenu.equals("main")){
-                        if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
-                            ConfrontationScene act = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),"Red","Blue",new Rectangle(5,5,Paint.valueOf("Gray")),debateButton,null,defendButton,null,true,health,enemyHealth);
-                            scene.setScene(act.getScene().getRoot());
-                            stage.show();
-                            battleMenu = "action";
-                        } else if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
-                            ConfrontationScene formSc = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),"Red","Blue",new Rectangle(5,5,Paint.valueOf("Gray")),debateButton,deffensiveButton,empatheticButton,assertiveButton,true,health,enemyHealth);
-                            scene.setScene(formSc.getScene().getRoot());
-                            stage.show();
-                            battleMenu = "form";
-                        }
-                    }else if(battleMenu.equals("action")){
-                        if (xVal >= debateButton.getLeftX() && xVal <= debateButton.getRightX() && yVal >= debateButton.getTopY() && yVal <= debateButton.getBottomY()) {
-                            final int damage = (int)(20*Math.random()+10);
-                            if (form.equals("defensive")){
+                    try{
+                        final double xVal = e.getX();
+                        final double yVal = e.getY();
+                        if(battleMenu.equals("main")){
+                            if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
+                                ConfrontationScene act = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),debateButton,null,defendButton,null,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(act.getScene());
+                                stage.show();
+                                battleMenu = "action";
+                            } else if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
+                                ConfrontationScene formSc = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),defensiveButton,empatheticButton,assertiveButton,null,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(formSc.getScene());
+                                stage.show();
+                                battleMenu = "form";
+                            }
+                        }else if(battleMenu.equals("action")){
+                            if (xVal >= debateButton.getLeftX() && xVal <= debateButton.getRightX() && yVal >= debateButton.getTopY() && yVal <= debateButton.getBottomY()) {
+                                final int damage = (int)(20*Math.random()+10);
+                                enemyHealth-=damage;
+                                if (form.equals("defensive")){
+                                    block+=15;
+                                }else if (form.equals("assertive")){
+                                    enemyHealth-=damage;
+                                }else if (form.equals("empathetic")){
+                                    block+=damage;
+                                }
+                                Text title = new Text("Damage");
+                                title.setFont(this.getPressStart2PFont(18));
+                                title.setFill(Paint.valueOf("Blue"));
+                                Text body;
+                                if(form.equals("assertive")){
+                                    body = new Text("You dealt "+(damage*2)+" damage and you have "+block+" block");
+                                }else{
+                                    body = new Text("You dealt "+damage+" damage and you have "+block+" block");
+                                }
+                                body.setFont(this.getPressStart2PFont(12));
+                                body.setFill(Paint.valueOf("Blue"));
+                                
+                                ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(damageTxt.getScene());
+                                battleMenu = "damageText";
+                            }else if(xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()){
                                 block+=15;
-                            }else if (form.equals("assertive")){
-                                damage*=2;
-                            }else if (form.equals("empathetic")){
-                                block+=damage;
+                                if (form.equals("defensive")){
+                                    block+=20;
+                                }
+                                Text title = new Text("Defend");
+                                title.setFont(this.getPressStart2PFont(18));
+                                title.setFill(Paint.valueOf("Blue"));
+                                Text body = new Text("You Defended and you now have "+block+" block");
+                                body.setFont(this.getPressStart2PFont(12));
+                                body.setFill(Paint.valueOf("Blue"));
+                                
+                                ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(damageTxt.getScene());
+                                
+                                battleMenu = "damageText";
                             }
-                            enemyHealth-=damage;
-                            Text title = new Text("Damage");
-                            title.setFont(this.getPressStart2PFont(18));
-                            title.setFill(Paint.valueOf("Blue"));
-                            Text body = new Text("You dealt "+damage+" damage and you have "+block+" block");
-                            body.setFont(this.getPressStart2PFont(12));
-                            body.setFill(Paint.valueOf("Blue"));
-                            
-                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
-                            scene.setScene(damageTxt.getScene().getRoot());
-                            battleMenu = "damageText";
-                        }else if(xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()){
-                            block+=15;
-                            if (form.equals("defensive")){
+                        }else if(battleMenu.equals("form")){
+                            if (xVal >= defensiveButton.getLeftX() && xVal <= defensiveButton.getRightX() && yVal >= defensiveButton.getTopY() && yVal <= defensiveButton.getBottomY()) {
+                                // Set Scene to damage text
+                                form = "defensive";
                                 block+=20;
+                                battleMenu = "damageText";
+                                
+                                Text title = new Text("Form Change");
+                                title.setFont(this.getPressStart2PFont(18));
+                                title.setFill(Paint.valueOf("Blue"));
+                                Text body = new Text("You changed to "+form+" form and you have "+block+" block");
+                                body.setFont(this.getPressStart2PFont(12));
+                                body.setFill(Paint.valueOf("Blue"));
+                                
+                                ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(damageTxt.getScene());
+                                
+                            } else if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
+                                // Set Scene to damage text
+                                form = "assertive";
+                                battleMenu = "damageText";
+                                
+                                Text title = new Text("Form Change");
+                                title.setFont(this.getPressStart2PFont(18));
+                                title.setFill(Paint.valueOf("Blue"));
+                                Text body = new Text("You changed to "+form+" form and you have "+block+" block");
+                                body.setFont(this.getPressStart2PFont(12));
+                                body.setFill(Paint.valueOf("Blue"));
+                                
+                                ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(damageTxt.getScene());
+                            } else if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
+                                // Set Scene to damage text
+                                form = "empathetic";
+                                battleMenu = "damageText";
+                                
+                                Text title = new Text("Form Change");
+                                title.setFont(this.getPressStart2PFont(18));
+                                title.setFill(Paint.valueOf("Blue"));
+                                Text body = new Text("You changed to "+form+" form and you have "+block+" block");
+                                body.setFont(this.getPressStart2PFont(12));
+                                body.setFill(Paint.valueOf("Blue"));
+                                
+                                ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);
+                                scene.setRoot(damageTxt.getScene());
                             }
-                            Text title = new Text("Defend");
-                            title.setFont(this.getPressStart2PFont(18));
-                            title.setFill(Paint.valueOf("Blue"));
-                            Text body = new Text("You Defended and you now have "+block+" block");
-                            body.setFont(this.getPressStart2PFont(12));
-                            body.setFill(Paint.valueOf("Blue"));
-                            
-                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
-                            scene.setScene(damageTxt.getScene().getRoot());
-                            
-                            battleMenu = "damageText";
                         }
-                    }else if(battleMenu.equals("form")){
-                        if (xVal >= defensiveButton.getLeftX() && xVal <= defensiveButton.getRightX() && yVal >= defensiveButton.getTopY() && yVal <= defensiveButton.getBottomY()) {
-                            // Set Scene to damage text
-                            form = "defensive";
-                            block+=20;
-                            battleMenu = "damageText";
-                            
-                            Text title = new Text("Form Change");
-                            title.setFont(this.getPressStart2PFont(18));
-                            title.setFill(Paint.valueOf("Blue"));
-                            Text body = new Text("You changed to "+form+" form and you have "+block+" block");
-                            body.setFont(this.getPressStart2PFont(12));
-                            body.setFill(Paint.valueOf("Blue"));
-                            
-                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
-                            scene.setScene(damageTxt.getScene().getRoot());
-                        } else if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
-                            // Set Scene to damage text
-                            form = "assertive";
-                            battleMenu = "damageText";
-                            
-                            Text title = new Text("Form Change");
-                            title.setFont(this.getPressStart2PFont(18));
-                            title.setFill(Paint.valueOf("Blue"));
-                            Text body = new Text("You changed to "+form+" form and you have "+block+" block");
-                            body.setFont(this.getPressStart2PFont(12));
-                            body.setFill(Paint.valueOf("Blue"));
-                            
-                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
-                            scene.setScene(damageTxt.getScene().getRoot());
-                        } else if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
-                            // Set Scene to damage text
-                            form = "empathetic";
-                            battleMenu = "damageText";
-                            
-                            Text title = new Text("Form Change");
-                            title.setFont(this.getPressStart2PFont(18));
-                            title.setFill(Paint.valueOf("Blue"));
-                            Text body = new Text("You changed to "+form+" form and you have "+block+" block");
-                            body.setFont(this.getPressStart2PFont(12));
-                            body.setFill(Paint.valueOf("Blue"));
-                            
-                            ConfrontationScene damageTxt = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(this.blank.getPath())),"Red","Blue",new ImageView(new Image(this.mainChar.getPath())),new ImageView(new Image(this.confrontationChar[encounterNum].getPath())),new Rectangle(5,5,Paint.valueOf("Gray")),title,body,true,health,enemyHealth);
-                            scene.setScene(damageTxt.getScene().getRoot());
-                        }
+                    }catch(Exception x){
+                        x.printStackTrace();
                     }
                 }
             );
             scene.addEventFilter(KeyEvent.KEY_PRESSED,
                 k -> {
-                    if(battleMenu.equals("damageText")){
-                        if(enemy.getPath().equals(confrontationChar[0].getPath())){
-                            final int damage = (int)(20*Math.random());
-                            health-=damage;
-                            //Set scene to enemy damage text
-                        }else if(enemy.getPath().equals(confrontationChar[1].getPath())){
-                            final int damage = (int)(20*Math.random()+10);
-                            health-=damage;
-                            //Set scene to enemy damage text
-                        }else if(enemy.getPath().equals(confrontationChar[2].getPath())){
-                            final int damage = (int)(20*Math.random()+10);
-                            health-=damage;
-                            //Set scene to enemy damage text
-                        }else if(enemy.getPath().equals(confrontationChar[3].getPath())){
-                            final int damage = (int)(20*Math.random()+10);
-                            health-=damage;
-                            //Set scene to enemy damage text
-                        }else if(enemy.getPath().equals(confrontationChar[4].getPath())){
-                            final int damage = (int)(20*Math.random()+20);
-                            health-=damage;
-                            //Set scene to enemy damage text
+                    try{
+                        if(battleMenu.equals("damageText")){
+                            if(encounterNum==0){
+                                final int damage = (int)(20*Math.random());
+                                health-=damage;
+                                //Set scene to enemy damage text
+                            }else if(encounterNum==1){
+                                final int damage = (int)(20*Math.random()+10);
+                                health-=damage;
+                                //Set scene to enemy damage text
+                            }else if(encounterNum==2){
+                                final int damage = (int)(20*Math.random()+10);
+                                health-=damage;
+                                //Set scene to enemy damage text
+                            }else if(encounterNum==3){
+                                final int damage = (int)(20*Math.random()+10);
+                                health-=damage;
+                                //Set scene to enemy damage text
+                            }else if(encounterNum==4){
+                                final int damage = (int)(20*Math.random()+20);
+                                health-=damage;
+                                //Set scene to enemy damage text
+                            }
+                            battleMenu = "enemyText";
+                        }else if(battleMenu.equals("enemyText")){
+                            ConfrontationScene mainButtons = new ConfrontationScene(this.pressStart2PFile,new ImageView(new Image(new FileInputStream(this.blankFile))),closeCharPlat, farCharPlat,new ImageView(new Image(new FileInputStream(this.mainCharFile))),new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum]))),new Rectangle(5,5,Paint.valueOf("Gray")),actionButton,null,formButton,null,health,char1HealthBarFront, char1HealthBarBack,enemyHealth,char2HealthBarFront, char2HealthBarBack);                   
+                            scene.setRoot(mainButtons.getScene());
+                            battleMenu = "main";
                         }
-                        battleMenu = "enemyText";
-                    }else if(battleMenu.equals("enemyText")){
-                        // Set Scene to attack options
-                        battleMenu = "main";
-                    }
+                    }catch(Exception e){}
                 }
             );
         }catch(Exception e){}
+        return scene;
     }
 
     /**
