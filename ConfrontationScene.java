@@ -54,7 +54,7 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
 
 public class ConfrontationScene {
     /** Private non-static File variable that will hold onto the file that stores the font to be used in the confrontation scene. */
-    private File fontFile;
+    private File textFontFile;
 
     /** Private non-static ImageView variable that will hold onto the background of the confrontation scene. */
     private ImageView backgroundImageView;
@@ -66,10 +66,10 @@ public class ConfrontationScene {
     private Ellipse farCharPlat;
     
     /** Private non-static ImageView variable that will hold onto the image that is used for the first character. */
-    private ImageView char1;
+    private ImageView char1ImageView;
     
     /** Private non-static ImageView variable that will hold onto the image that is used for the second character. */
-    private ImageView char2;
+    private ImageView char2ImageView;
     
     /** Private non-static Rectangle variable that will hold onto the rectangle that is used at the bottom of the scene. */
     private Rectangle bottomRectangle;
@@ -87,7 +87,7 @@ public class ConfrontationScene {
     private GameButton bottomRightButton;
     
     /** Private non-static double variable that will hold onto the amount of health for the first character (as a percentage out of 100). */
-    private double char1HealthBar;
+    private double char1Health;
     
     /** Private non-static Rectangle variable that will hold onto the front rectangle that is used to show the first character's health. */
     private Rectangle char1HealthBarForeground;
@@ -96,7 +96,7 @@ public class ConfrontationScene {
     private Rectangle char1HealthBarBackground;
     
     /** Private non-static double variable that will hold onto the amount of health for the second character (as a percentage out of 100). */
-    private double char2HealthBar;
+    private double char2Health;
     
     /** Private non-static Rectangle variable that will hold onto the front rectangle that is used to show the second character's health. */
     private Rectangle char2HealthBarForeground;
@@ -105,342 +105,64 @@ public class ConfrontationScene {
     private Rectangle char2HealthBarBackground;
     
     /** Private non-static Text variable that will hold onto the text that will be used for the title. */
-    private Text title;
+    private Text titleText;
     
     /** Private non-static Text variable that will hold onto the text that will be used for the body (the text underneath the title). */
-    private Text body;
+    private Text bodyText;
     
-    /**
-     * An instance of the ConfrontationScene.java class will be created using this constructor. It will create a scene with one title, two buttons, and no health bars.
-     * 
-     * @param fontFile The File that stores the font used for the confrontation scene.
-     * @param backgroundImageView The ImageView that stores the background image.
-     * @param closeCharPlat The Ellipse for the platform for the closer character.
-     * @param farCharPlat The Ellipse for the platform for the farther character.
-     * @param char1 The ImageView that stores the image for the first character (the closer one).
-     * @param char2 The ImageView that stores the image for the second character (the farther one).
-     * @param bottomRectangle The Rectangle that will be used on the bottom of the scene.
-     * @param title The Text that will be the title for the scene.
-     * @param topLeftButton The GameButton that will be used for the top left button.
-     * @param topRightButton The GameButton that will be used for the top right button.
-     */
-    public ConfrontationScene (File fontFile, ImageView backgroundImageView, Ellipse closeCharPlat, Ellipse farCharPlat, ImageView char1, ImageView char2, Rectangle bottomRectangle, Text title, GameButton topLeftButton, GameButton topRightButton) {
-        this(fontFile, backgroundImageView, closeCharPlat, farCharPlat, char1, char2, bottomRectangle, title, topLeftButton, topRightButton, 0, null, null, 0, null, null);
-    }
-    
-    /**
-     * An instance of the ConfrontationScene.java class will be created using this constructor. It will create a scene with one title, two buttons, and two health bars.
-     * 
-     * @param fontFile The File that stores the font used for the confrontation scene.
-     * @param backgroundImageView The ImageView that stores the background image.
-     * @param closeCharPlat The Ellipse for the platform for the closer character.
-     * @param farCharPlat The Ellipse for the platform for the farther character.
-     * @param char1 The ImageView that stores the image for the first character (the closer one).
-     * @param char2 The ImageView that stores the image for the second character (the farther one).
-     * @param bottomRectangle The Rectangle that will be used on the bottom of the scene.
-     * @param title The Text that will be the title for the scene.
-     * @param topLeftButton The GameButton that will be used for the top left button.
-     * @param topRightButton The GameButton that will be used for the top right button.
-     * @param char1HealthBar The double that will hold onto the amount of health in the first character.
-     * @param char1HealthBarForeground The Rectangle that will be the front rectangle for the first character's health bar.
-     * @param char1HealthBarBackground The Rectangle that will be the back rectangle for the first character's health bar.
-     * @param char2HealthBar The double that will hold onto the amount of health in the second character.
-     * @param char2HealthBarForeground The Rectangle that will be the front rectangle for the second character's health bar.
-     * @param char2HealthBarBackground The Rectangle that will be the back rectangle for the second character's health bar.
-     */
-    public ConfrontationScene (File fontFile, ImageView backgroundImageView, Ellipse closeCharPlat, Ellipse farCharPlat, ImageView char1, ImageView char2, Rectangle bottomRectangle, Text title, GameButton topLeftButton, GameButton topRightButton, double char1HealthBar, Rectangle char1HealthBarForeground, Rectangle char1HealthBarBackground, double char2HealthBar, Rectangle char2HealthBarForeground, Rectangle char2HealthBarBackground) {
-        this.fontFile = fontFile;
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String textForBody) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        //this.instantiateVariablesHealth(char1Health, char2Health);
         
-        backgroundImageView.setPreserveRatio(true);
-        backgroundImageView.setSmooth(true);
-        backgroundImageView.setX(0);
-        backgroundImageView.setY(0);
-        backgroundImageView.setFitWidth(600);
-        this.backgroundImageView = backgroundImageView;
-        
-        //Ellipse closeCharPlat = new Ellipse (150, 350, 120, 30);
-        closeCharPlat.setCenterX(150);
-        closeCharPlat.setCenterY(350);
-        closeCharPlat.setRadiusX(120);
-        closeCharPlat.setRadiusY(30);
-        closeCharPlat.setStyle(
-            "-fx-background-radius: 10; " +
-            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
-        );
-        closeCharPlat.setStroke(Paint.valueOf("black"));
-        closeCharPlat.setStrokeWidth(2.0);
-        //closeCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
-        this.closeCharPlat = closeCharPlat;
-        
-        //Ellipse farCharPlat = new Ellipse (450, 250, 120, 30);
-        farCharPlat.setCenterX(450);
-        farCharPlat.setCenterY(250);
-        farCharPlat.setRadiusX(120);
-        farCharPlat.setRadiusY(30);
-        farCharPlat.setStyle(
-            "-fx-background-radius: 10; " +
-            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
-        );
-        farCharPlat.setStroke(Paint.valueOf("black"));
-        farCharPlat.setStrokeWidth(2.0);
-        //farCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
-        this.farCharPlat = farCharPlat;
-            
-        char1.setPreserveRatio(true);
-        char1.setSmooth(true);
-        char1.setX(75);
-        char1.setY(150);
-        char1.setFitWidth(150);
-        this.char1 = char1;
-        
-        char2.setPreserveRatio(true);
-        char2.setSmooth(true);
-        char2.setX(387);
-        char2.setY(85);
-        char2.setFitWidth(126);
-        this.char2 = char2;
-        
-        if (title != null) {
-            title.setStyle("-fx-underline: true;");
-            title.setX(0);
-            title.setY(0);
+        if (textForTitle != null) {
+            this.titleText = new Text(textForTitle);
+            this.titleText.setStyle("-fx-underline: true;");
+            this.titleText.setX(0);
+            this.titleText.setY(0);
         } else {
-            this.title = null;
+            this.titleText = null;
         }
         
-        if (topLeftButton != null) {
-            topLeftButton.setXCoord(35);
-            topLeftButton.setYCoord(490);
-            topLeftButton.setWidth(260);
-            topLeftButton.setHeight(60);
-            this.topLeftButton = topLeftButton;
+        if (textForBody != null) {
+            this.bodyText = new Text(textForBody);
+            this.bodyText.setX(0);
+            this.bodyText.setY(0);
         } else {
-            this.topLeftButton = null;
+            this.bodyText = null;
         }
         
-        if (topRightButton != null) {
-            topRightButton.setXCoord(305);
-            topRightButton.setYCoord(490);
-            topRightButton.setWidth(260);
-            topRightButton.setHeight(60);
-            this.topRightButton = topRightButton;
-        } else {
-            this.topRightButton = null;
-        }
-        
-        bottomRectangle.setWidth(550);
-        bottomRectangle.setHeight(150);
-        bottomRectangle.setX(25);
-        bottomRectangle.setY(425);
-        this.bottomRectangle = bottomRectangle;
-                
-        if (char1HealthBar > 100) char1HealthBar = 100;
-        else if (char1HealthBar < 0) char1HealthBar = 0;
-        this.char1HealthBar = char1HealthBar;
-        
-        if (char1HealthBarForeground != null) {
-            char1HealthBarForeground.setWidth(250 * (char1HealthBar / 100));
-            char1HealthBarForeground.setHeight(25);
-            char1HealthBarForeground.setX(25);
-            char1HealthBarForeground.setY(110);
-            this.char1HealthBarForeground = char1HealthBarForeground;
-        } else {
-            this.char1HealthBarForeground = null;
-        }
-        
-        if (char1HealthBarBackground != null) {
-            char1HealthBarBackground.setWidth(250);
-            char1HealthBarBackground.setHeight(25);
-            char1HealthBarBackground.setX(25);
-            char1HealthBarBackground.setY(110);
-            this.char1HealthBarBackground = char1HealthBarBackground;
-        } else {
-            this.char1HealthBarBackground = null;
-        }
-        
-        if (char2HealthBar > 100) char2HealthBar = 100;
-        else if (char2HealthBar < 0) char2HealthBar = 0;
-        this.char2HealthBar = char2HealthBar;
-        
-        if (char2HealthBarForeground != null) {
-            char2HealthBarForeground.setWidth(250 * (char2HealthBar / 100));
-            char2HealthBarForeground.setHeight(25);
-            char2HealthBarForeground.setX(325);
-            char2HealthBarForeground.setY(60);
-            this.char2HealthBarForeground = char2HealthBarForeground;
-        } else {
-            this.char2HealthBarForeground = null;
-        }
-        
-        if (char2HealthBarBackground != null) {
-            char2HealthBarBackground.setWidth(250);
-            char2HealthBarBackground.setHeight(25);
-            char2HealthBarBackground.setX(325);
-            char2HealthBarBackground.setY(60);
-            this.char2HealthBarBackground = char2HealthBarBackground;
-        } else {
-            this.char2HealthBarBackground = null;
-        }
-        
+        this.topLeftButton = null;
         this.bottomLeftButton = null;
+        this.topRightButton = null;
         this.bottomRightButton = null;
+        
+        this.char1Health = 0;
+        this.char1HealthBarForeground = null;
+        this.char1HealthBarBackground = null;
+        this.char2Health = 0;
+        this.char2HealthBarForeground = null;
+        this.char2HealthBarBackground = null;
     }
     
-    /**
-     * An instance of the ConfrontationScene.java class will be created using this constructor. It will create a scene with one title, one body of text, and no health bars.
-     * 
-     * @param fontFile The File that stores the font used for the confrontation scene.
-     * @param backgroundImageView The ImageView that stores the background image.
-     * @param closeCharPlat The Ellipse for the platform for the closer character.
-     * @param farCharPlat The Ellipse for the platform for the farther character.
-     * @param char1 The ImageView that stores the image for the first character (the closer one).
-     * @param char2 The ImageView that stores the image for the second character (the farther one).
-     * @param bottomRectangle The Rectangle that will be used on the bottom of the scene.
-     * @param title The Text that will be the title for the scene.
-     * @param body The Text that will be the body of text for the scene.
-     */
-    public ConfrontationScene (File fontFile, ImageView backgroundImageView, Ellipse closeCharPlat, Ellipse farCharPlat, ImageView char1, ImageView char2, Rectangle bottomRectangle, Text title, Text body) {
-        this(fontFile, backgroundImageView, closeCharPlat, farCharPlat, char1, char2, bottomRectangle, title, body, 0, null, null, 0, null, null);
-    }
-    
-    /**
-     * An instance of the ConfrontationScene.java class will be created using this constructor. It will create a scene with one title, one body of text, and two health bars.
-     * 
-     * @param fontFile The File that stores the font used for the confrontation scene.
-     * @param backgroundImageView The ImageView that stores the background image.
-     * @param closeCharPlat The Ellipse for the platform for the closer character.
-     * @param farCharPlat The Ellipse for the platform for the farther character.
-     * @param char1 The ImageView that stores the image for the first character (the closer one).
-     * @param char2 The ImageView that stores the image for the second character (the farther one).
-     * @param bottomRectangle The Rectangle that will be used on the bottom of the scene.
-     * @param title The Text that will be the title for the scene.
-     * @param body The Text that will be the body of text for the scene.
-     * @param char1HealthBar The double that will hold onto the amount of health in the first character.
-     * @param char1HealthBarForeground The Rectangle that will be the front rectangle for the first character's health bar.
-     * @param char1HealthBarBackground The Rectangle that will be the back rectangle for the first character's health bar.
-     * @param char2HealthBar The double that will hold onto the amount of health in the second character.
-     * @param char2HealthBarForeground The Rectangle that will be the front rectangle for the second character's health bar.
-     * @param char2HealthBarBackground The Rectangle that will be the back rectangle for the second character's health bar.
-     */
-    public ConfrontationScene (File fontFile, ImageView backgroundImageView, Ellipse closeCharPlat, Ellipse farCharPlat, ImageView char1, ImageView char2, Rectangle bottomRectangle, Text title, Text body, double char1HealthBar, Rectangle char1HealthBarForeground, Rectangle char1HealthBarBackground, double char2HealthBar, Rectangle char2HealthBarForeground, Rectangle char2HealthBarBackground) {
-        this.fontFile = fontFile;
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String textForBody, double char1Health, double char2Health) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        this.instantiateVariablesHealth(char1Health, char2Health);
         
-        backgroundImageView.setPreserveRatio(true);
-        backgroundImageView.setSmooth(true);
-        backgroundImageView.setX(0);
-        backgroundImageView.setY(0);
-        backgroundImageView.setFitWidth(600);
-        this.backgroundImageView = backgroundImageView;
-        
-        //Ellipse closeCharPlat = new Ellipse (150, 350, 120, 30);
-        closeCharPlat.setCenterX(150);
-        closeCharPlat.setCenterY(350);
-        closeCharPlat.setRadiusX(120);
-        closeCharPlat.setRadiusY(30);
-        closeCharPlat.setStyle(
-            "-fx-background-radius: 10; " +
-            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
-        );
-        closeCharPlat.setStroke(Paint.valueOf("black"));
-        closeCharPlat.setStrokeWidth(2.0);
-        //closeCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
-        this.closeCharPlat = closeCharPlat;
-        
-        //Ellipse farCharPlat = new Ellipse (450, 250, 120, 30);
-        farCharPlat.setCenterX(450);
-        farCharPlat.setCenterY(250);
-        farCharPlat.setRadiusX(120);
-        farCharPlat.setRadiusY(30);
-        farCharPlat.setStyle(
-            "-fx-background-radius: 10; " +
-            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
-        );
-        farCharPlat.setStroke(Paint.valueOf("black"));
-        farCharPlat.setStrokeWidth(2.0);
-        //farCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
-        this.farCharPlat = farCharPlat;
-            
-        char1.setPreserveRatio(true);
-        char1.setSmooth(true);
-        char1.setX(75);
-        char1.setY(150);
-        char1.setFitWidth(150);
-        this.char1 = char1;
-        
-        char2.setPreserveRatio(true);
-        char2.setSmooth(true);
-        char2.setX(387);
-        char2.setY(85);
-        char2.setFitWidth(126);
-        this.char2 = char2;
-        
-        if (title != null) {
-            title.setStyle("-fx-underline: true;");
-            title.setX(0);
-            title.setY(0);
+        if (textForTitle != null) {
+            this.titleText = new Text(textForTitle);
+            this.titleText.setStyle("-fx-underline: true;");
+            this.titleText.setX(0);
+            this.titleText.setY(0);
         } else {
-            this.title = null;
+            this.titleText = null;
         }
         
-        if (body != null) {
-            body.setX(0);
-            body.setY(0);
+        if (textForBody != null) {
+            this.bodyText = new Text(textForBody);
+            this.bodyText.setX(0);
+            this.bodyText.setY(0);
         } else {
-            this.body = null;
-        }
-        
-        bottomRectangle.setWidth(550);
-        bottomRectangle.setHeight(150);
-        bottomRectangle.setX(25);
-        bottomRectangle.setY(425);
-        this.bottomRectangle = bottomRectangle;
-                
-        if (char1HealthBar > 100) char1HealthBar = 100;
-        else if (char1HealthBar < 0) char1HealthBar = 0;
-        this.char1HealthBar = char1HealthBar;
-        
-        if (char1HealthBarForeground != null) {
-            char1HealthBarForeground.setWidth(250 * (char1HealthBar / 100));
-            char1HealthBarForeground.setHeight(25);
-            char1HealthBarForeground.setX(25);
-            char1HealthBarForeground.setY(110);
-            this.char1HealthBarForeground = char1HealthBarForeground;
-        } else {
-            this.char1HealthBarForeground = null;
-        }
-        
-        if (char1HealthBarBackground != null) {
-            char1HealthBarBackground.setWidth(250);
-            char1HealthBarBackground.setHeight(25);
-            char1HealthBarBackground.setX(25);
-            char1HealthBarBackground.setY(110);
-            this.char1HealthBarBackground = char1HealthBarBackground;
-        } else {
-            this.char1HealthBarBackground = null;
-        }
-        
-        if (char2HealthBar > 100) char2HealthBar = 100;
-        else if (char2HealthBar < 0) char2HealthBar = 0;
-        this.char2HealthBar = char2HealthBar;
-        
-        if (char2HealthBarForeground != null) {
-            char2HealthBarForeground.setWidth(250 * (char2HealthBar / 100));
-            char2HealthBarForeground.setHeight(25);
-            char2HealthBarForeground.setX(325);
-            char2HealthBarForeground.setY(60);
-            this.char2HealthBarForeground = char2HealthBarForeground;
-        } else {
-            this.char2HealthBarForeground = null;
-        }
-        
-        if (char2HealthBarBackground != null) {
-            char2HealthBarBackground.setWidth(250);
-            char2HealthBarBackground.setHeight(25);
-            char2HealthBarBackground.setX(325);
-            char2HealthBarBackground.setY(60);
-            this.char2HealthBarBackground = char2HealthBarBackground;
-        } else {
-            this.char2HealthBarBackground = null;
+            this.bodyText = null;
         }
         
         this.topLeftButton = null;
@@ -449,48 +171,170 @@ public class ConfrontationScene {
         this.bottomRightButton = null;
     }
     
-    /**
-     * An instance of the ConfrontationScene.java class will be created using this constructor. It will create a scene with four game buttons and no health bars.
-     * 
-     * @param fontFile The File that stores the font used for the confrontation scene.
-     * @param backgroundImageView The ImageView that stores the background image.
-     * @param closeCharPlat The Ellipse for the platform for the closer character.
-     * @param farCharPlat The Ellipse for the platform for the farther character.
-     * @param char1 The ImageView that stores the image for the first character (the closer one).
-     * @param char2 The ImageView that stores the image for the second character (the farther one).
-     * @param bottomRectangle The Rectangle that will be used on the bottom of the scene.
-     * @param topLeftButton The GameButton that will be the top left button in the scene.
-     * @param bottomLeftButton The GameButton that will be the bottom left button in the scene.
-     * @param topRightButton The GameButton that will be the top right button in the scene.
-     * @param bottomRightButton The GameButton that will be the bottom right button in the scene.
-     */
-    public ConfrontationScene (File fontFile, ImageView backgroundImageView, Ellipse closeCharPlat, Ellipse farCharPlat, ImageView char1, ImageView char2, Rectangle bottomRectangle, GameButton topLeftButton, GameButton bottomLeftButton, GameButton topRightButton, GameButton bottomRightButton) {
-        this(fontFile, backgroundImageView, closeCharPlat, farCharPlat, char1, char2, bottomRectangle, topLeftButton, bottomLeftButton, topRightButton, bottomRightButton, 0, null, null, 0, null, null);
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String leftButtonText, String rightButtonText) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        //this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (textForTitle != null) {
+            this.titleText = new Text(textForTitle);
+            this.titleText.setStyle("-fx-underline: true;");
+            this.titleText.setX(0);
+            this.titleText.setY(0);
+        } else {
+            this.titleText = null;
+        }
+        
+        if (leftButtonText != null) {
+            this.topLeftButton = new GameButton(this.textFontFile, leftButtonText, 35, 490, 17);
+            this.topLeftButton.setWidth(260);
+            this.topLeftButton.setHeight(60);
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (rightButtonText != null) {
+            this.topRightButton = new GameButton(this.textFontFile, rightButtonText, 305, 490, 17);
+            this.topRightButton.setWidth(260);
+            this.topRightButton.setHeight(60);
+        } else {
+            this.topRightButton = null;
+        }
+        
+        this.bodyText = null;
+        this.bottomLeftButton = null;
+        this.bottomRightButton = null;
+        
+        this.char1Health = 0;
+        this.char1HealthBarForeground = null;
+        this.char1HealthBarBackground = null;
+        this.char2Health = 0;
+        this.char2HealthBarForeground = null;
+        this.char2HealthBarBackground = null;
     }
     
-    /**
-     * An instance of the ConfrontationScene.java class will be created using this constructor. It will create a scene with four game buttons and two health bars.
-     * 
-     * @param fontFile The File that stores the font used for the confrontation scene.
-     * @param backgroundImageView The ImageView that stores the background image.
-     * @param closeCharPlat The Ellipse for the platform for the closer character.
-     * @param farCharPlat The Ellipse for the platform for the farther character.
-     * @param char1 The ImageView that stores the image for the first character (the closer one).
-     * @param char2 The ImageView that stores the image for the second character (the farther one).
-     * @param bottomRectangle The Rectangle that will be used on the bottom of the scene.
-     * @param topLeftButton The GameButton that will be the top left button in the scene.
-     * @param bottomLeftButton The GameButton that will be the bottom left button in the scene.
-     * @param topRightButton The GameButton that will be the top right button in the scene.
-     * @param bottomRightButton The GameButton that will be the bottom right button in the scene.
-     * @param char1HealthBar The double that will hold onto the amount of health in the first character.
-     * @param char1HealthBarForeground The Rectangle that will be the front rectangle for the first character's health bar.
-     * @param char1HealthBarBackground The Rectangle that will be the back rectangle for the first character's health bar.
-     * @param char2HealthBar The double that will hold onto the amount of health in the second character.
-     * @param char2HealthBarForeground The Rectangle that will be the front rectangle for the second character's health bar.
-     * @param char2HealthBarBackground The Rectangle that will be the back rectangle for the second character's health bar.
-     */
-    public ConfrontationScene (File fontFile, ImageView backgroundImageView, Ellipse closeCharPlat, Ellipse farCharPlat, ImageView char1, ImageView char2, Rectangle bottomRectangle, GameButton topLeftButton, GameButton bottomLeftButton, GameButton topRightButton, GameButton bottomRightButton, double char1HealthBar, Rectangle char1HealthBarForeground, Rectangle char1HealthBarBackground, double char2HealthBar, Rectangle char2HealthBarForeground, Rectangle char2HealthBarBackground) {
-        this.fontFile = fontFile;
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String leftButtonText, String rightButtonText, double char1Health, double char2Health) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (textForTitle != null) {
+            this.titleText = new Text(textForTitle);
+            this.titleText.setStyle("-fx-underline: true;");
+            this.titleText.setX(0);
+            this.titleText.setY(0);
+        } else {
+            this.titleText = null;
+        }
+        
+        if (leftButtonText != null) {
+            this.topLeftButton = new GameButton(this.textFontFile, leftButtonText, 35, 490, 17);
+            this.topLeftButton.setWidth(260);
+            this.topLeftButton.setHeight(60);
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (rightButtonText != null) {
+            this.topRightButton = new GameButton(this.textFontFile, rightButtonText, 305, 490, 17);
+            this.topRightButton.setWidth(260);
+            this.topRightButton.setHeight(60);
+        } else {
+            this.topRightButton = null;
+        }
+        
+        this.bodyText = null;
+        this.bottomLeftButton = null;
+        this.bottomRightButton = null;
+    }
+    
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String topLeftButtonText, String bottomLeftButtonText, String topRightButtonText, String bottomRightButtonText) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        //this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (topLeftButtonText != null) {
+            this.topLeftButton = new GameButton(this.textFontFile, topLeftButtonText, 35, 435, 17);
+            this.topLeftButton.setWidth(260);
+            this.topLeftButton.setHeight(60);
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (bottomLeftButtonText != null) {
+            this.bottomLeftButton = new GameButton(this.textFontFile, bottomLeftButtonText, 35, 505, 17);
+            this.topLeftButton.setWidth(260);
+            this.topLeftButton.setHeight(60);
+        } else {
+            this.bottomLeftButton = null;
+        }
+        
+        if (topRightButtonText != null) {
+            this.topRightButton = new GameButton(this.textFontFile, topRightButtonText, 305, 435, 17);
+            this.topRightButton.setWidth(260);
+            this.topRightButton.setHeight(60);
+        } else {
+            this.topRightButton = null;
+        }
+        
+        if (bottomRightButtonText != null) {
+            this.bottomRightButton = new GameButton(this.textFontFile, bottomRightButtonText, 305, 505, 17);
+            this.bottomRightButton.setWidth(260);
+            this.bottomRightButton.setHeight(60);
+        } else {
+            this.bottomRightButton = null;
+        }
+        
+        this.titleText = null;
+        this.bodyText = null;
+        
+        this.char1Health = 0;
+        this.char1HealthBarForeground = null;
+        this.char1HealthBarBackground = null;
+        this.char2Health = 0;
+        this.char2HealthBarForeground = null;
+        this.char2HealthBarBackground = null;
+    }
+    
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String topLeftButtonText, String bottomLeftButtonText, String topRightButtonText, String bottomRightButtonText, double char1Health, double char2Health) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (topLeftButtonText != null) {
+            this.topLeftButton = new GameButton(this.textFontFile, topLeftButtonText, 35, 435, 17);
+            this.topLeftButton.setWidth(260);
+            this.topLeftButton.setHeight(60);
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (bottomLeftButtonText != null) {
+            this.bottomLeftButton = new GameButton(this.textFontFile, bottomLeftButtonText, 35, 505, 17);
+            this.topLeftButton.setWidth(260);
+            this.topLeftButton.setHeight(60);
+        } else {
+            this.bottomLeftButton = null;
+        }
+        
+        if (topRightButtonText != null) {
+            this.topRightButton = new GameButton(this.textFontFile, topRightButtonText, 305, 435, 17);
+            this.topRightButton.setWidth(260);
+            this.topRightButton.setHeight(60);
+        } else {
+            this.topRightButton = null;
+        }
+        
+        if (bottomRightButtonText != null) {
+            this.bottomRightButton = new GameButton(this.textFontFile, bottomRightButtonText, 305, 505, 17);
+            this.bottomRightButton.setWidth(260);
+            this.bottomRightButton.setHeight(60);
+        } else {
+            this.bottomRightButton = null;
+        }
+        
+        this.titleText = null;
+        this.bodyText = null;
+    }
+    
+    private void instantiateVariablesNonHealth(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView) {
+        this.textFontFile = textFontFile;
         
         backgroundImageView.setPreserveRatio(true);
         backgroundImageView.setSmooth(true);
@@ -499,144 +343,75 @@ public class ConfrontationScene {
         backgroundImageView.setFitWidth(600);
         this.backgroundImageView = backgroundImageView;
         
-        //Ellipse closeCharPlat = new Ellipse (150, 350, 120, 30);
-        closeCharPlat.setCenterX(150);
-        closeCharPlat.setCenterY(350);
-        closeCharPlat.setRadiusX(120);
-        closeCharPlat.setRadiusY(30);
-        closeCharPlat.setStyle(
+        this.closeCharPlat = new Ellipse(150, 350, 120, 30);
+        this.closeCharPlat.setStyle(
             "-fx-background-radius: 10; " +
             "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
         );
-        closeCharPlat.setStroke(Paint.valueOf("black"));
-        closeCharPlat.setStrokeWidth(2.0);
-        //closeCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
-        this.closeCharPlat = closeCharPlat;
+        this.closeCharPlat.setStroke(Paint.valueOf("black"));
+        this.closeCharPlat.setStrokeWidth(2.0);
+        //this.closeCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
         
-        //Ellipse farCharPlat = new Ellipse (450, 250, 120, 30);
-        farCharPlat.setCenterX(450);
-        farCharPlat.setCenterY(250);
-        farCharPlat.setRadiusX(120);
-        farCharPlat.setRadiusY(30);
-        farCharPlat.setStyle(
+        this.farCharPlat = new Ellipse (450, 250, 120, 30);
+        this.farCharPlat.setStyle(
             "-fx-background-radius: 10; " +
             "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
         );
-        farCharPlat.setStroke(Paint.valueOf("black"));
-        farCharPlat.setStrokeWidth(2.0);
-        //farCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
-        this.farCharPlat = farCharPlat;
-            
-        char1.setPreserveRatio(true);
-        char1.setSmooth(true);
-        char1.setX(75);
-        char1.setY(150);
-        char1.setFitWidth(150);
-        this.char1 = char1;
+        this.farCharPlat.setStroke(Paint.valueOf("black"));
+        this.farCharPlat.setStrokeWidth(2.0);
+        //this.farCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
         
-        char2.setPreserveRatio(true);
-        char2.setSmooth(true);
-        char2.setX(387);
-        char2.setY(85);
-        char2.setFitWidth(126);
-        this.char2 = char2;
+        char1ImageView.setPreserveRatio(true);
+        char1ImageView.setSmooth(true);
+        char1ImageView.setX(75);
+        char1ImageView.setY(150);
+        char1ImageView.setFitWidth(150);
+        this.char1ImageView = char1ImageView;
         
-        bottomRectangle.setWidth(550);
-        bottomRectangle.setHeight(150);
-        bottomRectangle.setX(25);
-        bottomRectangle.setY(425);
-        this.bottomRectangle = bottomRectangle;
+        char2ImageView.setPreserveRatio(true);
+        char2ImageView.setSmooth(true);
+        char2ImageView.setX(387);
+        char2ImageView.setY(85);
+        char2ImageView.setFitWidth(126);
+        this.char2ImageView = char2ImageView;
         
-        if (topLeftButton != null) {
-            topLeftButton.setXCoord(35);
-            topLeftButton.setYCoord(435);
-            topLeftButton.setWidth(260);
-            topLeftButton.setHeight(60);
-            this.topLeftButton = topLeftButton;
-        } else {
-            this.topLeftButton = null;
-        }
+        this.bottomRectangle = new Rectangle(550, 150, Paint.valueOf("grey"));
+        this.bottomRectangle.setX(25);
+        this.bottomRectangle.setY(425);
+    }
+    
+    private void instantiateVariablesHealth(double char1Health, double char2Health) {
+        if (char1Health > 100) char1Health = 100;
+        else if (char1Health < 0) char1Health = 0;
+        this.char1Health = char1Health;
         
-        if (bottomLeftButton != null) {
-            bottomLeftButton.setXCoord(35);
-            bottomLeftButton.setYCoord(505);
-            bottomLeftButton.setWidth(260);
-            bottomLeftButton.setHeight(60);
-            this.bottomLeftButton = bottomLeftButton;
-        } else {
-            this.bottomLeftButton = null;
-        }
+        this.char1HealthBarForeground = new Rectangle(250 * (char1Health / 100), 25, Paint.valueOf("yellow"));
+        this.char1HealthBarForeground.setX(25);
+        this.char1HealthBarForeground.setY(110);
+        this.char1HealthBarForeground.setStrokeWidth(1.0);
+        this.char1HealthBarForeground.setStroke(Paint.valueOf("black"));
         
-        if (topRightButton != null) {
-            topRightButton.setXCoord(305);
-            topRightButton.setYCoord(435);
-            topRightButton.setWidth(260);
-            topRightButton.setHeight(60);
-            this.topRightButton = topRightButton;
-        } else {
-            this.topRightButton = null;
-        }
+        this.char1HealthBarBackground = new Rectangle(250, 25, Paint.valueOf("yellow"));
+        this.char1HealthBarBackground.setX(25);
+        this.char1HealthBarBackground.setY(110);
+        this.char1HealthBarBackground.setStrokeWidth(1.0);
+        this.char1HealthBarBackground.setStroke(Paint.valueOf("black"));
         
-        if (bottomRightButton != null) {
-            bottomRightButton.setXCoord(305);
-            bottomRightButton.setYCoord(505);
-            bottomRightButton.setWidth(260);
-            bottomRightButton.setHeight(60);
-            this.bottomRightButton = bottomRightButton;
-        } else {
-            this.bottomRightButton = null;
-        }
+        if (char2Health > 100) char2Health = 100;
+        else if (char2Health < 0) char2Health = 0;
+        this.char2Health = char2Health;
         
-        if (char1HealthBar > 100) char1HealthBar = 100;
-        else if (char1HealthBar < 0) char1HealthBar = 0;
-        this.char1HealthBar = char1HealthBar;
-        
-        if (char1HealthBarForeground != null) {
-            char1HealthBarForeground.setWidth(250 * (char1HealthBar / 100));
-            char1HealthBarForeground.setHeight(25);
-            char1HealthBarForeground.setX(25);
-            char1HealthBarForeground.setY(110);
-            this.char1HealthBarForeground = char1HealthBarForeground;
-        } else {
-            this.char1HealthBarForeground = null;
-        }
-        
-        if (char1HealthBarBackground != null) {
-            char1HealthBarBackground.setWidth(250);
-            char1HealthBarBackground.setHeight(25);
-            char1HealthBarBackground.setX(25);
-            char1HealthBarBackground.setY(110);
-            this.char1HealthBarBackground = char1HealthBarBackground;
-        } else {
-            this.char1HealthBarBackground = null;
-        }
-        
-        if (char2HealthBar > 100) char2HealthBar = 100;
-        else if (char2HealthBar < 0) char2HealthBar = 0;
-        this.char2HealthBar = char2HealthBar;
-        
-        if (char2HealthBarForeground != null) {
-            char2HealthBarForeground.setWidth(250 * (char2HealthBar / 100));
-            char2HealthBarForeground.setHeight(25);
-            char2HealthBarForeground.setX(325);
-            char2HealthBarForeground.setY(50);
-            this.char2HealthBarForeground = char2HealthBarForeground;
-        } else {
-            this.char2HealthBarForeground = null;
-        }
-        
-        if (char2HealthBarBackground != null) {
-            char2HealthBarBackground.setWidth(250);
-            char2HealthBarBackground.setHeight(25);
-            char2HealthBarBackground.setX(325);
-            char2HealthBarBackground.setY(50);
-            this.char2HealthBarBackground = char2HealthBarBackground;
-        } else {
-            this.char2HealthBarBackground = null;
-        }
-        
-        this.title = null;
-        this.body = null;
+        this.char2HealthBarForeground = new Rectangle(250 * (char2Health / 100), 25, Paint.valueOf("grey"));
+        this.char2HealthBarForeground.setX(325);
+        this.char2HealthBarForeground.setY(60);
+        this.char2HealthBarForeground.setStrokeWidth(1.0);
+        this.char2HealthBarForeground.setStroke(Paint.valueOf("black"));
+
+        this.char2HealthBarBackground = new Rectangle(250, 25, Paint.valueOf("grey"));
+        this.char2HealthBarBackground.setX(325);
+        this.char2HealthBarBackground.setY(60);
+        this.char2HealthBarBackground.setStrokeWidth(1.0);
+        this.char2HealthBarBackground.setStroke(Paint.valueOf("black"));
     }
     
     /**
@@ -650,7 +425,7 @@ public class ConfrontationScene {
      *          the scene.
      */
     public File getFontFile() {
-        return this.fontFile;
+        return this.textFontFile;
     }
     
     /**
@@ -661,8 +436,8 @@ public class ConfrontationScene {
      * 
      * @param newFontFile A File that is the new file that the program will use for fonts.
      */
-    public void setFontFile(File newFontFile) {
-        this.fontFile = newFontFile;
+    public void setFontFile(File newTextFontFile) {
+        this.textFontFile = newTextFontFile;
     }
     
     /**
@@ -718,8 +493,8 @@ public class ConfrontationScene {
      *          ImageView used for the first character for the
      *          scene.
      */
-    public ImageView getChar1() {
-        return this.char1;
+    public ImageView getChar1ImageView() {
+        return this.char1ImageView;
     }
     
     /**
@@ -733,8 +508,8 @@ public class ConfrontationScene {
      *          ImageView used for the second character for the
      *          scene.
      */
-    public ImageView getChar2() {
-        return this.char2;
+    public ImageView getChar2ImageView() {
+        return this.char2ImageView;
     }
     
     /**
@@ -763,6 +538,10 @@ public class ConfrontationScene {
      *          rectangle.
      */
     public GameButton getTopLeftButton() {
+        return this.topLeftButton;
+    }
+    
+    public GameButton getLeftButton() {
         return this.topLeftButton;
     }
     
@@ -796,6 +575,10 @@ public class ConfrontationScene {
         return this.topRightButton;
     }
     
+    public GameButton getRightButton() {
+        return this.topRightButton;
+    }
+    
     /**
      * Public method that returns the GameButton used in the bottom right of the bottom rectangle.
      * <p>
@@ -820,16 +603,15 @@ public class ConfrontationScene {
      * 
      * @return  A double, which is the health of the first character.
      */
-    public double getChar1HealthBar() {
-        return this.char1HealthBar;
+    public double getChar1Health() {
+        return this.char1Health;
     }
     
-    /*
-    public void setChar1HealthBar(double newChar1HealthBar) {
-        if (newChar1HealthBar > 100) newChar1HealthBar = 100;
-        else if (newChar1HealthBar < 0) newChar1HealthBar = 0;
-        this.char1HealthBar = newChar1HealthBar;
-        this.char1HealthBarForeground.setWidth(250 * (newChar1HealthBar / 100));
+    public void setChar1Health(double newChar1Health) {
+        if (newChar1Health > 100) newChar1Health = 100;
+        else if (newChar1Health < 0) newChar1Health = 0;
+        this.char1Health = newChar1Health;
+        this.char1HealthBarForeground.setWidth(250 * (newChar1Health / 100));
     }
     
     public Rectangle getChar1HealthBarForeground() {
@@ -839,7 +621,6 @@ public class ConfrontationScene {
     public Rectangle getChar1HealthBarBackground() {
         return this.char1HealthBarBackground;
     }
-    */
     
     /**
      * Public method that returns the health of the second character as a double.
@@ -850,16 +631,15 @@ public class ConfrontationScene {
      * 
      * @return  A double, which is the health of the second character.
      */
-    public double getChar2HealthBar() {
-        return this.char2HealthBar;
+    public double getChar2Health() {
+        return this.char2Health;
     }
     
-    /*
-    public void setChar2HealthBar(double newChar2HealthBar) {
-        if (newChar2HealthBar > 100) newChar2HealthBar = 100;
-        else if (newChar2HealthBar < 0) newChar2HealthBar = 0;
-        this.char2HealthBar = newChar2HealthBar;
-        this.char2HealthBarForeground.setWidth(250 * (newChar2HealthBar / 100));
+    public void setChar2Health(double newChar2Health) {
+        if (newChar2Health > 100) newChar2Health = 100;
+        else if (newChar2Health < 0) newChar2Health = 0;
+        this.char2Health = newChar2Health;
+        this.char2HealthBarForeground.setWidth(250 * (newChar2Health / 100));
     }
     
     public Rectangle getChar2HealthBarForeground() {
@@ -871,13 +651,12 @@ public class ConfrontationScene {
     }
     
     public Text getTitle() {
-        return this.title;
+        return this.titleText;
     }
     
     public Text getBody() {
-        return this.body;
+        return this.bodyText;
     }
-    */
     
     /**
      * Public method that returns a Group containing all the Nodes in the confrontation scene.
@@ -894,9 +673,9 @@ public class ConfrontationScene {
         nodesToAdd.getChildren().addAll(
             this.backgroundImageView,
             this.farCharPlat,
-            this.char2,
+            this.char2ImageView,
             this.closeCharPlat,
-            this.char1,
+            this.char1ImageView,
             this.bottomRectangle
         );
         
@@ -911,8 +690,8 @@ public class ConfrontationScene {
         if(this.char1HealthBarForeground != null) nodesToAdd.getChildren().add(this.char1HealthBarForeground);
         
         TextFlow textToAdd = new TextFlow();
-        if (this.title != null) textToAdd.getChildren().add(this.title);
-        if (this.body != null) textToAdd.getChildren().add(this.body);
+        if (this.titleText != null) textToAdd.getChildren().add(this.titleText);
+        if (this.bodyText != null) textToAdd.getChildren().add(this.bodyText);
         textToAdd.setLineSpacing(10);
         textToAdd.setPrefWidth(550);
         textToAdd.setPrefHeight(150);
@@ -992,7 +771,7 @@ public class ConfrontationScene {
     }
     
     /**
-     * Private method that returns the Font from the specified file.
+     * Public method that returns the Font from the specified file.
      * <p>
      * This private non-static method is used to get a Font from a
      * certain file.
@@ -1002,10 +781,10 @@ public class ConfrontationScene {
      * @return  An instance of the Font class, which is the actual font
      *          at the specified size.
      */
-    private Font getFontFromFile(File fontFile, double fontSize) {
+    public Font getFontFromFile(double fontSize) {
         Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
         try {
-            FileInputStream fontFIS = new FileInputStream(fontFile);
+            FileInputStream fontFIS = new FileInputStream(this.textFontFile);
             fontFont = Font.loadFont(fontFIS, fontSize);
         } catch (IOException ioe) {
             ioe.printStackTrace();

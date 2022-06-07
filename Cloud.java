@@ -142,6 +142,22 @@ public class Cloud extends Shape {
         this.yVal = newYValue;
     }
     
+    public double getScale() {
+        return this.scale;
+    }
+    
+    public void setScale(double newScale) {
+        this.scale = newScale;
+    }
+    
+    public Paint getCloudFill() {
+        return this.colour;
+    }
+    
+    public void getCloudFill(Paint newColour) {
+        this.colour = newColour;
+    }
+    
    /**
     * Public non-static method used to get the actual cloud shape.
     * <p>
@@ -163,5 +179,5 @@ public class Cloud extends Shape {
         returnedShape.getTransforms().add(new Translate(this.xVal, this.yVal));
         returnedShape.getTransforms().add(new Scale(this.scale, this.scale));
         return returnedShape;
-    } 
+    }
 }

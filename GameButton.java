@@ -11,6 +11,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.Cursor;
 
 
 import java.io.File;
@@ -19,17 +21,7 @@ import java.io.IOException;
 
 
 public class GameButton {
-    
-    //private Label label;
-    
-    //private Text textText;
-    
-    private TextFlow textTextFlow;
-    
-    private Rectangle boxAroundLabel;
-    
-    //private Rectangle redRectangleAroundButton;
-    
+
     private double xCoord;
     
     private double yCoord;
@@ -38,7 +30,161 @@ public class GameButton {
     
     private double height;
     
-    public GameButton (String text, File fontFile, int fontSize, String fontPaint, String backgroundPaint, String strokePaint, double xCoord, double yCoord, double width, double height, double textTranslationX, double textTranslationY) {
+    private double textTranslationX;
+
+    private double textTranslationY;
+        
+    private Text textText;
+    
+    private Rectangle boxAroundLabel;
+    
+    private File textFontFile;
+    
+    public GameButton (File textFontFile, String text, double xCoord, double yCoord, int fontSize) {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+        this.width = 160;
+        this.height = 50;
+        this.textTranslationX = 0;
+        this.textTranslationY = 0;
+        this.textFontFile = textFontFile;
+        
+        this.textText = new Text(text);
+        this.textText.setFont(this.getFontFromFile(fontSize));
+        this.textText.setFill(Paint.valueOf("rgb(255,255,255)"));
+        
+        
+        this.boxAroundLabel = new Rectangle(0, 0, this.width, this.height);
+        this.boxAroundLabel.setFill(Paint.valueOf("rgb(0,0,0)"));
+        this.boxAroundLabel.setStrokeType(StrokeType.OUTSIDE);
+        this.boxAroundLabel.setStroke(Paint.valueOf("rgb(255,0,0)"));
+        this.boxAroundLabel.setStrokeWidth(0.0);
+    }
+    
+    public void cursorOverButton() {
+        this.boxAroundLabel.setStrokeWidth(3.0);
+    }
+    
+    public void cursorNotOverButton() {
+        this.boxAroundLabel.setStrokeWidth(0.0);
+    }
+    
+    public double getLeftX() {
+        return this.xCoord;
+    }
+    
+    public double getRightX() {
+        return this.xCoord + this.width;
+    }
+    
+    public double getTopY() {
+        return this.yCoord;
+    }
+    
+    public double getBottomY() {
+        return this.yCoord + this.height;
+    }
+    
+    public void setXCoord(double newXCoord) {
+        this.xCoord = newXCoord;
+    }
+    
+    public void setYCoord(double newYCoord) {
+        this.yCoord = newYCoord;
+    }
+    
+    public double getWidth() {
+        return this.width;
+    }
+    
+    public void setWidth(double newWidth) {
+        this.width = newWidth;
+        //this.textTextFlow.setPrefWidth(newWidth);
+        this.boxAroundLabel.setWidth(newWidth);
+    }
+    
+    public double getHeight() {
+        return this.height;
+    }
+    
+    public void setHeight(double newHeight) {
+        this.height = newHeight;
+        //this.textTextFlow.setPrefHeight(newHeight);
+        this.boxAroundLabel.setHeight(newHeight);
+    }
+    
+    public double getTextTranslationX() {
+        return this.textTranslationX;
+    }
+    
+    public void setTextTranslationX(double newTextTranslationX) {
+        this.textTranslationX = newTextTranslationX;
+    }
+    
+    public double getTextTranslationY() {
+        return this.textTranslationY;
+    }
+    
+    public void setTextTranslationY(double newTextTranslationY) {
+        this.textTranslationY = newTextTranslationY;
+    }
+    
+    public Text getText() {
+        return this.textText;
+    }
+    
+    public Rectangle getBackgroundRectangle() {
+        return this.boxAroundLabel;
+    }
+    
+    public File getFontFile() {
+        return this.textFontFile;
+    }
+    
+    public void setFontFile(File newFontFile) {
+        this.textFontFile = newFontFile;
+    }
+        
+    public Font getFontFromFile(double fontSize) {
+        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
+        try {
+            FileInputStream fontFIS = new FileInputStream(this.textFontFile);
+            fontFont = Font.loadFont(fontFIS, fontSize);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return fontFont;
+    }
+    
+    public Pane getButton() {
+        Pane returnedValue = new Pane();
+        
+        TextFlow textTextFlow = new TextFlow();
+        textTextFlow.getChildren().addAll(
+            this.textText
+        );
+        textTextFlow.setTextAlignment(TextAlignment.CENTER);
+        textTextFlow.setPrefWidth(this.width);
+        textTextFlow.setPrefHeight(this.height);
+        textTextFlow.setTranslateX(this.textTranslationX + 1);
+        textTextFlow.setTranslateY(this.textTranslationY + 16);
+        
+        returnedValue.getChildren().addAll(
+            //this.redRectangleAroundButton,
+            this.boxAroundLabel,
+            //this.label
+            textTextFlow
+            //this.textText
+        );
+        returnedValue.setTranslateX(this.xCoord);
+        returnedValue.setTranslateY(this.yCoord);
+        return returnedValue;
+    }
+}
+
+
+/*
+public GameButton (String text, File fontFile, int fontSize, String fontPaint, String backgroundPaint, String strokePaint, double xCoord, double yCoord, double width, double height, double textTranslationX, double textTranslationY) {
         //this.label = new Label(text);
         this.xCoord = xCoord;
         this.yCoord = yCoord;
@@ -104,150 +250,5 @@ public class GameButton {
         //this.redRectangleAroundButton.setFill(Paint.valueOf("rgb(255,0,0)"));
         //this.redRectangleAroundButton.setTranslateX(xCoord);
         //this.redRectangleAroundButton.setTranslateY(yCoord);
-        
-        
     }
-    
-    public void cursorOverButton() {
-        this.boxAroundLabel.setStrokeWidth(3.0);
-        //this.textText.setTranslateX(-3.5);
-        //this.textText.setTranslateY(-3.5);
-        //this.label.setTranslateX(-0.5);
-        //this.label.setTranslateY(-0.5);
-        //this.boxAroundLabel.setTranslateX(-3);
-        //this.boxAroundLabel.setTranslateY(-3);
-        //this.redRectangleAroundButton.setVisible(true);
-    }
-    
-    public void cursorNotOverButton() {
-        this.boxAroundLabel.setStrokeWidth(0.0);
-        //this.textText.setTranslateX(0);
-        //this.textText.setTranslateY(0);
-        //this.label.setTranslateX(0.5);
-        //this.label.setTranslateY(0.5);
-        //this.boxAroundLabel.setTranslateX(0);
-        //this.boxAroundLabel.setTranslateY(0);
-        //this.redRectangleAroundButton.setVisible(false);
-    }
-    
-    public double getLeftX() {
-        return this.xCoord;
-    }
-    
-    public double getRightX() {
-        return this.xCoord + this.width;
-    }
-    
-    public double getTopY() {
-        return this.yCoord;
-    }
-    
-    public double getBottomY() {
-        return this.yCoord + this.height;
-    }
-    
-    public void setXCoord(double newXCoord) {
-        this.xCoord = newXCoord;
-    }
-    
-    public void setYCoord(double newYCoord) {
-        this.yCoord = newYCoord;
-    }
-    
-    public void setWidth(double newWidth) {
-        this.width = newWidth;
-        this.textTextFlow.setPrefWidth(newWidth);
-        this.boxAroundLabel.setWidth(newWidth);
-    }
-    
-    public void setHeight(double newHeight) {
-        this.height = newHeight;
-        this.textTextFlow.setPrefHeight(newHeight);
-        this.boxAroundLabel.setHeight(newHeight);
-    }  
-      
-    /*
-    public Rectangle getRedRectangle() {
-        return this.redRectangleAroundButton;
-    }
-    */
-    
-    /*
-    public Rectangle getRectAroundLabel() {
-        return this.boxAroundLabel;
-    }
-    */
-    
-    /*
-    private double getWidth(Label label) {
-        HBox root = new HBox();
-        root.getChildren().addAll(
-            label
-        );
-        Scene scene = new Scene(root, 600, 600);
-        
-        root.applyCss();
-        root.layout();
-        return label.getWidth();
-    }
-    
-    private double getHoriPadding(double width) {
-        return (width - this.getWidth(this.label)) / 2.0;
-    }
-    
-    private double getHeight(Label label) {
-        HBox root = new HBox();
-        root.getChildren().addAll(
-            label
-        );
-        Scene scene = new Scene(root, 600, 600);
-        
-        root.applyCss();
-        root.layout();
-        return label.getHeight();
-    }
-    
-    private double getVertPadding(double height) {
-        return (height - this.getHeight(this.label)) / 2.0;
-    }
-    */
-    
-    private Font getFontFromFile(File fontFile, double fontSize) {
-        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        try {
-            FileInputStream fontFIS = new FileInputStream(fontFile);
-            fontFont = Font.loadFont(fontFIS, fontSize);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return fontFont;
-    }
-    
-    /*
-    public String getText() {
-        return this.label.getText();
-    }
-    
-    public void setText(String newText) {
-        this.label.setText(newText);
-    }
-    
-    public Label getLabel() {
-        return this.label;
-    }
-    */
-    
-    public Pane getButton() {
-        Pane returnedValue = new Pane();
-        returnedValue.getChildren().addAll(
-            //this.redRectangleAroundButton,
-            this.boxAroundLabel,
-            //this.label
-            this.textTextFlow
-            //this.textText
-        );
-        returnedValue.setTranslateX(this.xCoord);
-        returnedValue.setTranslateY(this.yCoord);
-        return returnedValue;
-    }
-}
+*/

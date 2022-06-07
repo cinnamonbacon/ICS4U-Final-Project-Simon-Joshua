@@ -19,8 +19,169 @@ import java.io.FileInputStream;
 
 public class GameTitle {
     
-    private StackPane overallTitle;
+    private double xCoord;
     
+    private double yCoord;
+    
+    private double width;
+    
+    private double height;
+    
+    private double spacing;
+    
+    private Text title;
+    
+    private Text subheading;
+    
+    private Rectangle underlineRect;
+    
+    private File textFontFile;
+    
+    public GameTitle(File textFontFile, String titleText, String subheadingText, double xCoord, double yCoord, int fontSize) {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+        this.width = Region.USE_COMPUTED_SIZE;
+        this.height = Region.USE_COMPUTED_SIZE;
+        this.spacing = 10;
+        this.textFontFile = textFontFile;
+        
+        this.title = new Text(titleText + "\n");
+        this.title.setFont(this.getFontFromFile(fontSize));
+        this.title.setFill(Paint.valueOf("rgb(255,255,255)"));
+        
+        this.subheading = new Text(subheadingText);
+        this.subheading.setFont(this.getFontFromFile(fontSize));
+        this.subheading.setFill(Paint.valueOf("rgb(255,0,0)"));
+        
+        this.underlineRect = new Rectangle(0, this.getHeight(this.title), this.getWidth(this.title), 2);
+        this.underlineRect.setFill(Paint.valueOf("rgb(255,255,255)"));
+    }
+    
+    public double getXCoord() {
+        return this.xCoord;
+    }
+    
+    public void setXCoord(double newXCoord) {
+        this.xCoord = newXCoord;
+    }
+    
+    public double getYCoord() {
+        return this.yCoord;
+    }
+    
+    public void setYCoord(double newYCoord) {
+        this.yCoord = newYCoord;
+    }
+    
+    public double getWidth() {
+        return this.width;
+    }
+    
+    public void setWidth(double newWidth) {
+        this.width = newWidth;
+        this.underlineRect.setWidth(newWidth);
+    }
+    
+    public double getHeight() {
+        return this.height;
+    }
+    
+    public void setHeight(double newHeight) {
+        this.height = newHeight;
+    }
+    
+    public double getSpacing() {
+        return this.spacing;
+    }
+    
+    public void setSpacing(double newSpacing) {
+        this.spacing = newSpacing;
+    }
+    
+    public Text getTitleText() {
+        return this.title;
+    }
+    
+    public Text getSubheadingText() {
+        return this.subheading;
+    }
+    
+    public Rectangle getUnderlineRectangle() {
+        return this.underlineRect;
+    }
+    
+    public File getFontFile() {
+        return this.textFontFile;
+    }
+    
+    public void setFontFile(File newFontFile) {
+        this.textFontFile = newFontFile;
+    }
+    
+    public Font getFontFromFile(double fontSize) {
+        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
+        try {
+            FileInputStream fontFIS = new FileInputStream(this.textFontFile);
+            fontFont = Font.loadFont(fontFIS, fontSize);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return fontFont;
+    }
+    
+    public StackPane getTitle() {
+        TextFlow tempTextFlow = new TextFlow();
+        tempTextFlow.getChildren().addAll(
+            this.title,
+            this.subheading
+        );
+        tempTextFlow.setTextAlignment(TextAlignment.CENTER);
+        tempTextFlow.setLineSpacing(this.spacing);
+        tempTextFlow.setPrefWidth(this.width);
+        tempTextFlow.setPrefHeight(this.height);
+        
+        StackPane overallTitle = new StackPane();
+        overallTitle.getChildren().addAll(
+            tempTextFlow,
+            this.underlineRect
+        );
+        
+        overallTitle.setTranslateX(this.xCoord);
+        overallTitle.setTranslateY(this.yCoord);
+        
+        return overallTitle;
+    }
+    
+    private double getWidth(Text text) {
+        Label label = new Label(text.getText());
+        label.setFont(text.getFont());
+        HBox root = new HBox();
+        root.getChildren().addAll(
+            label
+        );
+        Scene scene = new Scene(root, 600, 600);
+        
+        root.applyCss();
+        root.layout();
+        return label.getWidth();
+    }
+    
+    private double getHeight(Text text) {
+        Label label = new Label(text.getText());
+        label.setFont(text.getFont());
+        HBox root = new HBox();
+        root.getChildren().addAll(
+            label
+        );
+        Scene scene = new Scene(root, 600, 600);
+        
+        root.applyCss();
+        root.layout();
+        return label.getHeight();
+    }    
+}
+
+/*
     public GameTitle(File fontFile, String titleFontPaint, String subheadingText, String subheadingFontPaint, double spacing, double xCoord, double yCoord, double width) {
         this(fontFile, "Trans-form:", 24, titleFontPaint, subheadingText, 24, subheadingFontPaint, spacing, 0, 2, xCoord, yCoord, width, Region.USE_COMPUTED_SIZE);
     }
@@ -64,8 +225,9 @@ public class GameTitle {
         this.overallTitle.setTranslateY(yCoord);
            
     }
-    
-    /*
+*/
+
+/*
     public GameTitle(File fontFile, String titleText, int titleFontSize, String titleFontPaint, String subheadingText, int subheadingFontSize, String subheadingFontPaint, double xCoord, double yCoord, double gap, double underlineHeight, double underlineY) {
         Label titleLabel = new Label(titleText);
         
@@ -166,47 +328,3 @@ public class GameTitle {
         */
         //this.overallTitle = titleStackPane;
     //}
-    
-    private double getWidth(Text text) {
-        Label label = new Label(text.getText());
-        label.setFont(text.getFont());
-        HBox root = new HBox();
-        root.getChildren().addAll(
-            label
-        );
-        Scene scene = new Scene(root, 600, 600);
-        
-        root.applyCss();
-        root.layout();
-        return label.getWidth();
-    }
-    
-    private double getHeight(Text text) {
-        Label label = new Label(text.getText());
-        label.setFont(text.getFont());
-        HBox root = new HBox();
-        root.getChildren().addAll(
-            label
-        );
-        Scene scene = new Scene(root, 600, 600);
-        
-        root.applyCss();
-        root.layout();
-        return label.getHeight();
-    }
-    
-    private Font getFontFromFile(File fontFile, double fontSize) {
-        Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
-        try {
-            FileInputStream fontFIS = new FileInputStream(fontFile);
-            fontFont = Font.loadFont(fontFIS, fontSize);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return fontFont;
-    }
-
-    public StackPane getTitle() {
-        return this.overallTitle;   
-    }
-}
