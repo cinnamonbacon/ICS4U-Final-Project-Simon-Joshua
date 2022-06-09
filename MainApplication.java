@@ -1870,6 +1870,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.initializeStageSettings(stage);
+        /*
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
@@ -1886,6 +1887,7 @@ public class MainApplication extends Application {
         this.screenNum = 0;
         this.confrontations = 0;
         stage.setScene(this.introAnimationScene);
+        */
 
         /*
         //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
@@ -1966,6 +1968,11 @@ public class MainApplication extends Application {
         Scene scene = new Scene(cs.getScene(), 600, 600);
         stage.setScene(scene);
         */
+        
+        GameButton test = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
+        BookScene bs = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", false, test);
+        Scene scene = new Scene(bs.getScene(), 600, 600);
+        stage.setScene(scene);
         
         stage.show();
     }
