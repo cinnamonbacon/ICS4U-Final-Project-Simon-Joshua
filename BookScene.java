@@ -35,9 +35,11 @@ public class BookScene {
     private File textFontFile;
    
     private boolean textOnLeftSide;
+    
+    private double lineSpacing;
    
-    public BookScene(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide) {
-        this.instantiateVariables(textFontFile, bookImage, textForTitle, textForBody, textOnLeftSide);
+    public BookScene(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide, double lineSpacing) {
+        this.instantiateVariables(textFontFile, bookImage, textForTitle, textForBody, textOnLeftSide, lineSpacing);
         
         this.backButton = new GameButton(this.textFontFile, "Back", 420, 535, 18);
         this.backButton.setWidth(125);
@@ -45,8 +47,8 @@ public class BookScene {
         
     }
     
-    public BookScene(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide, GameButton backButton) {
-        this.instantiateVariables(textFontFile, bookImage, textForTitle, textForBody, textOnLeftSide);
+    public BookScene(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide, GameButton backButton, double lineSpacing) {
+        this.instantiateVariables(textFontFile, bookImage, textForTitle, textForBody, textOnLeftSide, lineSpacing);
         
         if (backButton != null) {
             backButton.setXCoord(420);
@@ -61,7 +63,7 @@ public class BookScene {
         }
     }
     
-    private void instantiateVariables(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide) {
+    private void instantiateVariables(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide, double lineSpacing) {
         this.textFontFile = textFontFile;
        
         //this.backgroundPaint = Paint.valueOf("green");
@@ -123,6 +125,8 @@ public class BookScene {
         }
         
         this.textOnLeftSide = textOnLeftSide;
+        
+        this.lineSpacing = lineSpacing;
     }
    
     public ImageView getBookImage() {
@@ -182,6 +186,14 @@ public class BookScene {
     public void setIfTextOnLeftSide(boolean newTextOnLeftSide) {
         this.textOnLeftSide = newTextOnLeftSide;
     }
+    
+    public double getLineSpacing() {
+        return this.lineSpacing;
+    }
+    
+    public void setLineSpacing(double newLineSpacing) {
+        this.lineSpacing = newLineSpacing;
+    }
    
     public Group getScene() {
     /*
@@ -211,7 +223,7 @@ public class BookScene {
                 this.bodyText
             );
             tempTextFlow.setPrefWidth(200);
-            tempTextFlow.setLineSpacing(7);
+            tempTextFlow.setLineSpacing(this.lineSpacing);
             tempTextFlow.setTranslateX(70);
             tempTextFlow.setTranslateY(60);
             
@@ -243,7 +255,7 @@ public class BookScene {
                 this.bodyText
             );
             tempTextFlow.setPrefWidth(200);
-            tempTextFlow.setLineSpacing(7);
+            tempTextFlow.setLineSpacing(this.lineSpacing);
             tempTextFlow.setTranslateX(325);
             tempTextFlow.setTranslateY(60);
             

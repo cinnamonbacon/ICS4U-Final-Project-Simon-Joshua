@@ -1870,7 +1870,6 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.initializeStageSettings(stage);
-        /*
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
@@ -1887,7 +1886,6 @@ public class MainApplication extends Application {
         this.screenNum = 0;
         this.confrontations = 0;
         stage.setScene(this.introAnimationScene);
-        */
 
         /*
         //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
@@ -1969,10 +1967,20 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         */
         
-        GameButton test = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
-        BookScene bs = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", false, test);
-        Scene scene = new Scene(bs.getScene(), 600, 600);
+        /*
+        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
+        //BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, backButton, 11);
+        //BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, backButton, 4.25);
+        //BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, backButton, 12);
+        //BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person’s preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, backButton, 11);
+        //BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone’s preferred pronouns or name", false, backButton, 9);
+        //BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, backButton, 11);
+        //BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, backButton, 2.5);
+        //BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, backButton, 3.5);
+        //BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, backButton, 7.5);
+        Scene scene = new Scene(fourthBookScene.getScene(), 600, 600);
         stage.setScene(scene);
+        */
         
         stage.show();
     }
