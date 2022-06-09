@@ -110,12 +110,45 @@ public class ConfrontationScene {
     /** Private non-static Text variable that will hold onto the text that will be used for the body (the text underneath the title). */
     private Text bodyText;
     
+    /*
+    public static final double TOP_LEFT_BUTTON_LEFT_X_COORD = 35;
+    public static final double TOP_LEFT_BUTTON_RIGHT_X_COORD = 295;
+    public static final double TOP_LEFT_BUTTON_TOP_Y_COORD = 435;
+    public static final double TOP_LEFT_BUTTON_BOTTOM_Y_COORD = 495;
+    
+    public static final double BOTTOM_LEFT_BUTTON_LEFT_X_COORD = 35;
+    public static final double BOTTOM_LEFT_BUTTON_RIGHT_X_COORD = 295;
+    public static final double BOTTOM_LEFT_BUTTON_TOP_Y_COORD = 505;
+    public static final double BOTTOM_LEFT_BUTTON_BOTTOM_Y_COORD = 565;
+    
+    public static final double TOP_RIGHT_BUTTON_LEFT_X_COORD = 305;
+    public static final double TOP_RIGHT_BUTTON_RIGHT_X_COORD = 565;
+    public static final double TOP_RIGHT_BUTTON_TOP_Y_COORD = 435;
+    public static final double TOP_RIGHT_BUTTON_BOTTOM_Y_COORD = 495;
+    
+    public static final double BOTTOM_RIGHT_BUTTON_LEFT_X_COORD = 305;
+    public static final double BOTTOM_RIGHT_BUTTON_RIGHT_X_COORD = 565;
+    public static final double BOTTOM_RIGHT_BUTTON_TOP_Y_COORD = 505;
+    public static final double BOTTOM_RIGHT_BUTTON_BOTTOM_Y_COORD = 565;
+    
+    public static final double LEFT_BUTTON_LEFT_X_COORD = 35;
+    public static final double LEFT_BUTTON_RIGHT_X_COORD = 295;
+    public static final double LEFT_BUTTON_TOP_Y_COORD = 475;
+    public static final double LEFT_BUTTON_BOTTOM_Y_COORD = 535;
+    
+    public static final double RIGHT_BUTTON_LEFT_X_COORD = 305;
+    public static final double RIGHT_BUTTON_RIGHT_X_COORD = 565;
+    public static final double RIGHT_BUTTON_TOP_Y_COORD = 475;
+    public static final double RIGHT_BUTTON_BOTTOM_Y_COORD = 535;
+    */
+    
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String textForBody) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         //this.instantiateVariablesHealth(char1Health, char2Health);
         
         if (textForTitle != null) {
-            this.titleText = new Text(textForTitle);
+            this.titleText = new Text(textForTitle + "\n");
+            this.titleText.setFont(this.getFontFromFile(18));
             this.titleText.setStyle("-fx-underline: true;");
             this.titleText.setX(0);
             this.titleText.setY(0);
@@ -125,6 +158,7 @@ public class ConfrontationScene {
         
         if (textForBody != null) {
             this.bodyText = new Text(textForBody);
+            this.bodyText.setFont(this.getFontFromFile(12));
             this.bodyText.setX(0);
             this.bodyText.setY(0);
         } else {
@@ -149,7 +183,8 @@ public class ConfrontationScene {
         this.instantiateVariablesHealth(char1Health, char2Health);
         
         if (textForTitle != null) {
-            this.titleText = new Text(textForTitle);
+            this.titleText = new Text(textForTitle + "\n");
+            this.titleText.setFont(this.getFontFromFile(18));
             this.titleText.setStyle("-fx-underline: true;");
             this.titleText.setX(0);
             this.titleText.setY(0);
@@ -159,6 +194,7 @@ public class ConfrontationScene {
         
         if (textForBody != null) {
             this.bodyText = new Text(textForBody);
+            this.bodyText.setFont(this.getFontFromFile(12));
             this.bodyText.setX(0);
             this.bodyText.setY(0);
         } else {
@@ -176,7 +212,8 @@ public class ConfrontationScene {
         //this.instantiateVariablesHealth(char1Health, char2Health);
         
         if (textForTitle != null) {
-            this.titleText = new Text(textForTitle);
+            this.titleText = new Text(textForTitle + "\n");
+            this.titleText.setFont(this.getFontFromFile(18));
             this.titleText.setStyle("-fx-underline: true;");
             this.titleText.setX(0);
             this.titleText.setY(0);
@@ -185,7 +222,7 @@ public class ConfrontationScene {
         }
         
         if (leftButtonText != null) {
-            this.topLeftButton = new GameButton(this.textFontFile, leftButtonText, 35, 490, 17);
+            this.topLeftButton = new GameButton(this.textFontFile, leftButtonText, 35, 475, 17);
             this.topLeftButton.setWidth(260);
             this.topLeftButton.setHeight(60);
         } else {
@@ -193,7 +230,7 @@ public class ConfrontationScene {
         }
         
         if (rightButtonText != null) {
-            this.topRightButton = new GameButton(this.textFontFile, rightButtonText, 305, 490, 17);
+            this.topRightButton = new GameButton(this.textFontFile, rightButtonText, 305, 475, 17);
             this.topRightButton.setWidth(260);
             this.topRightButton.setHeight(60);
         } else {
@@ -217,7 +254,8 @@ public class ConfrontationScene {
         this.instantiateVariablesHealth(char1Health, char2Health);
         
         if (textForTitle != null) {
-            this.titleText = new Text(textForTitle);
+            this.titleText = new Text(textForTitle + "\n");
+            this.titleText.setFont(this.getFontFromFile(18));
             this.titleText.setStyle("-fx-underline: true;");
             this.titleText.setX(0);
             this.titleText.setY(0);
@@ -226,7 +264,7 @@ public class ConfrontationScene {
         }
         
         if (leftButtonText != null) {
-            this.topLeftButton = new GameButton(this.textFontFile, leftButtonText, 35, 490, 17);
+            this.topLeftButton = new GameButton(this.textFontFile, leftButtonText, 35, 475, 17);
             this.topLeftButton.setWidth(260);
             this.topLeftButton.setHeight(60);
         } else {
@@ -234,9 +272,98 @@ public class ConfrontationScene {
         }
         
         if (rightButtonText != null) {
-            this.topRightButton = new GameButton(this.textFontFile, rightButtonText, 305, 490, 17);
+            this.topRightButton = new GameButton(this.textFontFile, rightButtonText, 305, 475, 17);
             this.topRightButton.setWidth(260);
             this.topRightButton.setHeight(60);
+        } else {
+            this.topRightButton = null;
+        }
+        
+        this.bodyText = null;
+        this.bottomLeftButton = null;
+        this.bottomRightButton = null;
+    }
+    
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, GameButton leftButton, GameButton rightButton) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        //this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (textForTitle != null) {
+            this.titleText = new Text(textForTitle + "\n");
+            this.titleText.setFont(this.getFontFromFile(18));
+            this.titleText.setStyle("-fx-underline: true;");
+            this.titleText.setX(0);
+            this.titleText.setY(0);
+        } else {
+            this.titleText = null;
+        }
+        
+        if (leftButton != null) {
+            leftButton.setXCoord(35);
+            leftButton.setYCoord(475);
+            //leftButton = new GameButton(this.textFontFile, topLeftButtonText, 35, 475, 17);
+            leftButton.setWidth(260);
+            leftButton.setHeight(60);
+            this.topLeftButton = leftButton;
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (rightButton != null) {
+            rightButton.setXCoord(305);
+            rightButton.setYCoord(475);
+            //rightButton = new GameButton(this.textFontFile, topRightButtonText, 305, 475, 17);
+            rightButton.setWidth(260);
+            rightButton.setHeight(60);
+            this.topRightButton = rightButton;
+        } else {
+            this.topRightButton = null;
+        }
+        
+        this.bodyText = null;
+        this.bottomLeftButton = null;
+        this.bottomRightButton = null;
+        
+        this.char1Health = 0;
+        this.char1HealthBarForeground = null;
+        this.char1HealthBarBackground = null;
+        this.char2Health = 0;
+        this.char2HealthBarForeground = null;
+        this.char2HealthBarBackground = null;
+    }
+    
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, GameButton leftButton, GameButton rightButton, double char1Health, double char2Health) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (textForTitle != null) {
+            this.titleText = new Text(textForTitle + "\n");
+            this.titleText.setFont(this.getFontFromFile(18));
+            this.titleText.setStyle("-fx-underline: true;");
+            this.titleText.setX(0);
+            this.titleText.setY(0);
+        } else {
+            this.titleText = null;
+        }
+        
+        if (leftButton != null) {
+            leftButton.setXCoord(35);
+            leftButton.setYCoord(475);
+            //leftButton = new GameButton(this.textFontFile, topLeftButtonText, 35, 475, 17);
+            leftButton.setWidth(260);
+            leftButton.setHeight(60);
+            this.topLeftButton = leftButton;
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (rightButton != null) {
+            rightButton.setXCoord(305);
+            rightButton.setYCoord(475);
+            //rightButton = new GameButton(this.textFontFile, topRightButtonText, 305, 475, 17);
+            rightButton.setWidth(260);
+            rightButton.setHeight(60);
+            this.topRightButton = rightButton;
         } else {
             this.topRightButton = null;
         }
@@ -260,8 +387,8 @@ public class ConfrontationScene {
         
         if (bottomLeftButtonText != null) {
             this.bottomLeftButton = new GameButton(this.textFontFile, bottomLeftButtonText, 35, 505, 17);
-            this.topLeftButton.setWidth(260);
-            this.topLeftButton.setHeight(60);
+            this.bottomLeftButton.setWidth(260);
+            this.bottomLeftButton.setHeight(60);
         } else {
             this.bottomLeftButton = null;
         }
@@ -307,8 +434,8 @@ public class ConfrontationScene {
         
         if (bottomLeftButtonText != null) {
             this.bottomLeftButton = new GameButton(this.textFontFile, bottomLeftButtonText, 35, 505, 17);
-            this.topLeftButton.setWidth(260);
-            this.topLeftButton.setHeight(60);
+            this.bottomLeftButton.setWidth(260);
+            this.bottomLeftButton.setHeight(60);
         } else {
             this.bottomLeftButton = null;
         }
@@ -333,6 +460,117 @@ public class ConfrontationScene {
         this.bodyText = null;
     }
     
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, GameButton topLeftButton, GameButton bottomLeftButton, GameButton topRightButton, GameButton bottomRightButton) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        //this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (topLeftButton != null) {
+            topLeftButton.setXCoord(35);
+            topLeftButton.setYCoord(435);
+            //topLeftButton = new GameButton(this.textFontFile, topLeftButtonText, 35, 435, 17);
+            topLeftButton.setWidth(260);
+            topLeftButton.setHeight(60);
+            this.topLeftButton = topLeftButton;
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (bottomLeftButton != null) {
+            bottomLeftButton.setXCoord(35);
+            bottomLeftButton.setYCoord(505);
+            //bottomLeftButton = new GameButton(this.textFontFile, bottomLeftButtonText, 35, 505, 17);
+            bottomLeftButton.setWidth(260);
+            bottomLeftButton.setHeight(60);
+            this.bottomLeftButton = bottomLeftButton;
+        } else {
+            this.bottomLeftButton = null;
+        }
+        
+        if (topRightButton != null) {
+            topRightButton.setXCoord(305);
+            topRightButton.setYCoord(435);
+            //topRightButton = new GameButton(this.textFontFile, topRightButtonText, 305, 435, 17);
+            topRightButton.setWidth(260);
+            topRightButton.setHeight(60);
+            this.topRightButton = topRightButton;
+        } else {
+            this.topRightButton = null;
+        }
+        
+        if (bottomRightButton != null) {
+            bottomRightButton.setXCoord(305);
+            bottomRightButton.setYCoord(505);
+            //bottomRightButton = new GameButton(this.textFontFile, bottomRightButtonText, 305, 505, 17);
+            bottomRightButton.setWidth(260);
+            bottomRightButton.setHeight(60);
+            this.bottomRightButton = bottomRightButton;
+        } else {
+            this.bottomRightButton = null;
+        }
+        
+        this.titleText = null;
+        this.bodyText = null;
+        
+        this.char1Health = 0;
+        this.char1HealthBarForeground = null;
+        this.char1HealthBarBackground = null;
+        this.char2Health = 0;
+        this.char2HealthBarForeground = null;
+        this.char2HealthBarBackground = null;
+    }
+    
+    public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, GameButton topLeftButton, GameButton bottomLeftButton, GameButton topRightButton, GameButton bottomRightButton, double char1Health, double char2Health) {
+        this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
+        this.instantiateVariablesHealth(char1Health, char2Health);
+        
+        if (topLeftButton != null) {
+            topLeftButton.setXCoord(35);
+            topLeftButton.setYCoord(435);
+            //topLeftButton = new GameButton(this.textFontFile, topLeftButtonText, 35, 435, 17);
+            topLeftButton.setWidth(260);
+            topLeftButton.setHeight(60);
+            this.topLeftButton = topLeftButton;
+        } else {
+            this.topLeftButton = null;
+        }
+        
+        if (bottomLeftButton != null) {
+            bottomLeftButton.setXCoord(35);
+            bottomLeftButton.setYCoord(505);
+            //bottomLeftButton = new GameButton(this.textFontFile, bottomLeftButtonText, 35, 505, 17);
+            bottomLeftButton.setWidth(260);
+            bottomLeftButton.setHeight(60);
+            this.bottomLeftButton = bottomLeftButton;
+        } else {
+            this.bottomLeftButton = null;
+        }
+        
+        if (topRightButton != null) {
+            topRightButton.setXCoord(305);
+            topRightButton.setYCoord(435);
+            //topRightButton = new GameButton(this.textFontFile, topRightButtonText, 305, 435, 17);
+            topRightButton.setWidth(260);
+            topRightButton.setHeight(60);
+            this.topRightButton = topRightButton;
+        } else {
+            this.topRightButton = null;
+        }
+        
+        if (bottomRightButton != null) {
+            bottomRightButton.setXCoord(305);
+            bottomRightButton.setYCoord(505);
+            //bottomRightButton = new GameButton(this.textFontFile, bottomRightButtonText, 305, 505, 17);
+            bottomRightButton.setWidth(260);
+            bottomRightButton.setHeight(60);
+            this.bottomRightButton = bottomRightButton;
+        } else {
+            this.bottomRightButton = null;
+        }
+        
+        this.titleText = null;
+        this.bodyText = null;
+    }
+    
     private void instantiateVariablesNonHealth(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView) {
         this.textFontFile = textFontFile;
         
@@ -348,6 +586,7 @@ public class ConfrontationScene {
             "-fx-background-radius: 10; " +
             "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
         );
+        this.closeCharPlat.setFill(Paint.valueOf("rgb(255,0,0)"));
         this.closeCharPlat.setStroke(Paint.valueOf("black"));
         this.closeCharPlat.setStrokeWidth(2.0);
         //this.closeCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
@@ -357,6 +596,7 @@ public class ConfrontationScene {
             "-fx-background-radius: 10; " +
             "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 20);"
         );
+        this.farCharPlat.setFill(Paint.valueOf("rgb(0,0,255)"));
         this.farCharPlat.setStroke(Paint.valueOf("black"));
         this.farCharPlat.setStrokeWidth(2.0);
         //this.farCharPlat.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 25);");
@@ -375,7 +615,9 @@ public class ConfrontationScene {
         char2ImageView.setFitWidth(126);
         this.char2ImageView = char2ImageView;
         
-        this.bottomRectangle = new Rectangle(550, 150, Paint.valueOf("grey"));
+        this.bottomRectangle = new Rectangle(550, 150, Paint.valueOf("rgb(63,63,255)"));
+        this.bottomRectangle.setStroke(Paint.valueOf("rgb(0,0,0)"));
+        this.bottomRectangle.setStrokeWidth(1.0);
         this.bottomRectangle.setX(25);
         this.bottomRectangle.setY(425);
     }
@@ -391,7 +633,7 @@ public class ConfrontationScene {
         this.char1HealthBarForeground.setStrokeWidth(1.0);
         this.char1HealthBarForeground.setStroke(Paint.valueOf("black"));
         
-        this.char1HealthBarBackground = new Rectangle(250, 25, Paint.valueOf("yellow"));
+        this.char1HealthBarBackground = new Rectangle(250, 25, Paint.valueOf("black"));
         this.char1HealthBarBackground.setX(25);
         this.char1HealthBarBackground.setY(110);
         this.char1HealthBarBackground.setStrokeWidth(1.0);
@@ -401,15 +643,15 @@ public class ConfrontationScene {
         else if (char2Health < 0) char2Health = 0;
         this.char2Health = char2Health;
         
-        this.char2HealthBarForeground = new Rectangle(250 * (char2Health / 100), 25, Paint.valueOf("grey"));
+        this.char2HealthBarForeground = new Rectangle(250 * (char2Health / 100), 25, Paint.valueOf("yellow"));
         this.char2HealthBarForeground.setX(325);
-        this.char2HealthBarForeground.setY(60);
+        this.char2HealthBarForeground.setY(50);
         this.char2HealthBarForeground.setStrokeWidth(1.0);
         this.char2HealthBarForeground.setStroke(Paint.valueOf("black"));
 
-        this.char2HealthBarBackground = new Rectangle(250, 25, Paint.valueOf("grey"));
+        this.char2HealthBarBackground = new Rectangle(250, 25, Paint.valueOf("black"));
         this.char2HealthBarBackground.setX(325);
-        this.char2HealthBarBackground.setY(60);
+        this.char2HealthBarBackground.setY(50);
         this.char2HealthBarBackground.setStrokeWidth(1.0);
         this.char2HealthBarBackground.setStroke(Paint.valueOf("black"));
     }
@@ -525,6 +767,50 @@ public class ConfrontationScene {
     public Rectangle getBottomRectangle() {
         return this.bottomRectangle;
     }
+    
+    /*
+    public static GameButton getTopLeftButtonBlank() {
+        GameButton returnedButton = new GameButton(this.textFontFile, "", 35, 435, 1);
+        returnedButton.setWidth(260);
+        returnedButton.setHeight(60);
+        return returnedButton; 
+    }
+    
+    public static GameButton getBottomLeftButtonBlank() {
+        GameButton returnedButton = new GameButton(this.textFontFile, "", 35, 505, 1);
+        returnedButton.setWidth(260);
+        returnedButton.setHeight(60);
+        return returnedButton; 
+    }
+    
+    public static GameButton getTopRightButtonBlank() {
+        GameButton returnedButton = new GameButton(this.textFontFile, "", 305, 435, 1);
+        returnedButton.setWidth(260);
+        returnedButton.setHeight(60);
+        return returnedButton; 
+    }
+    
+    public static GameButton getBottomRightButtonBlank() {
+        GameButton returnedButton = new GameButton(this.textFontFile, "", 305, 505, 1);
+        returnedButton.setWidth(260);
+        returnedButton.setHeight(60);
+        return returnedButton; 
+    }
+    
+    public static GameButton getLeftButtonBlank() {
+        GameButton returnedButton = new GameButton(this.textFontFile, "", 305, 475, 1);
+        returnedButton.setWidth(260);
+        returnedButton.setHeight(60);
+        return returnedButton; 
+    }
+    
+    public static GameButton getRightButtonBlank() {
+        GameButton returnedButton = new GameButton(this.textFontFile, "", 305, 475, 1);
+        returnedButton.setWidth(260);
+        returnedButton.setHeight(60);
+        return returnedButton; 
+    }
+    */
     
     /**
      * Public method that returns the GameButton used in the top left of the bottom rectangle.
@@ -691,12 +977,15 @@ public class ConfrontationScene {
         
         TextFlow textToAdd = new TextFlow();
         if (this.titleText != null) textToAdd.getChildren().add(this.titleText);
-        if (this.bodyText != null) textToAdd.getChildren().add(this.bodyText);
-        textToAdd.setLineSpacing(10);
+        if (this.bodyText != null) {
+            this.bodyText.setTranslateY(20);
+            textToAdd.getChildren().add(this.bodyText);
+        }
+        //textToAdd.setLineSpacing(10);
         textToAdd.setPrefWidth(550);
         textToAdd.setPrefHeight(150);
-        textToAdd.setTranslateX(25);
-        textToAdd.setTranslateY(425);
+        textToAdd.setTranslateX(35);
+        textToAdd.setTranslateY(435);
         nodesToAdd.getChildren().add(textToAdd);
         
         return nodesToAdd;
