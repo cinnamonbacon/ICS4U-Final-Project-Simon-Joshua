@@ -176,8 +176,8 @@ public class MainApplication extends Application {
     /** This private non-static integer variable will hold the number of the grid that the player is currently in. */
     private int gridNum;
 
-    /** This private non-static Group[] variable will be used to hold onto the books that are being used in the game (one element for each book). */
-    private Group[] books;
+    /** This private non-static BookScene[] variable will be used to hold onto the books that are being used in the game (one element for each book). */
+    private BookScene[] books;
 
     /** This private non-static boolean variable will be used to hold onto whether or not the game is showing a book or not. */
     private boolean showingBook;
@@ -366,7 +366,7 @@ public class MainApplication extends Application {
         this.cafFloorFiles[0] = new File("cafFloor1.png");
         this.cafFloorFiles[1] = new File("cafFloor2.png");
         
-        this.books = new Group[9];
+        this.books = new BookScene[9];
         this.pressStart2PFile = new File("PressStart2P-Regular.ttf");
         this.screenNum = 0;
         
@@ -686,8 +686,8 @@ public class MainApplication extends Application {
         mainCharacterImageView.setPreserveRatio(true);
         mainCharacterImageView.setSmooth(true);
         mainCharacterImageView.setX(230);
-        mainCharacterImageView.setY(364);
-        mainCharacterImageView.setFitWidth(120);
+        mainCharacterImageView.setY(355);
+        mainCharacterImageView.setFitWidth(140);
 
         Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
         yellowCircleForSun.setStroke(Paint.valueOf("rgb(0,0,0)"));
@@ -1088,6 +1088,80 @@ public class MainApplication extends Application {
             bookLabel
         );
         scene = new Scene(view);
+        
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                //System.out.println(xVal + " " + yVal);
+                
+                if (showingBook) {
+                    if (xVal >= books[bookNum].getBackButton().getLeftX() && xVal <= books[bookNum].getBackButton().getRightX() && yVal >= books[bookNum].getBackButton().getTopY() && yVal <= books[bookNum].getBackButton().getBottomY()) {
+                        scene.setCursor(Cursor.HAND);
+                    } else {
+                        scene.setCursor(Cursor.DEFAULT);
+                    }
+                } else {
+                    scene.setCursor(Cursor.DEFAULT);
+                }
+            }
+        );
+
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                //System.out.println(xVal + " " + yVal);
+                
+                if (showingBook) {
+                    if (xVal >= books[bookNum].getBackButton().getLeftX() && xVal <= books[bookNum].getBackButton().getRightX() && yVal >= books[bookNum].getBackButton().getTopY() && yVal <= books[bookNum].getBackButton().getBottomY()) {
+                        books[bookNum].getBackButton().cursorOverButton();
+                        scene.setRoot(books[bookNum].getScene());
+                        //backButton.getRedRectangle().setVisible(true);
+                        //redRectangleAroundBackButton.setVisible(true);
+                    } else {
+                        books[bookNum].getBackButton().cursorNotOverButton();
+                        scene.setRoot(books[bookNum].getScene());
+                        //backButton.getRedRectangle().setVisible(false);
+                        //redRectangleAroundBackButton.setVisible(false);
+                    }
+                }
+            }
+        );
+
+        scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+                if (showingBook) {
+                    if (xVal >= books[bookNum].getBackButton().getLeftX() && xVal <= books[bookNum].getBackButton().getRightX() && yVal >= books[bookNum].getBackButton().getTopY() && yVal <= books[bookNum].getBackButton().getBottomY()) {
+                        showingBook = false;
+                        gr[gridNum] = grid[gridNum].draw();
+                        bookNum++;
+                        Image image = new Image(mainCharFile.toURI().toString());
+                        mainChar.setImage(image);
+                        mainChar.setX(30 * grid[gridNum].getX());
+                        mainChar.setY(30 * grid[gridNum].getY()-15);
+                        if(direction.equals("left")){
+                            mainChar.setScaleX(-1);
+                        }else{
+                            mainChar.setScaleX(1);
+                        }
+                        view.getChildren().clear();
+                        view.getChildren().add(gr[gridNum]);
+                        view.getChildren().add(mainChar);
+                        bookLabel.setText(bookNum + "/" + books.length + " books found");
+                        view.getChildren().add(bookLabel);
+                        scene.setRoot(view);
+                    }
+                }
+            }
+        );
 
         // Runs on a key press.
         try {
@@ -1096,17 +1170,20 @@ public class MainApplication extends Application {
                     try {
                         if (k.getCode() == KeyCode.SPACE) {
                             Tile interaction = grid[gridNum].interact();
-                            if (showingBook) {
-                                showingBook = false;
-                                gr[gridNum] = grid[gridNum].draw();
-                            } else if (interaction.getObject().equals(bookTileFile.getPath())) {
+                            /*
+                                if (showingBook) {
+                                    showingBook = false;
+                                    gr[gridNum] = grid[gridNum].draw();
+                                } else 
+                            */
+                            if (interaction.getObject().equals(bookTileFile.getPath())) {
                                 showingBook = true;
                                 interaction.setObject(additionalGrassTileFile.getPath());
                                 interaction.setMovable(true);
                                 interaction.setInteractable(false);
-                                scene.setRoot(books[bookNum]);
-                                bookNum++;
-                                if (bookNum == books.length) {
+                                scene.setRoot(books[bookNum].getScene());
+                                //bookNum++;
+                                if (bookNum + 1 == books.length) {
                                     grid[0].setObject(15, 15, confrontationChar[0].getPath());
                                     grid[0].setMovable(15, 15, false);
                                     grid[0].setInteractable(15, 15, true);
@@ -3672,17 +3749,18 @@ public class MainApplication extends Application {
         */
         //stage.setScene(scene);
         
-        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
+        //GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
         
-        BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene1Image.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, backButton, 11);
-        BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene2Image.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, backButton, 4.25);
-        BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene3Image.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, backButton, 12);
-        BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene4Image.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person's preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, backButton, 11);
-        BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene5Image.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone's preferred pronouns or name", false, backButton, 9);
-        BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene6Image.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, backButton, 11);
-        BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene7Image.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, backButton, 2.5);
-        BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene8Image.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, backButton, 3.5);
-        BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene9Image.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, backButton, 7.5);
+        /*
+        BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene1Image.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
+        BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene2Image.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 4.25);
+        BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene3Image.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 12);
+        BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene4Image.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person's preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
+        BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene5Image.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone's preferred pronouns or name", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 9);
+        BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene6Image.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
+        BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene7Image.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 2.5);
+        BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene8Image.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 3.5);
+        BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene9Image.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 7.5);
         
         books[0] = firstBookScene.getScene();
         books[1] = secondBookScene.getScene();
@@ -3693,6 +3771,18 @@ public class MainApplication extends Application {
         books[6] = seventhBookScene.getScene();
         books[7] = eighthBookScene.getScene();
         books[8] = ninthBookScene.getScene();
+        */
+        
+        books[0] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene1Image.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
+        books[1] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene2Image.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 4.25);
+        books[2] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene3Image.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 12);
+        books[3] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene4Image.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person's preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
+        books[4] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene5Image.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone's preferred pronouns or name", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 9);
+        books[5] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene6Image.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
+        books[6] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene7Image.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 2.5);
+        books[7] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene8Image.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 3.5);
+        books[8] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene9Image.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 7.5);
+        
         
         stage.show();
     }
