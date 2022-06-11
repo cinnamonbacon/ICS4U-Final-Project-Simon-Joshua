@@ -35,17 +35,29 @@ import javafx.stage.StageStyle; // Imports the StageStyle.java class, which allo
 import javafx.util.Duration; // Imports the Duration.java class, which allows the program to set the duration of time for a specific task (say how long the fading animation (so FadeTransition instance) should last for).
 
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
-import java.io.IOException; // Imports the IOException.java class, which allows the user to take care of the IOExceptions that are thrown by any parts of the program.
+import java.io.IOException; // Imports the IOException.java class, which allows the program to take care of the IOExceptions that are thrown by any parts of the program.
 
 // Remember to add JavaDoc for these imports:
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text; 
+import javafx.scene.text.Text;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.TextFlow;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Pane;
-import java.io.FileInputStream;
+import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to read in data from files that arer on the user's computer.
+import java.util.Arrays;
+//import javafx.scene.control.Dialog;
+//import javafx.scene.control.DialogPane;
+//import javafx.scene.control.ButtonType;
+//import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.TextField;
+import javafx.animation.ScaleTransition;
+import javafx.scene.layout.StackPane;
+import java.time.LocalDateTime;
+import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane;
+import java.nio.charset.Charset;
 import javafx.scene.shape.Ellipse; // Imports the Ellipse.java class, which will allow the program to create ellipses for the graphics.
 import java.util.Arrays;
 //import javafx.scene.control.Dialog;
@@ -126,7 +138,7 @@ public class MainApplication extends Application {
     private File grassAndDirtBlockFile;
 
     /** This private non-static File variable will hold the design for the non-pixelated character in the main menu. */
-    private File characterNonPixelatedFile;
+    //private File characterNonPixelatedFile;
 
     /** This private non-static integer will hold the number of the screen that is currently being rendered. */
     private int screenNum; // Check to see if this variable is useful or not.
@@ -180,7 +192,7 @@ public class MainApplication extends Application {
     private Scene leaderboardScene;
 
     /** This private non-static File variable will hold onto the location of the first confrontation character file. */
-    private File level1Confrontation;
+    //private File level1Confrontation;
 
     /** This private non-static Scene variable will hold the scene for screen when the player quits the game. */
     private Scene quitGameScene;
@@ -321,6 +333,8 @@ public class MainApplication extends Application {
     
     private Scene writeUpScene;
     
+    private GridPane leaderboardValuesToAdd;
+    
     /**
      * An instance of the MainApplication class will be created using this no parameter constructor.
      */
@@ -333,10 +347,8 @@ public class MainApplication extends Application {
         this.bookTileFile = new File("Book.png");
         this.additionalGrassTileFile = new File("AdditionalGrass.png");
         this.grassAndDirtBlockFile = new File("ICS ISP - Design for Grass and Dirt Block.png");
-        this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
-        this.level1Confrontation = new File("Level1Confrontation.png");
-        this.leaderboard = new Leaderboard(new File("Leaderboard.txt"));
-        this.leaderboard.setFontFile(this.pressStart2PFile);
+        //this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
+        //this.level1Confrontation = new File("Confrontation1.png");
         
         this.mainCharFile = new File("MainChar.png");
         this.cafWallFile = new File("CafWall.png");
@@ -359,11 +371,35 @@ public class MainApplication extends Application {
         this.screenNum = 0;
         
         this.confrontationChar = new File[5];
-        this.confrontationChar[0] = new File("Level1Confrontation.png");
+        this.confrontationChar[0] = new File("Confrontation1.png");
         this.confrontationChar[1] = new File("Confrontation2.png");
         this.confrontationChar[2] = new File("Confrontation3.png");
         this.confrontationChar[3] = new File("Confrontation4.png");
         this.confrontationChar[4] = new File("Confrontation5.png");
+        
+        /*
+        this.books = new File[8];
+        this.pressStart2PFile = new File("PressStart2P-Regular.ttf");
+        this.books[0] = new File("Book1.png");
+        this.screenNum = 0;
+        
+        this.confrontationChar = new File[5];
+        
+        //this.confrontationChar[0] = new File("Level1Confrontation.png");
+        //this.confrontationChar[1] = new File("Confrontation2.png");
+        //this.confrontationChar[2] = new File("Confrontation3.png");
+        //this.confrontationChar[3] = new File("Confrontation4.png");
+        //this.confrontationChar[4] = new File("Level1Confrontation.png");
+        
+        this.confrontationChar[0] = new File("Level1Confrontation.png");
+        this.confrontationChar[1] = new File("Level1Confrontation.png");
+        this.confrontationChar[2] = new File("Level1Confrontation.png");
+        this.confrontationChar[3] = new File("Level1Confrontation.png");
+        this.confrontationChar[4] = new File("Level1Confrontation.png");
+        */
+        
+        this.leaderboard = new Leaderboard(new File("Leaderboard.txt"));
+        this.leaderboard.setFontFile(this.pressStart2PFile);
     }
 
     /**
@@ -566,7 +602,7 @@ public class MainApplication extends Application {
 
         return scene;
     }
-
+    
     /**
      * Public non-static method used to create the main menu for the game.
      * <p>
@@ -646,12 +682,12 @@ public class MainApplication extends Application {
             grassAndDirtBlocksGroup.getChildren().add(grassAndDirtBlockImageView);
         }
 
-        ImageView characterNonPixelatedImageView = new ImageView(new Image(characterNonPixelatedFile.getPath()));
-        characterNonPixelatedImageView.setPreserveRatio(true);
-        characterNonPixelatedImageView.setSmooth(true);
-        characterNonPixelatedImageView.setX(230);
-        characterNonPixelatedImageView.setY(364);
-        characterNonPixelatedImageView.setFitWidth(120);
+        ImageView mainCharacterImageView = new ImageView(new Image(mainCharFile.getPath()));
+        mainCharacterImageView.setPreserveRatio(true);
+        mainCharacterImageView.setSmooth(true);
+        mainCharacterImageView.setX(230);
+        mainCharacterImageView.setY(364);
+        mainCharacterImageView.setFitWidth(120);
 
         Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
         yellowCircleForSun.setStroke(Paint.valueOf("rgb(0,0,0)"));
@@ -750,7 +786,7 @@ public class MainApplication extends Application {
             quitGameGameButton.getButton(),
             copyrightStatementTextFlow,
             grassAndDirtBlocksGroup,
-            characterNonPixelatedImageView,
+            mainCharacterImageView,
             introBorderImageView
         );
 
@@ -1071,12 +1107,12 @@ public class MainApplication extends Application {
                                 scene.setRoot(books[bookNum]);
                                 bookNum++;
                                 if (bookNum == books.length) {
-                                    grid[0].setObject(15, 15, level1Confrontation.getPath());
+                                    grid[0].setObject(15, 15, confrontationChar[0].getPath());
                                     grid[0].setMovable(15, 15, false);
                                     grid[0].setInteractable(15, 15, true);
                                     gr[0] = grid[0].draw();
                                 }
-                            } else if (interaction.getObject().equals(level1Confrontation.getPath())) {
+                            } else if (interaction.getObject().equals(confrontationChar[0].getPath())) {
                                 stage.setScene(confrontationTextScene1);
                             }
                         }
@@ -1479,7 +1515,7 @@ public class MainApplication extends Application {
         
         questionMenu="startText";
         
-        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "Thomas:", "That so trans. You don’t even look like a girl. You should stop trying to be something you are not.", health, enemyHealth);	
+        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "Thomas:", "That so trans. You don't even look like a girl. You should stop trying to be something you are not.", health, enemyHealth);	
         encounterTxt.getTitle().setFont(encounterTxt.getFontFromFile(18));	
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
@@ -1604,7 +1640,7 @@ public class MainApplication extends Application {
         
         questionMenu="startText";
         
-        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "Sarah:", "I really love skirts. Don’t you like them too?", health, enemyHealth);	
+        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "Sarah:", "I really love skirts. Don't you like them too?", health, enemyHealth);	
         encounterTxt.getTitle().setFont(encounterTxt.getFontFromFile(18));	
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
@@ -1788,13 +1824,13 @@ public class MainApplication extends Application {
                         final double yVal = e.getY();
                         if(questionMenu.equals("question")){
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
-                                ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered yes:", "That is correct! Karen said that you are not a “real girl” which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
+                                ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered yes:", "That is correct! Karen said that you are not a \"real girl\" which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
                                 score += 50;
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
                             } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
-                                ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered no:", "That is incorrect! Karen said that you are not a “real girl” which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
+                                ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered no:", "That is incorrect! Karen said that you are not a \"real girl\" which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
@@ -2658,15 +2694,15 @@ public class MainApplication extends Application {
 
         return scene;
     }
-
+    
     public Scene writeUp(Stage stage) throws IOException {
         screenNum = 4;
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
-        GameTitle whiteInstructionsGameTitle = new GameTitle(this.pressStart2PFile, "Trans-form:", "Write-Up", 50, 40, 24);	
-        whiteInstructionsGameTitle.setWidth(300);	
-        whiteInstructionsGameTitle.setSpacing(15);
+        GameTitle whiteWriteUpGameTitle = new GameTitle(this.pressStart2PFile, "Trans-form:", "Write-Up", 50, 40, 24);	
+        whiteWriteUpGameTitle.setWidth(300);	
+        whiteWriteUpGameTitle.setSpacing(15);
 
         ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
         logoImageView.setPreserveRatio(true);
@@ -2675,7 +2711,7 @@ public class MainApplication extends Application {
         logoImageView.setY(25);
         logoImageView.setFitWidth(150);
 
-        Text writeUpText = new Text("Trans-form is a game centered around the topic of overcoming transphobia.\n\nIn the first level, you can use WASD keys to move around and the SPACE button to pick up nine books to give you information. You can walk off the screen to travel onto another grid to find more books. When you have collected them all, a mirror image of yourself will appear in the top-left grid. You can press SPACE to interact with them and after some text and pressing SPACE again, you will be in the confrontation menu.\n\nHere in the confrontation menu, you can use your turns to change forms or perform actions. Forms include “defensive”, which gives you block every turn which in turn shields you against damage from the enemy, “assertive” which doubles your damage, or “empathetic” which adds block for all the damage you deal. The actions include “debate” which deals damage to the enemy, and “defend” which gives you block. After you beat this you will be in level 2.\n\nHere you will have to determine if people are being transphobic or not and then battle them in the same way as level 1. After all three of the confrontations, you will be in level 3.\n\nIn level 3, you will be tasked with coming out to your parents. There will be another battle and after your parents, will need some time to get through it, but they will tell you they love you no matter what. The scoring gives you 5 points for every correct answer in level 2 and minus 1 point for every 5 damage you take in any of the levels. Good luck!");
+        Text writeUpText = new Text("Trans-form is a game centered around the topic of overcoming transphobia.\n\nIn the first level, you can use WASD keys to move around and the SPACE button to pick up nine books to give you information. You can walk off the screen to travel onto another grid to find more books. When you have collected them all, a mirror image of yourself will appear in the top-left grid. You can press SPACE to interact with them and after some text and pressing SPACE again, you will be in the confrontation menu.\n\nHere in the confrontation menu, you can use your turns to change forms or perform actions. Forms include \"defensive\", which gives you block every turn which in turn shields you against damage from the enemy, \"assertive\" which doubles your damage, or \"empathetic\" which adds block for all the damage you deal. The actions include \"debate\" which deals damage to the enemy, and \"defend\" which gives you block. After you beat this you will be in level 2.\n\nHere you will have to determine if people are being transphobic or not and then battle them in the same way as level 1. After all three of the confrontations, you will be in level 3.\n\nIn level 3, you will be tasked with coming out to your parents. There will be another battle and after your parents, will need some time to get through it, but they will tell you they love you no matter what. The scoring gives you 5 points for every correct answer in level 2 and minus 1 point for every 5 damage you take in any of the levels. Good luck!");
         writeUpText.setFont(this.getPressStart2PFont(8));
         writeUpText.setFill(Paint.valueOf("rgb(0,0,0)"));
         writeUpText.setWrappingWidth(500);
@@ -2700,7 +2736,7 @@ public class MainApplication extends Application {
         nodesToAdd.getChildren().addAll(
             writeUpText,
             backButton.getButton(),
-            whiteInstructionsGameTitle.getTitle(),
+            whiteWriteUpGameTitle.getTitle(),
             //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
@@ -2762,8 +2798,6 @@ public class MainApplication extends Application {
 
         return scene;
     }
-
-    private GridPane leaderboardValuesToAdd;
 
     public Scene leaderboard(Stage stage) throws IOException {
         screenNum = 5;
@@ -3000,7 +3034,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene quitGame(Stage stage) throws IOException {
-        screenNum = 5;
+        screenNum = 6;
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
@@ -3129,7 +3163,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene winGame(Stage stage) throws IOException {
-        screenNum = 6;
+        screenNum = 7;
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
@@ -3269,7 +3303,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene loseGame(Stage stage) throws IOException {
-        screenNum = 6;
+        screenNum = 7;
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
@@ -3414,6 +3448,8 @@ public class MainApplication extends Application {
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
+        this.writeUpScene = this.writeUp(stage);
+        /*
         this.leaderboardScene = this.leaderboard(stage);
         this.writeUpScene = this.writeUp(stage);
         this.level1Scene = this.level1(stage);
@@ -3424,8 +3460,18 @@ public class MainApplication extends Application {
         this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
         this.confrontationBattleScene5 = this.confrontationBattle(stage,5);
         this.quitGameScene = this.quitGame(stage);
+        */
+        this.leaderboardScene = this.leaderboard(stage);
+        this.level1Scene = this.level1(stage);
+        this.level2Scene = this.level2(stage);
+        this.level3Scene = this.level3(stage);
+        this.confrontationTextScene1 = this.confrontation1Text(stage);
+        this.confrontationTextScene5 = this.confrontation5Text(stage);
+        this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
+        this.confrontationBattleScene5 = this.confrontationBattle(stage,5);
+        this.quitGameScene = this.quitGame(stage);
         this.loseScene = this.loseGame(stage);
-        
+
         this.screenNum = 0;
         this.confrontations = 0;
         stage.setScene(this.introAnimationScene);
@@ -3496,18 +3542,147 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         */
         
+        /*
+        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
+        //BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, backButton, 11);
+        //BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, backButton, 4.25);
+        //BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, backButton, 12);
+        //BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person’s preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, backButton, 11);
+        //BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone’s preferred pronouns or name", false, backButton, 9);
+        //BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, backButton, 11);
+        //BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, backButton, 2.5);
+        //BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, backButton, 3.5);
+        //BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, backButton, 7.5);
+        Scene scene = new Scene(firstBookScene.getScene(), 600, 600);
+        stage.setScene(scene);
+        */
+        
+        /*
+        Dialog testD = new Dialog();
+        Group nodesToAdd = new Group();
+        nodesToAdd.getChildren().addAll(
+            testD.getDialogPane()
+        );
+        Scene scene = new Scene(nodesToAdd, 600, 600);
+        stage.setScene(scene);
+        */
+        /*
+        ButtonType okButton = new ButtonType.OK;
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.getDialogPane().getButtonTypes().add(okButton);
+        boolean disabled = false;
+        dialog.getDialogPane().lookupButton(okButton).setDisable(disabled);
+        */
+        
+        /*
+        Text text = new Text("asdkj;fk;asdjf;lkaskl;dfj;ajsddfk;jass;fj");
+        text.setFont(this.getPressStart2PFont(18));
+        text.setFill(Paint.valueOf("rgb(255,255,255)"));
+        text.setX(50);
+        text.setY(50);
+        */
+        /*
+        text.addEventFilter(KeyEvent.KEY_PRESSED,
+            k -> {
+                System.out.println("LOL");
+                try {
+                    boolean shiftIsPressed = k.isShiftDown();
+                    if (k.getCode().isDigitKey() || (k.getCode().isLetterKey() && k.getCode() != KeyCode.COMMA) || k.getCode() == KeyCode.BACK_SPACE) {
+                        System.out.println(k.getCode().getChar());
+                        System.out.println("Yo");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        );
+        */
+        
+        /*
+        Rectangle testRectangle = new Rectangle(600, 600, Paint.valueOf("green"));
+        Group nodesToAddTemp = new Group();
+        nodesToAddTemp.getChildren().addAll(
+            testRectangle
+        );
+        Scene secondScene = new Scene(nodesToAddTemp, 600, 600);
+        
+        
+        Rectangle background = new Rectangle(600, 600, Paint.valueOf("rgb(0,0,0)"));
+        //Leaderboard test = new Leaderboard(new File("Leaderboard.txt"));
+        //System.out.println(Arrays.deepToString(test.getLeaderboard()));
+        
+        //Rectangle inputBox = new 
+        
+        TextField testTF = new TextField();
+        testTF.setFont(this.getPressStart2PFont(18));
+        testTF.setPromptText("First Name");
+        testTF.setFocusTraversable(false);
+        //testTF.setPrefWidth(500);
+        //testTF.setPrefHeight(50);
+        //Rectangle backgroundRectangle = new Rectangle(500, 50, Paint.valueOf("rgb(255,255,255)"));
+        //backgroundRectangle.setStroke(Paint.valueOf("rgb(255,0,0)"));
+        //backgroundRectangle.setStrokeWidth(3.0);
+        //testTF.setShape(backgroundRectangle);
+        
+        
+        
+        testTF.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String buttonText = testTF.getText();
+                if (!buttonText.isEmpty()) {
+                    System.out.println(buttonText);
+                    stage.setScene(secondScene);
+                }
+            }
+        });
+        
+        
+        Group nodesToAdd = new Group();
+        nodesToAdd.getChildren().addAll(
+            background,
+            //text
+            testTF
+        );
+        
+        Scene scene = new Scene(nodesToAdd, 600, 600);
+        */
+        /*
+        scene.addEventFilter(KeyEvent.KEY_PRESSED,
+            k -> {
+                try {
+                    boolean shiftIsPressed = k.isShiftDown();
+                    if (!text.getText().isEmpty() && k.getCode() == KeyCode.BACK_SPACE) {
+                        text.setText(text.getText().substring(0, text.getText().length() - 1));
+                    } else if (k.getCode().isDigitKey() || (k.getCode().isLetterKey() && k.getCode() != KeyCode.COMMA) || (k.getCode().isWhitespaceKey() && k.getCode() != KeyCode.TAB)) {
+                        //String characterToAdd = k.getCode().getChar();
+                        //if (k.);
+                        text.setText(text.getText().concat(k.getCode().getChar()));
+                        System.out.println(k.getCharacter());
+                    }
+                    if (k.getCode().isDigitKey() || (k.getCode().isLetterKey() && k.getCode() != KeyCode.COMMA) || k.getCode() == KeyCode.BACK_SPACE) {
+                        System.out.println(k.getCode().getChar());
+                        //System.out.println("Yo");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        );
+        */
+        //stage.setScene(scene);
         
         GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
         
-        BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, backButton, 11);
-        BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, backButton, 4.25);
-        BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, backButton, 12);
-        BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person's preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, backButton, 11);
-        BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone's preferred pronouns or name", false, backButton, 9);
-        BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, backButton, 11);
-        BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, backButton, 2.5);
-        BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, backButton, 3.5);
-        BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, backButton, 7.5);
+        BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene1Image.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, backButton, 11);
+        BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene2Image.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, backButton, 4.25);
+        BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene3Image.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, backButton, 12);
+        BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene4Image.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person's preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, backButton, 11);
+        BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene5Image.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone's preferred pronouns or name", false, backButton, 9);
+        BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene6Image.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, backButton, 11);
+        BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene7Image.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, backButton, 2.5);
+        BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene8Image.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, backButton, 3.5);
+        BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene9Image.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, backButton, 7.5);
         
         books[0] = firstBookScene.getScene();
         books[1] = secondBookScene.getScene();

@@ -23,7 +23,7 @@ import javafx.scene.transform.Scale; // Imports the Scale.java class, which allo
  * Filename: Cloud.java
  *
  * @author Joshua Persaud
- * @version 5/27/2022
+ * @version 6/10/2022
  * 
  * @see javafx.scene.shape.Shape
  * @see javafx.scene.shape.Circle
@@ -142,19 +142,53 @@ public class Cloud extends Shape {
         this.yVal = newYValue;
     }
     
+    /**
+    * Public non-static method used to get the scale of the cloud.
+    * <p>
+    * This public non-static method will be used to return the scale
+    * factor that is used on the cloud.
+    *
+    * @return  A double, which is the scale factor of the cloud.
+    */
     public double getScale() {
         return this.scale;
     }
     
+    /**
+    * Public non-static method used to set the scale of the cloud.
+    * <p>
+    * This public non-static method will be used to take in a double,
+    * which will be the new scale factor for the cloud instance.
+    *
+    * @param newScale A double, which is the new scale factor of the cloud.
+    */
     public void setScale(double newScale) {
         this.scale = newScale;
     }
     
+    /**
+    * Public non-static method used to get the fill colour of the cloud.
+    * <p>
+    * This public non-static method will be used to return an instance of
+    * the Paint.java class, which is the colour that fills the cloud.
+    *
+    * @return  An instance of the Paint.java class, which is the colour
+    *          of the inside of the cloud.
+    */
     public Paint getCloudFill() {
         return this.colour;
     }
     
-    public void getCloudFill(Paint newColour) {
+    /**
+    * Public non-static method used to set the fill colour of the cloud.
+    * <p>
+    * This public non-static method will take in an instance of the Paint.java
+    * class, and this will be the colour that fills the inside of the cloud.
+    *
+    * @param newColour  An instance of the Paint.java class, which is the new
+    *                   colour of the inside of the cloud.
+    */
+    public void setCloudFill(Paint newColour) {
         this.colour = newColour;
     }
     

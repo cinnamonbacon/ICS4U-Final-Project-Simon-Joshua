@@ -92,6 +92,11 @@ public class Leaderboard {
         //else this.actualLeaderboardSize = this.leaderboardSize;
     }
     
+    /*
+        Here is the file format:
+        <name>,<score>,<start time>,<end time>
+    */
+    
     /**
      * Public non-static method used to read file.
      * <p>

@@ -982,8 +982,8 @@ public class ConfrontationScene {
             textToAdd.getChildren().add(this.bodyText);
         }
         //textToAdd.setLineSpacing(10);
-        textToAdd.setPrefWidth(550);
-        textToAdd.setPrefHeight(150);
+        textToAdd.setPrefWidth(530);
+        textToAdd.setPrefHeight(130);
         textToAdd.setTranslateX(35);
         textToAdd.setTranslateY(435);
         nodesToAdd.getChildren().add(textToAdd);
