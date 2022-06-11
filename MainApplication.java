@@ -47,7 +47,18 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.Pane;
 import java.io.FileInputStream;
 import javafx.scene.shape.Ellipse; // Imports the Ellipse.java class, which will allow the program to create ellipses for the graphics.
-
+import java.util.Arrays;
+//import javafx.scene.control.Dialog;
+//import javafx.scene.control.DialogPane;
+//import javafx.scene.control.ButtonType;
+//import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.TextField;
+import javafx.animation.ScaleTransition;
+import javafx.scene.layout.StackPane;
+import java.time.LocalDateTime;
+import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane;
+import java.nio.charset.Charset;
 /**
  * Main program that will act as driver class and run entire game.
  * <p>
@@ -300,6 +311,16 @@ public class MainApplication extends Application {
     /** This private non-static Scene variable will hold the scene for the text after the fifth confrontation of the game. */
     private Scene confrontationAfterTextScene5;
     
+    private String userName;
+    
+    private LocalDateTime startTime;
+    
+    private LocalDateTime endTime;
+    
+    private Leaderboard leaderboard;
+    
+    private Scene writeUpScene;
+    
     /**
      * An instance of the MainApplication class will be created using this no parameter constructor.
      */
@@ -314,6 +335,8 @@ public class MainApplication extends Application {
         this.grassAndDirtBlockFile = new File("ICS ISP - Design for Grass and Dirt Block.png");
         this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
         this.level1Confrontation = new File("Level1Confrontation.png");
+        this.leaderboard = new Leaderboard(new File("Leaderboard.txt"));
+        this.leaderboard.setFontFile(this.pressStart2PFile);
         
         this.mainCharFile = new File("MainChar.png");
         this.cafWallFile = new File("CafWall.png");
@@ -395,24 +418,139 @@ public class MainApplication extends Application {
         logoImageView.setX(100);
         logoImageView.setY(100);
         logoImageView.setFitWidth(400);
-
-        FadeTransition ftLogo = new FadeTransition(Duration.millis(1), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
-        ftLogo.setFromValue(0.0);
-        ftLogo.setToValue(1.0);
-        ftLogo.setByValue(0.01);
-        ftLogo.play();
-
-        // Taken from https://stackoverflow.com/questions/11188018/how-to-wait-for-a-transition-to-end-in-javafx-2-1
-        ftLogo.onFinishedProperty().set(
-            new EventHandler < ActionEvent > () {
+        
+        FadeTransition tempFTLogo = new FadeTransition(Duration.millis(1), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
+        tempFTLogo.setFromValue(1.0);
+        tempFTLogo.setToValue(0.0);
+        tempFTLogo.setByValue(0.1);
+        tempFTLogo.play();
+        
+        tempFTLogo.onFinishedProperty().set(
+            new EventHandler <ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    screenNum = 1;
-                    stage.setScene(mainMenuScene);
-                    stage.show();
+                    FadeTransition ftLogo = new FadeTransition(Duration.millis(1), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
+                    ftLogo.setFromValue(0.0);
+                    ftLogo.setToValue(1.0);
+                    ftLogo.setByValue(0.1);
+                    ftLogo.play();
+            
+                    // Taken from https://stackoverflow.com/questions/11188018/how-to-wait-for-a-transition-to-end-in-javafx-2-1
+                    ftLogo.onFinishedProperty().set(
+                        new EventHandler < ActionEvent > () {
+                            @Override
+                            public void handle(ActionEvent actionEvent) {
+                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(1), logoImageView);
+                                ttLogo.setByX(1.0);
+                                ttLogo.setFromX(0);
+                                ttLogo.setToX(0);
+                                ttLogo.setFromY(0);
+                                ttLogo.setToY(-150);
+                                //ttLogo.play();
+                                
+                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(1), logoImageView);
+                                scLogo.setFromX(1);
+                                scLogo.setToX(0.5);
+                                scLogo.setByX(0.5);
+                                scLogo.setFromY(1);
+                                scLogo.setToY(0.5);
+                                scLogo.setByY(0.5);
+                                
+                                ParallelTransition ptLogo = new ParallelTransition(ttLogo, scLogo);
+                                ptLogo.setCycleCount(1);
+                                ptLogo.play();
+                                
+                                ptLogo.onFinishedProperty().set(
+                                    new EventHandler < ActionEvent > () {
+                                        @Override
+                                        public void handle(ActionEvent actionEvent) {                                
+                                            Rectangle background = new Rectangle(600, 600, Paint.valueOf("rgb(0,0,0)"));
+                                            
+                                            Text instructionsText = new Text("Please enter your username:");
+                                            instructionsText.setFont(getPressStart2PFont(15));
+                                            instructionsText.setFill(Paint.valueOf("rgb(255,255,255)"));
+                                            instructionsText.setX(100);
+                                            instructionsText.setY(325);
+                                            
+                                            Text sideNoteText = new Text("Max username length: 8\n\nHere are the blacklisted characters: ,");
+                                            sideNoteText.setFont(getPressStart2PFont(12));
+                                            sideNoteText.setFill(Paint.valueOf("rgb(255,255,255)"));
+                                            //sideNoteText.setX(375);
+                                            //sideNoteText.setY(450);
+                                            
+                                            TextFlow tempTextFlowSideNote = new TextFlow();
+                                            tempTextFlowSideNote.getChildren().addAll(
+                                                sideNoteText
+                                            );
+                                            tempTextFlowSideNote.setTranslateX(100);
+                                            tempTextFlowSideNote.setTranslateY(425);
+                                            tempTextFlowSideNote.setPrefWidth(400);
+                                            tempTextFlowSideNote.setLineSpacing(5);
+                                            
+                                            //Leaderboard test = new Leaderboard(new File("Leaderboard.txt"));
+                                            //System.out.println(Arrays.deepToString(test.getLeaderboard()));
+                                            
+                                            //Rectangle inputBox = new 
+                                            
+                                            TextField testTF = new TextField();
+                                            testTF.setFont(getPressStart2PFont(18));
+                                            testTF.setPromptText("Username");
+                                            testTF.setFocusTraversable(false);
+                                            testTF.setTranslateX(100);
+                                            testTF.setTranslateY(350);
+                                            testTF.setPrefWidth(400);
+                                            testTF.setPrefHeight(50);
+                                            //Rectangle backgroundRectangle = new Rectangle(500, 50, Paint.valueOf("rgb(255,255,255)"));
+                                            //backgroundRectangle.setStroke(Paint.valueOf("rgb(255,0,0)"));
+                                            //backgroundRectangle.setStrokeWidth(3.0);
+                                            //testTF.setShape(backgroundRectangle);
+                                            
+                                            //Group nodesToAdd = new Group();
+                                            //nodesToAdd.getChildren().addAll(
+                                            //    
+                                            //);
+                                            
+                                            //Scene scene = new Scene(nodesToAdd, 600, 600);
+                                            //stage.setScene(scene);
+                                            //stage.show();
+                                            
+                                            testTF.setOnAction(new EventHandler<ActionEvent>() {
+                                                @Override
+                                                public void handle(ActionEvent actionEvent) {
+                                                    String buttonText = testTF.getText();
+                                                    if (!buttonText.isEmpty() && !buttonText.contains(",") && buttonText.length() <= 8) {
+                                                        userName = buttonText;
+                                                        screenNum = 1;
+                                                        stage.setScene(mainMenuScene);
+                                                        stage.show();
+                                                    }
+                                                }
+                                            });
+                                            
+                                            Group nodesToAdd = new Group();
+                                            nodesToAdd.getChildren().addAll(
+                                                background,
+                                                instructionsText,
+                                                tempTextFlowSideNote,
+                                                testTF,
+                                                logoImageView,
+                                                getIntroBorderImageView()
+                                            );
+                                            
+                                            Scene scene = new Scene(nodesToAdd, 600, 600);
+                                            stage.setScene(scene);
+                                            stage.show();
+                                        }
+                                    }
+                                );
+                            }
+                        }
+                    );
                 }
             }
         );
+
+        
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
@@ -452,6 +590,7 @@ public class MainApplication extends Application {
      */
     public Scene mainMenu(Stage stage) throws IOException {
         screenNum = 1;
+        this.startTime = LocalDateTime.now();
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
@@ -470,12 +609,15 @@ public class MainApplication extends Application {
         GameButton newGameGameButton = new GameButton(this.pressStart2PFile, "New Game", 30, 205, 17);
 
         GameButton instructionsGameButton = new GameButton(this.pressStart2PFile, "Instructions", 30, 275, 12);	
-        instructionsGameButton.setTextTranslationY(2);	
+        instructionsGameButton.setTextTranslationY(2);
+        
+        GameButton writeUpGameButton = new GameButton(this.pressStart2PFile, "Write Up", 30, 345, 16);	
+        writeUpGameButton.setTextTranslationY(2);	
 
-        GameButton leaderboardGameButton = new GameButton(this.pressStart2PFile, "Leaderboard", 30, 350, 13);	
+        GameButton leaderboardGameButton = new GameButton(this.pressStart2PFile, "Leaderboard", 30, 415, 13);	
         leaderboardGameButton.setTextTranslationY(2);
 
-        GameButton quitGameGameButton = new GameButton(this.pressStart2PFile, "Quit Game", 30, 435, 12);
+        GameButton quitGameGameButton = new GameButton(this.pressStart2PFile, "Quit Game", 30, 485, 12);
         quitGameGameButton.setWidth(125);	
         quitGameGameButton.setHeight(40);
         
@@ -488,7 +630,7 @@ public class MainApplication extends Application {
             copyrightStatementText
         );
         copyrightStatementTextFlow.setTranslateX(30);
-        copyrightStatementTextFlow.setTranslateY(530);
+        copyrightStatementTextFlow.setTranslateY(560);
         copyrightStatementTextFlow.setPrefWidth(160);
         copyrightStatementTextFlow.setPrefHeight(30);
 
@@ -504,11 +646,11 @@ public class MainApplication extends Application {
             grassAndDirtBlocksGroup.getChildren().add(grassAndDirtBlockImageView);
         }
 
-        ImageView characterNonPixelatedImageView = new ImageView(new Image(mainCharFile.getPath()));
+        ImageView characterNonPixelatedImageView = new ImageView(new Image(characterNonPixelatedFile.getPath()));
         characterNonPixelatedImageView.setPreserveRatio(true);
         characterNonPixelatedImageView.setSmooth(true);
         characterNonPixelatedImageView.setX(230);
-        characterNonPixelatedImageView.setY(380);
+        characterNonPixelatedImageView.setY(364);
         characterNonPixelatedImageView.setFitWidth(120);
 
         Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
@@ -603,6 +745,7 @@ public class MainApplication extends Application {
             whiteTitleGameTitle.getTitle(),
             newGameGameButton.getButton(),
             instructionsGameButton.getButton(),
+            writeUpGameButton.getButton(),
             leaderboardGameButton.getButton(),
             quitGameGameButton.getButton(),
             copyrightStatementTextFlow,
@@ -623,6 +766,8 @@ public class MainApplication extends Application {
                 if (xVal >= newGameGameButton.getLeftX() && xVal <= newGameGameButton.getRightX() && yVal >= newGameGameButton.getTopY() && yVal <= newGameGameButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
                 } else if (xVal >= instructionsGameButton.getLeftX() && xVal <= instructionsGameButton.getRightX() && yVal >= instructionsGameButton.getTopY() && yVal <= instructionsGameButton.getBottomY()) {
+                    scene.setCursor(Cursor.HAND);
+                } else if (xVal >= writeUpGameButton.getLeftX() && xVal <= writeUpGameButton.getRightX() && yVal >= writeUpGameButton.getTopY() && yVal <= writeUpGameButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
                 } else if (xVal >= leaderboardGameButton.getLeftX() && xVal <= leaderboardGameButton.getRightX() && yVal >= leaderboardGameButton.getTopY() && yVal <= leaderboardGameButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
@@ -655,6 +800,14 @@ public class MainApplication extends Application {
                     //redRectangleAroundInstructionsButton.setVisible(true);
                 } else {
                     instructionsGameButton.cursorNotOverButton();
+                    //redRectangleAroundInstructionsButton.setVisible(false);
+                }
+                
+                if (xVal >= writeUpGameButton.getLeftX() && xVal <= writeUpGameButton.getRightX() && yVal >= writeUpGameButton.getTopY() && yVal <= writeUpGameButton.getBottomY()) {
+                    writeUpGameButton.cursorOverButton();
+                    //redRectangleAroundInstructionsButton.setVisible(true);
+                } else {
+                    writeUpGameButton.cursorNotOverButton();
                     //redRectangleAroundInstructionsButton.setVisible(false);
                 }
 
@@ -690,12 +843,16 @@ public class MainApplication extends Application {
                     screenNum = 3;
                     stage.setScene(this.instructionsScene);
                     stage.show();
-                } else if (xVal >= leaderboardGameButton.getLeftX() && xVal <= leaderboardGameButton.getRightX() && yVal >= leaderboardGameButton.getTopY() && yVal <= leaderboardGameButton.getBottomY()) {
+                } else if (xVal >= writeUpGameButton.getLeftX() && xVal <= writeUpGameButton.getRightX() && yVal >= writeUpGameButton.getTopY() && yVal <= writeUpGameButton.getBottomY()) {
                     screenNum = 4;
+                    stage.setScene(this.writeUpScene);
+                    stage.show();
+                } else if (xVal >= leaderboardGameButton.getLeftX() && xVal <= leaderboardGameButton.getRightX() && yVal >= leaderboardGameButton.getTopY() && yVal <= leaderboardGameButton.getBottomY()) {
+                    screenNum = 5;
                     stage.setScene(this.leaderboardScene);
                     stage.show();
                 } else if (xVal >= quitGameGameButton.getLeftX() && xVal <= quitGameGameButton.getRightX() && yVal >= quitGameGameButton.getTopY() && yVal <= quitGameGameButton.getBottomY()) {
-                    screenNum = 5;
+                    screenNum = 6;
                     stage.setScene(this.quitGameScene);
                     stage.show();
                 }
@@ -706,7 +863,7 @@ public class MainApplication extends Application {
 
         return scene;
     }
-
+    
     /**
      * Public non-static method used to create the first level for the actual game.
      * <p>
@@ -2502,44 +2659,49 @@ public class MainApplication extends Application {
         return scene;
     }
 
-    public Scene leaderboard(Stage stage) throws IOException {
+    public Scene writeUp(Stage stage) throws IOException {
         screenNum = 4;
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
+
+        GameTitle whiteInstructionsGameTitle = new GameTitle(this.pressStart2PFile, "Trans-form:", "Write-Up", 50, 40, 24);	
+        whiteInstructionsGameTitle.setWidth(300);	
+        whiteInstructionsGameTitle.setSpacing(15);
 
         ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
         logoImageView.setPreserveRatio(true);
         logoImageView.setSmooth(true);
         logoImageView.setX(400);
-        logoImageView.setY(50);
+        logoImageView.setY(25);
         logoImageView.setFitWidth(150);
 
-        GameTitle whiteLeaderboardGameTitle = new GameTitle(this.pressStart2PFile, "Trans-form:", "Leaderboard", 50, 90, 24);	
-        whiteLeaderboardGameTitle.setWidth(300);	
-        whiteLeaderboardGameTitle.setSpacing(15);
+        Text writeUpText = new Text("Trans-form is a game centered around the topic of overcoming transphobia.\n\nIn the first level, you can use WASD keys to move around and the SPACE button to pick up nine books to give you information. You can walk off the screen to travel onto another grid to find more books. When you have collected them all, a mirror image of yourself will appear in the top-left grid. You can press SPACE to interact with them and after some text and pressing SPACE again, you will be in the confrontation menu.\n\nHere in the confrontation menu, you can use your turns to change forms or perform actions. Forms include “defensive”, which gives you block every turn which in turn shields you against damage from the enemy, “assertive” which doubles your damage, or “empathetic” which adds block for all the damage you deal. The actions include “debate” which deals damage to the enemy, and “defend” which gives you block. After you beat this you will be in level 2.\n\nHere you will have to determine if people are being transphobic or not and then battle them in the same way as level 1. After all three of the confrontations, you will be in level 3.\n\nIn level 3, you will be tasked with coming out to your parents. There will be another battle and after your parents, will need some time to get through it, but they will tell you they love you no matter what. The scoring gives you 5 points for every correct answer in level 2 and minus 1 point for every 5 damage you take in any of the levels. Good luck!");
+        writeUpText.setFont(this.getPressStart2PFont(8));
+        writeUpText.setFill(Paint.valueOf("rgb(0,0,0)"));
+        writeUpText.setWrappingWidth(500);
+        writeUpText.setLineSpacing(4);
+        writeUpText.setX(50);
+        writeUpText.setY(200);
+        
+        /*
+        TextFlow writeUpTextFlow = new TextFlow();
+        writeUpTextFlow.getChildren().addAll(
+            writeUpText
+        );
+        writeUpTextFlow.setLineSpacing(10);
+        tempTextFlow.setPrefWidth(this.width);
+        */
 
-        Rectangle scoresBackground = new Rectangle(100, 225, 400, 250);
-        scoresBackground.setFill(Paint.valueOf("rgb(193,154,107)"));
-        scoresBackground.setStrokeType(StrokeType.OUTSIDE);
-        scoresBackground.setStrokeWidth(10.0);
-        scoresBackground.setStroke(Paint.valueOf("rgb(66,47,33)"));
-        scoresBackground.setStrokeLineJoin(StrokeLineJoin.ROUND);
-
-
-        //Leaderboard leaderboard = new Leaderboard();
-        //Text scoresText = new Text(leaderboard.getLeaderboard());
-        //scoresText.setFill(Paint.valueOf("white"));
-
-        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 390, 495, 18);	
+        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 135, 120, 18);	
         backButton.setWidth(125);	
         backButton.setTextTranslationX(1);
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
+            writeUpText,
             backButton.getButton(),
-            //scoresText,
-            scoresBackground,
-            whiteLeaderboardGameTitle.getTitle(),
+            whiteInstructionsGameTitle.getTitle(),
+            //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
         );
@@ -2589,6 +2751,226 @@ public class MainApplication extends Application {
                 final double yVal = e.getY();
 
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
+                    screenNum = 1;
+                    stage.setScene(this.mainMenuScene);
+                    stage.show();
+                }
+            }
+        );
+
+        scene.setFill(Color.DEEPSKYBLUE);
+
+        return scene;
+    }
+
+    private GridPane leaderboardValuesToAdd;
+
+    public Scene leaderboard(Stage stage) throws IOException {
+        screenNum = 5;
+
+        ImageView introBorderImageView = this.getIntroBorderImageView();
+
+        ImageView logoImageView = new ImageView(new Image(logoFile.getPath()));
+        logoImageView.setPreserveRatio(true);
+        logoImageView.setSmooth(true);
+        logoImageView.setX(400);
+        logoImageView.setY(50);
+        logoImageView.setFitWidth(150);
+
+        GameTitle whiteLeaderboardGameTitle = new GameTitle(this.pressStart2PFile, "Trans-form:", "Leaderboard", 50, 90, 24);	
+        whiteLeaderboardGameTitle.setWidth(300);	
+        whiteLeaderboardGameTitle.setSpacing(15);
+
+        Rectangle scoresBackground = new Rectangle(100, 225, 400, 250);
+        scoresBackground.setFill(Paint.valueOf("rgb(193,154,107)"));
+        scoresBackground.setStrokeType(StrokeType.OUTSIDE);
+        scoresBackground.setStrokeWidth(10.0);
+        scoresBackground.setStroke(Paint.valueOf("rgb(66,47,33)"));
+        scoresBackground.setStrokeLineJoin(StrokeLineJoin.ROUND);
+
+        //String [][] leaderboardData = this.leaderboard.getLeaderboard();
+        //System.out.println(Arrays.deepToString(leaderboardData));
+        
+        /*
+        GridPane leaderboardValuesToAdd = new GridPane();
+        
+        int currentLevel = 0;
+        
+                
+        Label [][] displayedLeaderboard = new Label[10][4];
+        for (int i = 0; i < displayedLeaderboard.length; i++) {
+            for (int j = 0; j < displayedLeaderboard[i].length; j++) {
+                displayedLeaderboard[i][j] = new Label(leaderboardData[i][j]);// + " " + leaderboardData[i][1]+ " " + leaderboardData[i][2] + " " + leaderboardData[i][3]);
+                displayedLeaderboard[i][j].setFont(this.getPressStart2PFont(12));
+                displayedLeaderboard[i][j].setStyle("-fx-background-color: rgb(193,154,107); -fx-text-fill: black;");
+                //displayedLeaderboard[i][j].setTextFill(Paint.valueOf("rgb(255,255,255)"));
+                //displayedLeaderboard[i][j].setFill(Paint.valueOf("rgb(255,255,255)"));
+                //displayedLeaderboard[i].setPrefWidth(400);
+                //displayedLeaderboard[i].setTranslateX(100);
+                //displayedLeaderboard[i].setTranslateY(225 + i * 15);
+                //Pane tempPane = new Pane(displayedLeaderboard[i][j]);
+                //if (i % 2 == 1) tempPane.setStyle("-fx-background-color: rgb(143,114,57)");
+                leaderboardValuesToAdd.add(displayedLeaderboard[i][j], j, i);//, 1, 1);
+            }
+        }
+        */
+        
+        GameButton upButton = new GameButton(this.pressStart2PFile, "Up", 525, 275, 16);
+        upButton.setWidth(50);
+        //GameButton upArrowButton = new GameButton(this.pressStart2PFile, new String(new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x94, (byte)0xBC}, Charset.forName("UTF-8")), 100, 50, 16);
+        GameButton downButton = new GameButton(this.pressStart2PFile, "Down", 525, 375, 10);
+        downButton.setWidth(50);
+        downButton.setTextTranslationY(5);
+        
+        /*
+        if (leaderboard.length == 10) {
+            
+        }
+        */
+
+        //Leaderboard leaderboard = new Leaderboard();
+        //Text scoresText = new Text(leaderboard.getLeaderboard());
+        //scoresText.setFill(Paint.valueOf("white"));
+
+        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 390, 495, 18);	
+        backButton.setWidth(125);	
+        backButton.setTextTranslationX(1);
+        
+        //leaderboardValuesToAdd.setAlignment(Pos.CENTER);
+        leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
+        leaderboardValuesToAdd.setVgap(12);
+        leaderboardValuesToAdd.setHgap(8);
+        leaderboardValuesToAdd.setTranslateX(105);
+        leaderboardValuesToAdd.setTranslateY(230);
+        //displayedLeaderboard[0][0] = new Label("100");
+        
+
+        Group nodesToAdd = new Group();
+        nodesToAdd.getChildren().addAll(
+            backButton.getButton(),
+            upButton.getButton(),
+            downButton.getButton(),
+            //scoresText,
+            scoresBackground,
+            whiteLeaderboardGameTitle.getTitle(),
+            logoImageView,
+            introBorderImageView,
+            leaderboardValuesToAdd
+        );
+        /*
+        for (int i = 0; i < displayedLeaderboard.length; i++) {
+            nodesToAdd.getChildren().add(displayedLeaderboard[i]);
+        }
+        */
+
+        this.leaderboard.saveData();
+        Scene scene = new Scene(nodesToAdd, 600, 600);
+
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                //System.out.println(xVal + " " + yVal);
+
+                if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {
+                    scene.setCursor(Cursor.HAND);
+                } else if (xVal >= downButton.getLeftX() && xVal <= downButton.getRightX() && yVal >= downButton.getTopY() && yVal <= downButton.getBottomY()) {
+                    scene.setCursor(Cursor.HAND);
+                } else if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
+                    scene.setCursor(Cursor.HAND);
+                } else {
+                    scene.setCursor(Cursor.DEFAULT);
+                }
+            }
+        );
+
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                //System.out.println(xVal + " " + yVal);
+                
+                if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {
+                    upButton.cursorOverButton();
+                    //backButton.getRedRectangle().setVisible(true);
+                    //redRectangleAroundBackButton.setVisible(true);
+                } else {
+                    upButton.cursorNotOverButton();
+                    //backButton.getRedRectangle().setVisible(false);
+                    //redRectangleAroundBackButton.setVisible(false);
+                }
+                
+                if (xVal >= downButton.getLeftX() && xVal <= downButton.getRightX() && yVal >= downButton.getTopY() && yVal <= downButton.getBottomY()) {
+                    downButton.cursorOverButton();
+                    //backButton.getRedRectangle().setVisible(true);
+                    //redRectangleAroundBackButton.setVisible(true);
+                } else {
+                    downButton.cursorNotOverButton();
+                    //backButton.getRedRectangle().setVisible(false);
+                    //redRectangleAroundBackButton.setVisible(false);
+                }
+
+                if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
+                    backButton.cursorOverButton();
+                    //backButton.getRedRectangle().setVisible(true);
+                    //redRectangleAroundBackButton.setVisible(true);
+                } else {
+                    backButton.cursorNotOverButton();
+                    //backButton.getRedRectangle().setVisible(false);
+                    //redRectangleAroundBackButton.setVisible(false);
+                }
+            }
+        );
+        
+        scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
+            e -> {
+
+                final double xVal = e.getX();
+                final double yVal = e.getY();
+
+                if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {
+                    /*
+                    if (currentLevel > 0) {
+                        currentLevel--;
+                        for (int i = 0; i < displayedLeaderboard.length - 1; i++) {
+                            displayedLeaderboard[i] = displayedLeaderboard[i + 1];
+                        }
+                    }
+                    */
+                    this.leaderboard.moveUpLeaderboard();
+                    GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
+                    tempLeaderboardValuesToAdd.setVgap(12);
+                    tempLeaderboardValuesToAdd.setHgap(8);
+                    tempLeaderboardValuesToAdd.setTranslateX(105);
+                    tempLeaderboardValuesToAdd.setTranslateY(230);
+                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
+                    //nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)"));
+                    //leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)");
+                    //leaderboardValuesToAdd.moveUpLeaderboard();
+                    //leaderboardValuesToAdd = leaderboardValuesToAdd.getLeaderboardGridPane();
+                } else if (xVal >= downButton.getLeftX() && xVal <= downButton.getRightX() && yVal >= downButton.getTopY() && yVal <= downButton.getBottomY()) {
+                    this.leaderboard.moveDownLeaderboard();
+                    GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
+                    tempLeaderboardValuesToAdd.setVgap(12);
+                    tempLeaderboardValuesToAdd.setHgap(8);
+                    tempLeaderboardValuesToAdd.setTranslateX(105);
+                    tempLeaderboardValuesToAdd.setTranslateY(230);
+                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
+                    //nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)"));
+                    //leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)");
+                    //System.out.println("Yo");
+                } else if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
+                    this.leaderboard.resetCurrentLevel();
+                    GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
+                    tempLeaderboardValuesToAdd.setVgap(12);
+                    tempLeaderboardValuesToAdd.setHgap(8);
+                    tempLeaderboardValuesToAdd.setTranslateX(105);
+                    tempLeaderboardValuesToAdd.setTranslateY(230);
+                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
                     screenNum = 1;
                     stage.setScene(this.mainMenuScene);
                     stage.show();
@@ -3033,6 +3415,7 @@ public class MainApplication extends Application {
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
         this.leaderboardScene = this.leaderboard(stage);
+        this.writeUpScene = this.writeUp(stage);
         this.level1Scene = this.level1(stage);
         this.level2Scene = this.level2(stage);
         this.level3Scene = this.level3(stage);
