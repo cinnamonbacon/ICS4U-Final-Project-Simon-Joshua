@@ -231,7 +231,7 @@ public class MainApplication extends Application {
     /** This private non-static Scene variable will hold the scene for text before the fourth confrontation of the game. */
     private Scene confrontationTextScene4;
     
-    /** This private non-static Scene variable will hold the scene for text before the fith confrontation of the game. */
+    /** This private non-static Scene variable will hold the scene for text before the fifth confrontation of the game. */
     private Scene confrontationTextScene5;
     
     /** This private non-static Scene variable will hold the scene for the first confrontation of the game. */
@@ -246,40 +246,58 @@ public class MainApplication extends Application {
     /** This private non-static Scene variable will hold the scene for the fourth confrontation of the game. */
     private Scene confrontationBattleScene4;
     
+    /** This private non-static Scene variable will hold the scene for the fifth confrontation of the game. */
     private Scene confrontationBattleScene5;
     
+    /** This private non-static int variable will hold the number of confrontations the player has played. */
     private int confrontations;
     
+    /** This private non-static Group variable will hold the Group for the second level the game. */
     private Group level2Group;
     
+    /** This private non-static Group variable will hold the Group for the third level the game. */
     private Group level3Group;
     
+    /** This private non-static File variable will hold the file for the upper part of the image for the father. */
     private File fatherUpperFile;
     
+    /** This private non-static File variable will hold the file for the lower part of the image for the father. */
     private File fatherLowerFile;
     
+    /** This private non-static File variable will hold the file for the upper part of the image for the mother. */
     private File motherUpperFile;
     
+    /** This private non-static File variable will hold the file for the lower part of the image for the mother. */
     private File motherLowerFile;
     
+    /** This private non-static File variable will hold the file for the the image of the floors of the house in level 3. */
     private File houseFloorFile;
     
+    /** This private non-static File variable will hold the file for the the image of the walls of the house in level 3. */
     private File houseWallFile;
     
+    /** This private non-static String variable will keep track of what screen the text before the confrontations are on. */
     private String questionMenu;
     
+    /** This private non-static Scene variable will hold the scene for the win scene of the game. */
     private Scene winScene;
     
+    /** This private non-static Scene variable will hold the scene for the lose scene of the game. */
     private Scene loseScene;
     
+    /** This private non-static int variable will hold the score throughout the game. */
     private int score;
     
+    /** This private non-static Scene variable will hold the scene for the text after the second confrontation of the game. */
     private Scene confrontationAfterTextScene2;
     
+    /** This private non-static Scene variable will hold the scene for the text after the third confrontation of the game. */
     private Scene confrontationAfterTextScene3;
     
+    /** This private non-static Scene variable will hold the scene for the text after the fourth confrontation of the game. */
     private Scene confrontationAfterTextScene4;
     
+    /** This private non-static Scene variable will hold the scene for the text after the fifth confrontation of the game. */
     private Scene confrontationAfterTextScene5;
     
     /**
@@ -1280,9 +1298,9 @@ public class MainApplication extends Application {
     }
     
     /**
-     * Public non-static method used to create the first encounter text.
+     * Public non-static method used to create the second encounter text.
      * <p>
-     * This public non-static method will be used to create the text for the first
+     * This public non-static method will be used to create the text for the second
      * conflict. It will do this by creating an instance of the ConfrontationScene
      * class which will draw a scene with the main character, the enemy, and the
      * text. It will also ask if what the the enemy is saying is transphobic and 
@@ -1293,7 +1311,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the second encounter of the game.
      * @throws IOException
      */
     public Scene confrontation2Text(Stage stage) throws IOException {
@@ -1405,9 +1423,9 @@ public class MainApplication extends Application {
     }
     
     /**
-     * Public non-static method used to create the first encounter text.
+     * Public non-static method used to create the third encounter text.
      * <p>
-     * This public non-static method will be used to create the text for the first
+     * This public non-static method will be used to create the text for the third
      * conflict. It will do this by creating an instance of the ConfrontationScene
      * class which will draw a scene with the main character, the enemy, and the
      * text. It will also ask if what the the enemy is saying is transphobic and 
@@ -1418,7 +1436,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the third encounter of the game.
      * @throws IOException
      */
     public Scene confrontation3Text(Stage stage) throws IOException {
@@ -1530,9 +1548,9 @@ public class MainApplication extends Application {
     }
     
     /**
-     * Public non-static method used to create the first encounter text.
+     * Public non-static method used to create the fourth encounter text.
      * <p>
-     * This public non-static method will be used to create the text for the first
+     * This public non-static method will be used to create the text for the fourth
      * conflict. It will do this by creating an instance of the ConfrontationScene
      * class which will draw a scene with the main character, the enemy, and the
      * text. It will also ask if what the the enemy is saying is transphobic and 
@@ -1543,7 +1561,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the fourth encounter of the game.
      * @throws IOException
      */
     public Scene confrontation4Text(Stage stage) throws IOException {
@@ -1655,9 +1673,9 @@ public class MainApplication extends Application {
     }
     
     /**
-     * Public non-static method used to create the first encounter text.
+     * Public non-static method used to create the fifth encounter text.
      * <p>
-     * This public non-static method will be used to create the text for the fith
+     * This public non-static method will be used to create the text for the fifth
      * conflict. It will do this by creating an instance of the ConfrontationScene
      * class which will draw a scene with the main character, the enemy, and the
      * text.
@@ -1667,7 +1685,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the second encounter of the game.
      * @throws IOException
      */
     public Scene confrontation5Text(Stage stage) throws IOException {
@@ -1709,7 +1727,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the second encounter of the game.
      * @throws IOException
      */
     public Scene confrontation2AfterText(Stage stage) throws IOException {
@@ -1756,7 +1774,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the third encounter of the game.
      * @throws IOException
      */
     public Scene confrontation3AfterText(Stage stage) throws IOException {
@@ -1802,7 +1820,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the fourth encounter of the game.
      * @throws IOException
      */
     public Scene confrontation4AfterText(Stage stage) throws IOException {
@@ -1836,10 +1854,10 @@ public class MainApplication extends Application {
     }
     
     /**
-     * Public non-static method used to create the fith encounter text after confrontation.
+     * Public non-static method used to create the fifth encounter text after confrontation.
      * <p>
      * This public non-static method will be used to create the text for after the
-     * fith conflict. It will do this by creating an instance of the ConfrontationScene
+     * fifth conflict. It will do this by creating an instance of the ConfrontationScene
      * class which will draw a scene with the main character, the enemy, and the
      * text.
      * <p>
@@ -1848,7 +1866,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show the text of the fifth encounter of the game.
      * @throws IOException
      */
     public Scene confrontation5AfterText(Stage stage) throws IOException {
@@ -1894,7 +1912,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the text of the first encounter of the game.
+     *          that will show a confrontation of the game.
      * @throws IOException
      */
     public Scene confrontationBattle(Stage stage, int encounterNum) throws IOException {
@@ -2725,7 +2743,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the quit game screen.
+     *          that will show the win game screen.
      * @throws IOException
      */
     public Scene winGame(Stage stage) throws IOException {
@@ -2829,6 +2847,14 @@ public class MainApplication extends Application {
 
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     screenNum = 1;
+                    try{
+                        this.level1Scene = this.level1(stage);
+                        this.level2Scene = this.level2(stage);
+                        this.level3Scene = this.level3(stage);
+                        this.health = 100;
+                        this.enemyHealth = 100;
+                        this.score = 0;
+                    }catch(Exception x){}
                     stage.setScene(this.mainMenuScene);
                     stage.show();
                 } else if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
@@ -2857,7 +2883,7 @@ public class MainApplication extends Application {
      * @param stage An instance of the Stage.java class, which will be the main
      *              stage that the program will use and display to the user.
      * @return  An instance of the Scene.java class, which will be the scene
-     *          that will show the quit game screen.
+     *          that will show the lose game screen.
      * @throws IOException
      */
     public Scene loseGame(Stage stage) throws IOException {
@@ -2961,6 +2987,14 @@ public class MainApplication extends Application {
 
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     screenNum = 1;
+                    try{
+                        this.level1Scene = this.level1(stage);
+                        this.level2Scene = this.level2(stage);
+                        this.level3Scene = this.level3(stage);
+                        this.health = 100;
+                        this.enemyHealth = 100;
+                        this.score = 0;
+                    }catch(Exception x){}
                     stage.setScene(this.mainMenuScene);
                     stage.show();
                 } else if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
@@ -2991,7 +3025,9 @@ public class MainApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        this.enemyHealth=100;
+        this.health = 100;
+        this.enemyHealth = 100;
+        this.score = 0;
         this.initializeStageSettings(stage);
         this.introAnimationScene = this.introAnimation(stage);
         this.mainMenuScene = this.mainMenu(stage);
