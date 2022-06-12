@@ -12,7 +12,7 @@ import javafx.scene.layout.Region; // Imports the Region.java class, which allow
 
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
 import java.io.IOException; // Imports the IOException.java class, which allows the program to take care of the IOExceptions that are thrown by any parts of the program.
-import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to read in data from files that arer on the user's computer.
+import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to read in data from files that are on the user's computer.
 
 /**
  * Helper class that will create game titles.
@@ -53,44 +53,44 @@ import java.io.FileInputStream; // Imports the FileInputStream.java class, which
  */
 public class GameTitle {
     
-    /** Private non-static double variable used to hold the x-coordinate of the game title instance. */
+    /** Private non-static double variable used to hold the x-coordinate of the GameTitle instance. */
     private double xCoord;
     
-    /** Private non-static double variable used to hold the y-coordinate of the game title instance. */
+    /** Private non-static double variable used to hold the y-coordinate of the GameTitle instance. */
     private double yCoord;
     
-    /** Private non-static double variable used to hold the width of the game title instance. */
+    /** Private non-static double variable used to hold the width of the GameTitle instance. */
     private double width;
     
-    /** Private non-static double variable used to hold the height of the game title instance. */
+    /** Private non-static double variable used to hold the height of the GameTitle instance. */
     private double height;
     
-    /** Private non-static double variable used to hold the spacing of the text of the game title instance. */
+    /** Private non-static double variable used to hold the spacing of the text of the GameTitle instance. */
     private double spacing;
     
-    /** Private non-static variable that is an instance of the Text.java class and is used to hold the title of the game title instance. */
+    /** Private non-static variable that is an instance of the Text.java class and is used to hold the title of the GameTitle instance. */
     private Text title;
     
-    /** Private non-static variable that is an instance of the Text.java class and is used to hold the subheading of the game title instance. */    
+    /** Private non-static variable that is an instance of the Text.java class and is used to hold the subheading of the GameTitle instance. */    
     private Text subheading;
     
-    /** Private non-static variable that is an instance of the Rectangle.java class and is used to hold a rectangle that will act as the underline of the game title instance. */
+    /** Private non-static variable that is an instance of the Rectangle.java class and is used to hold a rectangle that will act as the underline of the GameTitle instance. */
     private Rectangle underlineRect;
     
-    /** Private non-static variable that is an instance of the File.java class and is used to hold the font file for the game title instance. */
+    /** Private non-static variable that is an instance of the File.java class and is used to hold the font file for the GameTitle instance. */
     private File textFontFile;
     
     /*
-     *  6 parameter constructor used to create an instance of the GameTitle.java class.
+     * Class constructor used to create an instance of the GameTitle.java class. It will take in 6 parameters.
      * 
      * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font.
      * @param titleText An instance of the String.java class, which will hold the text for the title.
      * @param subheadingText An instance of the String.java class, which will hold the text for the subheading.
-     * @param xCoord A double, which will be the x-coordinate of the game title instance.
-     * @param yCoord A double, which will be the y-coordinate of the game title instance.
-     * @param fontSize An integer, which will be the size of the font used in the game title instance.
+     * @param xCoord A double, which will be the x-coordinate of the GameTitle instance.
+     * @param yCoord A double, which will be the y-coordinate of the GameTitle instance.
+     * @param fontSize An double, which will be the size of the font used in the GameTitle instance.
      */
-    public GameTitle(File textFontFile, String titleText, String subheadingText, double xCoord, double yCoord, int fontSize) {
+    public GameTitle(File textFontFile, String titleText, String subheadingText, double xCoord, double yCoord, double fontSize) {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         this.width = Region.USE_COMPUTED_SIZE;
@@ -111,54 +111,72 @@ public class GameTitle {
     }
     
     /*
-     * Public non-static method used to get the x-coordinate of the game title instance.
+     * Public non-static method used to get the x-coordinate of the GameTitle instance.
+     * <p>
+     * This public non-static method will return a double, which is the x-coordinate of the
+     * GameTitle instance.
      * 
-     * @return  A double, which will be the x-coordinate of the game title instance.
+     * @return  A double, which will be the x-coordinate of the GameTitle instance.
      */
     public double getXCoord() {
         return this.xCoord;
     }
     
     /*
-     * Public non-static method used to set the x-coordinate of the game title instance.
+     * Public non-static method used to set the x-coordinate of the GameTitle instance.
+     * <p>
+     * This public non-static method is void and it will take in a double as a parameter, 
+     * which is the new x-coordinate of the GameTitle instance.
      * 
-     * @param newXCoord A double, which will be the new x-coordinate of the game title instance.
+     * @param newXCoord A double, which will be the new x-coordinate of the GameTitle instance.
      */
     public void setXCoord(double newXCoord) {
         this.xCoord = newXCoord;
     }
     
     /*
-     * Public non-static method used to get the y-coordinate of the game title instance.
+     * Public non-static method used to get the y-coordinate of the GameTitle instance.
+     * <p>
+     * This public non-static method will return a double, which is the y-coordinate
+     * of the GameTitle instance.
      * 
-     * @return  A double, which will be the y-coordinate of the game title instance.
+     * @return  A double, which will be the y-coordinate of the GameTitle instance.
      */
     public double getYCoord() {
         return this.yCoord;
     }
     
     /*
-     * Public non-static method used to set the y-coordinate of the game title instance.
+     * Public non-static method used to set the y-coordinate of the GameTitle instance.
+     * <p>
+     * This public non-static method is void and it will take in a double as a parameter, 
+     * which is the new y-coordinate of the GameTitle instance.
      * 
-     * @param newXCoord A double, which will be the new y-coordinate of the game title instance.
+     * @param newYCoord A double, which will be the new y-coordinate of the GameTitle instance.
      */
     public void setYCoord(double newYCoord) {
         this.yCoord = newYCoord;
     }
     
     /*
-     * Public non-static method used to get the width of the game title instance.
+     * Public non-static method used to get the width of the GameTitle instance.
+     * <p>
+     * This public non-static method will return a double, which is the width of
+     * the GameTitle instance.
      * 
-     * @return  A double, which will be the width of the game title instance.
+     * @return  A double, which will be the width of the GameTitle instance.
      */
     public double getWidth() {
         return this.width;
     }
     
     /*
-     * Public non-static method used to set the width of the game title instance.
+     * Public non-static method used to set the width of the GameTitle instance.
+     * <p>
+     * This public non-static method is void and it will take in a double as a parameter, 
+     * which will be the new width of the GameTitle instance.
      * 
-     * @param newWidth A double, which will be the new width of the game title instance.
+     * @param newWidth A double, which will be the new width of the GameTitle instance.
      */
     public void setWidth(double newWidth) {
         this.width = newWidth;
@@ -166,81 +184,112 @@ public class GameTitle {
     }
     
     /*
-     * Public non-static method used to get the height of the game title instance.
+     * Public non-static method used to get the height of the GameTitle instance.
+     * <p>
+     * This public non-static method will return a double, which is the height
+     * of the GameTitle instance.
      * 
-     * @return  A double, which will be the height of the game title instance.
+     * @return  A double, which will be the height of the GameTitle instance.
      */
     public double getHeight() {
         return this.height;
     }
     
     /*
-     * Public non-static method used to set the height of the game title instance.
+     * Public non-static method used to set the height of the GameTitle instance.
+     * <p>
+     * This public non-static method is void and it will take in a double as a parameter, 
+     * which will be the new height of the GameTitle instance.
      * 
-     * @param newHeight A double, which will be the new height of the game title instance.
+     * @param newHeight A double, which will be the new height of the GameTitle instance.
      */
     public void setHeight(double newHeight) {
         this.height = newHeight;
     }
     
     /*
-     * Public non-static method used to get the spacing between the text of the game title instance.
+     * Public non-static method used to get the spacing between the text of the GameTitle instance.
+     * <p>
+     * This public non-static method will return a double, which is the amount of spacing (in pixels)
+     * between the title and the subheading of the GameTitle instance.
      * 
-     * @return  A double, which will be the spacing between the text of the game title instance.
+     * @return  A double, which will be the spacing between the text of the GameTitle instance.
      */
     public double getSpacing() {
         return this.spacing;
     }
     
     /*
-     * Public non-static method used to set the spacing between the text of the game title instance.
+     * Public non-static method used to set the spacing between the text of the GameTitle instance.
+     * <p>
+     * This public non-static method is void and it will take in a double as a parameter, which will
+     * be the new amount of spacing (in pixels) between the title and subheading of the GameTitle instance.
      * 
-     * @param newSpacing A double, which will be the new spacing between the text of the game title instance.
+     * @param newSpacing A double, which will be the new spacing between the text of the GameTitle instance.
      */
     public void setSpacing(double newSpacing) {
         this.spacing = newSpacing;
     }
     
     /*
-     * Public non-static method used to get the title text of the game title instance.
+     * Public non-static method used to get the title text of the GameTitle instance.
+     * <p>
+     * This public non-static method will return an instance of the Text.java class, which
+     * will be the title portion of the GameTitle instance.
      * 
-     * @return  An instance of the Text.java class, which will be the title text of the game title instance.
+     * @return  An instance of the Text.java class, which will be the title text of the GameTitle instance.
      */
     public Text getTitleText() {
         return this.title;
     }
     
     /*
-     * Public non-static method used to get the subheading text of the game title instance.
+     * Public non-static method used to get the subheading text of the GameTitle instance.
+     * <p>
+     * This public non-static method will return an instance of the Text.java class, which
+     * will be the subheading portion of the GameTitle instance.
      * 
-     * @return  An instance of the Text.java class, which will be the subheading text of the game title instance.
+     * @return  An instance of the Text.java class, which will be the subheading text of the GameTitle instance.
      */
     public Text getSubheadingText() {
         return this.subheading;
     }
     
     /*
-     * Public non-static method used to get the underline rectangle of the game title instance.
+     * Public non-static method used to get the underline rectangle of the GameTitle instance.
+     * <p>
+     * This public non-static method will return an instance of the Rectangle.java class, which
+     * will be the rectangle that is used for the underline underneath the title portion of the
+     * GameTitle instance (a rectangle is used because the default underline that is created
+     * through JavaFX CSS is too thin and cannot be customized).
      * 
-     * @return  An instance of the Rectangle.java class, which will be the underline rectangle of the game title instance.
+     * @return  An instance of the Rectangle.java class, which will be the underline rectangle of the GameTitle instance.
      */
     public Rectangle getUnderlineRectangle() {
         return this.underlineRect;
     }
     
     /*
-     * Public non-static method used to get the file for the font of the game title instance.
+     * Public non-static method used to get the file for the font of the GameTitle instance.
+     * <p>
+     * This public non-static method will return an instance of the File.java class, which will
+     * be the file that holds the .ttf file that is used for the font type for the GameTitle
+     * instance's text.
      * 
-     * @return  An instance of the File.java class, which will be the file for the font of the game title instance.
+     * @return  An instance of the File.java class, which will be the file for the font of the GameTitle instance.
      */
     public File getFontFile() {
         return this.textFontFile;
     }
     
     /*
-     * Public non-static method used to set the file for the font of the game title instance.
+     * Public non-static method used to set the file for the font of the GameTitle instance.
+     * <p>
+     * This public non-static method is void and it will take in an instance of the File.java
+     * class as a parameter, which will be the new .ttf file that will be used for the font
+     * type for the GameTitle instance.
      * 
-     * @param newFontFile A double, which will be the new file for the font of the game title instance.
+     * @param newFontFile A double, which will be the new file for the font of the GameTitle instance.
      */
     public void setFontFile(File newFontFile) {
         this.textFontFile = newFontFile;
@@ -248,9 +297,15 @@ public class GameTitle {
     
     /*
      * Public non-static method used to get a font of a specified size, from the file.
+     * <p>
+     * This public non-static method will return an instance of the Font.java class, and
+     * it will be the font type that is created from the GameTitle instance's textFontFile.java
+     * instance. The method will also take in a double as a parameter, and this will be the
+     * font size of the desired font.
      * 
      * @param fontSize A double, which is the size of the desired font.
-     * @return  An instance of the Font.java class, which is the 
+     * @return  An instance of the Font.java class, which is the Font that is desired at the 
+     *          desired size.
      */
     public Font getFontFromFile(double fontSize) {
         Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.
@@ -264,9 +319,14 @@ public class GameTitle {
     }
     
     /*
-     * Public non-static method used to get a font of a specified size, from the file.
+     * Public non-static method used to get the actual game title from the GameTitle instance.
+     * <p>
+     * This public non-static method will return an instance of the StackPane.java class,
+     * which will hold onto the title text, the subheading text, and the rectangle that
+     * is used for the underline.
      * 
-     * @param fontSize A double, which is the size of the desired font.
+     * @return  An instance of the StackPane.java class, which will be the actual game title
+                from the GameTitle instance.
      */
     public StackPane getTitle() {
         TextFlow tempTextFlow = new TextFlow();
@@ -291,6 +351,19 @@ public class GameTitle {
         return overallTitle;
     }
     
+    /*
+     * Private non-static method used to compute and return the width of a Text.java instance.
+     * <p>
+     * This private non-static method will return a double, which is the computed width of the
+     * Text.java instance that is passed through as a parameter. The reason why a method is needed
+     * is because the Text.java instance needs to be rendered first (and its CSS has to be compiled
+     * and ran) so that its true width can be found.
+     * 
+     * @param text An instance of the Text.java class, which will be the Text that this method needs
+     *             to render (and whose CSS needs to be compiled and ran) so that its width can be found.
+     * @return  A double, which will be the computed width of the Text.java instance that is passed
+     *          through as a parameter.
+     */
     private double getWidth(Text text) {
         Label label = new Label(text.getText());
         label.setFont(text.getFont());
@@ -305,6 +378,19 @@ public class GameTitle {
         return label.getWidth();
     }
     
+    /*
+     * Private non-static method used to compute and return the height of a Text.java instance.
+     * <p>
+     * This private non-static method will return a double, which is the computed height of the
+     * Text.java instance that is passed through as a parameter. The reason why a method is needed
+     * is because the Text.java instance needs to be rendered first (and its CSS has to be compiled
+     * and ran) so that its true height can be found.
+     * 
+     * @param text An instance of the Text.java class, which will be the Text that this method needs
+     *             to render (and whose CSS needs to be compiled and ran) so that its height can be found.
+     * @return  A double, which will be the computed height of the Text.java instance that is passed
+     *          through as a parameter.
+     */
     private double getHeight(Text text) {
         Label label = new Label(text.getText());
         label.setFont(text.getFont());

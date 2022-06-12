@@ -196,7 +196,11 @@ public class Cloud extends Shape {
     * Public non-static method used to get the actual cloud shape.
     * <p>
     * This public non-static method will return a Shape.java object,
-    * and this will be the actual cloud shape.
+    * and this will be the actual cloud shape. It will be done by
+    * creating 3 circles and a rectangle, and then joining them
+    * together into a single Shape.java instance using the static
+    * method of Shape.union(). This Shape.java instance will then
+    * be returned.
     *
     * @return  An instance of the Shape.java class, which is the
     *          cloud shape.

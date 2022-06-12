@@ -465,7 +465,7 @@ public class MainApplication extends Application {
             new EventHandler <ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    FadeTransition ftLogo = new FadeTransition(Duration.millis(1), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
+                    FadeTransition ftLogo = new FadeTransition(Duration.millis(7000), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
                     ftLogo.setFromValue(0.0);
                     ftLogo.setToValue(1.0);
                     ftLogo.setByValue(0.1);
@@ -476,7 +476,7 @@ public class MainApplication extends Application {
                         new EventHandler < ActionEvent > () {
                             @Override
                             public void handle(ActionEvent actionEvent) {
-                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(1), logoImageView);
+                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(5000), logoImageView);
                                 ttLogo.setByX(1.0);
                                 ttLogo.setFromX(0);
                                 ttLogo.setToX(0);
@@ -484,7 +484,7 @@ public class MainApplication extends Application {
                                 ttLogo.setToY(-150);
                                 //ttLogo.play();
                                 
-                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(1), logoImageView);
+                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(5000), logoImageView);
                                 scLogo.setFromX(1);
                                 scLogo.setToX(0.5);
                                 scLogo.setByX(0.5);

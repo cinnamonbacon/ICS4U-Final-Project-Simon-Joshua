@@ -6,8 +6,6 @@ import javafx.scene.text.TextFlow; // Imports the TextFlow.java class, which all
 import javafx.scene.paint.Paint; // Imports the Paint.java class, which allows the program to create Paint instances and set various colours.
 import javafx.scene.text.Font; // Imports the Font.java class, which allows the program to create and use different fonts.
 import javafx.scene.shape.Rectangle; // Imports the Rectangle.java class, which allows the program to create rectangles.
-import javafx.scene.input.MouseEvent; // Imports the MouseEvent.java class, which allows the program to act on various events that occur with the mouse, such as moving the mouse or clicking it.
-import javafx.scene.Cursor; // Imports the Cursor.java class, which allows the program to gain access over the design of the cursor (allows it to change the cursor design over buttons to make them look more like buttons and act like them too).
 import javafx.scene.Group; // Imports the Group.java class, which allows the program to combing various nodes together so that they can be added to the Scene that is returned.
 import javafx.scene.Scene; // Imports the Scene.java class, which allows the program to return ta scene that the MainApplication.java class will use.
 
@@ -31,7 +29,7 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
  *
  * @author Simon Bakan
  * @author Joshua Persaud
- * @version 5/27/2022
+ * @version 6/12/2022
  * 
  * @see javafx.scene.shape.Shape
  * @see javafx.scene.image.ImageView
@@ -41,8 +39,6 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
  * @see javafx.scene.paint.Paint
  * @see javafx.scene.text.Font
  * @see javafx.scene.shape.Rectangle
- * @see javafx.scene.input.MouseEvent
- * @see javafx.scene.Cursor
  * @see javafx.scene.Group
  * @see javafx.scene.Scene
  * @see java.io.File
@@ -51,8 +47,8 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
  *
  * @since JDK1.17
  */
-
 public class ConfrontationScene {
+
     /** Private non-static File variable that will hold onto the file that stores the font to be used in the confrontation scene. */
     private File textFontFile;
 
@@ -142,6 +138,16 @@ public class ConfrontationScene {
     public static final double RIGHT_BUTTON_BOTTOM_Y_COORD = 535;
     */
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 6 parameters and it will create a ConfrontationScene instance with a title and body.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param textForTitle An instance of the String.java class, which is the String that will hold the title of the ConfrontationScene instance.
+     * @param textForBody An instance of the String.java class, which is the String that will hold the body of the ConfrontationScene instance.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String textForBody) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         //this.instantiateVariablesHealth(char1Health, char2Health);
@@ -178,6 +184,18 @@ public class ConfrontationScene {
         this.char2HealthBarBackground = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 8 parameters and it will create a ConfrontationScene instance with a title, body, and health bars for the first and second characters.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param textForTitle An instance of the String.java class, which is the String that will hold the title of the ConfrontationScene instance.
+     * @param textForBody An instance of the String.java class, which is the String that will hold the body of the ConfrontationScene instance.
+     * @param char1Health A double, which will be the amount of health that the first character (the closer one) will have, as a percentage out of 100.
+     * @param char2Health A double, which will be the amount of health that the second character (the farther one) will have, as a percentage out of 100.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String textForBody, double char1Health, double char2Health) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         this.instantiateVariablesHealth(char1Health, char2Health);
@@ -207,6 +225,17 @@ public class ConfrontationScene {
         this.bottomRightButton = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 7 parameters and it will create a ConfrontationScene instance with a title and two GameButtons (using String instances).
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param textForTitle An instance of the String.java class, which is the String that will hold the title of the ConfrontationScene instance.
+     * @param leftButtonText An instance of the String.java class, which is the String that will hold the text used on the left button of the ConfrontationScene instance.
+     * @param rightButtonText An instance of the String.java class, which is the String that will hold the text used on the right button of the ConfrontationScene instance.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String leftButtonText, String rightButtonText) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         //this.instantiateVariablesHealth(char1Health, char2Health);
@@ -249,6 +278,19 @@ public class ConfrontationScene {
         this.char2HealthBarBackground = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 9 parameters and it will create a ConfrontationScene instance with a title, two GameButtons (using String instances), and health bars for the first and second characters.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param textForTitle An instance of the String.java class, which is the String that will hold the title of the ConfrontationScene instance.
+     * @param leftButtonText An instance of the String.java class, which is the String that will hold the text used on the left button of the ConfrontationScene instance.
+     * @param rightButtonText An instance of the String.java class, which is the String that will hold the text used on the right button of the ConfrontationScene instance.
+     * @param char1Health A double, which will be the amount of health that the first character (the closer one) will have, as a percentage out of 100.
+     * @param char2Health A double, which will be the amount of health that the second character (the farther one) will have, as a percentage out of 100.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, String leftButtonText, String rightButtonText, double char1Health, double char2Health) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         this.instantiateVariablesHealth(char1Health, char2Health);
@@ -284,6 +326,17 @@ public class ConfrontationScene {
         this.bottomRightButton = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 7 parameters and it will create a ConfrontationScene instance with a title and two GameButtons (using GameButton instances).
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param textForTitle An instance of the String.java class, which is the String that will hold the title of the ConfrontationScene instance.
+     * @param leftButton An instance of the GameButton.java class, which is the GameButton that will act as the left button of the ConfrontationScene instance.
+     * @param rightButton An instance of the GameButton.java class, which is the String that will act as the right button of the ConfrontationScene instance.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, GameButton leftButton, GameButton rightButton) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         //this.instantiateVariablesHealth(char1Health, char2Health);
@@ -332,6 +385,19 @@ public class ConfrontationScene {
         this.char2HealthBarBackground = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 9 parameters and it will create a ConfrontationScene instance with a title, two GameButtons (using GameButton instances), and health bars for the first and second characters.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param textForTitle An instance of the String.java class, which is the String that will hold the title of the ConfrontationScene instance.
+     * @param leftButton An instance of the GameButton.java class, which is the GameButton that will act as the left button of the ConfrontationScene instance.
+     * @param rightButton An instance of the GameButton.java class, which is the String that will act as the right button of the ConfrontationScene instance.
+     * @param char1Health A double, which will be the amount of health that the first character (the closer one) will have, as a percentage out of 100.
+     * @param char2Health A double, which will be the amount of health that the second character (the farther one) will have, as a percentage out of 100.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String textForTitle, GameButton leftButton, GameButton rightButton, double char1Health, double char2Health) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         this.instantiateVariablesHealth(char1Health, char2Health);
@@ -373,6 +439,18 @@ public class ConfrontationScene {
         this.bottomRightButton = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 8 parameters and it will create a ConfrontationScene instance with a title and one to four GameButtons (using String instances) arranged in a 2x2 grid.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param topLeftButtonText An instance of the String.java class, which is the String that will hold the text that is used on the top left button of the ConfrontationScene instance.
+     * @param bottomLeftButtonText An instance of the String.java class, which is the String that will hold the text that is used on the bottom left button of the ConfrontationScene instance.
+     * @param topRightButtonText An instance of the String.java class, which is the String that will hold the text that is used on the top right button of the ConfrontationScene instance.
+     * @param bottomRightButtonText An instance of the String.java class, which is the String that will hold the text that is used on the bottom right button of the ConfrontationScene instance.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String topLeftButtonText, String bottomLeftButtonText, String topRightButtonText, String bottomRightButtonText) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         //this.instantiateVariablesHealth(char1Health, char2Health);
@@ -420,6 +498,20 @@ public class ConfrontationScene {
         this.char2HealthBarBackground = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 10 parameters and it will create a ConfrontationScene instance with a title, one to four GameButtons (using String instances) arranged in a 2x2 grid, and health bars for the first and second characters.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param topLeftButtonText An instance of the String.java class, which is the String that will hold the text that is used on the top left button of the ConfrontationScene instance.
+     * @param bottomLeftButtonText An instance of the String.java class, which is the String that will hold the text that is used on the bottom left button of the ConfrontationScene instance.
+     * @param topRightButtonText An instance of the String.java class, which is the String that will hold the text that is used on the top right button of the ConfrontationScene instance.
+     * @param bottomRightButtonText An instance of the String.java class, which is the String that will hold the text that is used on the bottom right button of the ConfrontationScene instance.
+     * @param char1Health A double, which will be the amount of health that the first character (the closer one) will have, as a percentage out of 100.
+     * @param char2Health A double, which will be the amount of health that the second character (the farther one) will have, as a percentage out of 100.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, String topLeftButtonText, String bottomLeftButtonText, String topRightButtonText, String bottomRightButtonText, double char1Health, double char2Health) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         this.instantiateVariablesHealth(char1Health, char2Health);
@@ -460,6 +552,18 @@ public class ConfrontationScene {
         this.bodyText = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 8 parameters and it will create a ConfrontationScene instance with a title and one to four GameButtons (using GameButton instances) arranged in a 2x2 grid.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param topLeftButton An instance of the GameButton.java class, which is the String that will act as the top left button of the ConfrontationScene instance.
+     * @param bottomLeftButton An instance of the GameButton.java class, which is the GameButton that will act as the bottom left button of the ConfrontationScene instance.
+     * @param topRightButton An instance of the GameButton.java class, which is the String that will act as the top right button of the ConfrontationScene instance.
+     * @param bottomRightButton An instance of the GameButton.java class, which is the String that will act as the bottom right button of the ConfrontationScene instance.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, GameButton topLeftButton, GameButton bottomLeftButton, GameButton topRightButton, GameButton bottomRightButton) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         //this.instantiateVariablesHealth(char1Health, char2Health);
@@ -519,6 +623,20 @@ public class ConfrontationScene {
         this.char2HealthBarBackground = null;
     }
     
+    /*
+     * Class constructor used to create an instance of the ConfrontationScene.java class. It will take in 10 parameters and it will create a ConfrontationScene instance with a title, one to four GameButtons (using GameButton instances) arranged in a 2x2 grid, and health bars for the first and second characters.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the location of the font for the ConfrontationScene instance.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the ImageView for the background of the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView for the first character (the closer one) of the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView for the second character (the farther one) of the ConfrontationScene instance.
+     * @param topLeftButton An instance of the GameButton.java class, which is the String that will act as the top left button of the ConfrontationScene instance.
+     * @param bottomLeftButton An instance of the GameButton.java class, which is the GameButton that will act as the bottom left button of the ConfrontationScene instance.
+     * @param topRightButton An instance of the GameButton.java class, which is the String that will act as the top right button of the ConfrontationScene instance.
+     * @param bottomRightButton An instance of the GameButton.java class, which is the String that will act as the bottom right button of the ConfrontationScene instance.
+     * @param char1Health A double, which will be the amount of health that the first character (the closer one) will have, as a percentage out of 100.
+     * @param char2Health A double, which will be the amount of health that the second character (the farther one) will have, as a percentage out of 100.
+     */
     public ConfrontationScene(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView, GameButton topLeftButton, GameButton bottomLeftButton, GameButton topRightButton, GameButton bottomRightButton, double char1Health, double char2Health) {
         this.instantiateVariablesNonHealth(textFontFile, backgroundImageView, char1ImageView, char2ImageView);
         this.instantiateVariablesHealth(char1Health, char2Health);
@@ -571,6 +689,18 @@ public class ConfrontationScene {
         this.bodyText = null;
     }
     
+    /*
+     * Private non-static method used to instantiate variables that are non-health related.
+     * <p>
+     * This public non-static method is void and will be used to instantiate variables.
+     * that are non-health related. This method is used to reduce the amount of code copied
+     * between class constructors.
+     * 
+     * @param textFontFile An instance of the File.java class, which is the file that holds the font for the text.
+     * @param backgroundImageView An instance of the ImageView.java class, which is the background ImageView that is used for the ConfrontationScene instance.
+     * @param char1ImageView An instance of the ImageView.java class, which is the ImageView of the first character (the one that is closer) that is used for the ConfrontationScene instance.
+     * @param char2ImageView An instance of the ImageView.java class, which is the ImageView of the second character (the one that is farther) that is used for the ConfrontationScene instance.
+     */
     private void instantiateVariablesNonHealth(File textFontFile, ImageView backgroundImageView, ImageView char1ImageView, ImageView char2ImageView) {
         this.textFontFile = textFontFile;
         
@@ -622,6 +752,16 @@ public class ConfrontationScene {
         this.bottomRectangle.setY(425);
     }
     
+    /*
+     * Private non-static method used to instantiate variables that are health related.
+     * <p>
+     * This public non-static method is void and will be used to instantiate variables.
+     * that are health related. This method is used to reduce the amount of code copied
+     * between class constructors.
+     * 
+     * @param char1Health A double, which is the amount of health in the first character (the one that is closer).
+     * @param char2Health A double, which is the amount of health in the second character (the one that is farther).
+     */
     private void instantiateVariablesHealth(double char1Health, double char2Health) {
         if (char1Health > 100) char1Health = 100;
         else if (char1Health < 0) char1Health = 0;
@@ -827,6 +967,22 @@ public class ConfrontationScene {
         return this.topLeftButton;
     }
     
+    /**
+     * Public method that returns the GameButton used in the left of the bottom rectangle.
+     * <p>
+     * This public non-static method returns an instance of the 
+     * GameButton class, which is the GameButton that is used at
+     * the left of the bottom rectangle of the scene. This method
+     * returns the same object as the getTopLeftButton() method, but
+     * it differs in name to help programmers who have instantiated
+     * the two button version of this class and don't want to get
+     * confused as to why they have to access the "Top Left" button
+     * instead the "Left" button.
+     * 
+     * @return  An instance of the GameButton class, which is the
+     *          GameButton used at the left of the lower
+     *          rectangle.
+     */
     public GameButton getLeftButton() {
         return this.topLeftButton;
     }
@@ -861,6 +1017,22 @@ public class ConfrontationScene {
         return this.topRightButton;
     }
     
+    /**
+     * Public method that returns the GameButton used in the right of the bottom rectangle.
+     * <p>
+     * This public non-static method returns an instance of the 
+     * GameButton class, which is the GameButton that is used at
+     * the right of the bottom rectangle of the scene. This method
+     * returns the same object as the getTopRightButton() method, but
+     * it differs in name to help programmers who have instantiated
+     * the two button version of this class and don't want to get
+     * confused as to why they have to access the "Top Right" button
+     * instead the "right" button.
+     * 
+     * @return  An instance of the GameButton class, which is the
+     *          GameButton used at the right of the lower
+     *          rectangle.
+     */
     public GameButton getRightButton() {
         return this.topRightButton;
     }
@@ -893,6 +1065,16 @@ public class ConfrontationScene {
         return this.char1Health;
     }
     
+    /**
+     * Public method that sets the health of the first character.
+     * <p>
+     * This public non-static method is void and takes in a double
+     * as a parameter, which is the new health of the first character
+     * (as a percentage out of 100).
+     * 
+     * @param newChar1Health A double, which is the new health of the
+     *                       first character.
+     */
     public void setChar1Health(double newChar1Health) {
         if (newChar1Health > 100) newChar1Health = 100;
         else if (newChar1Health < 0) newChar1Health = 0;
@@ -900,10 +1082,26 @@ public class ConfrontationScene {
         this.char1HealthBarForeground.setWidth(250 * (newChar1Health / 100));
     }
     
+    /*
+     * Public non-static method used to get the rectangle that is used in the foreground of the first character's health bar in the ConfrontationScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Rectangle.java class, which is
+     * the rectangle that is used as the foreground of the first character's health bar in the ConfrontationScene instance.
+     * 
+     * @return  An instance of the Rectangle.java class, which will be the rectangle that is used as the foreground of the first character's health bar in the ConfrontationScene instance.
+     */
     public Rectangle getChar1HealthBarForeground() {
         return this.char1HealthBarForeground;
     }
     
+    /*
+     * Public non-static method used to get the rectangle that is used in the background of the first character's health bar in the ConfrontationScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Rectangle.java class, which is
+     * the rectangle that is used as the background of the first character's health bar in the ConfrontationScene instance.
+     * 
+     * @return  An instance of the Rectangle.java class, which will be the rectangle that is used as the background of the first character's health bar in the ConfrontationScene instance.
+     */
     public Rectangle getChar1HealthBarBackground() {
         return this.char1HealthBarBackground;
     }
@@ -921,6 +1119,16 @@ public class ConfrontationScene {
         return this.char2Health;
     }
     
+    /**
+     * Public method that sets the health of the second character.
+     * <p>
+     * This public non-static method is void and takes in a double
+     * as a parameter, which is the new health of the second character
+     * (as a percentage out of 100).
+     * 
+     * @param newChar2Health A double, which is the new health of the
+     *                       second character.
+     */
     public void setChar2Health(double newChar2Health) {
         if (newChar2Health > 100) newChar2Health = 100;
         else if (newChar2Health < 0) newChar2Health = 0;
@@ -928,18 +1136,50 @@ public class ConfrontationScene {
         this.char2HealthBarForeground.setWidth(250 * (newChar2Health / 100));
     }
     
+    /*
+     * Public non-static method used to get the rectangle that is used in the foreground of the second character's health bar in the ConfrontationScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Rectangle.java class, which is
+     * the rectangle that is used as the foreground of the second character's health bar in the ConfrontationScene instance.
+     * 
+     * @return  An instance of the Rectangle.java class, which will be the rectangle that is used as the foreground of the second character's health bar in the ConfrontationScene instance.
+     */
     public Rectangle getChar2HealthBarForeground() {
         return this.char2HealthBarForeground;
     }
     
+    /*
+     * Public non-static method used to get the rectangle that is used in the background of the second character's health bar in the ConfrontationScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Rectangle.java class, which is
+     * the rectangle that is used as the background of the second character's health bar in the ConfrontationScene instance.
+     * 
+     * @return  An instance of the Rectangle.java class, which will be the rectangle that is used as the background of the second character's health bar in the ConfrontationScene instance.
+     */
     public Rectangle getChar2HealthBarBackground() {
         return this.char2HealthBarBackground;
     }
     
+    /*
+     * Public non-static method used to get the title text of the ConfrontationScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Text.java class, which
+     * will be the title portion of the ConfrontationScene instance.
+     * 
+     * @return  An instance of the Text.java class, which will be the title text of the ConfrontationScene instance.
+     */
     public Text getTitle() {
         return this.titleText;
     }
     
+    /*
+     * Public non-static method used to get the body text of the ConfrontationScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Text.java class, which
+     * will be the body portion of the ConfrontationScene instance.
+     * 
+     * @return  An instance of the Text.java class, which will be the body text of the ConfrontationScene instance.
+     */
     public Text getBody() {
         return this.bodyText;
     }
@@ -1065,7 +1305,6 @@ public class ConfrontationScene {
      * This private non-static method is used to get a Font from a
      * certain file.
      * 
-     * @param fontFile A File that is the source of the specified font.
      * @param fontSize A double, which is the font size that is desired.
      * @return  An instance of the Font class, which is the actual font
      *          at the specified size.
