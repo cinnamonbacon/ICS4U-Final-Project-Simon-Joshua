@@ -367,26 +367,27 @@ public class GameButton {
     }
     
     /*
-     * Public non-static method used to get the file for the font of the GameTitle instance.
+     * Public non-static method used to get the file for the font of the GameButton instance.
      * <p>
      * This public non-static method will return an instance of the File.java class, which will
-     * be the file that holds the .ttf file that is used for the font type for the GameTitle
+     * be the file that holds the .ttf file that is used for the font type for the GameButton
      * instance's text.
      * 
-     * @return  An instance of the File.java class, which will be the file for the font of the GameTitle instance.
+     * @return  An instance of the File.java class, which will be the file for the font of the GameButton instance.
      */
     public File getFontFile() {
         return this.textFontFile;
     }
     
     /*
-     * Public non-static method used to set the file for the font of the GameTitle instance.
+     * Public non-static method used to set the file for the font of the GameButton instance.
      * <p>
      * This public non-static method is void and it will take in an instance of the File.java
      * class as a parameter, which will be the new .ttf file that will be used for the font
-     * type for the GameTitle instance.
+     * type for the GameButton instance.
      * 
-     * @param newFontFile A double, which will be the new file for the font of the GameTitle instance.
+     * @param newFontFile An instance of the File.java class, which will be the new file for
+     *                    the font of the GameButton instance.
      */
     public void setFontFile(File newFontFile) {
         this.textFontFile = newFontFile;

@@ -1,16 +1,16 @@
-import java.io.File;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.PrintWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import java.io.File; // Imports the File.java class, which allows the program to access files on the computer, such as images.
+import java.io.IOException; // Imports the IOException.java class, which allows the program to deal with and catch any errors thrown during reading of IO.
+import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to easily read in data from certain files.
+import java.io.PrintWriter; // Imports the PrintWriter.java class, which allows the program to write data to a certain file.
+import java.io.FileReader; // Imports the FileReader.java class, which allows the program to read data from a certain file using a subclass of the Reader.java class.
+import java.io.BufferedReader; // Imports the BufferedReader.java class, which allows the program to read data at a much faster rate due to the buffering that is proved by this class.
+import java.util.ArrayList; // Imports the ArrayList.java class, which allows the program to have access to the ArrayList datatype (which is a resizable array).
+import java.time.LocalDateTime; // Imports the LocalDateTime.java class, which allows the program to have access to the current time.
+import java.time.Period; // Imports the Period.java class, which allows the program to calculate the difference in LocalDateTime instances on a larger duration (so days and up).
+import java.time.Duration; // Imports the Duration.java class, which allows the program to calculate the difference in LocalDateTime instances on a smaller duration (so hours and lower).
+import java.time.temporal.ChronoUnit; // Imports the ChronoUnit.java class, which allows the program to have access to the difference of a specific unit of time between two LocalDateTime instances. 
+import javafx.scene.control.Label; // Imports the Label.java class, which allows the program to have access to Labels that it can use in the leaderboard grid pane that is returned by the getLeaderboardGridPane(); method.
+import javafx.scene.layout.GridPane; // Imports the GridPane.java class, which allows the program to have access to a grid layout manager.
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
 

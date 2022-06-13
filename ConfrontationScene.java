@@ -14,10 +14,19 @@ import java.io.FileInputStream; // Imports the FileInputStream.java class, which
 import java.io.IOException; // Imports the IOException.java class, which allows the program to deal with and catch any errors thrown during reading of IO.
 
 /**
- * Program to create a scene that displayes a confrontation.
+ * Program to create a scene that displays a confrontation.
  * <p>
  * This class will be used to create a confrontation scene
- * that shoows a face-off between two characters.
+ * that shoows a face-off between two characters. It will do
+ * so by creating ImageView.java instances for the background
+ * as well as the characters, Ellipse.java instances for the
+ * platforms for the characters, Rectangle.java instances for
+ * the lower rectangle (behind the buttons and/or text) and the
+ * health bars for the first and second character, and either
+ * Text.java instances for the title and body and/or GameButton.java
+ * instances for the game buttons.
+ * 
+ * This was made fully by Joshua Persaud.
  * <p>
  * Course: ICS 4U0/P
  * <p>
@@ -26,8 +35,7 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
  * Purpose: to create confrontation scenes.
  * <p>
  * Filename: ConfrontationScene.java
- *
- * @author Simon Bakan
+ * 
  * @author Joshua Persaud
  * @version 6/12/2022
  * 
@@ -49,61 +57,61 @@ import java.io.IOException; // Imports the IOException.java class, which allows 
  */
 public class ConfrontationScene {
 
-    /** Private non-static File variable that will hold onto the file that stores the font to be used in the confrontation scene. */
+    /** Private non-static File variable that will hold onto the file that stores the font to be used in the ConfrontationScene.java instance. */
     private File textFontFile;
 
-    /** Private non-static ImageView variable that will hold onto the background of the confrontation scene. */
+    /** Private non-static ImageView variable that will hold onto the background of the ConfrontationScene.java instance. */
     private ImageView backgroundImageView;
     
-    /** Private non-static Ellipse variable that will hold onto the ellipse that is used as a platform for the closer character. */
+    /** Private non-static Ellipse variable that will hold onto the ellipse that is used as a platform for the closer character in the ConfrontationScene.java instance. */
     private Ellipse closeCharPlat;
     
-    /** Private non-static Ellipse variable that will hold onto the ellipse that is used as a platform for the farther character. */
+    /** Private non-static Ellipse variable that will hold onto the ellipse that is used as a platform for the farther character in the ConfrontationScene.java instance. */
     private Ellipse farCharPlat;
     
-    /** Private non-static ImageView variable that will hold onto the image that is used for the first character. */
+    /** Private non-static ImageView variable that will hold onto the image that is used for the first character in the ConfrontationScene.java instance. */
     private ImageView char1ImageView;
     
-    /** Private non-static ImageView variable that will hold onto the image that is used for the second character. */
+    /** Private non-static ImageView variable that will hold onto the image that is used for the second character in the ConfrontationScene.java instance. */
     private ImageView char2ImageView;
     
-    /** Private non-static Rectangle variable that will hold onto the rectangle that is used at the bottom of the scene. */
+    /** Private non-static Rectangle variable that will hold onto the rectangle that is used at the bottom of the scene in the ConfrontationScene.java instance. */
     private Rectangle bottomRectangle;
     
-    /** Private non-static GameButton variable that will hold onto the game button that is used for the top left of the lower rectangle. */
+    /** Private non-static GameButton variable that will hold onto the game button that is used for the top left of the lower rectangle in the ConfrontationScene.java instance. */
     private GameButton topLeftButton;
     
-    /** Private non-static GameButton variable that will hold onto the game button that is used for the bottom left of the lower rectangle. */
+    /** Private non-static GameButton variable that will hold onto the game button that is used for the bottom left of the lower rectangle in the ConfrontationScene.java instance. */
     private GameButton bottomLeftButton;
     
-    /** Private non-static GameButton variable that will hold onto the game button that is used for the top right of the lower rectangle. */
+    /** Private non-static GameButton variable that will hold onto the game button that is used for the top right of the lower rectangle in the ConfrontationScene.java instance. */
     private GameButton topRightButton;
     
-    /** Private non-static GameButton variable that will hold onto the game button that is used for the bottom right of the lower rectangle. */
+    /** Private non-static GameButton variable that will hold onto the game button that is used for the bottom right of the lower rectangle in the ConfrontationScene.java instance. */
     private GameButton bottomRightButton;
     
-    /** Private non-static double variable that will hold onto the amount of health for the first character (as a percentage out of 100). */
+    /** Private non-static double variable that will hold onto the amount of health for the first character (as a percentage out of 100) in the ConfrontationScene.java instance. */
     private double char1Health;
     
-    /** Private non-static Rectangle variable that will hold onto the front rectangle that is used to show the first character's health. */
+    /** Private non-static Rectangle variable that will hold onto the front rectangle that is used to show the first character's health in the ConfrontationScene.java instance. */
     private Rectangle char1HealthBarForeground;
     
-    /** Private non-static Rectangle variable that will hold onto the back rectangle that is used to show the first character's health. */
+    /** Private non-static Rectangle variable that will hold onto the back rectangle that is used to show the first character's health in the ConfrontationScene.java instance. */
     private Rectangle char1HealthBarBackground;
     
-    /** Private non-static double variable that will hold onto the amount of health for the second character (as a percentage out of 100). */
+    /** Private non-static double variable that will hold onto the amount of health for the second character (as a percentage out of 100) in the ConfrontationScene.java instance. */
     private double char2Health;
     
-    /** Private non-static Rectangle variable that will hold onto the front rectangle that is used to show the second character's health. */
+    /** Private non-static Rectangle variable that will hold onto the front rectangle that is used to show the second character's health in the ConfrontationScene.java instance. */
     private Rectangle char2HealthBarForeground;
     
-    /** Private non-static Rectangle variable that will hold onto the back rectangle that is used to show the second character's health. */
+    /** Private non-static Rectangle variable that will hold onto the back rectangle that is used to show the second character's health in the ConfrontationScene.java instance. */
     private Rectangle char2HealthBarBackground;
     
-    /** Private non-static Text variable that will hold onto the text that will be used for the title. */
+    /** Private non-static Text variable that will hold onto the text that will be used for the title in the ConfrontationScene.java instance. */
     private Text titleText;
     
-    /** Private non-static Text variable that will hold onto the text that will be used for the body (the text underneath the title). */
+    /** Private non-static Text variable that will hold onto the text that will be used for the body (the text underneath the title) in the ConfrontationScene.java instance. */
     private Text bodyText;
     
     /*
@@ -692,7 +700,7 @@ public class ConfrontationScene {
     /*
      * Private non-static method used to instantiate variables that are non-health related.
      * <p>
-     * This public non-static method is void and will be used to instantiate variables.
+     * This private non-static method is void and will be used to instantiate variables.
      * that are non-health related. This method is used to reduce the amount of code copied
      * between class constructors.
      * 
@@ -755,7 +763,7 @@ public class ConfrontationScene {
     /*
      * Private non-static method used to instantiate variables that are health related.
      * <p>
-     * This public non-static method is void and will be used to instantiate variables.
+     * This private non-static method is void and will be used to instantiate variables.
      * that are health related. This method is used to reduce the amount of code copied
      * between class constructors.
      * 
@@ -804,7 +812,7 @@ public class ConfrontationScene {
      * scene's font.
      * 
      * @return  An instance of the File class, which is the font used by
-     *          the scene.
+     *          the confrontation scene.
      */
     public File getFontFile() {
         return this.textFontFile;

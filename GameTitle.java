@@ -289,7 +289,8 @@ public class GameTitle {
      * class as a parameter, which will be the new .ttf file that will be used for the font
      * type for the GameTitle instance.
      * 
-     * @param newFontFile A double, which will be the new file for the font of the GameTitle instance.
+     * @param newFontFile An instance of the File.java class, which will be the new file for
+     *                    the font of the GameTitle instance.
      */
     public void setFontFile(File newFontFile) {
         this.textFontFile = newFontFile;
