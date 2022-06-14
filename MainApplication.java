@@ -649,17 +649,29 @@ public class MainApplication extends Application {
     /** This private non-static variable is an instance of the GridPane.java class and it will hold the grid pane that shows the leaderboard values. */
     private GridPane leaderboardValuesToAdd;
     
+    /** This private non-static File variable will hold the file for the upper part of the image for the first confrontation. */
     private File confrontation1UpperFile;
     
+    /** This private non-static File variable will hold the file for the lower part of the image for the first confrontation. */
     private File confrontation1LowerFile;
     
+    /** This private non-static File variable will hold the file for the upper part of the image for the third confrontation. */
     private File confrontation3UpperFile;
     
+    /** This private non-static File variable will hold the file for the lower part of the image for the third confrontation. */
     private File confrontation3LowerFile;
     
+    /** This private non-static File variable will hold the file for the upper part of the image for the fourth confrontation. */
     private File confrontation4UpperFile;
     
+    /** This private non-static File variable will hold the file for the lower part of the image for the fourth confrontation. */
     private File confrontation4LowerFile;
+    
+    /** This private non-static File array variable will hold the files for the table in level 3. */
+    private File[][] tableFile;
+    
+    /** This private non-static File array variable will hold the files for the trees in level 1. */
+    private File[][] treeFile;
     
     /**
      * An instance of the MainApplication.java class will be created using this no parameter constructor.
@@ -708,6 +720,22 @@ public class MainApplication extends Application {
         this.confrontationChar[2] = new File("Confrontation3.png");
         this.confrontationChar[3] = new File("Confrontation4.png");
         this.confrontationChar[4] = new File("Confrontation5.png");
+        
+        this.tableFile = new File[2][3];
+        this.tableFile[0][0] = new File("TableLeftTop.png");
+        this.tableFile[1][0] = new File("TableLeftBottom.png");
+        this.tableFile[0][1] = new File("TableMidTop.png");
+        this.tableFile[1][1] = new File("TableMidBottom.png");
+        this.tableFile[0][2] = new File("TableRightTop.png");
+        this.tableFile[1][2] = new File("TableRightBottom.png");
+        
+        this.treeFile = new File[3][2];
+        this.treeFile[0][0] = new File("TreeLeftTop.png");
+        this.treeFile[1][0] = new File("TreeLeftMid.png");
+        this.treeFile[2][0] = new File("TreeLeftBot.png");
+        this.treeFile[0][1] = new File("TreeRightTop.png");
+        this.treeFile[1][1] = new File("TreeRightMid.png");
+        this.treeFile[2][1] = new File("TreeRightBot.png");
         
         /*
         this.books = new File[8];
@@ -1296,6 +1324,17 @@ public class MainApplication extends Application {
         grid[0].setObject(5, 10, bookTileFile.getPath());
         grid[0].setInteractable(5, 10, true);
         grid[0].setMovable(5, 10, false);
+        for(int k=3;k<7;k+=3){
+            for(int h=15;h<18;h+=2){
+                for (int i=0;i<treeFile.length;i++){
+                    for (int x=0; x<treeFile[0].length;x++){
+                        grid[0].setObject(k+i, h+x, treeFile[i][x].getPath());
+                        grid[0].setInteractable(k+i, h+x, false);
+                        grid[0].setMovable(k+i, h+x, false);
+                    }
+                }
+            }
+        }
 
         // Top right grid
         for (int i = 0; i < 2; i++) {
@@ -1327,6 +1366,19 @@ public class MainApplication extends Application {
         grid[1].setObject(15, 7, bookTileFile.getPath());
         grid[1].setInteractable(15, 7, true);
         grid[1].setMovable(15, 7, false);
+        
+        for(int k=3;k<16;k+=3){
+            for(int h=2;h<5;h+=2){
+                for (int i=0;i<treeFile.length;i++){
+                    for (int x=0; x<treeFile[0].length;x++){
+                        grid[1].setObject(k+i, h+x, treeFile[i][x].getPath());
+                        grid[1].setInteractable(k+i, h+x, false);
+                        grid[1].setMovable(k+i, h+x, false);
+                    }
+                }
+            }
+        }
+
 
         // Bottom left grid
         for (int i = 18; i < 20; i++) {
@@ -1358,6 +1410,29 @@ public class MainApplication extends Application {
         grid[2].setObject(10, 10, bookTileFile.getPath());
         grid[2].setInteractable(10, 10, true);
         grid[2].setMovable(10, 10, false);
+
+        for(int k=6;k<13;k+=3){
+            for(int h=11;h<12;h+=2){
+                for (int i=0;i<treeFile.length;i++){
+                    for (int x=0; x<treeFile[0].length;x++){
+                        grid[2].setObject(k+i, h+x, treeFile[i][x].getPath());
+                        grid[2].setInteractable(k+i, h+x, false);
+                        grid[2].setMovable(k+i, h+x, false);
+                    }
+                }
+            }
+        }
+        for(int k=6;k<13;k+=6){
+            for(int h=7;h<11;h+=2){
+                for (int i=0;i<treeFile.length;i++){
+                    for (int x=0; x<treeFile[0].length;x++){
+                        grid[2].setObject(k+i, h+x, treeFile[i][x].getPath());
+                        grid[2].setInteractable(k+i, h+x, false);
+                        grid[2].setMovable(k+i, h+x, false);
+                    }
+                }
+            }
+        }
 
         // Bottom right grid
         for (int i = 18; i < 20; i++) {
@@ -1392,7 +1467,19 @@ public class MainApplication extends Application {
         grid[3].setObject(15, 8, bookTileFile.getPath());
         grid[3].setInteractable(15, 8, true);
         grid[3].setMovable(15, 8, false);
-
+        
+        for(int k=11;k<12;k+=3){
+            for(int h=5;h<15;h+=2){
+                for (int i=0;i<treeFile.length;i++){
+                    for (int x=0; x<treeFile[0].length;x++){
+                        grid[3].setObject(k+i, h+x, treeFile[i][x].getPath());
+                        grid[3].setInteractable(k+i, h+x, false);
+                        grid[3].setMovable(k+i, h+x, false);
+                    }
+                }
+            }
+        }
+        
         this.gridNum = 0;
         Group[] gr = new Group[4];
         for (int i = 0; i < 4; i++) {
@@ -1813,6 +1900,14 @@ public class MainApplication extends Application {
         grid.setObject(10, 15, fatherLowerFile.getPath());
         grid.setInteractable(10, 15, false);
         grid.setMovable(10, 15, false);
+        
+        for (int i=0;i<2;i++){
+            for (int x=0; x<3;x++){
+                grid.setObject(4+i, 5+x, tableFile[i][x].getPath());
+                grid.setInteractable(4+i, 5+x, false);
+                grid.setMovable(4+i, 5+x, false);
+            }
+        }
 
         level3Group = grid.draw();
         
@@ -2928,9 +3023,9 @@ public class MainApplication extends Application {
                                     final int damage = (int)(10*Math.random()+10);
                                     final int damageTaken = damage-block;
                                     if(damage-block>=0){
-                                        block = 0;
                                         health-=damageTaken;
-                                        ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                        ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                        block = 0;
                                         enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
@@ -2938,7 +3033,7 @@ public class MainApplication extends Application {
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }else{
                                         block-=damage;
-                                        ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
+                                        ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
                                         enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
