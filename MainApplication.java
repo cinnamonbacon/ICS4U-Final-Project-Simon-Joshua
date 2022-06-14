@@ -649,6 +649,18 @@ public class MainApplication extends Application {
     /** This private non-static variable is an instance of the GridPane.java class and it will hold the grid pane that shows the leaderboard values. */
     private GridPane leaderboardValuesToAdd;
     
+    private File confrontation1UpperFile;
+    
+    private File confrontation1LowerFile;
+    
+    private File confrontation3UpperFile;
+    
+    private File confrontation3LowerFile;
+    
+    private File confrontation4UpperFile;
+    
+    private File confrontation4LowerFile;
+    
     /**
      * An instance of the MainApplication.java class will be created using this no parameter constructor.
      */
@@ -675,6 +687,12 @@ public class MainApplication extends Application {
         this.motherLowerFile = new File("MotherLower.png");
         this.houseFloorFile = new File("HouseFloor.png");
         this.houseWallFile = new File("HouseWall.png");
+        this.confrontation1UpperFile = new File("Confrontation1Upper.png");
+        this.confrontation1LowerFile = new File("Confrontation1Lower.png");
+        this.confrontation3UpperFile = new File("Confrontation3Upper.png");
+        this.confrontation3LowerFile = new File("Confrontation3Lower.png");
+        this.confrontation4UpperFile = new File("Confrontation4Upper.png");
+        this.confrontation4LowerFile = new File("Confrontation4Lower.png");
         
         this.cafFloorFiles = new File[2];
         this.cafFloorFiles[0] = new File("cafFloor1.png");
@@ -1505,12 +1523,15 @@ public class MainApplication extends Application {
                                 scene.setRoot(books[bookNum].getScene());
                                 //bookNum++;
                                 if (bookNum + 1 == books.length) {
-                                    grid[0].setObject(15, 15, confrontationChar[0].getPath());
+                                    grid[0].setObject(15, 15, confrontation1LowerFile.getPath());
                                     grid[0].setMovable(15, 15, false);
                                     grid[0].setInteractable(15, 15, true);
+                                    grid[0].setObject(14, 15, confrontation1UpperFile.getPath());
+                                    grid[0].setMovable(14, 15, false);
+                                    grid[0].setInteractable(14, 15, true);
                                     gr[0] = grid[0].draw();
                                 }
-                            } else if (interaction.getObject().equals(confrontationChar[0].getPath())) {
+                            } else if (interaction.getObject().equals(confrontation1UpperFile.getPath())||interaction.getObject().equals(confrontation1LowerFile.getPath())) {
                                 stage.setScene(confrontationTextScene1);
                             }
                         }
@@ -1620,10 +1641,18 @@ public class MainApplication extends Application {
         grid.setObject(10, 5, confrontationChar[1].getPath());
         grid.setInteractable(10, 5, true);
         grid.setMovable(10, 5, false);
-        grid.setObject(16, 12, confrontationChar[2].getPath());
+        
+        grid.setObject(15, 12, confrontation3UpperFile.getPath());
+        grid.setInteractable(15, 12, true);
+        grid.setMovable(15, 12, false);
+        grid.setObject(16, 12, confrontation3LowerFile.getPath());
         grid.setInteractable(16, 12, true);
         grid.setMovable(16, 12, false);
-        grid.setObject(5, 16, confrontationChar[3].getPath());
+        
+        grid.setObject(4, 16, confrontation4UpperFile.getPath());
+        grid.setInteractable(4, 16, true);
+        grid.setMovable(4, 16, false);
+        grid.setObject(5, 16, confrontation4LowerFile.getPath());
         grid.setInteractable(5, 16, true);
         grid.setMovable(5, 16, false);
 
@@ -1675,10 +1704,13 @@ public class MainApplication extends Application {
                                 questionMenu = "startText";
                                 this.confrontationTextScene2 = this.confrontation2Text(stage);
                                 stage.setScene(confrontationTextScene2);
-                            }else if(interaction.getObject().equals(confrontationChar[2].getPath())){
-                                interaction.setObject("");
-                                interaction.setMovable(true);
-                                interaction.setInteractable(false);
+                            }else if(interaction.getObject().equals(confrontation3UpperFile.getPath())||interaction.getObject().equals(confrontation3LowerFile.getPath())){
+                                grid.setObject(15, 12, "");
+                                grid.setInteractable(15, 12, false);
+                                grid.setMovable(15, 12, true);
+                                grid.setObject(16, 12, "");
+                                grid.setInteractable(16, 12, false);
+                                grid.setMovable(16, 12, true);
                                 level2Group = grid.draw();
                                 enemyHealth = 100;
                                 battleMenu = "main";
@@ -1687,10 +1719,13 @@ public class MainApplication extends Application {
                                 questionMenu = "startText";
                                 this.confrontationTextScene3 = this.confrontation3Text(stage);
                                 stage.setScene(confrontationTextScene3);
-                            }else if(interaction.getObject().equals(confrontationChar[3].getPath())){
-                                interaction.setObject("");
-                                interaction.setMovable(true);
-                                interaction.setInteractable(false);
+                            }else if(interaction.getObject().equals(confrontation4UpperFile.getPath())||interaction.getObject().equals(confrontation4LowerFile.getPath())){
+                                grid.setObject(4, 16, "");
+                                grid.setInteractable(4, 16, false);
+                                grid.setMovable(4, 16, true);
+                                grid.setObject(5, 16, "");
+                                grid.setInteractable(5, 16, false);
+                                grid.setMovable(5, 16, true);
                                 level2Group = grid.draw();
                                 enemyHealth = 100;
                                 battleMenu = "main";
@@ -1907,7 +1942,6 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation2Text(Stage stage) throws IOException {
-        health = 100;
         Scene scene;
         GameButton yesButton = new GameButton(this.pressStart2PFile, "Yes", 85, 470, 17);	
         	
@@ -2045,7 +2079,6 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation3Text(Stage stage) throws IOException {
-        health = 100;
         Scene scene;
         GameButton yesButton = new GameButton(this.pressStart2PFile, "Yes", 85, 470, 17);	
         	
@@ -2183,7 +2216,6 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation4Text(Stage stage) throws IOException {
-        health = 100;
         Scene scene;
         GameButton yesButton = new GameButton(this.pressStart2PFile, "Yes", 85, 470, 17);	
         	
@@ -2888,6 +2920,7 @@ public class MainApplication extends Application {
                         if(battleMenu.equals("damageText")){
                             if(encounterNum==1){
                                 if(enemyHealth<=0){
+                                    health = 100;
                                     confrontations += 1;
                                     score -= (100-health)/5;
                                     stage.setScene(level2Scene);
@@ -3034,9 +3067,9 @@ public class MainApplication extends Application {
                                     final int damage = (int)(10*Math.random()+20);
                                     final int damageTaken = damage-block;
                                     if(damage-block>=0){
-                                        block = 0;
                                         health-=damageTaken;
                                         ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                        block = 0;
                                         enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
