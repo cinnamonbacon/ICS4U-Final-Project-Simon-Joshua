@@ -1230,10 +1230,10 @@ public class ConfrontationScene {
             textToAdd.getChildren().add(this.bodyText);
         }
         //textToAdd.setLineSpacing(10);
-        textToAdd.setPrefWidth(530);
-        textToAdd.setPrefHeight(130);
-        textToAdd.setTranslateX(35);
-        textToAdd.setTranslateY(435);
+        textToAdd.setPrefWidth(520);
+        textToAdd.setPrefHeight(120);
+        textToAdd.setTranslateX(40);
+        textToAdd.setTranslateY(440);
         nodesToAdd.getChildren().add(textToAdd);
         
         return nodesToAdd;
@@ -1307,15 +1307,17 @@ public class ConfrontationScene {
         */
     }
     
-    /**
-     * Public method that returns the Font from the specified file.
+    /*
+     * Public non-static method used to get a font of a specified size, from the file.
      * <p>
-     * This private non-static method is used to get a Font from a
-     * certain file.
+     * This public non-static method will return an instance of the Font.java class, and
+     * it will be the font type that is created from the ConfrontationScene instance's textFontFile
+     * File instance. The method will also take in a double as a parameter, and this will be
+     * the font size of the desired font.
      * 
-     * @param fontSize A double, which is the font size that is desired.
-     * @return  An instance of the Font class, which is the actual font
-     *          at the specified size.
+     * @param fontSize A double, which is the size of the desired font.
+     * @return  An instance of the Font.java class, which is the Font that is desired at the 
+     *          desired size.
      */
     public Font getFontFromFile(double fontSize) {
         Font fontFont = new Font(1); // It doesn't matter what size font I put, so I will default it to 1.

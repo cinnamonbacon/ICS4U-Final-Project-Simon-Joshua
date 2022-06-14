@@ -1,7 +1,7 @@
 /*
   Names: Simon Bakan and Joshua Persaud
   Teacher: Ms. Krasteva
-  Date: May 27, 2022
+  Date: June 14, 2022
   Course: ICS4U0/P
   
   Purpose: to act as a driver class and run various code in the correct order to simulate a game.
@@ -38,39 +38,28 @@ import java.io.File; // Imports the File.java class, which allows the program to
 import java.io.IOException; // Imports the IOException.java class, which allows the program to take care of the IOExceptions that are thrown by any parts of the program.
 
 // Remember to add JavaDoc for these imports:
-import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
-import javafx.scene.shape.StrokeType;
-import javafx.scene.shape.StrokeLineJoin;
-import javafx.scene.text.TextFlow;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region; // Imports the Region.java class, which allows the program to utilize the USE_COMPUTED_SIZE variable to use default heights for various Node.java text instances.
+import javafx.scene.text.Text; // Imports the Text.java class, which allows the program to beautiful text to display to the user. 
+import javafx.scene.shape.StrokeType; // Imports the StrokeType.java class, which allows the program to set the type of stroke that is used on the outer rectangle for the leaderboard Rectangle.java instance.
+import javafx.scene.shape.StrokeLineJoin; // Imports the StrokeLineJoin.java class, which allows the program to set how two lines come together (such as a rounded point or a sharp edge).
+import javafx.scene.text.TextFlow; // Imports the TextFlow.java class, which allows the program to add two or more Text.java instances together.
+import javafx.scene.layout.Pane; // Imports the Pane.java class, which allows the program to have a simple and vanilla layout manager where multiple Node.java instances can be added to.
 import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to read in data from files that arer on the user's computer.
-import java.util.Arrays;
+//import java.util.Arrays;
 //import javafx.scene.control.Dialog;
 //import javafx.scene.control.DialogPane;
 //import javafx.scene.control.ButtonType;
 //import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.TextField;
-import javafx.animation.ScaleTransition;
-import javafx.scene.layout.StackPane;
-import java.time.LocalDateTime;
-import javafx.geometry.Pos;
-import javafx.scene.layout.GridPane;
-import java.nio.charset.Charset;
+import javafx.scene.control.TextField; // Imports the TextField.java class, which allows the program to easily take in Strings from the user (more specifically, their username).
+import javafx.animation.ScaleTransition; // Imports the ScaleTransition.java class, which allows the program to make transitions that involve scaling, such as with the scaling of the logo in the intro animation.
+import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to use the StackPane layout manager (which just centers all the Node.java instances and then stacks them).
+import java.time.LocalDateTime; // Imports the LocalDateTime.java class, which allows the program to keep track of various times, such as the time when the user starts the game and when they end it.
+import javafx.geometry.Pos; // Imports the Pos.java class, which allows the program to change the positioning of Node.java instances within layout managers.
+import javafx.scene.layout.GridPane; // Imports the GridPane.java class, which allows the program to have access to a grid layout manager.
+//import java.nio.charset.Charset;
 import javafx.scene.shape.Ellipse; // Imports the Ellipse.java class, which will allow the program to create ellipses for the graphics.
-import java.util.Arrays;
-//import javafx.scene.control.Dialog;
-//import javafx.scene.control.DialogPane;
-//import javafx.scene.control.ButtonType;
-//import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.TextField;
-import javafx.animation.ScaleTransition;
-import javafx.scene.layout.StackPane;
-import java.time.LocalDateTime;
-import javafx.geometry.Pos;
-import javafx.scene.layout.GridPane;
-import java.nio.charset.Charset;
+//import java.util.Arrays;
+
 /**
  * Main program that will act as driver class and run entire game.
  * <p>
@@ -432,6 +421,12 @@ import java.nio.charset.Charset;
   * https://www.dreamstime.com/sadness-asian-girl-talking-mobile-phone-sadness-asian-girl-talking-mobile-phone-her-bed-image99956999
   * https://www.mygbhp.com/blog/how-loss-affects-teens/
   * https://docs.oracle.com/javase/7/docs/api/java/io/Reader.html
+  * https://www.tutorialspoint.com/opencv-javafx-application-to-alter-the-sharpness-of-an-image
+  * https://examples.javacodegeeks.com/desktop-java/awt/image/sharpening-a-buffered-image/
+  * https://stackoverflow.com/questions/45419835/javafx-imagepane-resize-bad-quality
+  * https://stackoverflow.com/questions/59525384/javafx-new-line-spacing-between-texts-in-textflow
+  * https://stackoverflow.com/questions/5068951/what-do-lt-and-gt-stand-for
+  * https://docs.oracle.com/javase/8/docs/api/java/util/List.html
  */
 
 public class MainApplication extends Application {
@@ -636,20 +631,26 @@ public class MainApplication extends Application {
     /** This private non-static Scene variable will hold the scene for the text after the fifth confrontation of the game. */
     private Scene confrontationAfterTextScene5;
     
+    /** This private non-static variable is an instance of the String.java class and it will hold the username of the current user. */
     private String userName;
     
+    /** This private non-static variable is an instance of the LocalDateTime.java class and it will hold the time when the user started playing the game. */
     private LocalDateTime startTime;
     
-    private LocalDateTime endTime;
+    /** This private non-static variable is an instance of the LocalDateTime.java class and it will hold the time when the user stopped playing the game. */
+    //private LocalDateTime endTime;
     
+    /** This private non-static variable is an instance of the Leaderboard.java class and it will hold the leaderboard for this game. */
     private Leaderboard leaderboard;
     
+    /** This private non-static variable is an instance of the Scene.java class and it will hold the scene for the write up screen. */
     private Scene writeUpScene;
     
+    /** This private non-static variable is an instance of the GridPane.java class and it will hold the grid pane that shows the leaderboard values. */
     private GridPane leaderboardValuesToAdd;
     
     /**
-     * An instance of the MainApplication class will be created using this no parameter constructor.
+     * An instance of the MainApplication.java class will be created using this no parameter constructor.
      */
     public MainApplication() {
         this.logoFile = new File("ICS ISP - Single Star Games Logo.png");
@@ -778,7 +779,7 @@ public class MainApplication extends Application {
             new EventHandler <ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    FadeTransition ftLogo = new FadeTransition(Duration.millis(7000), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
+                    FadeTransition ftLogo = new FadeTransition(Duration.millis(5000), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
                     ftLogo.setFromValue(0.0);
                     ftLogo.setToValue(1.0);
                     ftLogo.setByValue(0.1);
@@ -789,7 +790,7 @@ public class MainApplication extends Application {
                         new EventHandler < ActionEvent > () {
                             @Override
                             public void handle(ActionEvent actionEvent) {
-                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(5000), logoImageView);
+                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(4000), logoImageView);
                                 ttLogo.setByX(1.0);
                                 ttLogo.setFromX(0);
                                 ttLogo.setToX(0);
@@ -797,7 +798,7 @@ public class MainApplication extends Application {
                                 ttLogo.setToY(-150);
                                 //ttLogo.play();
                                 
-                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(5000), logoImageView);
+                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(4000), logoImageView);
                                 scLogo.setFromX(1);
                                 scLogo.setToX(0.5);
                                 scLogo.setByX(0.5);
@@ -940,6 +941,8 @@ public class MainApplication extends Application {
     public Scene mainMenu(Stage stage) throws IOException {
         screenNum = 1;
         this.startTime = LocalDateTime.now();
+        this.health = 100;
+        this.score = 0;
 
         ImageView introBorderImageView = this.getIntroBorderImageView();
 
@@ -1421,6 +1424,11 @@ public class MainApplication extends Application {
                 }
             }
         );
+        /*
+        if (!showingBook) {
+            scene.setCursor(Cursor.DEFAULT);
+        }
+        */
 
         scene.addEventFilter(MouseEvent.MOUSE_MOVED,
             e -> {
@@ -1855,10 +1863,11 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation1Text(Stage stage) throws IOException {
+        health = 100;
         Scene scene;
 
         
-        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[0]))), "Yourself:", "I think I may be transgendered, but I'm scared. How will people see me. Maybe its better If I just repress it.", health, enemyHealth);	
+        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[0]))), "Yourself:", "I think I may be transgender, but I'm scared. How will people see me. Maybe its better If I just repress it.", health, enemyHealth);	
         encounterTxt.getTitle().setFont(encounterTxt.getFontFromFile(18));	
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
@@ -1898,6 +1907,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation2Text(Stage stage) throws IOException {
+        health = 100;
         Scene scene;
         GameButton yesButton = new GameButton(this.pressStart2PFile, "Yes", 85, 470, 17);	
         	
@@ -1910,6 +1920,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(175);
+        encounterTxt.getChar2ImageView().setTranslateX(-24);
+        encounterTxt.getChar2ImageView().setTranslateY(-4);
         scene = new Scene(encounterTxt.getScene());
                 
         try{
@@ -1966,11 +1979,17 @@ public class MainApplication extends Application {
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                 score += 50;
                                 ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "You answered yes:", "That is correct! Thomas was talking about your physique and telling you that you are not the gender you are. This is very transphobic.", health, enemyHealth);
+                                answerTxt.getChar2ImageView().setFitWidth(175);
+                                answerTxt.getChar2ImageView().setTranslateX(-24);
+                                answerTxt.getChar2ImageView().setTranslateY(-4);
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
                             } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                 ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "You answered no:", "That is incorrect! Thomas was talking about your physique and telling you that you are not the gender you are. This is very transphobic.", health, enemyHealth);
+                                answerTxt.getChar2ImageView().setFitWidth(175);
+                                answerTxt.getChar2ImageView().setTranslateX(-24);
+                                answerTxt.getChar2ImageView().setTranslateY(-4);
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
@@ -1990,6 +2009,9 @@ public class MainApplication extends Application {
                     try {
                         if (questionMenu.equals("startText")) {
                             ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))),"Is Thomas Being transphobic?", yesButton, noButton);
+                            questionButtons.getChar2ImageView().setFitWidth(175);
+                            questionButtons.getChar2ImageView().setTranslateX(-24);
+                            questionButtons.getChar2ImageView().setTranslateY(-4);
                             scene.setRoot(questionButtons.getScene());
                             stage.show();
                             questionMenu = "question";
@@ -2023,6 +2045,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation3Text(Stage stage) throws IOException {
+        health = 100;
         Scene scene;
         GameButton yesButton = new GameButton(this.pressStart2PFile, "Yes", 85, 470, 17);	
         	
@@ -2035,6 +2058,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(175);
+        encounterTxt.getChar2ImageView().setTranslateX(-30);
+        encounterTxt.getChar2ImageView().setTranslateY(-4);
         scene = new Scene(encounterTxt.getScene());
                 
         try{
@@ -2089,13 +2115,19 @@ public class MainApplication extends Application {
                         final double yVal = e.getY();
                         if(questionMenu.equals("question")){
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
-                                ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "You answered yes:", "That is incorrect! Sarah is just trying to talk about something she likes. Even though she might unknowingly be pressuring you to wear a skirt it is not her intention.", health, enemyHealth);
+                                ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "You answered yes:", "That is incorrect! Sarah is just trying to talk about something she likes. Even though she might unknowingly be pressuring you to wear a skirt it is not her intention.", health, enemyHealth); 
+                                answerTxt.getChar2ImageView().setFitWidth(175);
+                                answerTxt.getChar2ImageView().setTranslateX(-30);
+                                answerTxt.getChar2ImageView().setTranslateY(-4);
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
                             } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                 score += 50;
                                 ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "You answered no:", "That is correct! Sarah is just trying to talk about something she likes. Even though she might unknowingly be pressuring you to wear a skirt it is not her intention.", health, enemyHealth);
+                                answerTxt.getChar2ImageView().setFitWidth(175);
+                                answerTxt.getChar2ImageView().setTranslateX(-30);
+                                answerTxt.getChar2ImageView().setTranslateY(-4);
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
@@ -2114,7 +2146,10 @@ public class MainApplication extends Application {
                 k -> {
                     try {
                         if (questionMenu.equals("startText")) {
-                            ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))),"Is Sarah Being transphobic?", yesButton, noButton);
+                            ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))),"Is Sarah being transphobic?", yesButton, noButton);
+                            questionButtons.getChar2ImageView().setFitWidth(175);
+                            questionButtons.getChar2ImageView().setTranslateX(-30);
+                            questionButtons.getChar2ImageView().setTranslateY(-4);
                             scene.setRoot(questionButtons.getScene());
                             stage.show();
                             questionMenu = "question";
@@ -2148,6 +2183,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation4Text(Stage stage) throws IOException {
+        health = 100;
         Scene scene;
         GameButton yesButton = new GameButton(this.pressStart2PFile, "Yes", 85, 470, 17);	
         	
@@ -2160,6 +2196,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(175);
+        encounterTxt.getChar2ImageView().setTranslateX(-30);
+        encounterTxt.getChar2ImageView().setTranslateY(-4);
         scene = new Scene(encounterTxt.getScene());
                 
         try{
@@ -2215,12 +2254,18 @@ public class MainApplication extends Application {
                         if(questionMenu.equals("question")){
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                 ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered yes:", "That is correct! Karen said that you are not a \"real girl\" which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
+                                answerTxt.getChar2ImageView().setFitWidth(175);
+                                answerTxt.getChar2ImageView().setTranslateX(-30);
+                                answerTxt.getChar2ImageView().setTranslateY(-4);
                                 score += 50;
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
                             } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                 ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered no:", "That is incorrect! Karen said that you are not a \"real girl\" which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
+                                answerTxt.getChar2ImageView().setFitWidth(175);
+                                answerTxt.getChar2ImageView().setTranslateX(-30);
+                                answerTxt.getChar2ImageView().setTranslateY(-4);
                                 scene.setRoot(answerTxt.getScene());
                                 stage.show();
                                 questionMenu = "endText";
@@ -2240,6 +2285,9 @@ public class MainApplication extends Application {
                     try {
                         if (questionMenu.equals("startText")) {
                             ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))),"Is Karen Being transphobic?", yesButton, noButton);
+                            questionButtons.getChar2ImageView().setFitWidth(175);
+                            questionButtons.getChar2ImageView().setTranslateX(-30);
+                            questionButtons.getChar2ImageView().setTranslateY(-4);
                             scene.setRoot(questionButtons.getScene());
                             stage.show();
                             questionMenu = "question";
@@ -2272,6 +2320,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontation5Text(Stage stage) throws IOException {
+        health = 100;
         Scene scene;
 
         
@@ -2280,6 +2329,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(110);
+        encounterTxt.getChar2ImageView().setTranslateX(3);
+        encounterTxt.getChar2ImageView().setTranslateY(-10);
         scene = new Scene(encounterTxt.getScene());
 
         try {
@@ -2317,11 +2369,14 @@ public class MainApplication extends Application {
         Scene scene;
 
         
-        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "Sarah:", "Thank you for playing with me!", health, enemyHealth);	
+        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "Thomas:", "I'm sorry I said those things, I'm just having a really bad day.", health, enemyHealth);	
         encounterTxt.getTitle().setFont(encounterTxt.getFontFromFile(18));	
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(175);
+        encounterTxt.getChar2ImageView().setTranslateX(-24);
+        encounterTxt.getChar2ImageView().setTranslateY(-4);
         scene = new Scene(encounterTxt.getScene());
 
         try {
@@ -2364,11 +2419,14 @@ public class MainApplication extends Application {
         Scene scene;
 
         
-        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "Thomas:", "I'm sorry I said those things, I'm just having a really bad day.", health, enemyHealth);	
+        ConfrontationScene encounterTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "Sarah:", "Thank you for playing with me!", health, enemyHealth);	
         encounterTxt.getTitle().setFont(encounterTxt.getFontFromFile(18));	
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(175);
+        encounterTxt.getChar2ImageView().setTranslateX(-30);
+        encounterTxt.getChar2ImageView().setTranslateY(-4);
         scene = new Scene(encounterTxt.getScene());
 
         try {
@@ -2415,6 +2473,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(175);
+        encounterTxt.getChar2ImageView().setTranslateX(-30);
+        encounterTxt.getChar2ImageView().setTranslateY(-4);
         scene = new Scene(encounterTxt.getScene());
 
         try {
@@ -2461,6 +2522,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
+        encounterTxt.getChar2ImageView().setFitWidth(110);
+        encounterTxt.getChar2ImageView().setTranslateX(3);
+        encounterTxt.getChar2ImageView().setTranslateY(-10);
         scene = new Scene(encounterTxt.getScene());
 
         try {
@@ -2469,6 +2533,7 @@ public class MainApplication extends Application {
                     try {
                         if (k.getCode() == KeyCode.SPACE) {
                             stage.setScene(winScene);
+                            this.leaderboard.addEntry(this.userName, this.score, this.startTime, LocalDateTime.now());
                         }
                     } catch (Exception e) {}
                 });
@@ -2499,7 +2564,7 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontationBattle(Stage stage, int encounterNum) throws IOException {
-        //health = 100;
+        health = 100;
         enemyHealth = 100;
         Scene scene;
         battleMenu = "main";
@@ -2542,6 +2607,19 @@ public class MainApplication extends Application {
         GameButton formBackButton = new GameButton(this.pressStart2PFile, "Back", 390, 540, 17);
         
         ConfrontationScene startButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);                   
+        if (encounterNum == 2) {
+            startButtons.getChar2ImageView().setFitWidth(175);
+            startButtons.getChar2ImageView().setTranslateX(-24);
+            startButtons.getChar2ImageView().setTranslateY(-4);
+        } else if (encounterNum == 3 || encounterNum == 4) {
+            startButtons.getChar2ImageView().setFitWidth(175);
+            startButtons.getChar2ImageView().setTranslateX(-30);
+            startButtons.getChar2ImageView().setTranslateY(-4);
+        } else if (encounterNum == 5) {
+            startButtons.getChar2ImageView().setFitWidth(110);
+            startButtons.getChar2ImageView().setTranslateX(3);
+            startButtons.getChar2ImageView().setTranslateY(-10);
+        }
         scene = new Scene(startButtons.getScene());
         try{
             scene.addEventFilter(MouseEvent.MOUSE_MOVED,
@@ -2854,6 +2932,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(175);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(-24);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }else{
                                         block-=damage;
@@ -2862,6 +2943,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(175);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(-24);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }                                
                                 }
@@ -2884,6 +2968,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(175);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }else{
                                         block-=damage;
@@ -2892,6 +2979,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(175);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }
                                 }
@@ -2914,6 +3004,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(175);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }else{
                                         block-=damage;
@@ -2922,6 +3015,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(175);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }
                                 }
@@ -2945,6 +3041,9 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(110);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(3);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-10);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }else{
                                         block-=damage;
@@ -2953,18 +3052,35 @@ public class MainApplication extends Application {
                                         enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                         enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                         enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
+                                        enemyDamageTxt.getChar2ImageView().setFitWidth(110);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateX(3);
+                                        enemyDamageTxt.getChar2ImageView().setTranslateY(-10);
                                         scene.setRoot(enemyDamageTxt.getScene());
                                     }
                                 }
                             }
                             if(health<=0){
-                                stage.setScene(loseScene);
+                                stage.setScene(loseScene);    
+                                this.leaderboard.addEntry(this.userName, this.score, this.startTime, LocalDateTime.now());
                                 confrontations = 0;
                             }else{
                                 battleMenu = "enemyText";
                             }
                         }else if(battleMenu.equals("enemyText")){
-                            ConfrontationScene mainButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);                   
+                            ConfrontationScene mainButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);
+                            if (encounterNum == 2) {
+                                mainButtons.getChar2ImageView().setFitWidth(175);
+                                mainButtons.getChar2ImageView().setTranslateX(-24);
+                                mainButtons.getChar2ImageView().setTranslateY(-4);
+                            } else if (encounterNum == 3 || encounterNum == 4) {
+                                mainButtons.getChar2ImageView().setFitWidth(175);
+                                mainButtons.getChar2ImageView().setTranslateX(-30);
+                                mainButtons.getChar2ImageView().setTranslateY(-4);
+                            } else if (encounterNum == 5) {
+                                mainButtons.getChar2ImageView().setFitWidth(110);
+                                mainButtons.getChar2ImageView().setTranslateX(3);
+                                mainButtons.getChar2ImageView().setTranslateY(-10);
+                            }        
                             scene.setRoot(mainButtons.getScene());
                             battleMenu = "main";
                         }
@@ -3121,6 +3237,7 @@ public class MainApplication extends Application {
         GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 135, 120, 18);	
         backButton.setWidth(125);	
         backButton.setTextTranslationX(1);
+        //backButton.getBackgroundRectangle().setFill(Paint.valueOf("rgba(0,0,0,0.2)"));
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
@@ -3261,12 +3378,19 @@ public class MainApplication extends Application {
         backButton.setTextTranslationX(1);
         
         //leaderboardValuesToAdd.setAlignment(Pos.CENTER);
+        /*
         leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
         leaderboardValuesToAdd.setVgap(12);
         leaderboardValuesToAdd.setHgap(8);
         leaderboardValuesToAdd.setTranslateX(105);
         leaderboardValuesToAdd.setTranslateY(230);
+        */
         //displayedLeaderboard[0][0] = new Label("100");
+        this.leaderboard.initializeLeaderboardTextFlow();
+        TextFlow leaderboardTextFlow = this.leaderboard.getLeaderboardTextFlow();
+        leaderboardTextFlow.setLineSpacing(13);
+        leaderboardTextFlow.setTranslateX(105);
+        leaderboardTextFlow.setTranslateY(233);
         
 
         Group nodesToAdd = new Group();
@@ -3279,7 +3403,9 @@ public class MainApplication extends Application {
             whiteLeaderboardGameTitle.getTitle(),
             logoImageView,
             introBorderImageView,
-            leaderboardValuesToAdd
+            //leaderboardValuesToAdd
+            leaderboardTextFlow
+            
         );
         /*
         for (int i = 0; i < displayedLeaderboard.length; i++) {
@@ -3365,6 +3491,11 @@ public class MainApplication extends Application {
                         }
                     }
                     */
+                    
+                    this.leaderboard.moveUpLeaderboard();
+                    TextFlow tempTextFlow = this.leaderboard.getLeaderboardTextFlow();
+                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempTextFlow);
+                    /*
                     this.leaderboard.moveUpLeaderboard();
                     GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
                     tempLeaderboardValuesToAdd.setVgap(12);
@@ -3372,11 +3503,17 @@ public class MainApplication extends Application {
                     tempLeaderboardValuesToAdd.setTranslateX(105);
                     tempLeaderboardValuesToAdd.setTranslateY(230);
                     nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
+                    */
                     //nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)"));
                     //leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)");
                     //leaderboardValuesToAdd.moveUpLeaderboard();
                     //leaderboardValuesToAdd = leaderboardValuesToAdd.getLeaderboardGridPane();
                 } else if (xVal >= downButton.getLeftX() && xVal <= downButton.getRightX() && yVal >= downButton.getTopY() && yVal <= downButton.getBottomY()) {
+                
+                    this.leaderboard.moveDownLeaderboard();
+                    TextFlow tempTextFlow = this.leaderboard.getLeaderboardTextFlow();
+                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempTextFlow);
+                    /*
                     this.leaderboard.moveDownLeaderboard();
                     GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
                     tempLeaderboardValuesToAdd.setVgap(12);
@@ -3384,10 +3521,15 @@ public class MainApplication extends Application {
                     tempLeaderboardValuesToAdd.setTranslateX(105);
                     tempLeaderboardValuesToAdd.setTranslateY(230);
                     nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
+                    */
                     //nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)"));
                     //leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)");
                     //System.out.println("Yo");
                 } else if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
+                    this.leaderboard.initializeLeaderboardTextFlow();
+                    TextFlow tempTextFlow = this.leaderboard.getLeaderboardTextFlow();
+                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempTextFlow);
+                    /*
                     this.leaderboard.resetCurrentLevel();
                     GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
                     tempLeaderboardValuesToAdd.setVgap(12);
@@ -3395,6 +3537,7 @@ public class MainApplication extends Application {
                     tempLeaderboardValuesToAdd.setTranslateX(105);
                     tempLeaderboardValuesToAdd.setTranslateY(230);
                     nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
+                    */
                     screenNum = 1;
                     stage.setScene(this.mainMenuScene);
                     stage.show();
@@ -3839,18 +3982,6 @@ public class MainApplication extends Application {
         this.mainMenuScene = this.mainMenu(stage);
         this.instructionsScene = this.instructions(stage);
         this.writeUpScene = this.writeUp(stage);
-        /*
-        this.leaderboardScene = this.leaderboard(stage);
-        this.writeUpScene = this.writeUp(stage);
-        this.level1Scene = this.level1(stage);
-        this.level2Scene = this.level2(stage);
-        this.level3Scene = this.level3(stage);
-        this.confrontationTextScene1 = this.confrontation1Text(stage);
-        this.confrontationTextScene5 = this.confrontation5Text(stage);
-        this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
-        this.confrontationBattleScene5 = this.confrontationBattle(stage,5);
-        this.quitGameScene = this.quitGame(stage);
-        */
         this.leaderboardScene = this.leaderboard(stage);
         this.level1Scene = this.level1(stage);
         this.level2Scene = this.level2(stage);
@@ -3865,6 +3996,23 @@ public class MainApplication extends Application {
         this.screenNum = 0;
         this.confrontations = 0;
         stage.setScene(this.introAnimationScene);
+        
+        //stage.setScene(this.leaderboard(stage));
+        
+        //stage.setScene(confrontation1Text(stage));
+        
+        /*
+        this.leaderboardScene = this.leaderboard(stage);
+        this.writeUpScene = this.writeUp(stage);
+        this.level1Scene = this.level1(stage);
+        this.level2Scene = this.level2(stage);
+        this.level3Scene = this.level3(stage);
+        this.confrontationTextScene1 = this.confrontation1Text(stage);
+        this.confrontationTextScene5 = this.confrontation5Text(stage);
+        this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
+        this.confrontationBattleScene5 = this.confrontationBattle(stage,5);
+        this.quitGameScene = this.quitGame(stage);
+        */
 
         /*
         //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);

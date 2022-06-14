@@ -554,9 +554,9 @@ public class BookScene {
      * Public non-static method used to get a font of a specified size, from the file.
      * <p>
      * This public non-static method will return an instance of the Font.java class, and
-     * it will be the font type that is created from the BookScene instance's textFontFile.java
-     * instance. The method will also take in a double as a parameter, and this will be the
-     * font size of the desired font.
+     * it will be the font type that is created from the BookScene instance's textFontFile
+     * File instance. The method will also take in a double as a parameter, and this will be
+     * the font size of the desired font.
      * 
      * @param fontSize A double, which is the size of the desired font.
      * @return  An instance of the Font.java class, which is the Font that is desired at the 

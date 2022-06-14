@@ -1,7 +1,7 @@
 import javafx.scene.shape.Rectangle; // Imports the Rectangle.java class, which allows the program to create a rectangle that will be shown to the user (by being added as a node to the current scene).
 import javafx.scene.text.Font; // Imports the Font.java class, which allows the program to create and use fonts.
 import javafx.scene.paint.Paint; // Imports the Paint.java class, which allows the program to create and use different paint colours.
-import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to use the StackPane layout manager.
+import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to use the StackPane layout manager (which just centers all the Node.java instances and then stacks them).
 import javafx.scene.layout.HBox; // Imports the HBox.java class, which allows the program to add the labels to a layout manager so that the width and height can be computed.
 import javafx.scene.Scene; // Imports the Scene.java class, which allows the program to have access to a scene on which the GUI can be added onto and displayed to the user.
 import javafx.scene.shape.StrokeType; // Imports the StrokeType.java class, which allows the program to set the type of stroke that is used on the outer rectangle for the GameButton instance.
@@ -128,7 +128,7 @@ public class GameButton {
      * the amount of pixels that is specified by the highlightSize variable.
      */
     public void cursorOverButton() {
-        this.boxAroundLabel.setStrokeWidth(highlightSize);
+        this.boxAroundLabel.setStrokeWidth(this.highlightSize);
     }
     
     /*
@@ -397,9 +397,9 @@ public class GameButton {
      * Public non-static method used to get a font of a specified size, from the file.
      * <p>
      * This public non-static method will return an instance of the Font.java class, and
-     * it will be the font type that is created from the GameTitle instance's textFontFile.java
-     * instance. The method will also take in a double as a parameter, and this will be the
-     * font size of the desired font.
+     * it will be the font type that is created from the GameButton instance's textFontFile
+     * File instance. The method will also take in a double as a parameter, and this will be
+     * the font size of the desired font.
      * 
      * @param fontSize A double, which is the size of the desired font.
      * @return  An instance of the Font.java class, which is the Font that is desired at the 

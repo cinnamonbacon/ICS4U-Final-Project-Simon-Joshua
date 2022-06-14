@@ -8,7 +8,7 @@ import javafx.scene.Scene; // Imports the Scene.java class, which allows the pro
 import javafx.scene.text.Text; // Imports the Text.java class, which allows the program to take Strings of text and convert it into a good looking String for the user.
 import javafx.scene.text.TextAlignment; // Imports the TextAlignment.java class, which allows the program to set the alignment of text, especially within TextFlow instances.
 import javafx.scene.text.TextFlow; // Imports the TextFlow.java class, which allows the program to add two or more Text.java instances together.
-import javafx.scene.layout.Region; // Imports the Region.java class, which allows the program to use default computed values for the width and height.
+import javafx.scene.layout.Region; // Imports the Region.java class, which allows the program to use default computed values for the width and height by using the USE_COMPUTED_SIZE variable.
 
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
 import java.io.IOException; // Imports the IOException.java class, which allows the program to take care of the IOExceptions that are thrown by any parts of the program.
@@ -300,9 +300,9 @@ public class GameTitle {
      * Public non-static method used to get a font of a specified size, from the file.
      * <p>
      * This public non-static method will return an instance of the Font.java class, and
-     * it will be the font type that is created from the GameTitle instance's textFontFile.java
-     * instance. The method will also take in a double as a parameter, and this will be the
-     * font size of the desired font.
+     * it will be the font type that is created from the GameTitle instance's textFontFile
+     * File instance. The method will also take in a double as a parameter, and this will be
+     * the font size of the desired font.
      * 
      * @param fontSize A double, which is the size of the desired font.
      * @return  An instance of the Font.java class, which is the Font that is desired at the 
