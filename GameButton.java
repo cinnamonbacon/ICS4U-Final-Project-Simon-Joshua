@@ -9,7 +9,6 @@ import javafx.scene.text.Text; // Imports the Text.java class, which allows the 
 import javafx.scene.text.TextAlignment; // Imports the TextAlignment.java class, which allows the program to set the alignment of text, especially within TextFlow instances.
 import javafx.scene.text.TextFlow; // Imports the TextFlow.java class, which allows the program to add two or more Text.java instances together.
 import javafx.scene.layout.Pane; // Imports the Pane.java class, which allows the program to have a simple and vanilla layout manager where multiple Node.java instances can be added to.
-
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
 import java.io.IOException; // Imports the IOException.java class, which allows the program to take care of the IOExceptions that are thrown by any parts of the program.
 import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to read in data from files that are on the user's computer.
@@ -238,7 +237,6 @@ public class GameButton {
      */
     public void setWidth(double newWidth) {
         this.width = newWidth;
-        //this.textTextFlow.setPrefWidth(newWidth);
         this.boxAroundLabel.setWidth(newWidth);
     }
     
@@ -264,7 +262,6 @@ public class GameButton {
      */
     public void setHeight(double newHeight) {
         this.height = newHeight;
-        //this.textTextFlow.setPrefHeight(newHeight);
         this.boxAroundLabel.setHeight(newHeight);
     }
     
@@ -439,85 +436,11 @@ public class GameButton {
         textTextFlow.setTranslateY(this.textTranslationY + 16);
         
         returnedValue.getChildren().addAll(
-            //this.redRectangleAroundButton,
             this.boxAroundLabel,
-            //this.label
             textTextFlow
-            //this.textText
         );
         returnedValue.setTranslateX(this.xCoord);
         returnedValue.setTranslateY(this.yCoord);
         return returnedValue;
     }
 }
-
-
-/*
-public GameButton (String text, File fontFile, int fontSize, String fontPaint, String backgroundPaint, String strokePaint, double xCoord, double yCoord, double width, double height, double textTranslationX, double textTranslationY) {
-        //this.label = new Label(text);
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
-        this.width = width;
-        this.height = height;
-        
-        Text textText = new Text(text);
-        
-        textText.setFont(this.getFontFromFile(fontFile, fontSize));
-        textText.setFill(Paint.valueOf(fontPaint));
-        
-        this.textTextFlow = new TextFlow();
-        this.textTextFlow.getChildren().addAll(
-            textText
-        );
-        this.textTextFlow.setTextAlignment(TextAlignment.CENTER);
-        this.textTextFlow.setPrefWidth(width);
-        this.textTextFlow.setPrefHeight(height);
-        this.textTextFlow.setTranslateX(textTranslationX);
-        this.textTextFlow.setTranslateY(textTranslationY);
-        
-        //System.out.println(fontFile.getPath());
-        
-        //fontFont = Font.loadFont("https://fonts.googleapis.com/css2?family=Press+Start+2P", 1);
-        //System.out.println(fontFont);
-        //this.label.setTextFill(Paint.valueOf(fontPaint));
-        //this.label.setFont(this.getFontFromFile(fontFile, 1)); // It doesn't matter what size font I put, so I will default it to 1.
-        //this.label.getStylesheets().add("https://fonts.googleapis.com/css2?family=Press+Start+2P");
-        //this.label.setStyle("-fx-font-family: 'Press Start 2P', cursive; -fx-background-color: " + backgroundColour + "; -fx-text-fill: " + fontPaint + "; -fx-font-size: " + fontSize + "px;"); // -fx-font-family: 'Press Start 2P', cursive;
-        //this.label.setTranslateX(textTranslationX);
-        //this.label.setTranslateY(textTranslationY);
-        //this.label.setTranslateX(xCoord);
-        //this.label.setTranslateY(yCoord);
-        
-        this.boxAroundLabel = new Rectangle(0, 0, width, height); // this.boxAroundLabel = new Rectangle(-this.getHoriPadding(width), -this.getVertPadding(height), width, height);
-        this.boxAroundLabel.setFill(Paint.valueOf(backgroundPaint));
-        //this.boxAroundLabel.setSmooth(false);
-        //this.boxAroundLabel.setStyle("-fx-stroke: red; -fx-stroke-width: 3;");
-        this.boxAroundLabel.setStrokeType(StrokeType.OUTSIDE);
-        this.boxAroundLabel.setStroke(Paint.valueOf(strokePaint));
-        //this.boxAroundLabel.setStrokeWidth(3.0);
-        this.boxAroundLabel.setStrokeWidth(0.0);
-        //this.boxAroundLabel.setTranslateX(-2.0);
-        //this.boxAroundLabel.setTranslateY(-2.0);
-        //System.out.println(this.label.prefWidth(-1));
-        //this.boxAroundLabel = new Rectangle(this.label.getWidth() + 2 * horiPadding, this.label.getHeight() + 2 * vertPadding);
-        //this.boxAroundLabel.setFill(Paint.valueOf("rgb(255,255,0)"));
-        //this.boxAroundLabel.setTranslateX(innerRectTranslationX);
-        //this.boxAroundLabel.setTranslateY(innerRectTranslationY);
-        //this.boxAroundLabel.setTranslateX(xCoord);
-        //this.boxAroundLabel.setTranslateY(yCoord);
-        
-        //this.redRectangleAroundButton = new Rectangle(0.0, 0.0, width + 5.0, height + 5.0);
-        //this.redRectangleAroundButton = new Rectangle(width + 4.0, height + 4.0);
-        //this.redRectangleAroundButton.setTranslateX(-2.0);
-        //this.redRectangleAroundButton.setTranslateY(-2.0);
-        //this.redRectangleAroundButton.setFill(Paint.valueOf("rgb(255,0,0)"));
-        //this.redRectangleAroundButton.setSmooth(false);
-        //this.redRectangleAroundButton.setVisible(false);
-
-        
-        //this.redRectangleAroundButton = new Rectangle(-horiPadding - 2, -vertPadding - 2, this.getWidth(this.label) + 2 * horiPadding + 4, this.getHeight(this.label) + 2 * vertPadding + 4);
-        //this.redRectangleAroundButton.setFill(Paint.valueOf("rgb(255,0,0)"));
-        //this.redRectangleAroundButton.setTranslateX(xCoord);
-        //this.redRectangleAroundButton.setTranslateY(yCoord);
-    }
-*/

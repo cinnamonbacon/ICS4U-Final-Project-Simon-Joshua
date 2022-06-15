@@ -31,7 +31,7 @@ import javafx.scene.paint.Paint; // Imports the Paint.java class, which allows t
  * <p>
  * Teacher Name: Ms. Krasteva
  * <p>
- * Purpose: to create confrontation scenes.
+ * Purpose: to create leaderboards.
  * <p>
  * Filename: Leaderboard.java
  * 
@@ -105,10 +105,6 @@ public class Leaderboard {
     /** This private non-static double variable will hold the font size for text of the leaderboard. */
     private double fontSize;
     
-    //private ArrayList<String> leaderboardData;
-    
-    //private String[][] leaderboardData;
-    
     /** This private non-static variable is an array that holds String instances. This variable will be used to hold the leaderboard's data as Strings (each element will be one entry). */
     private String[] leaderboardData;
     
@@ -136,7 +132,6 @@ public class Leaderboard {
         this.backgroundPaint = "rgba(0,0,0,0)";
         this.textPaint = "rgb(0,0,0)";
         this.fontSize = 11.5;
-        //this.leaderboardData = new ArrayList<String>();
         this.leaderboardDataTextFlow = new TextFlow();
         
         try {
@@ -149,8 +144,6 @@ public class Leaderboard {
 
         this.readFile();
         this.leaderboardData = this.getLeaderboard();
-        //if (this.numOfEntries < this.leaderboardSize) this.actualLeaderboardSize = this.numOfEntries;
-        //else this.actualLeaderboardSize = this.leaderboardSize;
     }
     
     /*
@@ -158,7 +151,6 @@ public class Leaderboard {
         <name>,<score>,<start time>,<end time>
         Note that the delimiter can be changed
     */
-    
     /**
      * Private non-static method used to read the data in the leaderboard text file.
      * <p>
@@ -202,12 +194,6 @@ public class Leaderboard {
         } catch (Exception e) {
             System.out.println("There is an issue on line "+ (this.numOfEntries + 1) + ".\nPlease make sure that you haven't interfered with the values (e.g. changing the name to having unsupported character encodings, changing the score to a very large number, or interfering with either of the LocalDateTime values)\nand/or you haven't deleted one of the delimiters.");
         }
-        /*
-        if (this.numOfEntries == 0) {
-            this.names.add("");
-            this.names.add("");
-        }
-        */
         this.shellSort();
     }
     
@@ -243,8 +229,6 @@ public class Leaderboard {
             }
         }
         this.leaderboardData = this.getLeaderboard();
-        //if (this.numOfEntries < this.leaderboardSize) this.leaderboardSize = this.numOfEntries;
-        //else this.leaderboardSize = 
     }
     
     /**
@@ -318,7 +302,6 @@ public class Leaderboard {
         if (this.numOfEntries > 0) {
             int sizeOfArray = this.numOfEntries;
             if (sizeOfArray > 1000) sizeOfArray = 1000;
-            //else if (sizeOfArray == 0) sizeOfArray = 1;
             String[] returnedArray = new String[sizeOfArray];
             for (int i = 0; i < sizeOfArray; i++) {
                 String tempString = "";
@@ -349,7 +332,6 @@ public class Leaderboard {
                 Text tempText = new Text(this.leaderboardData[i] + "\n");
                 if (this.textFontFile != null) tempText.setFont(this.getFontFromFile(this.fontSize));
                 else tempText.setFont(new Font(this.fontSize));
-                //tempLabel.setStyle("-fx-background-color: " + this.backgroundPaint + "; -fx-text-fill: " + this.textPaint + ";");
                 tempText.setFill(Paint.valueOf(this.textPaint));
                 this.leaderboardDataTextFlow.getChildren().add(tempText);
             }
@@ -413,120 +395,6 @@ public class Leaderboard {
         }
     }
     
-    ///**
-    // * Public non-static method used to get the data within the leaderboard.
-    // * <p>
-    // * This public non-static method will return an 2D array that holds instances
-    // * of the String.java class. Each row of this 2D array will hold data on the
-    // * user, so their ranking, their name, their score, and the amount of time
-    // * it took them to complete the game.
-    // * 
-    // * @return  A 2D array that holds instances of the String.java class, which
-    // *          will be data from the leaderboard.
-    // */
-    /*
-    public String[][] getLeaderboard() {
-        this.shellSort();
-        int sizeOfArray = this.numOfEntries;
-        if (sizeOfArray > 1000) sizeOfArray = 1000;
-        String[][] returnedArray = new String[sizeOfArray][4];
-        for (int i = 0; i < sizeOfArray; i++) {
-            returnedArray[i][0] = Integer.toString(i + 1);
-            returnedArray[i][1] = this.names.get(i);
-            returnedArray[i][2] = Integer.toString(this.scores.get(i));
-            returnedArray[i][3] = this.LDTToString(this.startTime.get(i), this.endTime.get(i));
-        }
-        return returnedArray;
-    }
-    */
-    
-    ///**
-    // * Public non-static method used to get the data within the leaderboard as an ArrayList&lt;String&gt;.
-    // * <p>
-    // * This public non-static method will return an 2D array that holds instances
-    // * of the String.java class. Each row of this 2D array will hold data on the
-    // * user, so their ranking, their name, their score, and the amount of time
-    // * it took them to complete the game.
-    // * 
-    // * @return  A 2D array that holds instances of the String.java class, which
-    // *          will be data from the leaderboard.
-    // */
-    /*
-    public ArrayList<String> getLeaderboardArrayList() {
-        this.shellSort();
-        int sizeOfArray = this.numOfEntries;
-        if (sizeOfArray > 1000) sizeOfArray = 1000;
-        ArrayList<String> returnedArrayList = new ArrayList<String>();
-        for (int i = 0; i < sizeOfArray; i++) {
-            String tempString = "";
-            tempString += String.format("%-4s", Integer.toString(i + 1));
-            tempString += String.format("%-8s", this.names.get(i));
-            tempString += String.format("%-3s", Integer.toString(this.scores.get(i)));
-            tempString += this.LDTToString(this.startTime.get(i), this.endTime.get(i));
-            returnedArrayList.add(tempString);
-        }
-        return returnedArrayList;
-    }
-    */
-    
-    ///**
-    // * Public non-static method used to get a GridPane of the leaderboard.
-    // * <p>
-    // * This public non-static method will be used to get graphics of the leaderboard
-    // * in a GridPane.
-    // * 
-    // * @return GridPane The elements of the leaderboard.
-    // */
-    /*
-    public GridPane getLeaderboardGridPane() {
-        //String [][] leaderboardData = this.getLeaderboard();
-        GridPane gridPaneToReturn = new GridPane();
-        
-        // The first ternary operator checks to see if the number of entries in the file is less than the size of the leaderboard, and if it is, then start counting from 0. If not, then start counting at whatever the current level is.
-        // The second ternary operator checks to see if the number of entries in the file is less than the size of the leaderboard, and it if is, then end the counting at the length of the array of data (so however many lines there are). If not, then end the counting at whatever the current level plus the expected size of the leaderboard is.
-        for (int i = ((this.numOfEntries <= this.leaderboardSize) ? 0 : this.currentLevel); i < ((this.numOfEntries <= this.leaderboardSize) ? leaderboardData.length : this.currentLevel + this.leaderboardSize); i++) {
-            for (int j = 0; j < leaderboardData[i].length; j++) {
-                Label tempLabel = new Label(this.leaderboardData[i][j]);
-                if (this.textFontFile != null) tempLabel.setFont(this.getFontFromFile(this.fontSize));
-                else tempLabel.setFont(new Font(this.fontSize));
-                tempLabel.setStyle("-fx-background-color: " + this.backgroundPaint + "; -fx-text-fill: " + this.textPaint + ";");
-                // The ternary operator checks to see if the number of entries in the file is less than the size of the leaderboard, and if it is, then don't subtract anything from the row coordinate. If not, then subtract the current level from the row coordinate.
-                gridPaneToReturn.add(tempLabel, j, i - ((this.numOfEntries <= this.leaderboardSize) ? 0 : this.currentLevel));
-            }
-        }
-        gridPaneToReturn.setAlignment(Pos.CENTER);
-        return gridPaneToReturn;
-    }
-    */
-    
-    ///**
-    // * Public non-static method used to move up the leaderboard.
-    // * <p>
-    // * This public non-static method is void and will be used to 
-    // * move up the leaderboard.
-    // */
-    /*
-    public void moveUpLeaderboard() {
-        if (this.currentLevel > 0 && this.numOfEntries > this.leaderboardSize) {
-            this.currentLevel--;
-        }
-    }
-    */
-    
-    ///**
-    // * Public non-static method used to move down the leaderboard.
-    // * <p>
-    // * This public non-static method is void and will be used to 
-    // * move down the leaderboard.
-    // */
-    /*
-    public void moveDownLeaderboard() {
-        if (this.currentLevel + this.leaderboardSize < this.numOfEntries && this.numOfEntries > this.leaderboardSize) {
-            this.currentLevel++;
-        }
-    }
-    */
-    
     /**
      * Public non-static method to get the current level of the leaderboard.
      * <p>
@@ -539,20 +407,6 @@ public class Leaderboard {
     public int getCurrentLevel() {
         return this.currentLevel;
     }
-    
-    ///**
-    // * Public non-static method to reset the current level that the leaderboard is on.
-    // * <p>
-    // * This public non-static method is void and it will be
-    // * used to reset the current level of the leaderboard
-    // * instance so that it is back at the top, at entry
-    // * #1.
-    // */
-    /*
-    public void resetCurrentLevel() {
-        this.currentLevel = 0;
-    }
-    */
     
     /**
      * Public non-static method used to take two LocalDateTime instances and convert the difference between them into instances of the String.java class.

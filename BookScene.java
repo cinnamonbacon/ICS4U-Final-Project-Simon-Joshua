@@ -6,7 +6,6 @@ import javafx.scene.text.Font; // Imports the Font.java class, which allows the 
 import javafx.scene.shape.Rectangle; // Imports the Rectangle.java class, which allows the program to create rectangles.
 import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to use the StackPane layout manager.
 import javafx.scene.Group; // Imports the Group.java class, which allows the program to combing various nodes together so that they can be added to the Scene that is returned.
-
 import java.io.File; // Imports the File.java class, which allows the program to access files on the computer, such as images.
 import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to easily read in data from certain files.
 import java.io.IOException; // Imports the IOException.java class, which allows the program to deal with and catch any errors thrown during reading of IO.
@@ -124,7 +123,6 @@ public class BookScene {
         if (backButton != null) {
             backButton.setXCoord(420);
             backButton.setYCoord(535);
-            //backButton = new GameButton(this.textFontFile, topLeftButtonText, 420, 535, 17);
             backButton.setWidth(125);
             backButton.getText().setText("Back");
             backButton.setTextTranslationX(1);
@@ -151,12 +149,10 @@ public class BookScene {
     private void instantiateVariables(File textFontFile, ImageView bookImage, String textForTitle, String textForBody, boolean textOnLeftSide, double lineSpacing) {
         this.textFontFile = textFontFile;
 
-        //this.backgroundPaint = Paint.valueOf("green");
         this.background = new Rectangle(600, 600, Paint.valueOf("rgb(64,158,64)"));
         this.background.setX(0);
         this.background.setY(0);
 
-        //this.bookColour = Paint.valueOf("brown");
         this.bookCover = new Rectangle(550, 550, Paint.valueOf("rgb(164,116,73)"));
         this.bookCover.setX(25);
         this.bookCover.setY(25);
@@ -175,7 +171,6 @@ public class BookScene {
         this.bookRightPage.setStroke(Paint.valueOf("gray"));
         this.bookRightPage.setStrokeWidth(1.0);
 
-        //this.bookSpineColour = Paint.valueOf("rgb(0,0,0)");
         this.bookSpine = new Rectangle(10, 520, Paint.valueOf("rgb(0,0,0)"));
         this.bookSpine.setX(295);
         this.bookSpine.setY(40);
@@ -193,7 +188,6 @@ public class BookScene {
             this.titleText.setStyle("-fx-underline: true;");
             this.titleText.setX(0);
             this.titleText.setY(0);
-            //this.titleText.setWrappingWidth(220);
         } else {
             this.titleText = null;
         }
@@ -201,10 +195,8 @@ public class BookScene {
         if (textForBody != null) {
             this.bodyText = new Text(textForBody);
             this.bodyText.setFont(this.getFontFromFile(11));
-            //this.bodyText.setLineSpacing(5);
             this.bodyText.setX(0);
             this.bodyText.setY(0);
-            //this.bodyText.setWrappingWidth(220);
         } else {
             this.bodyText = null;
         }
@@ -258,12 +250,6 @@ public class BookScene {
     public Text getBody() {
         return this.bodyText;
     }
-
-    /*
-    public Paint backgroundPaint() {
-        return this.backgroundPaint;
-    }
-    */
 
     /**
      * Public method that returns the rectangle that is used for the background in the BookScene instance.
@@ -446,23 +432,6 @@ public class BookScene {
      *          scene from the BookScene instance.
      */
     public Group getScene() {
-        /*
-           TextFlow tempTextFlow = new TextFlow;
-           tempTextFlow.getChildren().addAll(
-               this.titleText,
-               this.bodyText
-           );
-           tempTextFlow.setPrefWidth(245);
-           tempTextFlow.setPrefHeight(500);
-           if (textOnLeftSide) {
-               tempTextFlow.setTranslateX(50);
-           } else {
-               tempTextFlow.setTranslateX(305);
-           }
-           tempTextFlow.setTranslateY(50);
-           */
-
-        //StackPane tempStackPaneText = new StackPane();
         TextFlow tempTextFlow = new TextFlow();
         StackPane tempStackPaneImage = new StackPane();
         if (this.textOnLeftSide) {
@@ -479,18 +448,7 @@ public class BookScene {
 
             this.bookLeftPage.setX(50);
             this.bookLeftPage.setY(40);
-
-            /*
-            tempStackPaneText.getChildren().addAll(
-                this.bookLeftPage,
-                tempTextFlow
-            );
-            tempStackPaneText.setPrefWidth(200);
-            //tempStackPaneText.setPrefHeight(480);
-            tempStackPaneText.setTranslateX(50);
-            tempStackPaneText.setTranslateY(40);
-            */
-
+            
             tempStackPaneImage.getChildren().addAll(
                 this.bookRightPage,
                 this.bookImage
@@ -511,18 +469,7 @@ public class BookScene {
 
             this.bookLeftPage.setX(305);
             this.bookLeftPage.setY(40);
-
-            /*
-            tempStackPaneText.getChildren().addAll(
-                this.bookLeftPage,
-                tempTextFlow
-            );
-            tempStackPaneText.setPrefWidth(200);
-            //tempStackPaneText.setPrefHeight(480);
-            tempStackPaneText.setTranslateX(50);
-            tempStackPaneText.setTranslateY(40);
-            */
-
+            
             tempStackPaneImage.getChildren().addAll(
                 this.bookRightPage,
                 this.bookImage
@@ -537,12 +484,8 @@ public class BookScene {
             this.bookCover,
             this.bookLeftPage,
             tempTextFlow,
-            //tempStackPaneText,
             tempStackPaneImage,
-            //this.bookRightPage,
             this.bookSpine
-            //this.bookImage
-            //tempTextFlow
         );
 
         if (this.backButton != null) nodesToAdd.getChildren().add(this.backButton.getButton());

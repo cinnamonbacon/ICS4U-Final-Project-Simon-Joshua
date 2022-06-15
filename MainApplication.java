@@ -33,11 +33,8 @@ import javafx.scene.text.Font; // Imports the Font.java class, which allows the 
 import javafx.stage.Stage; // Imports the Stage.java class, which allows the program to have access to a stage to display the graphics within.
 import javafx.stage.StageStyle; // Imports the StageStyle.java class, which allows the program to set the style of the stage (such as modifying its border).
 import javafx.util.Duration; // Imports the Duration.java class, which allows the program to set the duration of time for a specific task (say how long the fading animation (so FadeTransition instance) should last for).
-
 import java.io.File; // Imports the File.java class, which allows the program to access files that are on the user's computer.
 import java.io.IOException; // Imports the IOException.java class, which allows the program to take care of the IOExceptions that are thrown by any parts of the program.
-
-// Remember to add JavaDoc for these imports:
 import javafx.scene.layout.Region; // Imports the Region.java class, which allows the program to utilize the USE_COMPUTED_SIZE variable to use default heights for various Node.java text instances.
 import javafx.scene.text.Text; // Imports the Text.java class, which allows the program to beautiful text to display to the user. 
 import javafx.scene.shape.StrokeType; // Imports the StrokeType.java class, which allows the program to set the type of stroke that is used on the outer rectangle for the leaderboard Rectangle.java instance.
@@ -45,20 +42,13 @@ import javafx.scene.shape.StrokeLineJoin; // Imports the StrokeLineJoin.java cla
 import javafx.scene.text.TextFlow; // Imports the TextFlow.java class, which allows the program to add two or more Text.java instances together.
 import javafx.scene.layout.Pane; // Imports the Pane.java class, which allows the program to have a simple and vanilla layout manager where multiple Node.java instances can be added to.
 import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to read in data from files that arer on the user's computer.
-//import java.util.Arrays;
-//import javafx.scene.control.Dialog;
-//import javafx.scene.control.DialogPane;
-//import javafx.scene.control.ButtonType;
-//import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.TextField; // Imports the TextField.java class, which allows the program to easily take in Strings from the user (more specifically, their username).
 import javafx.animation.ScaleTransition; // Imports the ScaleTransition.java class, which allows the program to make transitions that involve scaling, such as with the scaling of the logo in the intro animation.
 import javafx.scene.layout.StackPane; // Imports the StackPane.java class, which allows the program to use the StackPane layout manager (which just centers all the Node.java instances and then stacks them).
 import java.time.LocalDateTime; // Imports the LocalDateTime.java class, which allows the program to keep track of various times, such as the time when the user starts the game and when they end it.
 import javafx.geometry.Pos; // Imports the Pos.java class, which allows the program to change the positioning of Node.java instances within layout managers.
 import javafx.scene.layout.GridPane; // Imports the GridPane.java class, which allows the program to have access to a grid layout manager.
-//import java.nio.charset.Charset;
 import javafx.scene.shape.Ellipse; // Imports the Ellipse.java class, which will allow the program to create ellipses for the graphics.
-//import java.util.Arrays;
 
 /**
  * Main program that will act as driver class and run entire game.
@@ -78,7 +68,7 @@ import javafx.scene.shape.Ellipse; // Imports the Ellipse.java class, which will
  *
  * @author Simon Bakan
  * @author Joshua Persaud
- * @version 5/27/2022
+ * @version 6/14/2022
  * 
  * @see javafx.application.Application
  * @see javafx.animation.Animation
@@ -499,9 +489,6 @@ public class MainApplication extends Application {
     /** This private non-static Scene variable will hold the scene for the leaderboard of the game. */
     private Scene leaderboardScene;
 
-    /** This private non-static File variable will hold onto the location of the first confrontation character file. */
-    //private File level1Confrontation;
-
     /** This private non-static Scene variable will hold the scene for screen when the player quits the game. */
     private Scene quitGameScene;
     
@@ -637,9 +624,6 @@ public class MainApplication extends Application {
     /** This private non-static variable is an instance of the LocalDateTime.java class and it will hold the time when the user started playing the game. */
     private LocalDateTime startTime;
     
-    /** This private non-static variable is an instance of the LocalDateTime.java class and it will hold the time when the user stopped playing the game. */
-    //private LocalDateTime endTime;
-    
     /** This private non-static variable is an instance of the Leaderboard.java class and it will hold the leaderboard for this game. */
     private Leaderboard leaderboard;
     
@@ -690,8 +674,6 @@ public class MainApplication extends Application {
         this.bookTileFile = new File("Book.png");
         this.additionalGrassTileFile = new File("AdditionalGrass.png");
         this.grassAndDirtBlockFile = new File("ICS ISP - Design for Grass and Dirt Block.png");
-        //this.characterNonPixelatedFile = new File("ICS ISP - Design for Character (Non-pixelated).png");
-        //this.level1Confrontation = new File("Confrontation1.png");
         
         this.mainCharFile = new File("MainChar.png");
         this.cafWallFile = new File("CafWall.png");
@@ -747,27 +729,6 @@ public class MainApplication extends Application {
         this.benchFile[1] = new File("BenchMid.png");
         this.benchFile[2] = new File("BenchRight.png");
         this.onPauseScreen = false;
-        
-        /*
-        this.books = new File[8];
-        this.pressStart2PFile = new File("PressStart2P-Regular.ttf");
-        this.books[0] = new File("Book1.png");
-        this.screenNum = 0;
-        
-        this.confrontationChar = new File[5];
-        
-        //this.confrontationChar[0] = new File("Level1Confrontation.png");
-        //this.confrontationChar[1] = new File("Confrontation2.png");
-        //this.confrontationChar[2] = new File("Confrontation3.png");
-        //this.confrontationChar[3] = new File("Confrontation4.png");
-        //this.confrontationChar[4] = new File("Level1Confrontation.png");
-        
-        this.confrontationChar[0] = new File("Level1Confrontation.png");
-        this.confrontationChar[1] = new File("Level1Confrontation.png");
-        this.confrontationChar[2] = new File("Level1Confrontation.png");
-        this.confrontationChar[3] = new File("Level1Confrontation.png");
-        this.confrontationChar[4] = new File("Level1Confrontation.png");
-        */
         
         this.leaderboard = new Leaderboard(new File("Leaderboard.txt"));
         this.leaderboard.setFontFile(this.pressStart2PFile);
@@ -826,7 +787,7 @@ public class MainApplication extends Application {
         logoImageView.setY(100);
         logoImageView.setFitWidth(400);
         
-        FadeTransition tempFTLogo = new FadeTransition(Duration.millis(1), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
+        FadeTransition tempFTLogo = new FadeTransition(Duration.millis(1), logoImageView);
         tempFTLogo.setFromValue(1.0);
         tempFTLogo.setToValue(0.0);
         tempFTLogo.setByValue(0.1);
@@ -836,7 +797,7 @@ public class MainApplication extends Application {
             new EventHandler <ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    FadeTransition ftLogo = new FadeTransition(Duration.millis(1), logoImageView); // <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- set this to 5000 for 5 seconds later on
+                    FadeTransition ftLogo = new FadeTransition(Duration.millis(4000), logoImageView);
                     ftLogo.setFromValue(0.0);
                     ftLogo.setToValue(1.0);
                     ftLogo.setByValue(0.1);
@@ -847,15 +808,14 @@ public class MainApplication extends Application {
                         new EventHandler < ActionEvent > () {
                             @Override
                             public void handle(ActionEvent actionEvent) {
-                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(1), logoImageView);
+                                TranslateTransition ttLogo = new TranslateTransition(Duration.millis(4000), logoImageView);
                                 ttLogo.setByX(1.0);
                                 ttLogo.setFromX(0);
                                 ttLogo.setToX(0);
                                 ttLogo.setFromY(0);
                                 ttLogo.setToY(-150);
-                                //ttLogo.play();
                                 
-                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(1), logoImageView);
+                                ScaleTransition scLogo = new ScaleTransition(Duration.millis(4000), logoImageView);
                                 scLogo.setFromX(1);
                                 scLogo.setToX(0.5);
                                 scLogo.setByX(0.5);
@@ -882,8 +842,6 @@ public class MainApplication extends Application {
                                             Text sideNoteText = new Text("Max username length: 8\n\nHere are the blacklisted characters: ,");
                                             sideNoteText.setFont(getPressStart2PFont(12));
                                             sideNoteText.setFill(Paint.valueOf("rgb(255,255,255)"));
-                                            //sideNoteText.setX(375);
-                                            //sideNoteText.setY(450);
                                             
                                             TextFlow tempTextFlowSideNote = new TextFlow();
                                             tempTextFlowSideNote.getChildren().addAll(
@@ -894,11 +852,6 @@ public class MainApplication extends Application {
                                             tempTextFlowSideNote.setPrefWidth(400);
                                             tempTextFlowSideNote.setLineSpacing(5);
                                             
-                                            //Leaderboard test = new Leaderboard(new File("Leaderboard.txt"));
-                                            //System.out.println(Arrays.deepToString(test.getLeaderboard()));
-                                            
-                                            //Rectangle inputBox = new 
-                                            
                                             TextField testTF = new TextField();
                                             testTF.setFont(getPressStart2PFont(18));
                                             testTF.setPromptText("Username");
@@ -907,19 +860,6 @@ public class MainApplication extends Application {
                                             testTF.setTranslateY(350);
                                             testTF.setPrefWidth(400);
                                             testTF.setPrefHeight(50);
-                                            //Rectangle backgroundRectangle = new Rectangle(500, 50, Paint.valueOf("rgb(255,255,255)"));
-                                            //backgroundRectangle.setStroke(Paint.valueOf("rgb(255,0,0)"));
-                                            //backgroundRectangle.setStrokeWidth(3.0);
-                                            //testTF.setShape(backgroundRectangle);
-                                            
-                                            //Group nodesToAdd = new Group();
-                                            //nodesToAdd.getChildren().addAll(
-                                            //    
-                                            //);
-                                            
-                                            //Scene scene = new Scene(nodesToAdd, 600, 600);
-                                            //stage.setScene(scene);
-                                            //stage.show();
                                             
                                             testTF.setOnAction(new EventHandler<ActionEvent>() {
                                                 @Override
@@ -1013,7 +953,6 @@ public class MainApplication extends Application {
         whiteTitleGameTitle.setWidth(160);	
         whiteTitleGameTitle.setSpacing(10);	
         whiteTitleGameTitle.getUnderlineRectangle().setTranslateY(-13);
-        //System.out.println(Region.USE_COMPUTED_SIZE);
 
         GameButton newGameGameButton = new GameButton(this.pressStart2PFile, "New Game", 30, 205, 17);
 
@@ -1064,7 +1003,6 @@ public class MainApplication extends Application {
 
         Circle yellowCircleForSun = new Circle(600, 0, 100, Paint.valueOf("rgb(255,255,0)"));
         yellowCircleForSun.setStroke(Paint.valueOf("rgb(0,0,0)"));
-        //System.out.println(yellowCircleForSun);
 
         Cloud cloudCloud = new Cloud(0.0, 0.0);
         Shape cloudShapeTop = cloudCloud.getShape();
@@ -1100,48 +1038,6 @@ public class MainApplication extends Application {
         ParallelTransition ptClouds = new ParallelTransition(ttCloudTop, ttCloudMiddle, ttCloudBottom);
         ptClouds.setCycleCount(Animation.INDEFINITE);
         ptClouds.play();
-
-        /*
-        // This code will be used in the case that the code for the events take too long to run and start to make the game feel unresponsive and laggy.
-        Service<Void> service = new Service<Void>() {
-            @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {           
-                    @Override
-                    protected Void call() throws Exception {
-                        stage.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
-                            final double xVal = e.getX();
-                            final double yVal = e.getY();
-                        
-                            System.out.println(xVal + " " + yVal);
-                        
-                        });               
-                        final CountDownLatch latch = new CountDownLatch(1);
-                        Platform.runLater(new Runnable() {                          
-                            @Override
-                            public void run() {
-                                  try{
-                                      // Nothing for now
-                                }finally{
-                                    latch.countDown();
-                                }
-                            }
-                        });
-                        latch.await();                      
-                        stage.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
-                            final double xVal = e.getX();
-                            final double yVal = e.getY();
-                        
-                            System.out.println(xVal + " " + yVal);
-                        
-                        }); 
-                        return null;
-                    }
-                };
-            }
-        };
-        service.start();
-        */
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
@@ -1194,46 +1090,34 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
-
                 if (xVal >= newGameGameButton.getLeftX() && xVal <= newGameGameButton.getRightX() && yVal >= newGameGameButton.getTopY() && yVal <= newGameGameButton.getBottomY()) {
                     newGameGameButton.cursorOverButton();
-                    //redRectangleAroundNewGameButton.setVisible(true);
                 } else {
                     newGameGameButton.cursorNotOverButton();
-                    //redRectangleAroundNewGameButton.setVisible(false);
                 }
 
                 if (xVal >= instructionsGameButton.getLeftX() && xVal <= instructionsGameButton.getRightX() && yVal >= instructionsGameButton.getTopY() && yVal <= instructionsGameButton.getBottomY()) {
                     instructionsGameButton.cursorOverButton();
-                    //redRectangleAroundInstructionsButton.setVisible(true);
                 } else {
                     instructionsGameButton.cursorNotOverButton();
-                    //redRectangleAroundInstructionsButton.setVisible(false);
                 }
                 
                 if (xVal >= writeUpGameButton.getLeftX() && xVal <= writeUpGameButton.getRightX() && yVal >= writeUpGameButton.getTopY() && yVal <= writeUpGameButton.getBottomY()) {
                     writeUpGameButton.cursorOverButton();
-                    //redRectangleAroundInstructionsButton.setVisible(true);
                 } else {
                     writeUpGameButton.cursorNotOverButton();
-                    //redRectangleAroundInstructionsButton.setVisible(false);
                 }
 
                 if (xVal >= leaderboardGameButton.getLeftX() && xVal <= leaderboardGameButton.getRightX() && yVal >= leaderboardGameButton.getTopY() && yVal <= leaderboardGameButton.getBottomY()) {
                     leaderboardGameButton.cursorOverButton();
-                    //redRectangleAroundLeaderboardButton.setVisible(true);
                 } else {
                     leaderboardGameButton.cursorNotOverButton();
-                    //redRectangleAroundLeaderboardButton.setVisible(false);
                 }
 
                 if (xVal >= quitGameGameButton.getLeftX() && xVal <= quitGameGameButton.getRightX() && yVal >= quitGameGameButton.getTopY() && yVal <= quitGameGameButton.getBottomY()) {
                     quitGameGameButton.cursorOverButton();
-                    //redRectangleAroundQuitGameButton.setVisible(true);
                 } else {
                     quitGameGameButton.cursorNotOverButton();
-                    //redRectangleAroundQuitGameButton.setVisible(false);
                 }
             }
         );
@@ -1540,8 +1424,6 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (!this.onPauseScreen) {
                     if (showingBook) {
@@ -1564,57 +1446,34 @@ public class MainApplication extends Application {
                 }
             }
         );
-        /*
-        if (!showingBook) {
-            scene.setCursor(Cursor.DEFAULT);
-        }
-        */
 
         scene.addEventFilter(MouseEvent.MOUSE_MOVED,
             e -> {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (!this.onPauseScreen) {
                     if (showingBook) {
                         if (xVal >= books[bookNum].getBackButton().getLeftX() && xVal <= books[bookNum].getBackButton().getRightX() && yVal >= books[bookNum].getBackButton().getTopY() && yVal <= books[bookNum].getBackButton().getBottomY()) {
                             books[bookNum].getBackButton().cursorOverButton();
                             scene.setRoot(books[bookNum].getScene());
-                            //view.getChildren().set(0, books[bookNum].getScene());
-                            //view.getChildren().set(3, books[bookNum].getScene());
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             books[bookNum].getBackButton().cursorNotOverButton();
                             scene.setRoot(books[bookNum].getScene());
-                            //view.getChildren().set(3, books[bookNum].getScene());
-                            //view.getChildren().set(0, books[bookNum].getScene());
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
                     }
                 } else if (this.onPauseScreen && !showingBook) {
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -1640,7 +1499,6 @@ public class MainApplication extends Application {
                             }else{
                                 mainChar.setScaleX(1);
                             }
-                            //view.getChildren().clear();
                             view.getChildren().set(0, gr[gridNum]);
                             view.getChildren().set(1, mainChar);
                             bookLabel.setText(bookNum + "/" + books.length + " books found");
@@ -1650,34 +1508,18 @@ public class MainApplication extends Application {
                     }
                 } else if (this.onPauseScreen && !showingBook) {
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
                     } else if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         screenNum = 1;
                         this.onPauseScreen = false;
-                        //int lastIndex = view.getChildren().size() - 1;
-                        //view.getChildren().remove(lastIndex);
                         stage.setScene(this.mainMenuScene);
                         stage.show();
                     } else {
                         int lastIndex = view.getChildren().size() - 1;
-                        //System.out.println(view.getChildren());
-                        //System.out.println(view.getChildren().remove(lastIndex));
                         view.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //scene.setRoot(view);
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -1692,18 +1534,8 @@ public class MainApplication extends Application {
                             if (!showingBook && k.getCode() == KeyCode.ESCAPE) {
                                 this.onPauseScreen = true;
                                 view.getChildren().add(ps.getScene());
-                                //scene.setRoot(view);
-                                //System.out.println(temp);
-                                //System.out.println(view.getChildren());
-                                //System.out.println(this.onPauseScreen);
                             } else if (k.getCode() == KeyCode.SPACE) {
                                 Tile interaction = grid[gridNum].interact();
-                                /*
-                                    if (showingBook) {
-                                        showingBook = false;
-                                        gr[gridNum] = grid[gridNum].draw();
-                                    } else 
-                                */
                                 if (interaction != null) {
                                     if (interaction.getObject().equals(bookTileFile.getPath())) {
                                         showingBook = true;
@@ -1711,9 +1543,6 @@ public class MainApplication extends Application {
                                         interaction.setMovable(true);
                                         interaction.setInteractable(false);
                                         scene.setRoot(books[bookNum].getScene());
-                                        //view.getChildren().add(books[bookNum].getScene());
-                                        //scene.setRoot(view);
-                                        //bookNum++;
                                         if (bookNum + 1 == books.length) {
                                             grid[0].setObject(15, 15, confrontation1LowerFile.getPath());
                                             grid[0].setMovable(15, 15, false);
@@ -1770,7 +1599,6 @@ public class MainApplication extends Application {
                                 }else{
                                     mainChar.setScaleX(1);
                                 }
-                                //view.getChildren().clear();
                                 view.getChildren().set(0, gr[gridNum]);
                                 view.getChildren().set(1, mainChar);
                                 bookLabel.setText(bookNum + "/" + books.length + " books found");
@@ -1968,7 +1796,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -1986,28 +1813,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -2021,8 +1838,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -2035,20 +1850,6 @@ public class MainApplication extends Application {
                         int lastIndex = view.getChildren().size() - 1;
                         view.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //try {
-                        //    this.level1Scene = this.level1(stage);
-                        //    this.level2Scene = this.level2(stage);
-                        //    this.level3Scene = this.level3(stage);
-                        //} catch (IOException ioe) {}
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -2129,7 +1930,6 @@ public class MainApplication extends Application {
                             }else{
                                 mainChar.setScaleX(1);
                             }
-                            //view.getChildren().clear();
                             view.getChildren().set(0, level2Group);
                             view.getChildren().set(1, mainChar);
                             scene.setRoot(view);
@@ -2237,7 +2037,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -2255,28 +2054,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -2290,8 +2079,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -2304,15 +2091,6 @@ public class MainApplication extends Application {
                         int lastIndex = view.getChildren().size() - 1;
                         view.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -2357,7 +2135,6 @@ public class MainApplication extends Application {
                             }else{
                                 mainChar.setScaleX(1);
                             }
-                            //view.getChildren().clear();
                             view.getChildren().set(0, level3Group);
                             view.getChildren().set(1, mainChar);
                             scene.setRoot(view);
@@ -2415,7 +2192,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -2433,28 +2209,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -2468,8 +2234,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -2482,15 +2246,6 @@ public class MainApplication extends Application {
                         int lastIndex = nodesToAdd.getChildren().size() - 1;
                         nodesToAdd.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -2546,9 +2301,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
-        encounterTxt.getChar2ImageView().setFitWidth(175);
-        encounterTxt.getChar2ImageView().setTranslateX(-24);
-        encounterTxt.getChar2ImageView().setTranslateY(-4);
+        encounterTxt.getChar2ImageView().setFitWidth(160);
+        encounterTxt.getChar2ImageView().setTranslateX(-15);
+        encounterTxt.getChar2ImageView().setTranslateY(-45);
         
         GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
         GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
@@ -2594,45 +2349,31 @@ public class MainApplication extends Application {
                     final double xVal = e.getX();
                     final double yVal = e.getY();
                     
-                    //System.out.println(xVal + " " + yVal);
-                    
                     if (!this.onPauseScreen) {
                         if(questionMenu.equals("question")){
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                 yesButton.cursorOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(true);
                             } else {
                                 yesButton.cursorNotOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(false);
                             }
             
                             if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                 noButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 noButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                         } 
                     } else {
                         if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                             exitGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             exitGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
         
                         if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                             mainMenuGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             mainMenuGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
                     }             
                 }
@@ -2648,19 +2389,17 @@ public class MainApplication extends Application {
                                 if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                     score += 50;
                                     ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "You answered yes:", "That is correct! Thomas was talking about your physique and telling you that you are not the gender you are. This is very transphobic.", health, enemyHealth);
-                                    answerTxt.getChar2ImageView().setFitWidth(175);
-                                    answerTxt.getChar2ImageView().setTranslateX(-24);
-                                    answerTxt.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(answerTxt.getScene());
+                                    answerTxt.getChar2ImageView().setFitWidth(160);
+                                    answerTxt.getChar2ImageView().setTranslateX(-15);
+                                    answerTxt.getChar2ImageView().setTranslateY(-45);
                                     nodesToAdd.getChildren().set(0, answerTxt.getScene());
                                     stage.show();
                                     questionMenu = "endText";
                                 } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                     ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))), "You answered no:", "That is incorrect! Thomas was talking about your physique and telling you that you are not the gender you are. This is very transphobic.", health, enemyHealth);
-                                    answerTxt.getChar2ImageView().setFitWidth(175);
-                                    answerTxt.getChar2ImageView().setTranslateX(-24);
-                                    answerTxt.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(answerTxt.getScene());
+                                    answerTxt.getChar2ImageView().setFitWidth(160);
+                                    answerTxt.getChar2ImageView().setTranslateX(-15);
+                                    answerTxt.getChar2ImageView().setTranslateY(-45);
                                     nodesToAdd.getChildren().set(0, answerTxt.getScene());
                                     stage.show();
                                     questionMenu = "endText";
@@ -2668,8 +2407,6 @@ public class MainApplication extends Application {
                             }
                         } else {
                             if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                                //this.onPauseScreen = false;
-                                //System.exit(0);
                                 screenNum = 6;
                                 stage.setScene(this.quitGameScene);
                                 stage.show();
@@ -2682,20 +2419,6 @@ public class MainApplication extends Application {
                                 int lastIndex = nodesToAdd.getChildren().size() - 1;
                                 nodesToAdd.getChildren().remove(lastIndex);
                                 this.onPauseScreen = false;
-                                //try {
-                                //    this.level1Scene = this.level1(stage);
-                                //    this.level2Scene = this.level2(stage);
-                                //    this.level3Scene = this.level3(stage);
-                                //} catch (IOException ioe) {}
-                                /*
-                                Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                                Group tempGroup = new Group();
-                                tempGroup.getChildren().addAll(
-                                    back
-                                );
-                                stage.setScene(new Scene(tempGroup, 600, 600));
-                                return;
-                                */
                             }
                         }
                     }catch(Exception x){
@@ -2716,11 +2439,10 @@ public class MainApplication extends Application {
                                 nodesToAdd.getChildren().add(ps.getScene());
                             } else {
                                 if (questionMenu.equals("startText")) {
-                                    ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))),"Is Thomas Being transphobic?", yesButton, noButton);
-                                    questionButtons.getChar2ImageView().setFitWidth(175);
-                                    questionButtons.getChar2ImageView().setTranslateX(-24);
-                                    questionButtons.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(questionButtons.getScene());
+                                    ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[1]))),"Is Thomas being transphobic?", yesButton, noButton);
+                                    questionButtons.getChar2ImageView().setFitWidth(160);
+                                    questionButtons.getChar2ImageView().setTranslateX(-15);
+                                    questionButtons.getChar2ImageView().setTranslateY(-45);
                                     nodesToAdd.getChildren().set(0, questionButtons.getScene());
                                     stage.show();
                                     questionMenu = "question";
@@ -2768,9 +2490,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
-        encounterTxt.getChar2ImageView().setFitWidth(175);
-        encounterTxt.getChar2ImageView().setTranslateX(-30);
-        encounterTxt.getChar2ImageView().setTranslateY(-4);
+        encounterTxt.getChar2ImageView().setFitWidth(150);
+        encounterTxt.getChar2ImageView().setTranslateX(-16);
+        encounterTxt.getChar2ImageView().setTranslateY(-32);
         
         GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
         GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
@@ -2816,45 +2538,31 @@ public class MainApplication extends Application {
                     final double xVal = e.getX();
                     final double yVal = e.getY();
                     
-                    //System.out.println(xVal + " " + yVal);
-                    
                     if (!this.onPauseScreen) {
                         if(questionMenu.equals("question")){
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                 yesButton.cursorOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(true);
                             } else {
                                 yesButton.cursorNotOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(false);
                             }
             
                             if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                 noButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 noButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                         }
                     } else {
                         if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                             exitGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             exitGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
         
                         if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                             mainMenuGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             mainMenuGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
                     }                
                 }
@@ -2869,20 +2577,18 @@ public class MainApplication extends Application {
                             if(questionMenu.equals("question")){
                                 if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                     ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "You answered yes:", "That is incorrect! Sarah is just trying to talk about something she likes. Even though she might unknowingly be pressuring you to wear a skirt it is not her intention.", health, enemyHealth); 
-                                    answerTxt.getChar2ImageView().setFitWidth(175);
-                                    answerTxt.getChar2ImageView().setTranslateX(-30);
-                                    answerTxt.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(answerTxt.getScene());
+                                    answerTxt.getChar2ImageView().setFitWidth(150);
+                                    answerTxt.getChar2ImageView().setTranslateX(-16);
+                                    answerTxt.getChar2ImageView().setTranslateY(-32);
                                     nodesToAdd.getChildren().set(0, answerTxt.getScene());
                                     stage.show();
                                     questionMenu = "endText";
                                 } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                     score += 50;
                                     ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))), "You answered no:", "That is correct! Sarah is just trying to talk about something she likes. Even though she might unknowingly be pressuring you to wear a skirt it is not her intention.", health, enemyHealth);
-                                    answerTxt.getChar2ImageView().setFitWidth(175);
-                                    answerTxt.getChar2ImageView().setTranslateX(-30);
-                                    answerTxt.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(answerTxt.getScene());
+                                    answerTxt.getChar2ImageView().setFitWidth(150);
+                                    answerTxt.getChar2ImageView().setTranslateX(-16);
+                                    answerTxt.getChar2ImageView().setTranslateY(-32);
                                     nodesToAdd.getChildren().set(0, answerTxt.getScene());
                                     stage.show();
                                     questionMenu = "endText";
@@ -2890,8 +2596,6 @@ public class MainApplication extends Application {
                             }
                         } else {
                             if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                                //this.onPauseScreen = false;
-                                //System.exit(0);
                                 screenNum = 6;
                                 stage.setScene(this.quitGameScene);
                                 stage.show();
@@ -2904,20 +2608,6 @@ public class MainApplication extends Application {
                                 int lastIndex = nodesToAdd.getChildren().size() - 1;
                                 nodesToAdd.getChildren().remove(lastIndex);
                                 this.onPauseScreen = false;
-                                //try {
-                                //    this.level1Scene = this.level1(stage);
-                                //    this.level2Scene = this.level2(stage);
-                                //    this.level3Scene = this.level3(stage);
-                                //} catch (IOException ioe) {}
-                                /*
-                                Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                                Group tempGroup = new Group();
-                                tempGroup.getChildren().addAll(
-                                    back
-                                );
-                                stage.setScene(new Scene(tempGroup, 600, 600));
-                                return;
-                                */
                             }
                         }
                     }catch(Exception x){
@@ -2939,10 +2629,9 @@ public class MainApplication extends Application {
                             } else {
                                 if (questionMenu.equals("startText")) {
                                     ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[2]))),"Is Sarah being transphobic?", yesButton, noButton);
-                                    questionButtons.getChar2ImageView().setFitWidth(175);
-                                    questionButtons.getChar2ImageView().setTranslateX(-30);
-                                    questionButtons.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(questionButtons.getScene());
+                                    questionButtons.getChar2ImageView().setFitWidth(150);
+                                    questionButtons.getChar2ImageView().setTranslateX(-16);
+                                    questionButtons.getChar2ImageView().setTranslateY(-32);
                                     nodesToAdd.getChildren().set(0, questionButtons.getScene());
                                     stage.show();
                                     questionMenu = "question";
@@ -2990,9 +2679,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
-        encounterTxt.getChar2ImageView().setFitWidth(175);
-        encounterTxt.getChar2ImageView().setTranslateX(-30);
-        encounterTxt.getChar2ImageView().setTranslateY(-4);
+        encounterTxt.getChar2ImageView().setFitWidth(150);
+        encounterTxt.getChar2ImageView().setTranslateX(-16);
+        encounterTxt.getChar2ImageView().setTranslateY(-32);
         
         GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
         GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
@@ -3038,45 +2727,31 @@ public class MainApplication extends Application {
                     final double xVal = e.getX();
                     final double yVal = e.getY();
                     
-                    //System.out.println(xVal + " " + yVal);
-                    
                     if (!this.onPauseScreen) {
                         if(questionMenu.equals("question")){
                             if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                 yesButton.cursorOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(true);
                             } else {
                                 yesButton.cursorNotOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(false);
                             }
             
                             if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                 noButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 noButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                         }
                     } else {
                         if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                             exitGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             exitGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
         
                         if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                             mainMenuGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             mainMenuGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
                     }            
                 }
@@ -3091,20 +2766,18 @@ public class MainApplication extends Application {
                             if(questionMenu.equals("question")){
                                 if (xVal >= yesButton.getLeftX() && xVal <= yesButton.getRightX() && yVal >= yesButton.getTopY() && yVal <= yesButton.getBottomY()) {
                                     ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered yes:", "That is correct! Karen said that you are not a \"real girl\" which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
-                                    answerTxt.getChar2ImageView().setFitWidth(175);
-                                    answerTxt.getChar2ImageView().setTranslateX(-30);
-                                    answerTxt.getChar2ImageView().setTranslateY(-4);
+                                    answerTxt.getChar2ImageView().setFitWidth(150);
+                                    answerTxt.getChar2ImageView().setTranslateX(-16);
+                                    answerTxt.getChar2ImageView().setTranslateY(-32);
                                     score += 50;
-                                    //scene.setRoot(answerTxt.getScene());
                                     nodesToAdd.getChildren().set(0, answerTxt.getScene());
                                     stage.show();
                                     questionMenu = "endText";
                                 } else if (xVal >= noButton.getLeftX() && xVal <= noButton.getRightX() && yVal >= noButton.getTopY() && yVal <= noButton.getBottomY()) {
                                     ConfrontationScene answerTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))), "You answered no:", "That is incorrect! Karen said that you are not a \"real girl\" which is very transphobic. A just because your gender is not the same as your gender assigned at birth does not mean you are not the gender you are.", health, enemyHealth);
-                                    answerTxt.getChar2ImageView().setFitWidth(175);
-                                    answerTxt.getChar2ImageView().setTranslateX(-30);
-                                    answerTxt.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(answerTxt.getScene());
+                                    answerTxt.getChar2ImageView().setFitWidth(150);
+                                    answerTxt.getChar2ImageView().setTranslateX(-16);
+                                    answerTxt.getChar2ImageView().setTranslateY(-32);
                                     nodesToAdd.getChildren().set(0, answerTxt.getScene());
                                     stage.show();
                                     questionMenu = "endText";
@@ -3112,8 +2785,6 @@ public class MainApplication extends Application {
                             }
                         } else {
                             if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                                //this.onPauseScreen = false;
-                                //System.exit(0);
                                 screenNum = 6;
                                 stage.setScene(this.quitGameScene);
                                 stage.show();
@@ -3126,20 +2797,6 @@ public class MainApplication extends Application {
                                 int lastIndex = nodesToAdd.getChildren().size() - 1;
                                 nodesToAdd.getChildren().remove(lastIndex);
                                 this.onPauseScreen = false;
-                                //try {
-                                //    this.level1Scene = this.level1(stage);
-                                //    this.level2Scene = this.level2(stage);
-                                //    this.level3Scene = this.level3(stage);
-                                //} catch (IOException ioe) {}
-                                /*
-                                Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                                Group tempGroup = new Group();
-                                tempGroup.getChildren().addAll(
-                                    back
-                                );
-                                stage.setScene(new Scene(tempGroup, 600, 600));
-                                return;
-                                */
                             }
                         }
                     }catch(Exception x){
@@ -3160,11 +2817,10 @@ public class MainApplication extends Application {
                                 nodesToAdd.getChildren().add(ps.getScene());
                             } else {
                                 if (questionMenu.equals("startText")) {
-                                    ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))),"Is Karen Being transphobic?", yesButton, noButton);
-                                    questionButtons.getChar2ImageView().setFitWidth(175);
-                                    questionButtons.getChar2ImageView().setTranslateX(-30);
-                                    questionButtons.getChar2ImageView().setTranslateY(-4);
-                                    //scene.setRoot(questionButtons.getScene());
+                                    ConfrontationScene questionButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[3]))),"Is Karen being transphobic?", yesButton, noButton);
+                                    questionButtons.getChar2ImageView().setFitWidth(150);
+                                    questionButtons.getChar2ImageView().setTranslateX(-16);
+                                    questionButtons.getChar2ImageView().setTranslateY(-32);
                                     nodesToAdd.getChildren().set(0, questionButtons.getScene());
                                     stage.show();
                                     questionMenu = "question";
@@ -3229,7 +2885,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -3247,28 +2902,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -3282,8 +2927,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -3296,20 +2939,6 @@ public class MainApplication extends Application {
                         int lastIndex = nodesToAdd.getChildren().size() - 1;
                         nodesToAdd.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //try {
-                        //    this.level1Scene = this.level1(stage);
-                        //    this.level2Scene = this.level2(stage);
-                        //    this.level3Scene = this.level3(stage);
-                        //} catch (IOException ioe) {}
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -3360,9 +2989,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
-        encounterTxt.getChar2ImageView().setFitWidth(175);
-        encounterTxt.getChar2ImageView().setTranslateX(-24);
-        encounterTxt.getChar2ImageView().setTranslateY(-4);
+        encounterTxt.getChar2ImageView().setFitWidth(160);
+        encounterTxt.getChar2ImageView().setTranslateX(-15);
+        encounterTxt.getChar2ImageView().setTranslateY(-45);
         
         GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
         GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
@@ -3381,7 +3010,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -3399,28 +3027,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -3434,8 +3052,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -3448,20 +3064,6 @@ public class MainApplication extends Application {
                         int lastIndex = nodesToAdd.getChildren().size() - 1;
                         nodesToAdd.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //try {
-                        //    this.level1Scene = this.level1(stage);
-                        //    this.level2Scene = this.level2(stage);
-                        //    this.level3Scene = this.level3(stage);
-                        //} catch (IOException ioe) {}
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -3517,9 +3119,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
-        encounterTxt.getChar2ImageView().setFitWidth(175);
-        encounterTxt.getChar2ImageView().setTranslateX(-30);
-        encounterTxt.getChar2ImageView().setTranslateY(-4);
+        encounterTxt.getChar2ImageView().setFitWidth(150);
+        encounterTxt.getChar2ImageView().setTranslateX(-16);
+        encounterTxt.getChar2ImageView().setTranslateY(-32);
         
         GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
         GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
@@ -3538,7 +3140,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -3556,28 +3157,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -3591,8 +3182,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -3605,20 +3194,6 @@ public class MainApplication extends Application {
                         int lastIndex = nodesToAdd.getChildren().size() - 1;
                         nodesToAdd.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //try {
-                        //    this.level1Scene = this.level1(stage);
-                        //    this.level2Scene = this.level2(stage);
-                        //    this.level3Scene = this.level3(stage);
-                        //} catch (IOException ioe) {}
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -3673,9 +3248,9 @@ public class MainApplication extends Application {
         encounterTxt.getTitle().setFill(Paint.valueOf("Black"));	
         encounterTxt.getBody().setFont(encounterTxt.getFontFromFile(12));	
         encounterTxt.getBody().setFill(Paint.valueOf("Black"));
-        encounterTxt.getChar2ImageView().setFitWidth(175);
-        encounterTxt.getChar2ImageView().setTranslateX(-30);
-        encounterTxt.getChar2ImageView().setTranslateY(-4);
+        encounterTxt.getChar2ImageView().setFitWidth(150);
+        encounterTxt.getChar2ImageView().setTranslateX(-16);
+        encounterTxt.getChar2ImageView().setTranslateY(-32);
         
         GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
         GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
@@ -3694,7 +3269,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -3712,28 +3286,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -3747,8 +3311,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -3761,20 +3323,6 @@ public class MainApplication extends Application {
                         int lastIndex = nodesToAdd.getChildren().size() - 1;
                         nodesToAdd.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //try {
-                        //    this.level1Scene = this.level1(stage);
-                        //    this.level2Scene = this.level2(stage);
-                        //    this.level3Scene = this.level3(stage);
-                        //} catch (IOException ioe) {}
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -3850,7 +3398,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         scene.setCursor(Cursor.HAND);
@@ -3868,28 +3415,18 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                         exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
     
                     if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                         mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
                     } else {
                         mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
                     }
                 }
             }
@@ -3903,8 +3440,6 @@ public class MainApplication extends Application {
 
                 if (this.onPauseScreen){
                     if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        //System.exit(0);
                         screenNum = 6;
                         stage.setScene(this.quitGameScene);
                         stage.show();
@@ -3917,20 +3452,6 @@ public class MainApplication extends Application {
                         int lastIndex = nodesToAdd.getChildren().size() - 1;
                         nodesToAdd.getChildren().remove(lastIndex);
                         this.onPauseScreen = false;
-                        //try {
-                        //    this.level1Scene = this.level1(stage);
-                        //    this.level2Scene = this.level2(stage);
-                        //    this.level3Scene = this.level3(stage);
-                        //} catch (IOException ioe) {}
-                        /*
-                        Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        Group tempGroup = new Group();
-                        tempGroup.getChildren().addAll(
-                            back
-                        );
-                        stage.setScene(new Scene(tempGroup, 600, 600));
-                        return;
-                        */
                     }
                 }
             }
@@ -3983,24 +3504,6 @@ public class MainApplication extends Application {
         battleMenu = "main";
         form = "";
         
-        /*Rectangle char1HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
-        char1HealthBarFront.setStrokeWidth(1.0);
-        char1HealthBarFront.setStroke(Paint.valueOf("black"));
-        Rectangle char1HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
-        char1HealthBarBack.setStrokeWidth(1.0);
-        char1HealthBarBack.setStroke(Paint.valueOf("black"));
-        Rectangle char2HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
-        char2HealthBarFront.setStrokeWidth(1.0);
-        char2HealthBarFront.setStroke(Paint.valueOf("black"));
-        Rectangle char2HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
-        char2HealthBarBack.setStrokeWidth(1.0);
-        char2HealthBarBack.setStroke(Paint.valueOf("black"));
-        
-        Ellipse closeCharPlat = new Ellipse(5, 5);
-        closeCharPlat.setFill(Paint.valueOf("red"));
-        Ellipse farCharPlat = new Ellipse(5, 5);
-        farCharPlat.setFill(Paint.valueOf("blue"));
-        */
         GameButton actionButton = new GameButton(this.pressStart2PFile, "Action", 85, 470, 17);	
         	
         GameButton formButton = new GameButton(this.pressStart2PFile, "Form", 390, 470, 17);	
@@ -4021,13 +3524,13 @@ public class MainApplication extends Application {
         
         ConfrontationScene startButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);                   
         if (encounterNum == 2) {
-            startButtons.getChar2ImageView().setFitWidth(175);
-            startButtons.getChar2ImageView().setTranslateX(-24);
-            startButtons.getChar2ImageView().setTranslateY(-4);
+            startButtons.getChar2ImageView().setFitWidth(160);
+            startButtons.getChar2ImageView().setTranslateX(-15);
+            startButtons.getChar2ImageView().setTranslateY(-45);
         } else if (encounterNum == 3 || encounterNum == 4) {
-            startButtons.getChar2ImageView().setFitWidth(175);
-            startButtons.getChar2ImageView().setTranslateX(-30);
-            startButtons.getChar2ImageView().setTranslateY(-4);
+            startButtons.getChar2ImageView().setFitWidth(150);
+            startButtons.getChar2ImageView().setTranslateX(-16);
+            startButtons.getChar2ImageView().setTranslateY(-32);
         } else if (encounterNum == 5) {
             startButtons.getChar2ImageView().setFitWidth(110);
             startButtons.getChar2ImageView().setTranslateX(3);
@@ -4101,101 +3604,73 @@ public class MainApplication extends Application {
                     final double xVal = e.getX();
                     final double yVal = e.getY();
                     
-                    //System.out.println(xVal + " " + yVal);
-                    
                     if (!this.onPauseScreen) {
                         if(battleMenu.equals("main")){
                             if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
                                 actionButton.cursorOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(true);
                             } else {
                                 actionButton.cursorNotOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(false);
                             }
             
                             if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
                                 formButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 formButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                         }else if(battleMenu.equals("action")){
                             if (xVal >= debateButton.getLeftX() && xVal <= debateButton.getRightX() && yVal >= debateButton.getTopY() && yVal <= debateButton.getBottomY()) {
                                 debateButton.cursorOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(true);
                             } else {
                                 debateButton.cursorNotOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(false);
                             }
             
                             if (xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()) {
                                 defendButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 defendButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                             
                             if (xVal >= actionBackButton.getLeftX() && xVal <= actionBackButton.getRightX() && yVal >= actionBackButton.getTopY() && yVal <= actionBackButton.getBottomY()) {
                                 actionBackButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 actionBackButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                         }else if(battleMenu.equals("form")){
                             if (xVal >= defensiveButton.getLeftX() && xVal <= defensiveButton.getRightX() && yVal >= defensiveButton.getTopY() && yVal <= defensiveButton.getBottomY()) {
                                 defensiveButton.cursorOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(true);
                             } else {
                                 defensiveButton.cursorNotOverButton();
-                                //redRectangleAroundNewGameButton.setVisible(false);
                             }
             
                             if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
                                 assertiveButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 assertiveButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                             
                             if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
                                 empatheticButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 empatheticButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                             
                             if (xVal >= formBackButton.getLeftX() && xVal <= formBackButton.getRightX() && yVal >= formBackButton.getTopY() && yVal <= formBackButton.getBottomY()) {
                                 formBackButton.cursorOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(true);
                             } else {
                                 formBackButton.cursorNotOverButton();
-                                //redRectangleAroundInstructionsButton.setVisible(false);
                             }
                         }
                     } else {
                         if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
                             exitGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             exitGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
         
                         if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
                             mainMenuGameButton.cursorOverButton();
-                            //backButton.getRedRectangle().setVisible(true);
-                            //redRectangleAroundBackButton.setVisible(true);
                         } else {
                             mainMenuGameButton.cursorNotOverButton();
-                            //backButton.getRedRectangle().setVisible(false);
-                            //redRectangleAroundBackButton.setVisible(false);
                         }
                     }
                 }
@@ -4212,38 +3687,36 @@ public class MainApplication extends Application {
                                 if (xVal >= actionButton.getLeftX() && xVal <= actionButton.getRightX() && yVal >= actionButton.getTopY() && yVal <= actionButton.getBottomY()) {
                                     ConfrontationScene act = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), debateButton, actionBackButton, defendButton, null, health, enemyHealth);
                                     if (encounterNum == 2) {
-                                        act.getChar2ImageView().setFitWidth(175);
-                                        act.getChar2ImageView().setTranslateX(-24);
-                                        act.getChar2ImageView().setTranslateY(-4);
+                                        act.getChar2ImageView().setFitWidth(160);
+                                        act.getChar2ImageView().setTranslateX(-15);
+                                        act.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        act.getChar2ImageView().setFitWidth(175);
-                                        act.getChar2ImageView().setTranslateX(-30);
-                                        act.getChar2ImageView().setTranslateY(-4);
+                                        act.getChar2ImageView().setFitWidth(150);
+                                        act.getChar2ImageView().setTranslateX(-16);
+                                        act.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         act.getChar2ImageView().setFitWidth(110);
                                         act.getChar2ImageView().setTranslateX(3);
                                         act.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(act.getScene());
                                     nodesToAdd.getChildren().set(0, act.getScene());
                                     stage.show();
                                     battleMenu = "action";
                                 } else if (xVal >= formButton.getLeftX() && xVal <= formButton.getRightX() && yVal >= formButton.getTopY() && yVal <= formButton.getBottomY()) {
                                     ConfrontationScene formSc = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), defensiveButton, empatheticButton, assertiveButton, formBackButton, health, enemyHealth);
                                     if (encounterNum == 2) {
-                                        formSc.getChar2ImageView().setFitWidth(175);
-                                        formSc.getChar2ImageView().setTranslateX(-24);
-                                        formSc.getChar2ImageView().setTranslateY(-4);
+                                        formSc.getChar2ImageView().setFitWidth(160);
+                                        formSc.getChar2ImageView().setTranslateX(-15);
+                                        formSc.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        formSc.getChar2ImageView().setFitWidth(175);
-                                        formSc.getChar2ImageView().setTranslateX(-30);
-                                        formSc.getChar2ImageView().setTranslateY(-4);
+                                        formSc.getChar2ImageView().setFitWidth(150);
+                                        formSc.getChar2ImageView().setTranslateX(-16);
+                                        formSc.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         formSc.getChar2ImageView().setFitWidth(110);
                                         formSc.getChar2ImageView().setTranslateX(3);
                                         formSc.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(formSc.getScene());
                                     nodesToAdd.getChildren().set(0, formSc.getScene());
                                     stage.show();
                                     battleMenu = "form";
@@ -4275,19 +3748,18 @@ public class MainApplication extends Application {
                                     damageTxt.getBody().setFont(damageTxt.getFontFromFile(12));	
                                     damageTxt.getBody().setFill(Paint.valueOf("Black"));
                                     if (encounterNum == 2) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-24);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(160);
+                                        damageTxt.getChar2ImageView().setTranslateX(-15);
+                                        damageTxt.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-30);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(150);
+                                        damageTxt.getChar2ImageView().setTranslateX(-16);
+                                        damageTxt.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         damageTxt.getChar2ImageView().setFitWidth(110);
                                         damageTxt.getChar2ImageView().setTranslateX(3);
                                         damageTxt.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(damageTxt.getScene());
                                     nodesToAdd.getChildren().set(0, damageTxt.getScene());
                                     battleMenu = "damageText";
                                     }else if(xVal >= defendButton.getLeftX() && xVal <= defendButton.getRightX() && yVal >= defendButton.getTopY() && yVal <= defendButton.getBottomY()){
@@ -4308,38 +3780,36 @@ public class MainApplication extends Application {
                                     damageTxt.getBody().setFont(damageTxt.getFontFromFile(12));	
                                     damageTxt.getBody().setFill(Paint.valueOf("Black"));
                                     if (encounterNum == 2) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-24);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(160);
+                                        damageTxt.getChar2ImageView().setTranslateX(-15);
+                                        damageTxt.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-30);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(150);
+                                        damageTxt.getChar2ImageView().setTranslateX(-16);
+                                        damageTxt.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         damageTxt.getChar2ImageView().setFitWidth(110);
                                         damageTxt.getChar2ImageView().setTranslateX(3);
                                         damageTxt.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(damageTxt.getScene());
                                     nodesToAdd.getChildren().set(0, damageTxt.getScene());
                                     
                                     battleMenu = "damageText";
                                 } else if(xVal >= actionBackButton.getLeftX() && xVal <= actionBackButton.getRightX() && yVal >= actionBackButton.getTopY() && yVal <= actionBackButton.getBottomY()){
                                     ConfrontationScene mainButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);                   
                                     if (encounterNum == 2) {
-                                        mainButtons.getChar2ImageView().setFitWidth(175);
-                                        mainButtons.getChar2ImageView().setTranslateX(-24);
-                                        mainButtons.getChar2ImageView().setTranslateY(-4);
+                                        mainButtons.getChar2ImageView().setFitWidth(160);
+                                        mainButtons.getChar2ImageView().setTranslateX(-15);
+                                        mainButtons.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        mainButtons.getChar2ImageView().setFitWidth(175);
-                                        mainButtons.getChar2ImageView().setTranslateX(-30);
-                                        mainButtons.getChar2ImageView().setTranslateY(-4);
+                                        mainButtons.getChar2ImageView().setFitWidth(150);
+                                        mainButtons.getChar2ImageView().setTranslateX(-16);
+                                        mainButtons.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         mainButtons.getChar2ImageView().setFitWidth(110);
                                         mainButtons.getChar2ImageView().setTranslateX(3);
                                         mainButtons.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(mainButtons.getScene());
                                     nodesToAdd.getChildren().set(0, mainButtons.getScene());
                                     battleMenu = "main";
                                 }
@@ -4363,19 +3833,18 @@ public class MainApplication extends Application {
                                     damageTxt.getBody().setFont(damageTxt.getFontFromFile(12));	
                                     damageTxt.getBody().setFill(Paint.valueOf("Black"));
                                     if (encounterNum == 2) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-24);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(160);
+                                        damageTxt.getChar2ImageView().setTranslateX(-15);
+                                        damageTxt.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-30);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(150);
+                                        damageTxt.getChar2ImageView().setTranslateX(-16);
+                                        damageTxt.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         damageTxt.getChar2ImageView().setFitWidth(110);
                                         damageTxt.getChar2ImageView().setTranslateX(3);
                                         damageTxt.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(damageTxt.getScene());
                                     nodesToAdd.getChildren().set(0, damageTxt.getScene());
                                     
                                 } else if (xVal >= assertiveButton.getLeftX() && xVal <= assertiveButton.getRightX() && yVal >= assertiveButton.getTopY() && yVal <= assertiveButton.getBottomY()) {
@@ -4396,19 +3865,18 @@ public class MainApplication extends Application {
                                     damageTxt.getBody().setFont(damageTxt.getFontFromFile(12));	
                                     damageTxt.getBody().setFill(Paint.valueOf("Black"));
                                     if (encounterNum == 2) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-24);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(160);
+                                        damageTxt.getChar2ImageView().setTranslateX(-15);
+                                        damageTxt.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-30);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(150);
+                                        damageTxt.getChar2ImageView().setTranslateX(-16);
+                                        damageTxt.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         damageTxt.getChar2ImageView().setFitWidth(110);
                                         damageTxt.getChar2ImageView().setTranslateX(3);
                                         damageTxt.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(damageTxt.getScene());
                                     nodesToAdd.getChildren().set(0, damageTxt.getScene());
                                 } else if (xVal >= empatheticButton.getLeftX() && xVal <= empatheticButton.getRightX() && yVal >= empatheticButton.getTopY() && yVal <= empatheticButton.getBottomY()) {
                                     // Set Scene to damage text
@@ -4428,44 +3896,40 @@ public class MainApplication extends Application {
                                     damageTxt.getBody().setFont(damageTxt.getFontFromFile(12));	
                                     damageTxt.getBody().setFill(Paint.valueOf("Black"));
                                     if (encounterNum == 2) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-24);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(160);
+                                        damageTxt.getChar2ImageView().setTranslateX(-15);
+                                        damageTxt.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        damageTxt.getChar2ImageView().setFitWidth(175);
-                                        damageTxt.getChar2ImageView().setTranslateX(-30);
-                                        damageTxt.getChar2ImageView().setTranslateY(-4);
+                                        damageTxt.getChar2ImageView().setFitWidth(150);
+                                        damageTxt.getChar2ImageView().setTranslateX(-16);
+                                        damageTxt.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         damageTxt.getChar2ImageView().setFitWidth(110);
                                         damageTxt.getChar2ImageView().setTranslateX(3);
                                         damageTxt.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(damageTxt.getScene());
                                     nodesToAdd.getChildren().set(0, damageTxt.getScene());
                                 } else if(xVal >= formBackButton.getLeftX() && xVal <= formBackButton.getRightX() && yVal >= formBackButton.getTopY() && yVal <= formBackButton.getBottomY()){
                                     ConfrontationScene mainButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);                   
                                     if (encounterNum == 2) {
-                                        mainButtons.getChar2ImageView().setFitWidth(175);
-                                        mainButtons.getChar2ImageView().setTranslateX(-24);
-                                        mainButtons.getChar2ImageView().setTranslateY(-4);
+                                        mainButtons.getChar2ImageView().setFitWidth(160);
+                                        mainButtons.getChar2ImageView().setTranslateX(-20);
+                                        mainButtons.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        mainButtons.getChar2ImageView().setFitWidth(175);
-                                        mainButtons.getChar2ImageView().setTranslateX(-30);
-                                        mainButtons.getChar2ImageView().setTranslateY(-4);
+                                        mainButtons.getChar2ImageView().setFitWidth(150);
+                                        mainButtons.getChar2ImageView().setTranslateX(-16);
+                                        mainButtons.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         mainButtons.getChar2ImageView().setFitWidth(110);
                                         mainButtons.getChar2ImageView().setTranslateX(3);
                                         mainButtons.getChar2ImageView().setTranslateY(-10);
                                     }
-                                    //scene.setRoot(mainButtons.getScene());
                                     nodesToAdd.getChildren().set(0, mainButtons.getScene());
                                     battleMenu = "main";
                                 }
                             }
                         } else {
                             if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                                //this.onPauseScreen = false;
-                                //System.exit(0);
                                 screenNum = 6;
                                 stage.setScene(this.quitGameScene);
                                 stage.show();
@@ -4478,20 +3942,6 @@ public class MainApplication extends Application {
                                 int lastIndex = nodesToAdd.getChildren().size() - 1;
                                 nodesToAdd.getChildren().remove(lastIndex);
                                 this.onPauseScreen = false;
-                                //try {
-                                //    this.level1Scene = this.level1(stage);
-                                //    this.level2Scene = this.level2(stage);
-                                //    this.level3Scene = this.level3(stage);
-                                //} catch (IOException ioe) {}
-                                /*
-                                Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                                Group tempGroup = new Group();
-                                tempGroup.getChildren().addAll(
-                                    back
-                                );
-                                stage.setScene(new Scene(tempGroup, 600, 600));
-                                return;
-                                */
                             }
                         }
                     }catch(Exception x){
@@ -4520,51 +3970,19 @@ public class MainApplication extends Application {
                                             if(damage-block>=0){
                                                 block = 0;
                                                 health-=damageTaken;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                                 enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
-                                                /*
-                                                if (encounterNum == 2) {
-                                                    enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateX(-24);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                } else if (encounterNum == 3 || encounterNum == 4) {
-                                                    enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                } else if (encounterNum == 5) {
-                                                    enemyDamageTxt.getChar2ImageView().setFitWidth(110);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateX(3);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateY(-10);
-                                                }
-                                                */
-                                                //scene.setRoot(enemyDamageTxt.getScene());
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }else{
                                                 block-=damage;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                                 enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
-                                                /*
-                                                if (encounterNum == 2) {
-                                                    enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateX(-24);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                } else if (encounterNum == 3 || encounterNum == 4) {
-                                                    enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                } else if (encounterNum == 5) {
-                                                    enemyDamageTxt.getChar2ImageView().setFitWidth(110);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateX(3);
-                                                    enemyDamageTxt.getChar2ImageView().setTranslateY(-10);
-                                                }
-                                                */
-                                                //scene.setRoot(enemyDamageTxt.getScene());
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }
                                         }
@@ -4582,27 +4000,25 @@ public class MainApplication extends Application {
                                             if(damage-block>=0){
                                                 block = 0;
                                                 health-=damageTaken;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                                 enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
-                                                enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-24);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
+                                                enemyDamageTxt.getChar2ImageView().setFitWidth(160);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-15);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-45);
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }else{
                                                 block-=damage;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                                 enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
-                                                enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-24);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
+                                                enemyDamageTxt.getChar2ImageView().setFitWidth(160);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-15);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-45);
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }                                
                                         }
@@ -4620,27 +4036,25 @@ public class MainApplication extends Application {
                                             if(damage-block>=0){
                                                 block = 0;
                                                 health-=damageTaken;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                                 enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
-                                                enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
+                                                enemyDamageTxt.getChar2ImageView().setFitWidth(150);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-16);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-32);
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }else{
                                                 block-=damage;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
                                                 enemyDamageTxt.getBody().setFill(Paint.valueOf("Red"));
-                                                enemyDamageTxt.getChar2ImageView().setFitWidth(175);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
-                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
+                                                enemyDamageTxt.getChar2ImageView().setFitWidth(150);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateX(-16);
+                                                enemyDamageTxt.getChar2ImageView().setTranslateY(-32);
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }
                                         }
@@ -4658,7 +4072,7 @@ public class MainApplication extends Application {
                                             if(damage-block>=0){
                                                 block = 0;
                                                 health-=damageTaken;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
@@ -4670,7 +4084,7 @@ public class MainApplication extends Application {
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }else{
                                                 block-=damage;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
@@ -4678,7 +4092,6 @@ public class MainApplication extends Application {
                                                 enemyDamageTxt.getChar2ImageView().setFitWidth(175);
                                                 enemyDamageTxt.getChar2ImageView().setTranslateX(-30);
                                                 enemyDamageTxt.getChar2ImageView().setTranslateY(-4);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }
                                         }
@@ -4705,7 +4118,6 @@ public class MainApplication extends Application {
                                                 enemyDamageTxt.getChar2ImageView().setFitWidth(110);
                                                 enemyDamageTxt.getChar2ImageView().setTranslateX(3);
                                                 enemyDamageTxt.getChar2ImageView().setTranslateY(-10);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }else{
                                                 block-=damage;
@@ -4717,7 +4129,6 @@ public class MainApplication extends Application {
                                                 enemyDamageTxt.getChar2ImageView().setFitWidth(110);
                                                 enemyDamageTxt.getChar2ImageView().setTranslateX(3);
                                                 enemyDamageTxt.getChar2ImageView().setTranslateY(-10);
-                                                //scene.setRoot(enemyDamageTxt.getScene());
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }
                                         }
@@ -4732,19 +4143,18 @@ public class MainApplication extends Application {
                                 }else if(battleMenu.equals("enemyText")){
                                     ConfrontationScene mainButtons = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), actionButton, null, formButton, null, health, enemyHealth);
                                     if (encounterNum == 2) {
-                                        mainButtons.getChar2ImageView().setFitWidth(175);
-                                        mainButtons.getChar2ImageView().setTranslateX(-24);
-                                        mainButtons.getChar2ImageView().setTranslateY(-4);
+                                        mainButtons.getChar2ImageView().setFitWidth(160);
+                                        mainButtons.getChar2ImageView().setTranslateX(-15);
+                                        mainButtons.getChar2ImageView().setTranslateY(-45);
                                     } else if (encounterNum == 3 || encounterNum == 4) {
-                                        mainButtons.getChar2ImageView().setFitWidth(175);
-                                        mainButtons.getChar2ImageView().setTranslateX(-30);
-                                        mainButtons.getChar2ImageView().setTranslateY(-4);
+                                        mainButtons.getChar2ImageView().setFitWidth(150);
+                                        mainButtons.getChar2ImageView().setTranslateX(-16);
+                                        mainButtons.getChar2ImageView().setTranslateY(-32);
                                     } else if (encounterNum == 5) {
                                         mainButtons.getChar2ImageView().setFitWidth(110);
                                         mainButtons.getChar2ImageView().setTranslateX(3);
                                         mainButtons.getChar2ImageView().setTranslateY(-10);
                                     }        
-                                    //scene.setRoot(mainButtons.getScene());
                                     nodesToAdd.getChildren().set(0, mainButtons.getScene());
                                     battleMenu = "main";
                                 }
@@ -4805,7 +4215,6 @@ public class MainApplication extends Application {
             instructionsText,
             backButton.getButton(),
             whiteInstructionsGameTitle.getTitle(),
-            //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
         );
@@ -4817,8 +4226,6 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
 
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
@@ -4834,16 +4241,10 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
-
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     backButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     backButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -4890,27 +4291,16 @@ public class MainApplication extends Application {
         writeUpText.setLineSpacing(4);
         writeUpText.setX(50);
         writeUpText.setY(200);
-        
-        /*
-        TextFlow writeUpTextFlow = new TextFlow();
-        writeUpTextFlow.getChildren().addAll(
-            writeUpText
-        );
-        writeUpTextFlow.setLineSpacing(10);
-        tempTextFlow.setPrefWidth(this.width);
-        */
 
         GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 135, 120, 18);	
         backButton.setWidth(125);	
         backButton.setTextTranslationX(1);
-        //backButton.getBackgroundRectangle().setFill(Paint.valueOf("rgba(0,0,0,0.2)"));
 
         Group nodesToAdd = new Group();
         nodesToAdd.getChildren().addAll(
             writeUpText,
             backButton.getButton(),
             whiteWriteUpGameTitle.getTitle(),
-            //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
         );
@@ -4922,8 +4312,6 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
 
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
@@ -4939,16 +4327,10 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
-
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     backButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     backButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -4994,64 +4376,16 @@ public class MainApplication extends Application {
         scoresBackground.setStrokeWidth(10.0);
         scoresBackground.setStroke(Paint.valueOf("rgb(66,47,33)"));
         scoresBackground.setStrokeLineJoin(StrokeLineJoin.ROUND);
-
-        //String [][] leaderboardData = this.leaderboard.getLeaderboard();
-        //System.out.println(Arrays.deepToString(leaderboardData));
-        
-        /*
-        GridPane leaderboardValuesToAdd = new GridPane();
-        
-        int currentLevel = 0;
-        
-                
-        Label [][] displayedLeaderboard = new Label[10][4];
-        for (int i = 0; i < displayedLeaderboard.length; i++) {
-            for (int j = 0; j < displayedLeaderboard[i].length; j++) {
-                displayedLeaderboard[i][j] = new Label(leaderboardData[i][j]);// + " " + leaderboardData[i][1]+ " " + leaderboardData[i][2] + " " + leaderboardData[i][3]);
-                displayedLeaderboard[i][j].setFont(this.getPressStart2PFont(12));
-                displayedLeaderboard[i][j].setStyle("-fx-background-color: rgb(193,154,107); -fx-text-fill: black;");
-                //displayedLeaderboard[i][j].setTextFill(Paint.valueOf("rgb(255,255,255)"));
-                //displayedLeaderboard[i][j].setFill(Paint.valueOf("rgb(255,255,255)"));
-                //displayedLeaderboard[i].setPrefWidth(400);
-                //displayedLeaderboard[i].setTranslateX(100);
-                //displayedLeaderboard[i].setTranslateY(225 + i * 15);
-                //Pane tempPane = new Pane(displayedLeaderboard[i][j]);
-                //if (i % 2 == 1) tempPane.setStyle("-fx-background-color: rgb(143,114,57)");
-                leaderboardValuesToAdd.add(displayedLeaderboard[i][j], j, i);//, 1, 1);
-            }
-        }
-        */
         
         GameButton upButton = new GameButton(this.pressStart2PFile, "Up", 525, 275, 16);
         upButton.setWidth(50);
-        //GameButton upArrowButton = new GameButton(this.pressStart2PFile, new String(new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x94, (byte)0xBC}, Charset.forName("UTF-8")), 100, 50, 16);
         GameButton downButton = new GameButton(this.pressStart2PFile, "Down", 525, 375, 10);
         downButton.setWidth(50);
         downButton.setTextTranslationY(5);
-        
-        /*
-        if (leaderboard.length == 10) {
-            
-        }
-        */
-
-        //Leaderboard leaderboard = new Leaderboard();
-        //Text scoresText = new Text(leaderboard.getLeaderboard());
-        //scoresText.setFill(Paint.valueOf("white"));
 
         GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 390, 495, 18);	
         backButton.setWidth(125);	
         backButton.setTextTranslationX(1);
-        
-        //leaderboardValuesToAdd.setAlignment(Pos.CENTER);
-        /*
-        leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
-        leaderboardValuesToAdd.setVgap(12);
-        leaderboardValuesToAdd.setHgap(8);
-        leaderboardValuesToAdd.setTranslateX(105);
-        leaderboardValuesToAdd.setTranslateY(230);
-        */
-        //displayedLeaderboard[0][0] = new Label("100");
         this.leaderboard.initializeLeaderboardTextFlow();
         TextFlow leaderboardTextFlow = this.leaderboard.getLeaderboardTextFlow();
         leaderboardTextFlow.setLineSpacing(13);
@@ -5064,20 +4398,13 @@ public class MainApplication extends Application {
             backButton.getButton(),
             upButton.getButton(),
             downButton.getButton(),
-            //scoresText,
             scoresBackground,
             whiteLeaderboardGameTitle.getTitle(),
             logoImageView,
             introBorderImageView,
-            //leaderboardValuesToAdd
             leaderboardTextFlow
             
         );
-        /*
-        for (int i = 0; i < displayedLeaderboard.length; i++) {
-            nodesToAdd.getChildren().add(displayedLeaderboard[i]);
-        }
-        */
 
         this.leaderboard.saveData();
         Scene scene = new Scene(nodesToAdd, 600, 600);
@@ -5087,8 +4414,6 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
 
                 if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
@@ -5107,37 +4432,23 @@ public class MainApplication extends Application {
 
                 final double xVal = e.getX();
                 final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
                 
                 if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {
                     upButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     upButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
                 
                 if (xVal >= downButton.getLeftX() && xVal <= downButton.getRightX() && yVal >= downButton.getTopY() && yVal <= downButton.getBottomY()) {
                     downButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     downButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
 
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     backButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     backButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -5148,62 +4459,18 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {
-                    /*
-                    if (currentLevel > 0) {
-                        currentLevel--;
-                        for (int i = 0; i < displayedLeaderboard.length - 1; i++) {
-                            displayedLeaderboard[i] = displayedLeaderboard[i + 1];
-                        }
-                    }
-                    */
-                    
+                if (xVal >= upButton.getLeftX() && xVal <= upButton.getRightX() && yVal >= upButton.getTopY() && yVal <= upButton.getBottomY()) {                    
                     this.leaderboard.moveUpLeaderboard();
                     TextFlow tempTextFlow = this.leaderboard.getLeaderboardTextFlow();
                     nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempTextFlow);
-                    /*
-                    this.leaderboard.moveUpLeaderboard();
-                    GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
-                    tempLeaderboardValuesToAdd.setVgap(12);
-                    tempLeaderboardValuesToAdd.setHgap(8);
-                    tempLeaderboardValuesToAdd.setTranslateX(105);
-                    tempLeaderboardValuesToAdd.setTranslateY(230);
-                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
-                    */
-                    //nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)"));
-                    //leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)");
-                    //leaderboardValuesToAdd.moveUpLeaderboard();
-                    //leaderboardValuesToAdd = leaderboardValuesToAdd.getLeaderboardGridPane();
                 } else if (xVal >= downButton.getLeftX() && xVal <= downButton.getRightX() && yVal >= downButton.getTopY() && yVal <= downButton.getBottomY()) {
-                
                     this.leaderboard.moveDownLeaderboard();
                     TextFlow tempTextFlow = this.leaderboard.getLeaderboardTextFlow();
                     nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempTextFlow);
-                    /*
-                    this.leaderboard.moveDownLeaderboard();
-                    GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
-                    tempLeaderboardValuesToAdd.setVgap(12);
-                    tempLeaderboardValuesToAdd.setHgap(8);
-                    tempLeaderboardValuesToAdd.setTranslateX(105);
-                    tempLeaderboardValuesToAdd.setTranslateY(230);
-                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
-                    */
-                    //nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)"));
-                    //leaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane(this.pressStart2PFile, "rgba(0,0,0,0)", "rgb(0,0,0)");
-                    //System.out.println("Yo");
                 } else if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     this.leaderboard.initializeLeaderboardTextFlow();
                     TextFlow tempTextFlow = this.leaderboard.getLeaderboardTextFlow();
                     nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempTextFlow);
-                    /*
-                    this.leaderboard.resetCurrentLevel();
-                    GridPane tempLeaderboardValuesToAdd = this.leaderboard.getLeaderboardGridPane();
-                    tempLeaderboardValuesToAdd.setVgap(12);
-                    tempLeaderboardValuesToAdd.setHgap(8);
-                    tempLeaderboardValuesToAdd.setTranslateX(105);
-                    tempLeaderboardValuesToAdd.setTranslateY(230);
-                    nodesToAdd.getChildren().set(nodesToAdd.getChildren().size() - 1, tempLeaderboardValuesToAdd);
-                    */
                     screenNum = 1;
                     stage.setScene(this.mainMenuScene);
                     stage.show();
@@ -5270,7 +4537,6 @@ public class MainApplication extends Application {
             exitButton.getButton(),
             backButton.getButton(),
             whiteQuitGameGameTitle.getTitle(),
-            //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
         );
@@ -5283,7 +4549,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
                 } else if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
@@ -5300,26 +4565,16 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
-
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     backButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     backButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
 
                 if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
                     exitButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     exitButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -5400,7 +4655,6 @@ public class MainApplication extends Application {
             exitButton.getButton(),
             backButton.getButton(),
             whiteWinGameGameTitle.getTitle(),
-            //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
         );
@@ -5413,7 +4667,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
                 } else if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
@@ -5430,26 +4683,16 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
-
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     backButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     backButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
 
                 if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
                     exitButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     exitButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -5463,9 +4706,6 @@ public class MainApplication extends Application {
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     screenNum = 1;
                     try{
-                        //this.level1Scene = this.level1(stage);
-                        //this.level2Scene = this.level2(stage);
-                        //this.level3Scene = this.level3(stage);
                         this.health = 100;
                         this.enemyHealth = 100;
                         this.score = 0;
@@ -5540,7 +4780,6 @@ public class MainApplication extends Application {
             exitButton.getButton(),
             backButton.getButton(),
             whiteLoseGameGameTitle.getTitle(),
-            //whiteInstructionsTitleImageView,
             logoImageView,
             introBorderImageView
         );
@@ -5553,7 +4792,6 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     scene.setCursor(Cursor.HAND);
                 } else if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
@@ -5570,26 +4808,16 @@ public class MainApplication extends Application {
                 final double xVal = e.getX();
                 final double yVal = e.getY();
 
-                //System.out.println(xVal + " " + yVal);
-
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     backButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     backButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
 
                 if (xVal >= exitButton.getLeftX() && xVal <= exitButton.getRightX() && yVal >= exitButton.getTopY() && yVal <= exitButton.getBottomY()) {
                     exitButton.cursorOverButton();
-                    //backButton.getRedRectangle().setVisible(true);
-                    //redRectangleAroundBackButton.setVisible(true);
                 } else {
                     exitButton.cursorNotOverButton();
-                    //backButton.getRedRectangle().setVisible(false);
-                    //redRectangleAroundBackButton.setVisible(false);
                 }
             }
         );
@@ -5603,9 +4831,6 @@ public class MainApplication extends Application {
                 if (xVal >= backButton.getLeftX() && xVal <= backButton.getRightX() && yVal >= backButton.getTopY() && yVal <= backButton.getBottomY()) {
                     screenNum = 1;
                     try{
-                        //this.level1Scene = this.level1(stage);
-                        //this.level2Scene = this.level2(stage);
-                        //this.level3Scene = this.level3(stage);
                         this.health = 100;
                         this.enemyHealth = 100;
                         this.score = 0;
@@ -5652,7 +4877,6 @@ public class MainApplication extends Application {
         this.level1Scene = this.level1(stage);
         this.level2Scene = this.level2(stage);
         this.level3Scene = this.level3(stage);
-        //stage.setScene(this.confrontation2Text(stage));
         this.confrontationTextScene1 = this.confrontation1Text(stage);
         this.confrontationTextScene5 = this.confrontation5Text(stage);
         this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
@@ -5662,387 +4886,7 @@ public class MainApplication extends Application {
 
         this.screenNum = 0;
         this.confrontations = 0;
-        stage.setScene(this.level2Scene);
-        
-        
-        /*
-        Rectangle clearOverlay = new Rectangle(600, 600, Paint.valueOf("rgba(0,0,0,0.1)"));
-        
-        Rectangle leftRectPauseButton = new Rectangle(225, 100, 25, 175);
-        leftRectPauseButton.setFill(Paint.valueOf("rgb(255,255,255)"));
-        leftRectPauseButton.setStroke(Paint.valueOf("rgb(0,0,0)"));
-        leftRectPauseButton.setStrokeWidth(3.0);
-        
-        Rectangle rightRectPauseButton = new Rectangle(325, 100, 25, 175);
-        rightRectPauseButton.setFill(Paint.valueOf("rgb(255,255,255)"));
-        rightRectPauseButton.setStroke(Paint.valueOf("rgb(0,0,0)"));
-        rightRectPauseButton.setStrokeWidth(3.0);
-        
-        GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
-        exitGameButton.setWidth(200);
-        exitGameButton.setHeight(60);
-        exitGameButton.setTextTranslationY(5);
-        
-        GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
-        mainMenuGameButton.setWidth(200);
-        mainMenuGameButton.setHeight(60);
-        mainMenuGameButton.setTextTranslationY(5);
-        
-        Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().addAll(
-            background,
-            clearOverlay,
-            leftRectPauseButton,
-            rightRectPauseButton,
-            exitGameButton.getButton(),
-            mainMenuGameButton.getButton()
-        );
-        */
-        /*
-        Rectangle background = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-        GameButton exitGameButton = new GameButton(this.pressStart2PFile, "Exit Game", 50, 400, 17);
-        GameButton mainMenuGameButton = new GameButton(this.pressStart2PFile, "Main Menu", 350, 400, 17);
-        
-        PauseScene ps = new PauseScene(this.pressStart2PFile, exitGameButton, mainMenuGameButton);
-        
-        Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().addAll(
-            background
-            //ps.getScene()
-        );
-        
-        Scene scene = new Scene(nodesToAdd, 600, 600);
-        
-        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
-            e -> {
-
-                final double xVal = e.getX();
-                final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
-                if (this.onPauseScreen){
-                    if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        scene.setCursor(Cursor.HAND);
-                    } else if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
-                        scene.setCursor(Cursor.HAND);
-                    } else {
-                        scene.setCursor(Cursor.DEFAULT);
-                    }
-                }
-            }
-        );
-
-        scene.addEventFilter(MouseEvent.MOUSE_MOVED,
-            e -> {
-
-                final double xVal = e.getX();
-                final double yVal = e.getY();
-
-                //System.out.println(xVal + " " + yVal);
-                
-                if (this.onPauseScreen){
-                    if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        exitGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
-                    } else {
-                        exitGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
-                    }
-    
-                    if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
-                        mainMenuGameButton.cursorOverButton();
-                        //backButton.getRedRectangle().setVisible(true);
-                        //redRectangleAroundBackButton.setVisible(true);
-                    } else {
-                        mainMenuGameButton.cursorNotOverButton();
-                        //backButton.getRedRectangle().setVisible(false);
-                        //redRectangleAroundBackButton.setVisible(false);
-                    }
-                }
-            }
-        );
-
-        scene.addEventFilter(MouseEvent.MOUSE_CLICKED,
-            e -> {
-
-                final double xVal = e.getX();
-                final double yVal = e.getY();
-
-                if (this.onPauseScreen){
-                    if (xVal >= exitGameButton.getLeftX() && xVal <= exitGameButton.getRightX() && yVal >= exitGameButton.getTopY() && yVal <= exitGameButton.getBottomY()) {
-                        //this.onPauseScreen = false;
-                        System.exit(0);
-                    } else if (xVal >= mainMenuGameButton.getLeftX() && xVal <= mainMenuGameButton.getRightX() && yVal >= mainMenuGameButton.getTopY() && yVal <= mainMenuGameButton.getBottomY()) {
-                        screenNum = 1;
-                        this.onPauseScreen = false;
-                        stage.setScene(this.mainMenuScene);
-                        stage.show();
-                    } else {
-                        int lastIndex = nodesToAdd.getChildren().size() - 1;
-                        nodesToAdd.getChildren().remove(lastIndex);
-                        this.onPauseScreen = false;
-                        //Rectangle back = new Rectangle(600, 600, Paint.valueOf("rgb(255,0,0)"));
-                        //Group tempGroup = new Group();
-                        //tempGroup.getChildren().addAll(
-                        //    back
-                        //);
-                        //stage.setScene(new Scene(tempGroup, 600, 600));
-                        //return;
-                    }
-                }
-            }
-        );
-        
-        scene.addEventFilter(KeyEvent.KEY_PRESSED,
-            k -> {
-                if (!this.onPauseScreen && k.getCode() == KeyCode.ESCAPE) {
-                    this.onPauseScreen = true;
-                    nodesToAdd.getChildren().add(ps.getScene());
-                }
-            }
-        );
-        
-        stage.setScene(scene);
-        */
-        
-        //stage.setScene(this.leaderboard(stage));
-        
-        //stage.setScene(confrontation1Text(stage));
-        
-        /*
-        this.leaderboardScene = this.leaderboard(stage);
-        this.writeUpScene = this.writeUp(stage);
-        this.level1Scene = this.level1(stage);
-        this.level2Scene = this.level2(stage);
-        this.level3Scene = this.level3(stage);
-        this.confrontationTextScene1 = this.confrontation1Text(stage);
-        this.confrontationTextScene5 = this.confrontation5Text(stage);
-        this.confrontationBattleScene1 = this.confrontationBattle(stage,1);
-        this.confrontationBattleScene5 = this.confrontationBattle(stage,5);
-        this.quitGameScene = this.quitGame(stage);
-        */
-
-        /*
-        //GameButton test = new GameButton("New Game", pressStart2PFile, 24, "white", "black", 50, 50, 210, 75, 0, 0);
-        //GameTitle test = new GameTitle(pressStart2PFile, "Trans-form:", 24, "black", "Instructions", 24, "blue", 100, 50, 10, 0, 2);
-        //Rectangle rect = new Rectangle(50, 50, 1, 1);
-        Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().addAll(
-            //test.getButton()
-            //rect
-            test.getTitle()
-        );
-        Scene scene = new Scene(nodesToAdd, 600, 600);
-        //scene.setFill(Color.BLACK);
-        stage.setScene(scene);
-        */
-        
-        /*
-        ImageView mainChar = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
-        ImageView mainCharV2 = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
-        mainCharV2.setScaleY(-1.0);
-        ImageView background = new ImageView(new Image(new FileInputStream(new File("Background.png"))));
-        GameButton test1 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        GameButton test2 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        GameButton test3 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        GameButton test4 = new GameButton("Test", this.pressStart2PFile, 24, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        
-        ConfrontationScene cs = new ConfrontationScene(this.pressStart2PFile, background, mainChar, mainCharV2, test1, test2, test3, test4, new Rectangle(500, 200, Paint.valueOf("grey")), "red", "blue", false, 0.0, 0.0);
-        // Paint closeEllipsePaint, Paint farEllipsePaint, boolean setHealth, double healthChar1, double healthChar2
-        */
-        
-        /*
-        ImageView background = new ImageView(new Image(new FileInputStream(new File("Water.png"))));
-        ImageView mainChar = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
-        ImageView mainCharV2 = new ImageView(new Image(new FileInputStream(new File("MainChar.png"))));
-        mainCharV2.setScaleX(-1.0);
-        Ellipse closeCharPlat = new Ellipse(5, 5);
-        closeCharPlat.setFill(Paint.valueOf("red"));
-        Ellipse farCharPlat = new Ellipse(5, 5);
-        farCharPlat.setFill(Paint.valueOf("blue"));
-        Rectangle rect = new Rectangle(5, 5, Paint.valueOf("blue"));
-        rect.setStrokeWidth(3.0);
-        rect.setStroke(Paint.valueOf("black"));
-        GameButton test1 = new GameButton("Top Left Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        GameButton test2 = new GameButton("Bottom Left Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        GameButton test3 = new GameButton("Top Right Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        GameButton test4 = new GameButton("Bottom Right Button", this.pressStart2PFile, 15, "rgb(255,255,255)", "rgb(0,0,0)", "red", 0, 0, 125, 50, 1, 16);
-        Rectangle char1HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
-        char1HealthBarFront.setStrokeWidth(1.0);
-        char1HealthBarFront.setStroke(Paint.valueOf("black"));
-        Rectangle char1HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
-        char1HealthBarBack.setStrokeWidth(1.0);
-        char1HealthBarBack.setStroke(Paint.valueOf("black"));
-        Rectangle char2HealthBarFront = new Rectangle(5, 5, Paint.valueOf("yellow"));
-        char2HealthBarFront.setStrokeWidth(1.0);
-        char2HealthBarFront.setStroke(Paint.valueOf("black"));
-        Rectangle char2HealthBarBack = new Rectangle(5, 5, Paint.valueOf("black"));
-        char2HealthBarBack.setStrokeWidth(1.0);
-        char2HealthBarBack.setStroke(Paint.valueOf("black"));
-        //mainCharV2.setTranslateX(0);
-        //ImageView background = new ImageView(new Image(new FileInputStream(new File("RedBackgroundRectangle.svg"))));
-        //ImageView background = new ImageView("https://upload.wikimedia.org/wikipedia/commons/e/e6/Red_rectangle.svg");
-        ConfrontationScene cs = new ConfrontationScene(this.pressStart2PFile, background, closeCharPlat, farCharPlat, mainChar, mainCharV2, rect, test1, test2, test3, test4, 50, char1HealthBarFront, char1HealthBarBack, 50, char2HealthBarFront, char2HealthBarBack);
-        
-        Scene scene = cs.getScene();
-        stage.setScene(scene);
-        */
-        
-        /*
-        GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
-        //BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, backButton, 11);
-        //BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, backButton, 4.25);
-        //BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, backButton, 12);
-        //BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person’s preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, backButton, 11);
-        //BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone’s preferred pronouns or name", false, backButton, 9);
-        //BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, backButton, 11);
-        //BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, backButton, 2.5);
-        //BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, backButton, 3.5);
-        //BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("CryingWomanOnPhone.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, backButton, 7.5);
-        Scene scene = new Scene(firstBookScene.getScene(), 600, 600);
-        stage.setScene(scene);
-        */
-        
-        /*
-        Dialog testD = new Dialog();
-        Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().addAll(
-            testD.getDialogPane()
-        );
-        Scene scene = new Scene(nodesToAdd, 600, 600);
-        stage.setScene(scene);
-        */
-        /*
-        ButtonType okButton = new ButtonType.OK;
-        Dialog<String> dialog = new Dialog<String>();
-        dialog.getDialogPane().getButtonTypes().add(okButton);
-        boolean disabled = false;
-        dialog.getDialogPane().lookupButton(okButton).setDisable(disabled);
-        */
-        
-        /*
-        Text text = new Text("asdkj;fk;asdjf;lkaskl;dfj;ajsddfk;jass;fj");
-        text.setFont(this.getPressStart2PFont(18));
-        text.setFill(Paint.valueOf("rgb(255,255,255)"));
-        text.setX(50);
-        text.setY(50);
-        */
-        /*
-        text.addEventFilter(KeyEvent.KEY_PRESSED,
-            k -> {
-                System.out.println("LOL");
-                try {
-                    boolean shiftIsPressed = k.isShiftDown();
-                    if (k.getCode().isDigitKey() || (k.getCode().isLetterKey() && k.getCode() != KeyCode.COMMA) || k.getCode() == KeyCode.BACK_SPACE) {
-                        System.out.println(k.getCode().getChar());
-                        System.out.println("Yo");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        );
-        */
-        
-        /*
-        Rectangle testRectangle = new Rectangle(600, 600, Paint.valueOf("green"));
-        Group nodesToAddTemp = new Group();
-        nodesToAddTemp.getChildren().addAll(
-            testRectangle
-        );
-        Scene secondScene = new Scene(nodesToAddTemp, 600, 600);
-        
-        
-        Rectangle background = new Rectangle(600, 600, Paint.valueOf("rgb(0,0,0)"));
-        //Leaderboard test = new Leaderboard(new File("Leaderboard.txt"));
-        //System.out.println(Arrays.deepToString(test.getLeaderboard()));
-        
-        //Rectangle inputBox = new 
-        
-        TextField testTF = new TextField();
-        testTF.setFont(this.getPressStart2PFont(18));
-        testTF.setPromptText("First Name");
-        testTF.setFocusTraversable(false);
-        //testTF.setPrefWidth(500);
-        //testTF.setPrefHeight(50);
-        //Rectangle backgroundRectangle = new Rectangle(500, 50, Paint.valueOf("rgb(255,255,255)"));
-        //backgroundRectangle.setStroke(Paint.valueOf("rgb(255,0,0)"));
-        //backgroundRectangle.setStrokeWidth(3.0);
-        //testTF.setShape(backgroundRectangle);
-        
-        
-        
-        testTF.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                String buttonText = testTF.getText();
-                if (!buttonText.isEmpty()) {
-                    System.out.println(buttonText);
-                    stage.setScene(secondScene);
-                }
-            }
-        });
-        
-        
-        Group nodesToAdd = new Group();
-        nodesToAdd.getChildren().addAll(
-            background,
-            //text
-            testTF
-        );
-        
-        Scene scene = new Scene(nodesToAdd, 600, 600);
-        */
-        /*
-        scene.addEventFilter(KeyEvent.KEY_PRESSED,
-            k -> {
-                try {
-                    boolean shiftIsPressed = k.isShiftDown();
-                    if (!text.getText().isEmpty() && k.getCode() == KeyCode.BACK_SPACE) {
-                        text.setText(text.getText().substring(0, text.getText().length() - 1));
-                    } else if (k.getCode().isDigitKey() || (k.getCode().isLetterKey() && k.getCode() != KeyCode.COMMA) || (k.getCode().isWhitespaceKey() && k.getCode() != KeyCode.TAB)) {
-                        //String characterToAdd = k.getCode().getChar();
-                        //if (k.);
-                        text.setText(text.getText().concat(k.getCode().getChar()));
-                        System.out.println(k.getCharacter());
-                    }
-                    if (k.getCode().isDigitKey() || (k.getCode().isLetterKey() && k.getCode() != KeyCode.COMMA) || k.getCode() == KeyCode.BACK_SPACE) {
-                        System.out.println(k.getCode().getChar());
-                        //System.out.println("Yo");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        );
-        */
-        //stage.setScene(scene);
-        
-        //GameButton backButton = new GameButton(this.pressStart2PFile, "Back", 0, 0, 17);
-        
-        /*
-        BookScene firstBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene1Image.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
-        BookScene secondBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene2Image.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 4.25);
-        BookScene thirdBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene3Image.png"))), "What are common types of transphobia?", "Transphobia is very common in our everyday lives. Some examples are:\n\n- Using derogatory terms against trans people.\n\n- Excluding transgender people on the basis of their sexuality\n\n- Refusing to use proper pronouns", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 12);
-        BookScene fourthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene4Image.png"))), "What are common types of transphobia?", "More examples of transphobia are:\n\n- Not using a trans person's preferred name\n\n- Bullying a trans person because they are transgender\n\n- Spreading misinformation about trans people (such as by saying that they are in a \"teenage phase\")", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
-        BookScene fifthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene5Image.png"))), "How do you combat transphobia?", "A proactive approach is needed to help combat the transphobia that is prevalent within our society.\n\nSome steps you can take are to:\n\n- Recognize and confront internal transphobia\n\n- Call out those who are not using someone's preferred pronouns or name", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 9);
-        BookScene sixthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene6Image.png"))), "How do you combat transphobia?", "More steps that you can take are:\n\n- Ask people for their pronouns (you can also use generalized pronouns like they/them)\n\n- Avoid using slurs against trans people\n\n- Call out those that are making transphobic jokes or remarks", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
-        BookScene seventhBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene7Image.png"))), "Statistics on transgender people", "The topic of transgender people has been buzzing for some time now. It is important to know the facts about trans people to get a better understanding of why they are in such dire need.\n\nSome important statistics are:\n\n- 22% - 43% of transgender people have attempted suicide in their lives\n\n- 67% of transgender people have thought less about suicide after transitioning whereas 3% of transgender people have thought about suicide more.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 2.5);
-        BookScene eighthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene8Image.png"))), "Statistics on transgender people", "Here are some more stats on trans people:\n\n- 15 percent of transgender-related online posts are transphobic\n\n- Over one in four transgender people have lost a job due to bias in their workplace\n\n- One in five transgender people have been homeless at least once in their life\n\n- Over one in ten transgender people have been evicted from their homes as a result of being transgender", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 3.5);
-        BookScene ninthBookScene = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene9Image.png"))), "What should I do if I am being bullied?", "If you are being bullied on the basis of being transgender, then you should talk to your friends about it (they will help support you in your outcoming)\n\nIf you are ever feeling suicidal, know that there are still people who love you. You should also call your local suicide hotline, such as 833-456-4566 for the Canada Suicide Prevention Service.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 7.5);
-        
-        books[0] = firstBookScene.getScene();
-        books[1] = secondBookScene.getScene();
-        books[2] = thirdBookScene.getScene();
-        books[3] = fourthBookScene.getScene();
-        books[4] = fifthBookScene.getScene();
-        books[5] = sixthBookScene.getScene();
-        books[6] = seventhBookScene.getScene();
-        books[7] = eighthBookScene.getScene();
-        books[8] = ninthBookScene.getScene();
-        */
+        stage.setScene(this.introAnimationScene);
         
         books[0] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene1Image.png"))), "What is transphobia?", "Transphobia is caused by a person being harmful and negative towards a transgender person on the basis of them being transgender.\n\nThis issue can also be seen as systemic because of how people are not taught that gender is actually fluid and not as rigid as being only male or only female.", true, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 11);
         books[1] = new BookScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream("BookScene2Image.png"))), "How do I come out to my parents/friends?", "Coming out as a trans person is never an easy task. Here are some things to know before coming out:\n\n- It should be done when you feel safe coming out and it is useful to think through how you are going to do it\n\n- People might need some time to process the information\n\n- The majority of people will be accepting of your outcoming", false, new GameButton(this.pressStart2PFile, "Back", 0, 0, 17), 4.25);

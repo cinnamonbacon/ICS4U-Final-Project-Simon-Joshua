@@ -1,27 +1,71 @@
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Paint;
-import javafx.scene.Group;
-import javafx.scene.text.Font;
-
+import javafx.scene.shape.Rectangle; // Imports the Rectangle.java class, which allows the program to create a rectangle that will be shown to the user (by being added as a node to the current scene).
+import javafx.scene.paint.Paint; // Imports the Paint.java class, which allows the program to create and use different paint colours.
+import javafx.scene.Group; // Imports the Group.java class, which allows the program to combing various nodes together so that they can be added to the Scene that is returned.
+import javafx.scene.text.Font;// Imports the Font.java class, which allows the program to create and use different fonts.
 import java.io.File; // Imports the File.java class, which allows the program to access files on the computer, such as images.
 import java.io.FileInputStream; // Imports the FileInputStream.java class, which allows the program to easily read in data from certain files.
 import java.io.IOException; // Imports the IOException.java class, which allows the program to deal with and catch any errors thrown during reading of IO.
 
+/**
+ * Program to create a pause screen.
+ * <p>
+ * This class will be used to create a pause
+ * screen. It will do so by creating a
+ * mostly clear rectangle that will be the
+ * background. It will also create two
+ * rectangles for the pause symbol and it
+ * will make two GameButton.java instances,
+ * one for the exit button and the other for
+ * the main menu button.
+ * 
+ * This was made fully by Joshua Persaud.
+ * <p>
+ * Course: ICS 4U0/P
+ * <p>
+ * Teacher Name: Ms. Krasteva
+ * <p>
+ * Purpose: to create pause scenes.
+ * <p>
+ * Filename: PauseScene.java
+ * 
+ * @author Joshua Persaud
+ * @version 6/14/2022
+ * 
+ * @see javafx.scene.shape.Rectangle
+ * @see javafx.scene.paint.Paint
+ * @see javafx.scene.Group
+ * @see javafx.scene.text.Font
+ * @see java.io.File
+ * @see java.io.IOException
+ * @see java.io.FileInputStream
+ * 
+ * @since JDK1.17
+ */
 public class PauseScene {
 
+    /** Private non-static File variable that will hold onto the file that holds the font to be used. */
     private File textFontFile;
     
+    /** Private non-static Rectangle variable that will hold onto the rectangle that is used as the clear overlay over the scene. */
     private Rectangle clearOverlay;
 
+    /** Private non-static Rectangle variable that will hold onto the rectangle that is used as the left bar in the pause button symbol. */
     private Rectangle leftRectPauseButton;
     
+    /** Private non-static Rectangle variable that will hold onto the rectangle that is used as the right bar in the pause button symbol. */
     private Rectangle rightRectPauseButton;
     
+    /** Private non-static GameButton variable that will hold onto the GameButton instance that is used for the exit button. */
     private GameButton exitGameButton;
     
+    /** Private non-static GameButton variable that will hold onto the GameButton instance that is used for the main menu button. */
     private GameButton mainMenuGameButton;
     
-    
+    /**
+     * An instance of the PauseScene class will be created using this one parameter constructor.
+     * 
+     * @param textFontFile A File variable, which will be the file where the font to be used is located.
+     */
     public PauseScene (File textFontFile) {
         this.textFontFile = textFontFile;
         
@@ -48,6 +92,13 @@ public class PauseScene {
         this.mainMenuGameButton.setTextTranslationY(5);
     }
     
+    /**
+     * An instance of the PauseScene class will be created using this three parameter constructor.
+     * 
+     * @param textFontFile A File variable, which will be the file where the font to be used is located.
+     * @param exitGameButton A GameButton variable, which will be the GameButton that is used for the exit button.
+     * @param mainMenuGameButton A GameButton variable, which will be the GameButton that is used for the main menu button.
+     */
     public PauseScene (File textFontFile, GameButton exitGameButton, GameButton mainMenuGameButton) {
         this.textFontFile = textFontFile;
         
@@ -82,6 +133,16 @@ public class PauseScene {
         this.mainMenuGameButton = mainMenuGameButton;
     }
     
+    /*
+     * Public non-static method used to get the pause scene itself from the PauseScene instance.
+     * <p>
+     * This public non-static method will return an instance of the Group.java class,
+     * which will be the actual pause scene. This Group.java instance will contain all
+     * the nodes that are needed to create this scene.
+     * 
+     * @return  An instance of the Group.java class, which will be the actual pause
+     *          scene from the PauseScene instance.
+     */
     public Group getScene() {
         Group nodesToReturn = new Group();
         nodesToReturn.getChildren().addAll(
