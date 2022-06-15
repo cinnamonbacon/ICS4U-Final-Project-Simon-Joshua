@@ -202,6 +202,12 @@ public class Leaderboard {
         } catch (Exception e) {
             System.out.println("There is an issue on line "+ (this.numOfEntries + 1) + ".\nPlease make sure that you haven't interfered with the values (e.g. changing the name to having unsupported character encodings, changing the score to a very large number, or interfering with either of the LocalDateTime values)\nand/or you haven't deleted one of the delimiters.");
         }
+        /*
+        if (this.numOfEntries == 0) {
+            this.names.add("");
+            this.names.add("");
+        }
+        */
         this.shellSort();
     }
     
@@ -309,18 +315,23 @@ public class Leaderboard {
      */
     public String[] getLeaderboard() {
         this.shellSort();
-        int sizeOfArray = this.numOfEntries;
-        if (sizeOfArray > 1000) sizeOfArray = 1000;
-        String[] returnedArray = new String[sizeOfArray];
-        for (int i = 0; i < sizeOfArray; i++) {
-            String tempString = "";
-            tempString += String.format("%-4s ", Integer.toString(i + 1));
-            tempString += String.format("%-8s ", this.names.get(i));
-            tempString += String.format("%-3s ", Integer.toString(this.scores.get(i)));
-            tempString += this.LDTToString(this.startTime.get(i), this.endTime.get(i));
-            returnedArray[i] = tempString;
+        if (this.numOfEntries > 0) {
+            int sizeOfArray = this.numOfEntries;
+            if (sizeOfArray > 1000) sizeOfArray = 1000;
+            //else if (sizeOfArray == 0) sizeOfArray = 1;
+            String[] returnedArray = new String[sizeOfArray];
+            for (int i = 0; i < sizeOfArray; i++) {
+                String tempString = "";
+                tempString += String.format("%-4s ", Integer.toString(i + 1));
+                tempString += String.format("%-8s ", this.names.get(i));
+                tempString += String.format("%-3s ", Integer.toString(this.scores.get(i)));
+                tempString += this.LDTToString(this.startTime.get(i), this.endTime.get(i));
+                returnedArray[i] = tempString;
+            }
+            return returnedArray;
+        } else {
+            return new String[0];
         }
-        return returnedArray;
     }
     
     /**
@@ -333,13 +344,15 @@ public class Leaderboard {
     public void initializeLeaderboardTextFlow() {
         this.currentLevel = 0;
         this.leaderboardDataTextFlow.getChildren().clear();
-        for (int i = 0; i < this.leaderboardSize; i++) {
-            Text tempText = new Text(this.leaderboardData[i] + "\n");
-            if (this.textFontFile != null) tempText.setFont(this.getFontFromFile(this.fontSize));
-            else tempText.setFont(new Font(this.fontSize));
-            //tempLabel.setStyle("-fx-background-color: " + this.backgroundPaint + "; -fx-text-fill: " + this.textPaint + ";");
-            tempText.setFill(Paint.valueOf(this.textPaint));
-            this.leaderboardDataTextFlow.getChildren().add(tempText);
+        if (this.leaderboardData.length != 0) {
+            for (int i = 0; i < ((this.leaderboardData.length < this.leaderboardSize) ? this.leaderboardData.length : this.leaderboardSize); i++) {
+                Text tempText = new Text(this.leaderboardData[i] + "\n");
+                if (this.textFontFile != null) tempText.setFont(this.getFontFromFile(this.fontSize));
+                else tempText.setFont(new Font(this.fontSize));
+                //tempLabel.setStyle("-fx-background-color: " + this.backgroundPaint + "; -fx-text-fill: " + this.textPaint + ";");
+                tempText.setFill(Paint.valueOf(this.textPaint));
+                this.leaderboardDataTextFlow.getChildren().add(tempText);
+            }
         }
     }
     
