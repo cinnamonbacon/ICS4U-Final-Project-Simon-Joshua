@@ -4697,7 +4697,7 @@ public class MainApplication extends Application {
                                             final int damageTaken = damage-block;
                                             if(damage-block>=0){
                                                 health-=damageTaken;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked block so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but "+block+" was blocked so you took " + damageTaken + " damage. Press any key to continue...", health, enemyHealth);	
                                                 block = 0;
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
@@ -4710,7 +4710,7 @@ public class MainApplication extends Application {
                                                 nodesToAdd.getChildren().set(0, enemyDamageTxt.getScene());
                                             }else{
                                                 block-=damage;
-                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
+                                                ConfrontationScene enemyDamageTxt = new ConfrontationScene(this.pressStart2PFile, new ImageView(new Image(new FileInputStream(this.blankFile))), new ImageView(new Image(new FileInputStream(this.mainCharFile))), new ImageView(new Image(new FileInputStream(this.confrontationChar[encounterNum-1]))), "Enemy Damage", "The enemy did "+damage+" damage but all of it was blocked. You now have " + block + " block. Press any key to continue...", health, enemyHealth);	
                                                 enemyDamageTxt.getTitle().setFont(enemyDamageTxt.getFontFromFile(18));	
                                                 enemyDamageTxt.getTitle().setFill(Paint.valueOf("Red"));	
                                                 enemyDamageTxt.getBody().setFont(enemyDamageTxt.getFontFromFile(12));	
