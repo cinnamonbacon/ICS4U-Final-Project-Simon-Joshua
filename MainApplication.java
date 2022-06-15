@@ -1869,7 +1869,7 @@ public class MainApplication extends Application {
             }
         }
         
-        for(int h=4;h<17;h+=3){
+        for(int h=1;h<14;h+=3){
             int k = 4;
             for (int i=0;i<benchFile.length;i++){
                 grid.setObject(k, h+i, benchFile[i].getPath());
@@ -1877,7 +1877,7 @@ public class MainApplication extends Application {
                 grid.setMovable(k, h+i, false);
             }
         }
-        
+                
         for(int h=1;h<11;h+=3){
             int k = 7;
             for (int i=0;i<benchFile.length;i++){
@@ -3978,7 +3978,6 @@ public class MainApplication extends Application {
      * @throws IOException
      */
     public Scene confrontationBattle(Stage stage, int encounterNum) throws IOException {
-        health = 100;
         enemyHealth = 100;
         Scene scene;
         battleMenu = "main";
@@ -5663,7 +5662,7 @@ public class MainApplication extends Application {
 
         this.screenNum = 0;
         this.confrontations = 0;
-        stage.setScene(this.introAnimationScene);
+        stage.setScene(this.level2Scene);
         
         
         /*
