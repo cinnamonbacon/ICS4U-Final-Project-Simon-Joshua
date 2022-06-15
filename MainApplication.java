@@ -667,11 +667,14 @@ public class MainApplication extends Application {
     /** This private non-static File variable will hold the file for the lower part of the image for the fourth confrontation. */
     private File confrontation4LowerFile;
     
-    /** This private non-static File array variable will hold the files for the table in level 3. */
+    /** This private non-static 2 dimentional File array variable will hold the files for the table in level 3. */
     private File[][] tableFile;
     
-    /** This private non-static File array variable will hold the files for the trees in level 1. */
+    /** This private non-static 2 dimentional File array variable will hold the files for the trees in level 1. */
     private File[][] treeFile;
+    
+    /** This private non-static File array variable will hold the files for the benches in level 2. */
+    private File[] benchFile;
     
     /**
      * An instance of the MainApplication.java class will be created using this no parameter constructor.
@@ -736,6 +739,11 @@ public class MainApplication extends Application {
         this.treeFile[0][1] = new File("TreeRightTop.png");
         this.treeFile[1][1] = new File("TreeRightMid.png");
         this.treeFile[2][1] = new File("TreeRightBot.png");
+        
+        this.benchFile = new File[3];
+        this.benchFile[0] = new File("BenchLeft.png");
+        this.benchFile[1] = new File("BenchMid.png");
+        this.benchFile[2] = new File("BenchRight.png");
         
         /*
         this.books = new File[8];
@@ -1724,6 +1732,8 @@ public class MainApplication extends Application {
                 grid.assign(i, j, cafFloorFiles[(i+j)%2].getPath(), "", true, false);
             }
         }
+        grid.setObject(0, 15, doorLeftFile.getPath());
+        grid.setObject(0, 16, doorRightFile.getPath());
         
         grid.setObject(10, 5, confrontationChar[1].getPath());
         grid.setInteractable(10, 5, true);
@@ -1742,7 +1752,93 @@ public class MainApplication extends Application {
         grid.setObject(5, 16, confrontation4LowerFile.getPath());
         grid.setInteractable(5, 16, true);
         grid.setMovable(5, 16, false);
-
+        
+        for(int h=1;h<8;h+=3){
+            int k = 2;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        for(int h=13;h<17;h+=3){
+            int k = 2;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        
+        for(int h=4;h<17;h+=3){
+            int k = 4;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        
+        for(int h=1;h<11;h+=3){
+            int k = 7;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        for(int h=16;h<17;h+=3){
+            int k = 7;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        
+        for(int h=1;h<4;h+=3){
+            int k = 11;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        for(int h=7;h<17;h+=3){
+            int k = 11;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        
+        for(int h=1;h<7;h+=3){
+            int k = 14;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        for(int h=10;h<17;h+=3){
+            int k = 14;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        
+        for(int h=4;h<17;h+=3){
+            int k = 17;
+            for (int i=0;i<benchFile.length;i++){
+                grid.setObject(k, h+i, benchFile[i].getPath());
+                grid.setInteractable(k, h+i, false);
+                grid.setMovable(k, h+i, false);
+            }
+        }
+        
         level2Group = grid.draw();
         
         direction = "right";
